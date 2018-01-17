@@ -11,9 +11,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  MasterBankRef: {fileID: 0}
-  StringsBankRef: {fileID: 0}
-  stringsBankWriteTime: 0
+  EditorBanks:
+  - {fileID: 114866842002705674}
+  - {fileID: 114009839704880666}
+  EditorEvents:
+  - {fileID: 114721556680316716}
+  MasterBankRef: {fileID: 114009839704880666}
+  StringsBankRef: {fileID: 114866842002705674}
+  stringsBankWriteTime: 636445363982678686
   cacheVersion: 2
+--- !u!114 &114009839704880666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: E:\#Workspaces\Git Workspace\MajorProduction-Team1\Major Production - Team
+    1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
+  lastModified: 636445363982658684
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1298048
+  Exists: 1
+--- !u!114 &114721556680316716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/MainTheme2
+  guid: e86babdb7f422541a6a8da723ec57342
+  Banks:
+  - {fileID: 114009839704880666}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114866842002705674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636445363982678686
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 720
+  Exists: 1
