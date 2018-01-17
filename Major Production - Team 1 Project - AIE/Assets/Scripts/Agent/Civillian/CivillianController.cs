@@ -151,6 +151,13 @@ public class CivillianController : MonoBehaviour
             alertedByItem = false;
         }
 
+        //State changing to Retreat, because the repel mechanic was used in playerPosession
+        if(TRIGGERED_repel)
+        {
+            ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
+            m_stateMachine.ChangeState(this, new CIV_Retreat());
+        }
+
         //Call update from this agents FSM
         if (m_stateMachine != null)
         {
