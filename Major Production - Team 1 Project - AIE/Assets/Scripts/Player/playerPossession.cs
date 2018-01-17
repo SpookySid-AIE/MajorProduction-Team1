@@ -57,13 +57,18 @@ public class playerPossession : MonoBehaviour
         //doing so causes the player to try and throw itself - which does not work very well :)
         if (Input.GetMouseButtonDown(0))
         {
-            if (isPossesed)
+            //Moved possessItem() around to left click - Jak
+            if (hidden == false && !isPossesed) //The hidden flag only detects when a player is hiding in an item, not POSSESSED - Jak
+            {
+                PossessItem();
+            }
+            else if(isPossesed)
             {
                 ThrowPossessedItemAway();
                 UnpossessItem();
             }
 
-            //Start of lure mechanic
+            //Start of lure mechanic - Jak
             if(hidden)
             {
                 Debug.Log("We are hidden annd left click was pressed.");
@@ -81,24 +86,12 @@ public class playerPossession : MonoBehaviour
                         civ.GetComponent<CivillianController>().itemPosition = navHit.position;
                         civ.GetComponent<CivillianController>().alertedByItem = true;
                     }
-                }
-                
+                }                
             }
+            //End Jak's
         }
-        else //need this to ensure that only 1 event happens ata a time.
+        else
         {
-            if (Input.GetKeyDown(KeyCode.Q) && hidden == false) //The hidden flag only detects when a player is hiding in an item, not POSSESSED
-            {
-                if (!isPossesed)
-                {
-                    PossessItem();
-                }
-                else
-                {
-                    UnpossessItem();
-                }
-            }
-
             //Hide/Unhide mechanic written by Jak
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -113,12 +106,30 @@ public class playerPossession : MonoBehaviour
             }
         }
 
+        //Repel - Jak
+        if (Input.GetMouseButtonDown(1) && hidden)
+        {
+            Debug.Log("We are hidden annd right click was pressed.");
+
+            //Get all colliders
+            Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange); //Refactor this so it finds tags first instead of all colliders
+
+            foreach (Collider civ in civillians)
+            {
+                if (civ.tag == "Civillian")
+                {
+                    civ.GetComponent<CivillianController>().target = gameObject;
+                    civ.GetComponent<CivillianController>().TRIGGERED_repel = true;
+                }
+            }
+        }
+        //End Repel - Jak
+
     }
 
     // Update is called once per frame
     void PossessItem()
     {
-
         //try to posess an item
         RaycastHit hit;
         Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
@@ -265,7 +276,7 @@ public class playerPossession : MonoBehaviour
 
     }
 
-    //written by Jak
+    //written by Jak - copypasted some stuff from "PossessItem()"
     void Hide()
     {
         //try to posess an item
@@ -320,6 +331,8 @@ public class playerPossession : MonoBehaviour
                 if (target.GetComponent<playerPossession>() == null)
                     target.AddComponent<playerPossession>();
 
+                //target.GetComponent<playerPossession>().PossessedItem = target;
+
 
                 //switch off gravity for the target
                 target.GetComponent<Rigidbody>().useGravity = false;
@@ -332,7 +345,7 @@ public class playerPossession : MonoBehaviour
         }
     }
 
-    //enable will
+    //enable player
     void EnablePlayer()
     {
         //re enable the real player

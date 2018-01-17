@@ -45,9 +45,9 @@ public class CIV_Retreat : State_CIV
         }
         else if (agent.TRIGGERED_repel) //Was lured to an item and spooked - multiply by x5??
         {
-            //CheckScaryRating();
-            //ectoplasm.GetComponent<ectoplasmController>().modifier = 5;
-            //currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().baseScariness * 10);
+            CheckScaryRating();
+            ectoplasm.GetComponent<ectoplasmController>().modifier = 5;
+            currentAgent.currentScareValue += (currentAgent.target.GetComponent<ItemController>().baseScariness * 10);
         }
 
     }
@@ -81,12 +81,11 @@ public class CIV_Retreat : State_CIV
             Vector3 dirAwayFromWill = currentAgent.transform.position - agent.target.transform.position;
 
             //Just minus a default value for now from the scared score
+            //Overtime minus 1 from the scared value - possibly change in the future
             if (currentAgent.currentScareValue <= 0)
                 currentAgent.currentScareValue = 0;
             else
             {
-                Debug.Log(currentAgent.currentScareValue);
-
                 scareDecreaseTimer -= Time.deltaTime;
 
                 if (scareDecreaseTimer <= 0f)
@@ -96,7 +95,7 @@ public class CIV_Retreat : State_CIV
                 }
                 
             }
-            //Update the text
+            //Update the debug text
             currentAgent.txtScaredValue.text = currentAgent.currentScareValue.ToString();
 
             //If will is not close to the agent then don't flee
@@ -158,7 +157,7 @@ public class CIV_Retreat : State_CIV
         }
     }
 
-    //NOTE: THIS WILL NOT LOAD THE PARTICLES AT RUNTIME
+    //Load ectoplasm prefabs based on scary rating
     void CheckScaryRating()
     {
 
@@ -181,8 +180,7 @@ public class CIV_Retreat : State_CIV
             ectoplasm = currentAgent.ParticlePink;
 
         else if (currentAgent.ItemScaryRating == ItemController.Orientation.Most_Scary)
-            ectoplasm = currentAgent.ParticleRed;
-        
+            ectoplasm = currentAgent.ParticleRed;        
 #endif
 
     }
