@@ -5,10 +5,11 @@ using UnityEngine;
  
 public class SmoothFollowWithCameraBumper : MonoBehaviour
 {
+    
     [SerializeField]
     private Transform target = null;
     [SerializeField]
-    private float distance = 3.0f;
+    public float distance;
     [SerializeField]
     private float height = 1.0f;
     [SerializeField]

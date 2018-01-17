@@ -221,7 +221,13 @@ public class playerPossession : MonoBehaviour
                     //switch the camera back on to follow the player
                     Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
                     target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
+                    if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Small)
+                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 1.0f;
+
+                    else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
+                        Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
                     isPossesed = true;
+                    Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
                     //Debug.Log(isPossesed);
                 }
             }
@@ -267,6 +273,8 @@ public class playerPossession : MonoBehaviour
 
         sneakTest.tag = "Player";//need to do this here as the agent code needs a player at all times
         sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 2.0f;
+        Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
         Invoke("EnablePlayer", .25f);//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
 

@@ -13,7 +13,9 @@ public class ItemController : MonoBehaviour
 {
 
     public enum Orientation { Least_Scary, Medium_Scary, Most_Scary }
+    public enum Size { Small, Medium, Large }
     public Orientation ItemScaryRating;
+    public Size itemSize;
     public bool hasBeenThrown;
 
     [HideInInspector]
