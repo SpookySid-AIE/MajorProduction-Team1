@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114866842002705674}
-  - {fileID: 114009839704880666}
+  - {fileID: 114638701049880406}
+  - {fileID: 114906782864686302}
   EditorEvents:
-  - {fileID: 114721556680316716}
-  MasterBankRef: {fileID: 114009839704880666}
-  StringsBankRef: {fileID: 114866842002705674}
-  stringsBankWriteTime: 636445363982678686
+  - {fileID: 114840446105910988}
+  - {fileID: 114018612610756632}
+  MasterBankRef: {fileID: 114906782864686302}
+  StringsBankRef: {fileID: 114638701049880406}
+  stringsBankWriteTime: 636517924911857609
   cacheVersion: 2
 --- !u!114 &114009839704880666
 MonoBehaviour:
@@ -38,6 +39,45 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1298048
+  Exists: 1
+--- !u!114 &114018612610756632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/MainTheme2
+  guid: e86babdb7f422541a6a8da723ec57342
+  Banks:
+  - {fileID: 114906782864686302}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114638701049880406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636517924911857609
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 778
   Exists: 1
 --- !u!114 &114721556680316716
 MonoBehaviour:
@@ -60,6 +100,27 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114840446105910988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/NPC_Startled_F
+  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
+  Banks:
+  - {fileID: 114906782864686302}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114866842002705674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,4 +138,23 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 720
+  Exists: 1
+--- !u!114 &114906782864686302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636517924911832489
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1376000
   Exists: 1
