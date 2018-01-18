@@ -20,24 +20,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    [Header("Time in seconds until lose screen.")]public float timer; //Timer till lose screen
-    [Header("How much score to show win screen.")] public int maxMischeif;
+    // [Header("Time in seconds until lose screen.")]public float timer; //Timer till lose screen
+    // [Header("How much score to show win screen.")] public int maxMischeif;
     [HideInInspector] public int NPCcount;
 
     //Gameplay UI
-    private Text txt_timerText;
+    // private Text txt_timerText;
     private Text txt_npcCount;
     private Text txt_playerHealth;
 
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
-    public Canvas canvasPause;
+    // public Canvas canvasPause;
     private RectTransform winText; //Transforms of the child text objects
     private RectTransform loseText;
     private List<RectTransform> textList;
 
     private bool gameover;
-    private float timeLeft;
+    // private float timeLeft;
     private bool paused;
     private bool win;
 
