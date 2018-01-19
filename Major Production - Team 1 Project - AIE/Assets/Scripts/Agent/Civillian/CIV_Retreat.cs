@@ -3,7 +3,7 @@
 // Date Created: <05/08/17>                               
 // Brief: <Runs in the opposite direction from the player and cower>  
 ////////////////////////////////////////////////////////////
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +18,7 @@ public class CIV_Retreat : State_CIV
     float timer = 3.0f; //Wait 3 seconds before switching states otherwise you are still scared if the player comes to you
     float scareDecreaseTimer = 3.0f;
 
+    [HideInInspector]public static Vector3 dirAwayFromObject; //Set in OnCollisionEnter
 
 #if UNITY_EDITOR
 
@@ -26,8 +27,18 @@ public class CIV_Retreat : State_CIV
 #endif
 
     public void OnEnter(CivillianController agent)
-    {
-        currentAgent = agent;
+    {        
+        //Reset path to prevent errors when switching
+        if(agent.navAgent.hasPath)
+            agent.navAgent.ResetPath();
+
+        currentAgent = agent; //Storing reference
+        currentAgent.currentState = State.State_Retreat; //Setting currentState - kinda temporary i hope
+
+        //Update animator
+        currentAgent.navAgent.speed = 1.5f; //Add some additional speed to make them feel really spooked
+        currentAgent.m_Animator.SetBool("Scared", true);
+
         //Debug.Log(currentAgent.gameObject.name + " State: RETREAT");
         agent.txtState.text = "RETREAT";
 
@@ -71,14 +82,14 @@ public class CIV_Retreat : State_CIV
         if (agent.hasDroppedEcto == false)
         {
             agent.hasDroppedEcto = true;
-            GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
+            //GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
         }
 
         //This is the code that makes the agent run away from whatever target has been set
         if (scared == false)
         {
             //Get the direction away from the target object that they are trying to flee from
-            Vector3 dirAwayFromWill = currentAgent.transform.position - agent.target.transform.position;
+            dirAwayFromObject = currentAgent.transform.position - currentAgent.target.transform.position;
 
             //Just minus a default value for now from the scared score
             //Overtime minus 1 from the scared value - possibly change in the future
@@ -92,14 +103,13 @@ public class CIV_Retreat : State_CIV
                 {
                     currentAgent.currentScareValue = currentAgent.currentScareValue - 1;
                     scareDecreaseTimer = 3.0f;
-                }
-                
+                }                
             }
             //Update the debug text
             currentAgent.txtScaredValue.text = currentAgent.currentScareValue.ToString();
 
             //If will is not close to the agent then don't flee
-            if (dirAwayFromWill.magnitude > scaredRadius)
+            if (dirAwayFromObject.magnitude > scaredRadius)
             {
                 currentAgent.navAgent.velocity = Vector3.zero; //Stop the agent from moving
 
@@ -115,21 +125,45 @@ public class CIV_Retreat : State_CIV
             {
                 timer = 3.0f; //Reset the timer
 
-                if (agent.navAgent.hasPath == false)
+                //if (agent.navAgent.hasPath == false)
+                //{
+                //    Vector3 randDirection = Random.insideUnitSphere * currentAgent.wanderRadius;
+
+                //    //randDirection = randDirection += dirAwayFromObject; //Update direction based on Agent's current position
+
+                //    NavMeshHit navHit; //Stores the result of a NavMesh query
+                //    NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, -1);
+
+                //    agent.navAgent.SetDestination(navHit.position);
+                //}
+
+                if(agent.navAgent.hasPath == false)
                 {
-                    Vector3 randDirection = UnityEngine.Random.insideUnitSphere * currentAgent.wanderRadius;
-
-                    randDirection += dirAwayFromWill; //Update direction based on Agent's current position
-
-                    NavMeshHit navHit; //Stores the result of a NavMesh query
-                    NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, -1);
-
-                    agent.navAgent.SetDestination(navHit.position);
+                    agent.navAgent.SetDestination(RandomNavSphere(currentAgent.transform.position, 10, -1));
                 }
+
             } //End else
         }//End Scared if
 
     } //End update
+
+    //Calculate a random point to run to - may need a different solution if they keep running towards the "scary" item
+    public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
+    {
+        Vector3 randDirection = Random.onUnitSphere * distance;
+
+        randDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, distance, layermask);
+
+        //Debug.DrawLine(randDirection - Vector3.forward * 0.05f, randDirection + Vector3.forward * 0.05f, Color.green, 50.0f);
+        //Debug.DrawLine(randDirection - Vector3.right * 0.05f, randDirection + Vector3.right * 0.05f, Color.green, 50.0f);
+        //Debug.DrawLine(randDirection - Vector3.up * 0.05f, randDirection + Vector3.up * 0.05f, Color.green, 50.0f);
+
+        return navHit.position;
+    }
 
     //Updates animation to scared run, and run towards exit point and despawn once at max scaredness
     void RunScaredExit()

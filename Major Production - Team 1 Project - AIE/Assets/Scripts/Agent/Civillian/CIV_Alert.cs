@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////
 // Author: <Jak Revai>                                     
-// Date Created: <00/00/00>                               
+// Date Created: <15/01/18>                               
 // Brief: <Description>  
 ////////////////////////////////////////////////////////////
 using System;
@@ -18,13 +18,13 @@ public class CIV_Alert : State_CIV
     public void OnEnter(CivillianController agent)
     {
         currentAgent = agent;
+        currentAgent.currentState = State.State_Alert;
         currentAgent.txtState.text = "ALERT";
         itemPos = currentAgent.itemPosition;
     }
 
     public void OnExit(CivillianController agent)
     {
-        throw new NotImplementedException();
     }
 
     public void STATE_Update(CivillianController agent, StateMachine_CIV stateMachine, float deltaTime)

@@ -28,7 +28,6 @@ public class playerPossession : MonoBehaviour
 
     //Determines when we can use the "Lure/Repel" ability
     private static bool hidden = false;
-    public bool ishidden = hidden;
     public int lureRange = 10; //Range at which the lure ability will attract the ai
 
     // Use this for initialization - note that the player could be real or could be an item
@@ -71,7 +70,6 @@ public class playerPossession : MonoBehaviour
             //Start of lure mechanic - Jak
             if(hidden)
             {
-                Debug.Log("We are hidden annd left click was pressed.");
                 //Lure Enemies to us
                 Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange); //Refactor this so it finds tags first instead of all colliders
 
@@ -109,7 +107,9 @@ public class playerPossession : MonoBehaviour
         //Repel - Jak
         if (Input.GetMouseButtonDown(1) && hidden)
         {
-            Debug.Log("We are hidden annd right click was pressed.");
+            //Play scare animation
+            //We assume that we are correctly hidden in an ITEM, so they MUST have a ItemController script attached
+            GetComponent<ItemController>().scare = true;
 
             //Get all colliders
             Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange); //Refactor this so it finds tags first instead of all colliders

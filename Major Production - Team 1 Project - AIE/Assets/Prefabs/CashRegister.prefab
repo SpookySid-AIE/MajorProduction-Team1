@@ -50,9 +50,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4236556668497016}
   - component: {fileID: 95549265202116782}
-  - component: {fileID: 114105400750629474}
   - component: {fileID: 65507337615177608}
   - component: {fileID: 54527292403549048}
+  - component: {fileID: 135546665622769060}
   - component: {fileID: 114543378003669532}
   m_Layer: 0
   m_Name: CashRegister
@@ -391,15 +391,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1110673303633924}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -3.63, y: 0, z: 22.69}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.13, y: 2.5278355e-17, z: -23.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4699072824712022}
   - {fileID: 4139740779723380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4248528575365056
 Transform:
   m_ObjectHideFlags: 1
@@ -611,18 +611,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114105400750629474
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1110673303633924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!114 &114543378003669532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,6 +628,19 @@ MonoBehaviour:
   timer: 0
   baseScariness: 0
   ectoCost: 0
+  scare: 0
+--- !u!135 &135546665622769060
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110673303633924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137439775392474174
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

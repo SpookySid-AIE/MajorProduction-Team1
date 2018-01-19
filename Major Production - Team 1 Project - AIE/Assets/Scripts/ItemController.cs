@@ -23,7 +23,11 @@ public class ItemController : MonoBehaviour
     [HideInInspector]
     public int baseScariness;
     [HideInInspector]
-    public int ectoCost; 
+    public int ectoCost;
+
+    //Animation boolean - turns off/on the animation
+    [HideInInspector]public bool scare = false;
+    private Animator anim;
 
     private void Awake()
     {
@@ -48,6 +52,9 @@ public class ItemController : MonoBehaviour
             //    txtValue.text = "";
         }
 #endif
+        //Check for an animator controller - error checking
+        anim = GetComponent<Animator>();
+
         if (ItemScaryRating == Orientation.Least_Scary)
         {
             baseScariness = 2; //Edit this to edit how scared citizens get when struck with said item
@@ -68,6 +75,15 @@ public class ItemController : MonoBehaviour
 
     void Update()
     {
+        //Animation activation for repel
+        if (anim != null) //Error checking incase an Item doesnt have a controller
+        {
+            if (scare == true)
+                anim.SetBool("scare", scare); //This also means every Item that has a scared animation need this boolean in the controller
+            else
+                anim.SetBool("scare", scare);
+        }
+
         if (hasBeenThrown)
         {
             timer += Time.deltaTime;
@@ -79,5 +95,29 @@ public class ItemController : MonoBehaviour
             
         }
     } //End update
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
+        {
+            other.GetComponent<CivillianController>().navAgent.isStopped = true;
+
+            //Play thinking? animation here
+
+            other.GetComponent<Animator>().enabled = false;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
+        {
+            other.GetComponent<CivillianController>().navAgent.isStopped = true;
+
+            //Play thinking? animation here
+
+            other.GetComponent<Animator>().enabled = false;
+        }
+    }
 
 }

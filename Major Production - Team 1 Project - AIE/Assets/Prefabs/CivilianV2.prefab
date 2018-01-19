@@ -2072,7 +2072,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1133314864877492}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e39ded8ec3e26da40a95b9ebcacc5a0d, type: 3}
   m_Controller: {fileID: 9100000, guid: e6f1786e747adf742aa7c1163861013f, type: 2}
   m_CullingMode: 1
@@ -2195,7 +2195,7 @@ MonoBehaviour:
   navAgent: {fileID: 0}
   currentScareValue: 0
   ItemScaryRating: 0
-  scareThreshHoldMax: 10
+  scareThreshHoldMax: 1000
   m_Animator: {fileID: 0}
   txtState: {fileID: 0}
   txtScaredValue: {fileID: 0}
@@ -2211,6 +2211,8 @@ MonoBehaviour:
     type: 2}
   enableWander: 0
   hasDroppedEcto: 0
+  itemPosition: {x: 0, y: 0, z: 0}
+  alertedByItem: 0
   civIconStateScript: {fileID: 0}
 --- !u!114 &114730520532990398
 MonoBehaviour:

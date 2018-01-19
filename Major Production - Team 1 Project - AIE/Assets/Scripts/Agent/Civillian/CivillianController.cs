@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+public enum State
+{
+    State_Alert,
+    State_Retreat,
+    State_Wander
+}
+
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 public class CivillianController : MonoBehaviour
@@ -65,6 +72,8 @@ public class CivillianController : MonoBehaviour
     [HideInInspector]public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
 
+    public State currentState;
+
     //Testing - Mark
     public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
 
@@ -72,6 +81,9 @@ public class CivillianController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine
+        currentState = State.State_Wander;
+
         hasDroppedEcto = false;
         currentScareValue = 0;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -129,12 +141,12 @@ public class CivillianController : MonoBehaviour
         //    navAgent.ResetPath();
         //}
 
-        //if (navAgent.remainingDistance > navAgent.stoppingDistance)
-        //    Move(navAgent.desiredVelocity, false, false);
-        //else
-        //    Move(Vector3.zero, false, false);
+        if (navAgent.remainingDistance > navAgent.stoppingDistance)
+            Move(navAgent.desiredVelocity, false, false);
+        else
+            Move(Vector3.zero, false, false);
 
-        if(isInLineOfSight() == true && sid.GetComponent<playerPossession>().CheckIsPossesed() == true && TRIGGERED_floating == false)
+        if (isInLineOfSight() == true && sid.GetComponent<playerPossession>().CheckIsPossesed() == true && TRIGGERED_floating == false)
         {
             //Debug.Log("In sight!");
             ItemScaryRating = sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().ItemScaryRating;
@@ -145,14 +157,14 @@ public class CivillianController : MonoBehaviour
         }
 
         //State changing to INTRIGUED if an itemPosition has been set, that means the ai has been in range of a recent lure mechanic used by the player
-        if(alertedByItem)
+        if(alertedByItem && currentScareValue != scareThreshHoldMax)
         {
             m_stateMachine.ChangeState(this, new CIV_Alert());
             alertedByItem = false;
         }
 
         //State changing to Retreat, because the repel mechanic was used in playerPosession
-        if(TRIGGERED_repel)
+        if(TRIGGERED_repel && currentScareValue != scareThreshHoldMax)
         {
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
@@ -163,8 +175,6 @@ public class CivillianController : MonoBehaviour
         {
             m_stateMachine.Update(this, Time.deltaTime);
         }
-
-
         //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(new Vector3(this.velocity_.x, 0.0f, this.velocity_.y), Vector3.up), Time.deltaTime * 10f);
         //Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green);
 
@@ -197,7 +207,7 @@ public class CivillianController : MonoBehaviour
 
         //ApplyExtraTurnRotation();
 
-        // send input and other state parameters to the animator
+        //Send input and other state parameters to the animator
         UpdateAnimator();
     }
 
@@ -237,14 +247,14 @@ public class CivillianController : MonoBehaviour
             if (TRIGGERED_hit == false)
             {
                 ItemScaryRating = collision.gameObject.GetComponent<ItemController>().ItemScaryRating;
-                Debug.Log(ItemScaryRating);
                 TRIGGERED_hit = true; //This needs to be set to update the code in CIV_Retreat
             }
-            //Update text accordinally
-            //txtScaredValue.text = currentScareValue.ToString();
             
-
-
+            //Calculate new direction away from the hit object so we can "Avoid" it
+            //Vector3 direction = collision.contacts[0].point - transform.position;
+            //direction = -direction.normalized;
+            //CIV_Retreat.dirAwayFromObject = direction; //Pass into CIV_Retreat
+            
             //Change into Retreat State
             m_stateMachine.ChangeState(this, new CIV_Retreat());
             civIconStateScript.myState = script_civilianIconState.gameState.retreat;// 19-12-2017 Added by Mark 
