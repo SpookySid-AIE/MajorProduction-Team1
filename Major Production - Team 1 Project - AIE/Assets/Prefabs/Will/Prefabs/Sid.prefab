@@ -1475,8 +1475,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770363062168760}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 42.3, y: 2.04, z: 66.1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -55.81, y: 1.15, z: 64.25}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4810589716007910}
@@ -1487,7 +1487,7 @@ Transform:
   - {fileID: 4294596449982756}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4848965939526308
 Transform:
   m_ObjectHideFlags: 1
@@ -1749,18 +1749,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e36fdc681c0284889f348e4cefd090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  maxMischeif: 0
   NPCcount: 0
   canvasWinOrLose: {fileID: 0}
-  canvasPause: {fileID: 0}
 --- !u!114 &114090657199047826
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624796461697904}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
@@ -1812,7 +1809,6 @@ MonoBehaviour:
   possessionColour: {r: 0, g: 1, b: 1, a: 1}
   HeightAdjustment: 0.4
   allowablePosessionRange: 15
-  ishidden: 0
   lureRange: 10
 --- !u!114 &114127850985420996
 MonoBehaviour:
@@ -1848,7 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ectoplasm: 100
   ectoplasmValue: 0
-  speed: 15
+  speed: 5
   floatSpeed: 0.75
   controller: {fileID: 143192119463792556}
 --- !u!114 &114294829516336740
@@ -1933,13 +1929,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770363062168760}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
-  PlayEvent: 0
+  Event: event:/MainTheme
+  PlayEvent: 1
   StopEvent: 0
   CollisionTag: 
   AllowFadeout: 1
@@ -1947,8 +1943,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!114 &114865636173594950
 MonoBehaviour:
   m_ObjectHideFlags: 1
