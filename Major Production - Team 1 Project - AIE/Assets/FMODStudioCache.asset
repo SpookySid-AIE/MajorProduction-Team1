@@ -13,12 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114329640646741226}
-  - {fileID: 114954589175471550}
+  - {fileID: 114809396267332072}
   EditorEvents:
-  - {fileID: 114457652043416146}
-  MasterBankRef: {fileID: 114954589175471550}
+  - {fileID: 114871188419565306}
+  - {fileID: 114766999257341854}
+  - {fileID: 114505814949546654}
+  MasterBankRef: {fileID: 114809396267332072}
   StringsBankRef: {fileID: 114329640646741226}
-  stringsBankWriteTime: 636445363982678686
+  stringsBankWriteTime: 636520011730012255
   cacheVersion: 2
 --- !u!114 &114009839704880666
 MonoBehaviour:
@@ -60,6 +62,26 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114188071832266954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/89534__cgeffex__very-fast-bubble-pop1
+  guid: c81032e3671331438a65d789a3ec11d7
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114329640646741226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,11 +94,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636445363982678686
+  lastModified: 636520011730012255
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 720
+    Value: 818
   Exists: 1
 --- !u!114 &114457652043416146
 MonoBehaviour:
@@ -92,7 +114,28 @@ MonoBehaviour:
   Path: event:/MainTheme2
   guid: e86babdb7f422541a6a8da723ec57342
   Banks:
-  - {fileID: 114954589175471550}
+  - {fileID: 114809396267332072}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+--- !u!114 &114505814949546654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/MainTheme
+  guid: e86babdb7f422541a6a8da723ec57342
+  Banks:
+  - {fileID: 114809396267332072}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -138,6 +181,46 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114766999257341854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Ecto_pickup
+  guid: c81032e3671331438a65d789a3ec11d7
+  Banks:
+  - {fileID: 114809396267332072}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114809396267332072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636520011729942000
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1377824
+  Exists: 1
 --- !u!114 &114840446105910988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +260,27 @@ MonoBehaviour:
   - Name: Desktop
     Value: 720
   Exists: 1
+--- !u!114 &114871188419565306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/NPC_Startled_F
+  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
+  Banks:
+  - {fileID: 114809396267332072}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114906782864686302
 MonoBehaviour:
   m_ObjectHideFlags: 0

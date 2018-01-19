@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4372179528205346}
   - component: {fileID: 136274664329019618}
   - component: {fileID: 114422418906458716}
+  - component: {fileID: 114240670203271314}
   m_Layer: 0
   m_Name: particleEctoplasmGreen
   m_TagString: Ectoplasm
@@ -99,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476844225496228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.43, y: 1.57, z: 5.61}
+  m_LocalPosition: {x: -49.24, y: 0.97, z: 67.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4963931389140148}
@@ -134,6 +135,28 @@ Transform:
   m_Father: {fileID: 4372179528205346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114240670203271314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476844225496228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Ecto_pickup
+  PlayEvent: 3
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &114422418906458716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8aa92c3b28010b46b8d1a04fc28005c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEctoplasmValue: 2
+  currentEctoplasmValue: 5
   modifier: 2
   Ectoplasm: {fileID: 1476844225496228}
 --- !u!136 &136274664329019618
