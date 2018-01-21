@@ -16,20 +16,7 @@ public class playerController : MonoBehaviour
     [HideInInspector] public float ectoplasmValue; // What is this for? Why is this hidden? - MP
     public float speed = 6.0f;
     public float floatSpeed; //Speed of how fasty you float upwards when holding space.
-    
-    public bool IsHiding
-    {
-        get
-        {
-            return hiding;
-        }
-        set
-        {
-            hiding = value;
-        }
-    }
 
-    private bool hiding;
     private Text txt_ectoplasm;
     private Vector3 moveDirection = Vector3.zero;
     public CharacterController controller;
@@ -39,7 +26,6 @@ public class playerController : MonoBehaviour
         // Store reference to attached component
         controller = GetComponent<CharacterController>();
         txt_ectoplasm = GameObject.Find("Ectoplasm").GetComponent<Text>();
-        hiding = false;
     }
 
     void Update()

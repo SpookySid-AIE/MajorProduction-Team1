@@ -36,7 +36,10 @@ public class CIV_Retreat : State_CIV
         currentAgent.currentState = State.State_Retreat; //Setting currentState - kinda temporary i hope
 
         //Update animator
-        currentAgent.navAgent.speed = 1.5f; //Add some additional speed to make them feel really spooked
+        if (currentAgent.m_Animator.enabled == false) //This is here temporarilly until we get a intriged animation going, this just unfreezes anim
+            currentAgent.m_Animator.enabled = true;
+
+        currentAgent.navAgent.speed = 5.0f; //Add some additional speed to make them feel really spooked
         currentAgent.m_Animator.SetBool("Scared", true);
 
         //Debug.Log(currentAgent.gameObject.name + " State: RETREAT");
@@ -70,6 +73,9 @@ public class CIV_Retreat : State_CIV
         agent.TRIGGERED_hit = false;
         agent.TRIGGERED_repel = false;
         agent.hasDroppedEcto = false;
+        currentAgent.navAgent.speed = 1;
+        currentAgent.m_Animator.SetBool("Scared", false);
+        
         //Reset target item that hit us
         //agent.target = null; //Trying to prevent multiple hits from the same object, but seems to be working ok so far
     }

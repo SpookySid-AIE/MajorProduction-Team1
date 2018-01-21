@@ -52,6 +52,8 @@ public class CamLock : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerrb = player.GetComponent<Rigidbody>();
+        currentHorizontal = player.transform.eulerAngles.y;
+        currentVertical = player.transform.eulerAngles.x;
 
     }
     // Update is called once per frame

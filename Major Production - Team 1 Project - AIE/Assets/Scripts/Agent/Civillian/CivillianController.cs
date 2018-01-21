@@ -261,7 +261,6 @@ public class CivillianController : MonoBehaviour
         }
     }
 
-    //True until false
     public bool isInLineOfSight()
     {
         Vector3 targetAdjustedPosition = (sid.transform.position + (sid.transform.up * 1.1f));//aim for wills head
