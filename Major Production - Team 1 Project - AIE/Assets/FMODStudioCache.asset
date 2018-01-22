@@ -12,189 +12,17 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114329640646741226}
-<<<<<<< HEAD
-  - {fileID: 114212681447511790}
+  - {fileID: 114214098787162120}
+  - {fileID: 114099923251220928}
   EditorEvents:
-  - {fileID: 114892528889303724}
-  - {fileID: 114026249104350842}
-  - {fileID: 114138224952167716}
-  MasterBankRef: {fileID: 114212681447511790}
-  StringsBankRef: {fileID: 114329640646741226}
+  - {fileID: 114419641938024616}
+  - {fileID: 114733679014321386}
+  - {fileID: 114501165315704122}
+  MasterBankRef: {fileID: 114099923251220928}
+  StringsBankRef: {fileID: 114214098787162120}
   stringsBankWriteTime: 636522291576884317
-=======
-  - {fileID: 114542139910087636}
-  EditorEvents:
-  - {fileID: 114606180412674122}
-  MasterBankRef: {fileID: 114542139910087636}
-  StringsBankRef: {fileID: 114329640646741226}
-  stringsBankWriteTime: 636522390741857731
->>>>>>> 125a39d9399ea6e31d5a0f6485a43ca37e1d4ecf
   cacheVersion: 2
---- !u!114 &114009839704880666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: E:\#Workspaces\Git Workspace\MajorProduction-Team1\Major Production - Team
-    1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636445363982658684
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1298048
-  Exists: 1
---- !u!114 &114018612610756632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme2
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114906782864686302}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114026249104350842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Ecto_pickup
-  guid: c81032e3671331438a65d789a3ec11d7
-  Banks:
-  - {fileID: 114212681447511790}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114077935635984274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114451126758763350}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114093485488895106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: E:\#Workspaces\Git Workspace\MajorProduction-Team1\Major Production - Team
-    1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636445363982658684
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1298048
-  Exists: 1
---- !u!114 &114138224952167716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114212681447511790}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114169031595300950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Ecto_pickup
-  guid: c81032e3671331438a65d789a3ec11d7
-  Banks:
-  - {fileID: 114451126758763350}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114188071832266954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/89534__cgeffex__very-fast-bubble-pop1
-  guid: c81032e3671331438a65d789a3ec11d7
-  Banks: []
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114212681447511790
+--- !u!114 &114099923251220928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -213,7 +41,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1377824
   Exists: 1
---- !u!114 &114329640646741226
+--- !u!114 &114214098787162120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -225,17 +53,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-<<<<<<< HEAD
   lastModified: 636522291576884317
-=======
-  lastModified: 636522390741857731
->>>>>>> 125a39d9399ea6e31d5a0f6485a43ca37e1d4ecf
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 818
   Exists: 1
---- !u!114 &114447258546347440
+--- !u!114 &114419641938024616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -246,57 +70,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: event:/MainTheme2
-  guid: e86babdb7f422541a6a8da723ec57342
+  Path: event:/NPC_Startled_F
+  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
   Banks:
-  - {fileID: 114093485488895106}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
+  - {fileID: 114099923251220928}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
   Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114451126758763350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
-    Bank.bank
-  lastModified: 636520011729942000
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1377824
-  Exists: 1
---- !u!114 &114457652043416146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme2
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114809396267332072}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114505814949546654
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114501165315704122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -310,114 +94,14 @@ MonoBehaviour:
   Path: event:/MainTheme
   guid: e86babdb7f422541a6a8da723ec57342
   Banks:
-  - {fileID: 114809396267332072}
+  - {fileID: 114099923251220928}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
---- !u!114 &114542139910087636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: D:\Kips\Desktop\SpookySid\MajorProduction-Team1\Major Production - Team 1
-    Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636522390741697297
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1298048
-  Exists: 1
---- !u!114 &114606180412674122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme2
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114542139910087636}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114638701049880406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636517924911857609
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 778
-  Exists: 1
---- !u!114 &114721556680316716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/MainTheme2
-  guid: e86babdb7f422541a6a8da723ec57342
-  Banks:
-  - {fileID: 114009839704880666}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
---- !u!114 &114733445056531266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/NPC_Startled_F
-  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
-  Banks:
-  - {fileID: 114451126758763350}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114766999257341854
+--- !u!114 &114733679014321386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -431,167 +115,10 @@ MonoBehaviour:
   Path: event:/Ecto_pickup
   guid: c81032e3671331438a65d789a3ec11d7
   Banks:
-  - {fileID: 114809396267332072}
+  - {fileID: 114099923251220928}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
---- !u!114 &114809396267332072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
-    Bank.bank
-  lastModified: 636520011729942000
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1377824
-  Exists: 1
---- !u!114 &114825478883803334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: E:\#Workspaces\Git Workspace\MajorProduction-Team1\Major Production - Team
-    1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636445363982658684
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1298048
-  Exists: 1
---- !u!114 &114840446105910988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/NPC_Startled_F
-  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
-  Banks:
-  - {fileID: 114906782864686302}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114866842002705674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636445363982678686
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 720
-  Exists: 1
---- !u!114 &114871188419565306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/NPC_Startled_F
-  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
-  Banks:
-  - {fileID: 114809396267332072}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114892528889303724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/NPC_Startled_F
-  guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
-  Banks:
-  - {fileID: 114212681447511790}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
---- !u!114 &114906782864686302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
-    Bank.bank
-  lastModified: 636517924911832489
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1376000
-  Exists: 1
---- !u!114 &114954589175471550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: E:\#Workspaces\Git Workspace\MajorProduction-Team1\Major Production - Team
-    1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636445363982658684
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1298048
-  Exists: 1
