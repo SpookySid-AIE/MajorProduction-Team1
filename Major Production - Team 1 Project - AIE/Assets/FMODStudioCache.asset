@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114329640646741226}
+<<<<<<< HEAD
   - {fileID: 114212681447511790}
   EditorEvents:
   - {fileID: 114892528889303724}
@@ -21,6 +22,14 @@ MonoBehaviour:
   MasterBankRef: {fileID: 114212681447511790}
   StringsBankRef: {fileID: 114329640646741226}
   stringsBankWriteTime: 636522291576884317
+=======
+  - {fileID: 114542139910087636}
+  EditorEvents:
+  - {fileID: 114606180412674122}
+  MasterBankRef: {fileID: 114542139910087636}
+  StringsBankRef: {fileID: 114329640646741226}
+  stringsBankWriteTime: 636522390741857731
+>>>>>>> 125a39d9399ea6e31d5a0f6485a43ca37e1d4ecf
   cacheVersion: 2
 --- !u!114 &114009839704880666
 MonoBehaviour:
@@ -216,7 +225,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
+<<<<<<< HEAD
   lastModified: 636522291576884317
+=======
+  lastModified: 636522390741857731
+>>>>>>> 125a39d9399ea6e31d5a0f6485a43ca37e1d4ecf
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -304,6 +317,25 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114542139910087636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Kips\Desktop\SpookySid\MajorProduction-Team1\Major Production - Team 1
+    Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
+  lastModified: 636522390741697297
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1298048
+  Exists: 1
 --- !u!114 &114606180412674122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +350,7 @@ MonoBehaviour:
   Path: event:/MainTheme2
   guid: e86babdb7f422541a6a8da723ec57342
   Banks:
-  - {fileID: 114825478883803334}
+  - {fileID: 114542139910087636}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
