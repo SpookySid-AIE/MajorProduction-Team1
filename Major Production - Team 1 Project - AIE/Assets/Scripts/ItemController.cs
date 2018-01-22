@@ -27,6 +27,7 @@ public class ItemController : MonoBehaviour
 
     //Animation boolean - turns off/on the animation
     [HideInInspector]public bool scare = false;
+    public bool scaryObject = false; //Temporary until i can figure a way to make all scary objects with animations generic
     private Animator anim;
 
     private void Awake()
@@ -78,10 +79,14 @@ public class ItemController : MonoBehaviour
         //Animation activation for repel
         if (anim != null) //Error checking incase an Item doesnt have a controller
         {
-            if (scare == true)
-                anim.SetBool("scare", scare); //This also means every Item that has a scared animation need this boolean in the controller
-            else
-                anim.SetBool("scare", scare);
+            if (scaryObject)
+            {
+                 if (scare == true)
+                    anim.SetBool("scare", scare); //This also means every Item that has a scared animation need this boolean in the controller
+                 else
+                    anim.SetBool("scare", scare);
+            }
+   
         }
 
         if (hasBeenThrown)
