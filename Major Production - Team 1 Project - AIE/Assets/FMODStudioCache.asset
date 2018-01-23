@@ -20,9 +20,10 @@ MonoBehaviour:
   - {fileID: 114501165315704122}
   - {fileID: 114918579525195232}
   - {fileID: 114077603852228876}
+  - {fileID: 114215810252616838}
   MasterBankRef: {fileID: 114099923251220928}
   StringsBankRef: {fileID: 114214098787162120}
-  stringsBankWriteTime: 636523217823427664
+  stringsBankWriteTime: 636523347587254985
   cacheVersion: 2
 --- !u!114 &114077603852228876
 MonoBehaviour:
@@ -58,11 +59,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636523217823377029
+  lastModified: 636523347587194899
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 3011360
+    Value: 3028480
   Exists: 1
 --- !u!114 &114214098787162120
 MonoBehaviour:
@@ -76,12 +77,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636523217823427664
+  lastModified: 636523347587254985
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 930
+    Value: 992
   Exists: 1
+--- !u!114 &114215810252616838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Iron_Gate_Squeaky_Swing_Open_01
+  guid: a72d5ca558ebac4dbaaecd30c8e7ba1d
+  Banks:
+  - {fileID: 114099923251220928}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114419641938024616
 MonoBehaviour:
   m_ObjectHideFlags: 0
