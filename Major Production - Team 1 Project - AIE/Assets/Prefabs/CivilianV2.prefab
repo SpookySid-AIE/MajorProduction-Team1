@@ -732,6 +732,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1644143040032534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4505880152631542}
+  - component: {fileID: 33452972944731068}
+  - component: {fileID: 65192484824079320}
+  - component: {fileID: 114208366901689342}
+  m_Layer: 0
+  m_Name: SFX_Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1654986522599498
 GameObject:
   m_ObjectHideFlags: 1
@@ -1212,12 +1230,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1133314864877492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2, y: 0, z: -31.05}
+  m_LocalPosition: {x: -23.81, y: 9.66556e-18, z: 57.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224101321295736268}
   - {fileID: 4226100910499778}
   - {fileID: 4663338008799252}
+  - {fileID: 4505880152631542}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1554,6 +1573,19 @@ Transform:
   - {fileID: 4525383025009014}
   m_Father: {fileID: 4401119513951778}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4505880152631542
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644143040032534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: 1.15, z: 6.15}
+  m_LocalScale: {x: 3.0012677, y: 2, z: 14.887505}
+  m_Children: []
+  m_Father: {fileID: 4083330562759590}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4507205169021494
 Transform:
@@ -2033,6 +2065,13 @@ Transform:
   m_Father: {fileID: 4914711551228024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &33452972944731068
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644143040032534}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54973945542377092
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2048,6 +2087,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &65192484824079320
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644143040032534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95311292516199258
 Animator:
   serializedVersion: 3
@@ -2115,6 +2166,28 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
+--- !u!114 &114208366901689342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644143040032534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/NPC_Startled_M
+  PlayEvent: 3
+  StopEvent: 4
+  CollisionTag: Player
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &114390291201266578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2185,10 +2258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faef6381cdf55bc418a518bea63ac66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRadius: 8
+  wanderRadius: 1
   audioSearch: 0
   ShowRadius: 1
-  ShowState: 1
+  ShowState: 0
   target: {fileID: 0}
   sid: {fileID: 0}
   endPoint: {fileID: 0}
@@ -2199,7 +2272,7 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   txtState: {fileID: 0}
   txtScaredValue: {fileID: 0}
-  lineOfSight: 8
+  lineOfSight: 15
   TRIGGERED_repel: 0
   TRIGGERED_hit: 0
   TRIGGERED_floating: 0
@@ -2213,6 +2286,7 @@ MonoBehaviour:
   hasDroppedEcto: 0
   itemPosition: {x: 0, y: 0, z: 0}
   alertedByItem: 0
+  currentState: 0
   civIconStateScript: {fileID: 0}
 --- !u!114 &114730520532990398
 MonoBehaviour:
