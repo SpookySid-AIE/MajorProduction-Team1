@@ -131,6 +131,36 @@ GameObject:
   m_PrefabParentObject: {fileID: 1770363062168760, guid: 61212dd804211d54a9c01ff218f91907,
     type: 2}
   m_PrefabInternal: {fileID: 1338150635}
+--- !u!114 &2127542 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114777026968608658, guid: 61212dd804211d54a9c01ff218f91907,
+    type: 2}
+  m_PrefabInternal: {fileID: 1338150635}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+--- !u!114 &2127543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Crowd_Shopping_Mall_Large_Ambience_01
+  PlayEvent: 1
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: SupermaketEntered
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!4 &4208423 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4211384997436680, guid: 0f2acb9b954eed3478f0613d2c13cd69,
@@ -10168,7 +10198,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -9.090634e-17
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.z
@@ -20754,7 +20784,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -9.090634e-17
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.z
@@ -25531,6 +25561,31 @@ Prefab:
       propertyPath: canvasWinOrLose
       value: 
       objectReference: {fileID: 1361287899}
+    - target: {fileID: 108513814522131988, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: m_Range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 108513814522131988, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108513814522131988, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108513814522131988, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108513814522131988, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61212dd804211d54a9c01ff218f91907, type: 2}
   m_IsPrefabParent: 0
@@ -25588,6 +25643,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fafb633aa596e3d4c9390fba5800ef00, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1340490313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1340490317}
+  - component: {fileID: 1340490316}
+  - component: {fileID: 1340490315}
+  - component: {fileID: 1340490314}
+  m_Layer: 0
+  m_Name: AmbientCrowdTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1340490314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1340490313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Emitters:
+  - Target: {fileID: 2127543}
+    Params:
+    - Name: SupermaketEntered
+      Value: 1
+  - Target: {fileID: 2127542}
+    Params: []
+  TriggerEvent: 3
+  CollisionTag: Player
+--- !u!65 &1340490315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1340490313}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1340490316
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1340490313}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1340490317
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1340490313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.51271856, y: 10.5, z: 25.4}
+  m_LocalScale: {x: 120, y: 20, z: 50}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 38
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1347611281 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4873697358872260, guid: 4f511ce64a39be0409d1bccdcd4a2343,
@@ -26589,7 +26714,7 @@ Prefab:
     - target: {fileID: 224493787459119990, guid: 07f6fed542328654a874eb9cb4df536c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 818.5
+      value: 880
       objectReference: {fileID: 0}
     - target: {fileID: 224493787459119990, guid: 07f6fed542328654a874eb9cb4df536c,
         type: 2}
@@ -36882,7 +37007,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -9.090634e-17
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4372179528205346, guid: d6ff438e2ab55114587b409ce9fc0248, type: 2}
       propertyPath: m_LocalPosition.z
