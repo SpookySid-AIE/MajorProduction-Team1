@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 195815117104414252}
   - component: {fileID: 54973945542377092}
   - component: {fileID: 114390291201266578}
+  - component: {fileID: 114689209051966460}
   m_Layer: 0
   m_Name: CivilianV2
   m_TagString: Civillian
@@ -2247,6 +2248,28 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114689209051966460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133314864877492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/NPC_Scared_M
+  PlayEvent: 7
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &114728336560159224
 MonoBehaviour:
   m_ObjectHideFlags: 1

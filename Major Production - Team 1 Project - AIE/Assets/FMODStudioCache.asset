@@ -21,10 +21,26 @@ MonoBehaviour:
   - {fileID: 114918579525195232}
   - {fileID: 114077603852228876}
   - {fileID: 114215810252616838}
+  - {fileID: 114660777587092512}
   MasterBankRef: {fileID: 114099923251220928}
   StringsBankRef: {fileID: 114214098787162120}
-  stringsBankWriteTime: 636523347587254985
+  stringsBankWriteTime: 636523959112902629
   cacheVersion: 2
+--- !u!114 &114074285713080192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114077603852228876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,12 +75,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636523347587194899
+  lastModified: 636523959112817488
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 3028480
+    Value: 3063680
   Exists: 1
+--- !u!114 &114210110833700562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114214098787162120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,11 +108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636523347587254985
+  lastModified: 636523959112902629
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 992
+    Value: 1042
   Exists: 1
 --- !u!114 &114215810252616838
 MonoBehaviour:
@@ -146,6 +177,27 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114660777587092512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/NPC_Scared_M
+  guid: d89efc79ac1336439fff1c3b7bb85086
+  Banks:
+  - {fileID: 114099923251220928}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114733679014321386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +219,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114833080669382782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114918579525195232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +250,9 @@ MonoBehaviour:
   Banks:
   - {fileID: 114099923251220928}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  Parameters:
+  - {fileID: 114074285713080192}
+  MinDistance: 0
+  MaxDistance: 0
