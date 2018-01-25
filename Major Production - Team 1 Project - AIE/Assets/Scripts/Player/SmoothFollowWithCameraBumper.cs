@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- 
+
 public class SmoothFollowWithCameraBumper : MonoBehaviour
 {
-    
+
     [SerializeField]
     private Transform target = null;
     [SerializeField]
@@ -49,10 +49,20 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         if (Physics.Raycast(target.TransformPoint(bumperRayOffset), back, out hit, bumperDistanceCheck)
             && hit.transform != target) // ignore ray-casts that hit the user. DR
         {
+            Ray theRayToCamera = new Ray(target.position, (hit.point - target.position));
+
+            Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
+
+
+
             // clamp wanted position to hit position
-            wantedPosition.x = hit.point.x;
-            wantedPosition.z = hit.point.z;
+
+            wantedPosition.x = theHitPositionMinusABit.x;
+
+            wantedPosition.z = theHitPositionMinusABit.z;
+
             wantedPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
+
         }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
@@ -67,4 +77,11 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         else
             transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
     }
+    static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end)
+    {
+        Vector3 result = new Vector3((start.x + end.x) * 0.1f, (start.y + end.y) * 0.1f, (start.z + end.z) * 0.1f);
+        return result;
+    }
 }
+
+
