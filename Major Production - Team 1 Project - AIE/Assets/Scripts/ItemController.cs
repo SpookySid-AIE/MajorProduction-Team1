@@ -76,6 +76,9 @@ public class ItemController : MonoBehaviour
 
     void Update()
     {
+
+        if (transform.position.y < -0.5)
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.rotation);
         //Animation activation for repel
         if (anim != null) //Error checking incase an Item doesnt have a controller
         {
