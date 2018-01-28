@@ -1,57 +1,30 @@
 fileFormatVersion: 2
-guid: ecd79f6bc416bf949893ba37e9799e7a
-timeCreated: 1512370899
-licenseType: Free
+guid: 83af5adf707ed684bb5c5c3da3d2c666
+timeCreated: 1517107691
+licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: obj_tree
-    100004: obj_vase
-    100006: geo_largeStem
-    100008: geo_medStem
-    100010: geo_plantVase
-    100012: geo_smallStem
-    400000: //RootNode
-    400002: obj_tree
-    400004: obj_vase
-    400006: geo_largeStem
-    400008: geo_medStem
-    400010: geo_plantVase
-    400012: geo_smallStem
-    2300000: obj_tree
-    2300002: obj_vase
-    2300004: //RootNode
-    2300006: geo_largeStem
-    2300008: geo_medStem
-    2300010: geo_plantVase
-    2300012: geo_smallStem
-    3300000: obj_tree
-    3300002: obj_vase
-    3300004: //RootNode
-    3300006: geo_largeStem
-    3300008: geo_medStem
-    3300010: geo_plantVase
-    3300012: geo_smallStem
-    4300000: obj_tree
-    4300002: obj_vase
-    4300004: obj_plant
-    4300006: geo_medStem
-    4300008: geo_largeStem
-    4300010: geo_plantVase
-    4300012: geo_smallStem
+    100000: geo_chestBottom
+    100002: geo_chestTop
+    100004: //RootNode
+    400000: geo_chestBottom
+    400002: geo_chestTop
+    400004: //RootNode
+    2300000: geo_chestBottom
+    2300002: geo_chestTop
+    3300000: geo_chestBottom
+    3300002: geo_chestTop
+    4300000: geo_chestBottom
+    4300002: geo_chestTop
+    7400000: Take 001
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 308a330018b655e489cf1ada24baa2e8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shd_plant
-    second: {fileID: 2100000, guid: cf648a83ad49c0940b047f100a639865, type: 2}
+      name: shd_chest
+    second: {fileID: 2100000, guid: f412af879d6ea9044952505a8e9e7f65, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
