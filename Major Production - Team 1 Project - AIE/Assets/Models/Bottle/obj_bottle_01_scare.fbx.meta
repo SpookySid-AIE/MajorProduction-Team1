@@ -1,24 +1,23 @@
 fileFormatVersion: 2
-guid: ef5c82de5c3f8b143a95906257d84c25
-timeCreated: 1512719191
+guid: 99b013d60ee1d7d40aa3472e8b5233dd
+timeCreated: 1517119600
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: geo_bottle
-    100004: geo_cork
-    400000: //RootNode
-    400002: geo_bottle
-    400004: geo_cork
-    2300000: //RootNode
-    2300002: geo_bottle
-    2300004: geo_cork
-    3300000: //RootNode
-    3300002: geo_bottle
-    3300004: geo_cork
+    100000: geo_bottle
+    100002: geo_cork
+    100004: //RootNode
+    400000: geo_bottle
+    400002: geo_cork
+    400004: //RootNode
+    2300000: geo_bottle
+    2300002: geo_cork
+    3300000: geo_bottle
+    3300002: geo_cork
     4300000: geo_bottle
     4300002: geo_cork
+    7400000: Take 001
     9500000: //RootNode
   externalObjects:
   - first:
@@ -26,11 +25,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: shd_bottle_01
     second: {fileID: 2100000, guid: ffa8ff15bbc866341acea8adca05a468, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shd_bottles
-    second: {fileID: 2100000, guid: eee28965de3f0214fbf349da90822fd2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
