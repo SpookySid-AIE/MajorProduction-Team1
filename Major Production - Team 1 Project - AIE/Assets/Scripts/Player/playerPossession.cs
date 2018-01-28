@@ -24,7 +24,7 @@ public class playerPossession : MonoBehaviour
         return isPossesed;
     }
 
-    private float throwVelocity = 30;
+    public float throwVelocity = 30;
 
     //Determines when we can use the "Lure/Repel" ability
     private static bool hidden = false;
@@ -68,7 +68,7 @@ public class playerPossession : MonoBehaviour
             }
             else if(isPossesed)
             {
-                ThrowPossessedItemAway();
+                StartCoroutine(ThrowPossessedItemAway());
                 UnpossessItem();
             }
 
@@ -256,11 +256,18 @@ public class playerPossession : MonoBehaviour
         }
     }
 
-    void ThrowPossessedItemAway()
+    IEnumerator ThrowPossessedItemAway()
     {
         //throw the object;
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
-        player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
+        if (player.GetComponent<MeshCollider>() != null)
+        {
+            player.layer = 9;
+            player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
+            yield return new WaitForSeconds(1.00f);
+            player.layer = 0;
+        }
+        else player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
     }
 
     public void UnpossessItem()
@@ -335,7 +342,6 @@ public class playerPossession : MonoBehaviour
             smr.enabled = true;
         }
 
-        //Turn on colliders
         sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         sneakTest.GetComponent<CharacterController>().enabled = true;
 
@@ -442,12 +448,12 @@ public class playerPossession : MonoBehaviour
         //Destroy the old possession componenet on the last possessed object
         Destroy(player.GetComponent<playerPossession>());
 
-
+        sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         sneakTest.GetComponent<CharacterController>().enabled = true;
+
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
 
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-        sneakTest.GetComponent<CapsuleCollider>().enabled = true;
     }
 
     static bool lastClicked = false; //needs to be static as this code is called from multiple objects 
