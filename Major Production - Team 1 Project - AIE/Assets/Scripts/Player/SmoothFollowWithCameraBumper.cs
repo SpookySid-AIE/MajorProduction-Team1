@@ -20,7 +20,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     private float rotationDamping = 10.0f;
 
     [SerializeField]
-    private Vector3 targetLookAtOffset; // allows offsetting of camera lookAt, very useful for low bumper heights
+    public Vector3 targetLookAtOffset; // allows offsetting of camera lookAt, very useful for low bumper heights
 
     [SerializeField]
     private float bumperDistanceCheck = 2.5f; // length of bumper ray
