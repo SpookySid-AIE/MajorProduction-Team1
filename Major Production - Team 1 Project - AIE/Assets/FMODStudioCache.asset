@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114214098787162120}
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   EditorEvents:
   - {fileID: 114419641938024616}
   - {fileID: 114733679014321386}
@@ -22,9 +22,13 @@ MonoBehaviour:
   - {fileID: 114077603852228876}
   - {fileID: 114215810252616838}
   - {fileID: 114660777587092512}
-  MasterBankRef: {fileID: 114097678066502646}
+  MasterBankRef: {fileID: 114450959861583920}
   StringsBankRef: {fileID: 114214098787162120}
+<<<<<<< HEAD
   stringsBankWriteTime: 636528343945521153
+=======
+  stringsBankWriteTime: 636527440331303735
+>>>>>>> 2993968598e96850e4f7894c66abe3cc456d778f
   cacheVersion: 2
 --- !u!114 &114038723424377424
 MonoBehaviour:
@@ -115,7 +119,7 @@ MonoBehaviour:
   Path: event:/NPC_Startled_M
   guid: b1f294e5f215c44484591db77f3e5c06
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -262,7 +266,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
+<<<<<<< HEAD
   lastModified: 636528343945521153
+=======
+  lastModified: 636527440331303735
+>>>>>>> 2993968598e96850e4f7894c66abe3cc456d778f
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -282,7 +290,7 @@ MonoBehaviour:
   Path: event:/Iron_Gate_Squeaky_Swing_Open_01
   guid: a72d5ca558ebac4dbaaecd30c8e7ba1d
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -412,13 +420,32 @@ MonoBehaviour:
   Path: event:/NPC_Startled_F
   guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114450959861583920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Kips\Desktop\SpookySid\MajorProduction-Team1\Major Production - Team 1
+    Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
+  lastModified: 636527440331288932
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 3063680
+  Exists: 1
 --- !u!114 &114501165315704122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +460,7 @@ MonoBehaviour:
   Path: event:/MainTheme
   guid: e86babdb7f422541a6a8da723ec57342
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -530,7 +557,7 @@ MonoBehaviour:
   Path: event:/NPC_Scared_M
   guid: d89efc79ac1336439fff1c3b7bb85086
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -551,13 +578,14 @@ MonoBehaviour:
   Path: event:/Ecto_pickup
   guid: c81032e3671331438a65d789a3ec11d7
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+<<<<<<< HEAD
 --- !u!114 &114817606949101696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +602,9 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114824002562863084
+=======
+--- !u!114 &114804050284026934
+>>>>>>> 2993968598e96850e4f7894c66abe3cc456d778f
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -632,12 +663,16 @@ MonoBehaviour:
   Path: event:/Crowd_Shopping_Mall_Large_Ambience_01
   guid: db57490bc3d0c344a10d29b36a574716
   Banks:
-  - {fileID: 114097678066502646}
+  - {fileID: 114450959861583920}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
+<<<<<<< HEAD
   - {fileID: 114132557121668582}
+=======
+  - {fileID: 114804050284026934}
+>>>>>>> 2993968598e96850e4f7894c66abe3cc456d778f
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114969606529433194
