@@ -1,36 +1,40 @@
 fileFormatVersion: 2
-guid: ef5c82de5c3f8b143a95906257d84c25
-timeCreated: 1512719191
+guid: 11f825fe1f0ab274b828069f860c8233
+timeCreated: 1517200486
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: geo_bottle
-    100004: geo_cork
-    400000: //RootNode
-    400002: geo_bottle
-    400004: geo_cork
-    2300000: //RootNode
-    2300002: geo_bottle
-    2300004: geo_cork
-    3300000: //RootNode
-    3300002: geo_bottle
-    3300004: geo_cork
-    4300000: geo_bottle
-    4300002: geo_cork
+    100000: geo_largeStem
+    100002: geo_medStem
+    100004: geo_plantVase
+    100006: geo_smallStem
+    100008: //RootNode
+    400000: geo_largeStem
+    400002: geo_medStem
+    400004: geo_plantVase
+    400006: geo_smallStem
+    400008: //RootNode
+    2300000: geo_largeStem
+    2300002: geo_medStem
+    2300004: geo_plantVase
+    2300006: geo_smallStem
+    3300000: geo_largeStem
+    3300002: geo_medStem
+    3300004: geo_plantVase
+    3300006: geo_smallStem
+    4300000: geo_medStem
+    4300002: geo_largeStem
+    4300004: geo_plantVase
+    4300006: geo_smallStem
+    7400000: Take 001
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: shd_bottle_01
-    second: {fileID: 2100000, guid: ef2b6c9db7628514b829bb61d8966ca5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shd_bottles
-    second: {fileID: 2100000, guid: eee28965de3f0214fbf349da90822fd2, type: 2}
+      name: shd_plant
+    second: {fileID: 2100000, guid: 02ad6c3ffefa3314f9e7cba6a9213936, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

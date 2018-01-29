@@ -1,36 +1,21 @@
 fileFormatVersion: 2
-guid: ef5c82de5c3f8b143a95906257d84c25
-timeCreated: 1512719191
+guid: 70d039a0e3b9e854483801c287b75967
+timeCreated: 1517200487
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: geo_bottle
-    100004: geo_cork
     400000: //RootNode
-    400002: geo_bottle
-    400004: geo_cork
     2300000: //RootNode
-    2300002: geo_bottle
-    2300004: geo_cork
     3300000: //RootNode
-    3300002: geo_bottle
-    3300004: geo_cork
-    4300000: geo_bottle
-    4300002: geo_cork
-    9500000: //RootNode
+    4300000: geo_book_02
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: shd_bottle_01
-    second: {fileID: 2100000, guid: ef2b6c9db7628514b829bb61d8966ca5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shd_bottles
-    second: {fileID: 2100000, guid: eee28965de3f0214fbf349da90822fd2, type: 2}
+      name: shd_book_02
+    second: {fileID: 2100000, guid: d4e53c7e697103f4ca1c340f4bf3e01c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -102,7 +87,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

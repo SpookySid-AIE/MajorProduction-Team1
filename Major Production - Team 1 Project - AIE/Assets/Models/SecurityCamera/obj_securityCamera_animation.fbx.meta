@@ -1,36 +1,30 @@
 fileFormatVersion: 2
-guid: ef5c82de5c3f8b143a95906257d84c25
-timeCreated: 1512719191
+guid: b473f7ad00afef94e864d88cca91bcb9
+timeCreated: 1517200488
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: geo_bottle
-    100004: geo_cork
-    400000: //RootNode
-    400002: geo_bottle
-    400004: geo_cork
-    2300000: //RootNode
-    2300002: geo_bottle
-    2300004: geo_cork
-    3300000: //RootNode
-    3300002: geo_bottle
-    3300004: geo_cork
-    4300000: geo_bottle
-    4300002: geo_cork
+    100000: geo_camera
+    100002: geo_cameraNeck
+    100004: //RootNode
+    400000: geo_camera
+    400002: geo_cameraNeck
+    400004: //RootNode
+    2300000: geo_camera
+    2300002: geo_cameraNeck
+    3300000: geo_camera
+    3300002: geo_cameraNeck
+    4300000: geo_camera
+    4300002: geo_cameraNeck
+    7400000: Take 001
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: shd_bottle_01
-    second: {fileID: 2100000, guid: ef2b6c9db7628514b829bb61d8966ca5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shd_bottles
-    second: {fileID: 2100000, guid: eee28965de3f0214fbf349da90822fd2, type: 2}
+      name: shd_securityCamera
+    second: {fileID: 2100000, guid: 1b84338737f2d214abd5d5f3a1dd158b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
