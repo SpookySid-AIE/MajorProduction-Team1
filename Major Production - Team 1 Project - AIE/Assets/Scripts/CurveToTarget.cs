@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,14 +27,18 @@ public class CurveToTarget : MonoBehaviour {
 
     void Update()
     {
-
         Vector3 endPos = target.transform.position;
+
         if (Time.time >= particleLaunchTimer)
         {
             incrementor += speed;
             currentPos = Vector3.Lerp(startPos, endPos, incrementor);
             currentPos.y += lerpHeight * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
             transform.position = currentPos;
+
+            Vector3 curPos = new Vector3(currentPos.x, currentPos.y + 2, currentPos.z);            
+            Camera.main.transform.position = curPos;
+            Debug.Log("Tracking");
         }
     }
 }

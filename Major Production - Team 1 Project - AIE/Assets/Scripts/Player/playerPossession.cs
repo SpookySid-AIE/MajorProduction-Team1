@@ -35,10 +35,15 @@ public class playerPossession : MonoBehaviour
 
     public int lureRange = 10; //Range at which the lure ability will attract the ai
 
+    //Cached script_willDisolve, Script that sends camera and particles over to the intended object
+    script_WillDissolve disolveScript;
+
+
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        disolveScript = player.GetComponent<script_WillDissolve>();
         sneakTest = GameObject.FindGameObjectWithTag("Sneak");
     }
 
@@ -175,6 +180,8 @@ public class playerPossession : MonoBehaviour
                     //name it player so that it behaves like one in collisions
                     target.tag = "Player";
 
+                    //oldPlayerPos = gameObject.transform.position;
+
                     //change the colour so we know we have selected it
                     eRenderer = target.GetComponentInChildren<Renderer>();
                     mat = eRenderer.material;
@@ -267,12 +274,14 @@ public class playerPossession : MonoBehaviour
             yield return new WaitForSeconds(1.00f);
             player.layer = 0;
         }
-        else player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
+        else
+            player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
     }
 
     public void UnpossessItem()
     {
         //turn this item back into a regular item
+        //At this point the player reference has changed is the Possessed Item
         player.tag = "Item";
         player.GetComponent<Rigidbody>().useGravity = true;
         player.GetComponent<Rigidbody>().freezeRotation = false; //Added by Jak - 13/11/17
@@ -301,8 +310,9 @@ public class playerPossession : MonoBehaviour
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
         sneakTest.tag = "Player";//need to do this here as the agent code needs a player at all times
+        //sneakTest.transform.position = oldPlayerPos;
         sneakTest.GetComponent<CapsuleCollider>().enabled = true;
-        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 2.0f;
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
         //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
         Invoke("EnablePlayer", .25f);//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
@@ -318,7 +328,7 @@ public class playerPossession : MonoBehaviour
         sneakTest.tag = "Player";
 
         //set the taget to what was hit in the raycast
-        GameObject target = this.gameObject; //Target equals the current object that this script is on(aka ITEM)
+        GameObject target = this.gameObject; //Target equals the current object that this script is on(aka ITEM at this stage)
 
         //Rename the item
         target.tag = "Item";
@@ -363,18 +373,22 @@ public class playerPossession : MonoBehaviour
     }
 
     //written by Jak - copypasted some stuff from "PossessItem()"
-    void Hide()
+    void H()
     {
-        //try to posess an item
-        RaycastHit hit;
-        Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
-
-        Ray testRay = new Ray(adjustedPlayerPosition, player.transform.forward);
-        //Debug.DrawRay(adjustedPlayerPosition, player.transform.forward * allowablePosessionRange, Color.yellow ,3f);
-
-        if (Physics.Raycast(testRay, out hit, allowablePosessionRange))
+        //set the taget to what was hit in the raycast
+        GameObject target = RaycastCheckItem();
+        if (target.tag == "Item")
         {
-            if (hit.transform.tag == "Item")
+            //eRenderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
+            //mat = eRenderer.material; //let the code know which objects renderer to change
+            //mat.SetColor("_Color", Color.red);// Added by Mark - Change main colour of object back to white
+            disolveScript.target = target;
+            disolveScript.startDissolve = true;
+
+            //Wait until the particles have reached the object before we possess
+            //StartCoroutine(Hide());
+                
+            if (disolveScript.transferred == true)
             {
                 //disable camera whilst we change the cameras target to the newly possesed item
                 Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
@@ -382,8 +396,7 @@ public class playerPossession : MonoBehaviour
                 //rename the player tag so they dont participate in any collisions
                 player.tag = "Sneak";
 
-                //set the taget to what was hit in the raycast
-                GameObject target = hit.collider.gameObject;
+                Debug.Log("HIDE NOW");
 
                 //name it player so that it behaves like one in collisions
                 target.tag = "Player";
@@ -418,14 +431,18 @@ public class playerPossession : MonoBehaviour
 
 
                 //switch off gravity for the target
-                target.GetComponent<Rigidbody>().useGravity = false;
+                target.GetComponent<Rigidbody>().useGravity = true;
                 target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
+
+
 
                 //switch the camera back on to follow the player
                 Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-                hidden = true;
+                hidden = true; //set that we are now hidden in an object
+                disolveScript.transferred = false; //Update the script to let it know we are no longer transfering particles
             }
         }
+        
     }
 
     //enable player
@@ -454,6 +471,44 @@ public class playerPossession : MonoBehaviour
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
 
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+    }
+
+    //This ONLY returns if an ITEM has been hit - I can make this general if need be - Jak
+    //Can pass in a variable to store the object if needed
+    GameObject RaycastCheckItem()
+    {
+        //try to posess an item
+        RaycastHit hit;
+        Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
+
+        Ray testRay = new Ray(adjustedPlayerPosition, player.transform.forward);
+        //Debug.DrawRay(adjustedPlayerPosition, player.transform.forward * allowablePosessionRange, Color.yellow ,3f);
+
+        if (Physics.Raycast(testRay, out hit, allowablePosessionRange))
+        {
+            if(hit.transform.tag == "Item")
+            {
+                return hit.collider.gameObject;
+            }
+        }
+
+        //Return false if Item wasnt hit
+        return new GameObject();
+    }
+
+    //Coroutines
+    IEnumerator Hide()
+    {
+        //Add the raycast check here and initiate disolve
+        while (disolveScript.transferred != true)
+        {
+            Debug.Log("hasParticlesFinished - No");
+            yield return null; // wait until next frame
+        }
+
+        //Actual hide code once possesion anim is complete
+        H();
+
     }
 
     static bool lastClicked = false; //needs to be static as this code is called from multiple objects 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public class script_WillDissolve : MonoBehaviour {
     public float particleTimer; // Timer for Particle Instance Creation
     public float currentTime; // Current Time
     public float particleLaunchDelay = 0.2f; // Delay for Particle to start moving to target
-
+    public bool transferred = false; // Used while transfering into an object - when to trigger final transition into hide() method inside playerPossesion
 
     private bool dissolve; // Used during disolve
     private Renderer[] rend; // Reference for renderers in each characterObject
@@ -65,8 +65,9 @@ public class script_WillDissolve : MonoBehaviour {
             CurveToTarget curveToTarget = particle.GetComponent<CurveToTarget>();
             curveToTarget.target = target;
             curveToTarget.particleLaunchDelay = particleLaunchDelay;
-            Debug.Log("Yo");
+            //Debug.Log("Yo");
             startDissolve = false;
+            transferred = true;
         }
         if (currentDissolve < -2 && dissolve)
         {
