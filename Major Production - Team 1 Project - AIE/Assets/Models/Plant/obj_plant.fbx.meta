@@ -8,18 +8,38 @@ ModelImporter:
     100000: //RootNode
     100002: obj_tree
     100004: obj_vase
+    100006: geo_largeStem
+    100008: geo_medStem
+    100010: geo_plantVase
+    100012: geo_smallStem
     400000: //RootNode
     400002: obj_tree
     400004: obj_vase
+    400006: geo_largeStem
+    400008: geo_medStem
+    400010: geo_plantVase
+    400012: geo_smallStem
     2300000: obj_tree
     2300002: obj_vase
     2300004: //RootNode
+    2300006: geo_largeStem
+    2300008: geo_medStem
+    2300010: geo_plantVase
+    2300012: geo_smallStem
     3300000: obj_tree
     3300002: obj_vase
     3300004: //RootNode
+    3300006: geo_largeStem
+    3300008: geo_medStem
+    3300010: geo_plantVase
+    3300012: geo_smallStem
     4300000: obj_tree
     4300002: obj_vase
     4300004: obj_plant
+    4300006: geo_medStem
+    4300008: geo_largeStem
+    4300010: geo_plantVase
+    4300012: geo_smallStem
     9500000: //RootNode
   externalObjects:
   - first:
@@ -27,6 +47,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lambert1
     second: {fileID: 2100000, guid: 308a330018b655e489cf1ada24baa2e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_plant
+    second: {fileID: 2100000, guid: 02ad6c3ffefa3314f9e7cba6a9213936, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

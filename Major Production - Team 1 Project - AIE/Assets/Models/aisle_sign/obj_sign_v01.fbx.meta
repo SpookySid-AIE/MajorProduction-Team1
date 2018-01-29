@@ -10,6 +10,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: geo_sign
+    4300002: geo_aisleSign
     9500000: //RootNode
   externalObjects:
   - first:
@@ -22,6 +23,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: shd_aisleSign
     second: {fileID: 2100000, guid: c74a1a4a3ebef6d44b78811482224f57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_aisleSign1
+    second: {fileID: 2100000, guid: 187ff5f4f168c884eb977d7bf439594a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
