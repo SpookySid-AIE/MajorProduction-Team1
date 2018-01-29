@@ -262,7 +262,7 @@ public class playerPossession : MonoBehaviour
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
         if (player.GetComponent<MeshCollider>() != null)
         {
-            player.layer = 9;
+            player.layer = 8;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
             yield return new WaitForSeconds(1.00f);
             player.layer = 0;
