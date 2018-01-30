@@ -581,7 +581,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!65 &65161640163240722
 BoxCollider:
@@ -629,6 +629,8 @@ MonoBehaviour:
   timer: 0
   baseScariness: 0
   ectoCost: 0
+  scare: 0
+  scaryObject: 0
 --- !u!114 &114587031244103102
 MonoBehaviour:
   m_ObjectHideFlags: 1
