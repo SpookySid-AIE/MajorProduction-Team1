@@ -498,6 +498,7 @@ public class playerPossession : MonoBehaviour
         if (targetSet == true)
         {
             //Stop movement on sid while transitioning
+            gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             disolveScript.target = target;

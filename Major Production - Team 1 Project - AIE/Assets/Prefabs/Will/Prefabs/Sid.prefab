@@ -1476,8 +1476,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770363062168760}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 42.3, y: 2.04, z: 66.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.04, z: -15.534}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4810589716007910}
@@ -1810,6 +1810,7 @@ MonoBehaviour:
   possessionColour: {r: 0, g: 1, b: 1, a: 1}
   HeightAdjustment: 0.4
   allowablePosessionRange: 15
+  throwVelocity: 30
   lureRange: 10
 --- !u!114 &114127850985420996
 MonoBehaviour:
@@ -1994,6 +1995,7 @@ MonoBehaviour:
   particleTimer: 0
   currentTime: 0
   particleLaunchDelay: 0.2
+  transferred: 0
 --- !u!124 &124630050999534324
 Behaviour:
   m_ObjectHideFlags: 1
