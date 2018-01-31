@@ -67,8 +67,12 @@ public class script_WillDissolve : MonoBehaviour {
             curveToTarget.particleLaunchDelay = particleLaunchDelay;
             //Debug.Log("Yo");
             startDissolve = false;
-            transferred = true;
+
+            if (curveToTarget.finishedAnim == true)
+                Debug.Log("ANIM COMPLETE");
         }
+
+
         if (currentDissolve < -2 && dissolve)
         {
             currentDissolve = -2.0f;

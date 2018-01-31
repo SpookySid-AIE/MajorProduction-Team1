@@ -385,6 +385,7 @@ public class playerPossession : MonoBehaviour
     //written by Jak - copypasted some stuff from "PossessItem()"
     void H()
     {
+        //Time.timeScale = 0;
         //disable camera whilst we change the cameras target to the newly possesed item
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
@@ -491,10 +492,14 @@ public class playerPossession : MonoBehaviour
     //Coroutines
     IEnumerator ParticleTransition()
     {
+        
         RaycastCheckItem();
 
         if (targetSet == true)
         {
+            //Stop movement on sid while transitioning
+            gameObject.GetComponent<CharacterController>().enabled = false;
+
             disolveScript.target = target;
             disolveScript.startDissolve = true;
 
@@ -504,9 +509,9 @@ public class playerPossession : MonoBehaviour
                 //Debug.Log("hasParticlesFinished - No");
                 yield return null; // wait until next frame
             }
-
+            //yield return new WaitForSeconds(disolveScript.particleTimer + 0.5f);
             //Actual hide code once possesion anim is complete
-            H();
+            //H();
         }
     }
 

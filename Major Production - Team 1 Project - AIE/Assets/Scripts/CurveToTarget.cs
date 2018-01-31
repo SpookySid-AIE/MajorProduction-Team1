@@ -16,6 +16,8 @@ public class CurveToTarget : MonoBehaviour {
     private Vector3 startPos;
     private Vector3 currentPos;
 
+    public bool finishedAnim = false;
+
     private void Start()
     {
         particleLaunchTimer = Time.time + particleLaunchDelay;
@@ -31,6 +33,7 @@ public class CurveToTarget : MonoBehaviour {
 
         if (Time.time >= particleLaunchTimer)
         {
+            finishedAnim = false;
             incrementor += speed;
             currentPos = Vector3.Lerp(startPos, endPos, incrementor);
             currentPos.y += lerpHeight * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
@@ -39,11 +42,21 @@ public class CurveToTarget : MonoBehaviour {
             Vector3 curPos = new Vector3(currentPos.x, currentPos.y + 2, currentPos.z);
             curPos.x += .5f;
             curPos.z += 1f;
-            Camera.main.transform.position = curPos;            
+            Camera.main.transform.position = curPos;
+
+            //Through testing i found that the distance between the target and Camera should always be less than 2.3, so if errors in transitions, this could be why
+            float dist = Vector3.Distance(Camera.main.transform.position, target.transform.position);
+
+            if (dist <= 2.3f)
+            {
+                Debug.Log(dist);
+                finishedAnim = true;
+                Debug.Log(finishedAnim);
+            }
         }
-        else
-        {
-            Debug.Log("Curve finished at: " + Time.time);
-        }
+
+        Debug.Log(finishedAnim);
+
+
     }
 }
