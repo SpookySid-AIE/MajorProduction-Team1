@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4835041225336674}
   - component: {fileID: 33134296059576776}
   - component: {fileID: 23934809961941388}
-  - component: {fileID: 95666929344939522}
   - component: {fileID: 54379839380277384}
   - component: {fileID: 64212939048462904}
   - component: {fileID: 114288471429469850}
@@ -38,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1644877061552342}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.1, y: 0.408, z: 61.4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.647903, y: 1.8629944, z: -31.293343}
   m_LocalScale: {x: 0.31701437, y: 0.4481291, z: 0.31701437}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c713dda7e3194394ab51a41be774c2bb, type: 2}
+  - {fileID: 2100000, guid: 6a58a7988374674479b36f4d074fe280, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,23 +114,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 6d6d502cd6019c94bb8e83868d903533, type: 3}
---- !u!95 &95666929344939522
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1644877061552342}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 6d6d502cd6019c94bb8e83868d903533, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114288471429469850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,7 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemScaryRating: 0
+  itemSize: 0
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
+  scare: 0
+  scaryObject: 0

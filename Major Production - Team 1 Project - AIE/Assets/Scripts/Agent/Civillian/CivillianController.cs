@@ -77,6 +77,11 @@ public class CivillianController : MonoBehaviour
     //Testing - Mark
     public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
 
+    public Color civilianPantsColour = Color.black; // 31/01/2018 Added by Mark - For custom colours
+    public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
+    public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
+    public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
+    private Renderer rend;   // 31/01/2018 Added by Mark  
 
     // Use this for initialization
     void Start ()
@@ -108,6 +113,11 @@ public class CivillianController : MonoBehaviour
 
         civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
         civIconStateScript.myState = script_civilianIconState.gameState.normal;// 19-12-2017 Added by Mark 
+
+        rend = rendererGeo.GetComponent<Renderer>();// 31/01/2018 Added by Mark - For custom colours
+        rend.material.SetColor("_PantsColour", civilianPantsColour);// 31/01/2018 Added by Mark - For custom colours
+        rend.material.SetColor("_Top1Colour", civilianTop1Colour);// 31/01/2018 Added by Mark - For custom colours
+        rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
     }
 
     private void FixedUpdate()

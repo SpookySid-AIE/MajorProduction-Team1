@@ -17,6 +17,8 @@ ModelImporter:
     3300002: geo_chestTop
     4300000: geo_chestBottom
     4300002: geo_chestTop
+    6400000: geo_chestBottom
+    6400002: geo_chestTop
     7400000: Take 001
     9500000: //RootNode
   externalObjects:
@@ -54,9 +56,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.01
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

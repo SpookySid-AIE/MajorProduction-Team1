@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{8c0e0ceb-fead-434a-9bac-b2f7ad79788a}">
+        <property name="name">
+            <value>ThemeVolume</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ee30e8c4-6b61-47d1-8859-2fc5cbfa098c}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{1c45564d-326a-4104-8051-5f79a57dd133}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{1c45564d-326a-4104-8051-5f79a57dd133}">
+        <property name="initialValue">
+            <value>1</value>
+        </property>
+        <property name="isExposedRecursively">
+            <value>false</value>
+        </property>
+    </object>
+</objects>
