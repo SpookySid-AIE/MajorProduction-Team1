@@ -274,7 +274,7 @@ public class playerPossession : MonoBehaviour
         {
             player.layer = 9;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            yield return new WaitForSeconds(5.00f);
+            yield return new WaitForSeconds(1.00f);
             player.layer = 0;
             UnpossessItem();
         }
@@ -282,7 +282,7 @@ public class playerPossession : MonoBehaviour
         {
             player.layer = 9;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            yield return new WaitForSeconds(5.00f);
+            yield return new WaitForSeconds(1.00f);
             player.layer = 0;
             UnpossessItem();
         }
@@ -385,7 +385,7 @@ public class playerPossession : MonoBehaviour
     //written by Jak - copypasted some stuff from "PossessItem()"
     void H()
     {
-        //Time.timeScale = 0;
+        Debug.Log("Hide Started: " + Time.deltaTime);
         //disable camera whilst we change the cameras target to the newly possesed item
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
@@ -433,6 +433,7 @@ public class playerPossession : MonoBehaviour
         //switch the camera back on to follow the player
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
         hidden = true; //set that we are now hidden in an object
+        Debug.Log("Hide finished: " + Time.deltaTime);
     }
 
     //enable player
@@ -491,12 +492,11 @@ public class playerPossession : MonoBehaviour
 
     //Coroutines
     IEnumerator ParticleTransition()
-    {
-        
+    {        
         RaycastCheckItem();
 
         if (targetSet == true)
-        {
+        {            
             //Stop movement on sid while transitioning
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<CharacterController>().enabled = false;
@@ -512,7 +512,8 @@ public class playerPossession : MonoBehaviour
             }
             //yield return new WaitForSeconds(disolveScript.particleTimer + 0.5f);
             //Actual hide code once possesion anim is complete
-            //H();
+            H();
+            targetSet = false;
         }
     }
 
