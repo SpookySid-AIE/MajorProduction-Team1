@@ -12,6 +12,9 @@ public class playerPossession : MonoBehaviour
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
 
+    private GameObject target; //Global target once that is set when we RaycastCheckItem is run
+    private bool targetSet;
+
     public Color possessionColour = Color.cyan;// Added by Mark - Added possession color for outline
     public float HeightAdjustment = .4f; //where to start the ray - need to align the spotlight to this position
 
@@ -74,7 +77,7 @@ public class playerPossession : MonoBehaviour
             else if(isPossesed)
             {
                 StartCoroutine(ThrowPossessedItemAway());
-                UnpossessItem();
+                
             }
 
             //Start of lure mechanic - Jak
@@ -111,7 +114,7 @@ public class playerPossession : MonoBehaviour
             {
                 if (hidden == false)
                 {
-                    Hide();
+                    StartCoroutine(ParticleTransition());
                 }
                 else
                 {
@@ -271,11 +274,18 @@ public class playerPossession : MonoBehaviour
         {
             player.layer = 9;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            yield return new WaitForSeconds(1.00f);
+            yield return new WaitForSeconds(5.00f);
             player.layer = 0;
+            UnpossessItem();
         }
         else
+        {
+            player.layer = 9;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
+            yield return new WaitForSeconds(5.00f);
+            player.layer = 0;
+            UnpossessItem();
+        }
     }
 
     public void UnpossessItem()
@@ -375,74 +385,53 @@ public class playerPossession : MonoBehaviour
     //written by Jak - copypasted some stuff from "PossessItem()"
     void H()
     {
-        //set the taget to what was hit in the raycast
-        GameObject target = RaycastCheckItem();
-        if (target.tag == "Item")
+        //disable camera whilst we change the cameras target to the newly possesed item
+        Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+
+        //rename the player tag so they dont participate in any collisions
+        player.tag = "Sneak";
+
+        Debug.Log("HIDE called at: " + Time.time);
+
+        //name it player so that it behaves like one in collisions
+        target.tag = "Player";
+
+        //At this point - playerPossession.cs is still active on Player
+        oldPlayerPos = gameObject.transform.position;
+        oldPlayerRot = gameObject.transform.rotation;
+
+        //turn off all player scripts
+        foreach (Behaviour childCompnent in player.GetComponentsInChildren<Behaviour>())
         {
-            //eRenderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
-            //mat = eRenderer.material; //let the code know which objects renderer to change
-            //mat.SetColor("_Color", Color.red);// Added by Mark - Change main colour of object back to white
-            disolveScript.target = target;
-            disolveScript.startDissolve = true;
-
-            //Wait until the particles have reached the object before we possess
-            //StartCoroutine(Hide());
-                
-            if (disolveScript.transferred == true)
-            {
-                //disable camera whilst we change the cameras target to the newly possesed item
-                Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
-
-                //rename the player tag so they dont participate in any collisions
-                player.tag = "Sneak";
-
-                Debug.Log("HIDE NOW");
-
-                //name it player so that it behaves like one in collisions
-                target.tag = "Player";
-
-                //At this point - playerPossession.cs is still active on Player
-                oldPlayerPos = gameObject.transform.position;
-                oldPlayerRot = gameObject.transform.rotation;
-
-                //turn off all player scripts
-                foreach (Behaviour childCompnent in player.GetComponentsInChildren<Behaviour>())
-                {
-                    if (childCompnent.tag != "MainCamera")
-                        childCompnent.enabled = false;
-                }
-
-                //turn off all player renderers
-                SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
-
-                foreach (SkinnedMeshRenderer smr in meshRenderer)
-                {
-                    smr.enabled = false;
-                }
-
-                //Turn off colliders
-                player.GetComponent<CapsuleCollider>().enabled = false;
-                player.GetComponent<CharacterController>().enabled = false;
-
-                if (target.GetComponent<playerPossession>() == null)
-                    target.AddComponent<playerPossession>();
-
-                //target.GetComponent<playerPossession>().PossessedItem = target;
-
-
-                //switch off gravity for the target
-                target.GetComponent<Rigidbody>().useGravity = true;
-                target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
-
-
-
-                //switch the camera back on to follow the player
-                Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-                hidden = true; //set that we are now hidden in an object
-                disolveScript.transferred = false; //Update the script to let it know we are no longer transfering particles
-            }
+            if (childCompnent.tag != "MainCamera")
+                childCompnent.enabled = false;
         }
-        
+
+        //turn off all player renderers
+        SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        foreach (SkinnedMeshRenderer smr in meshRenderer)
+        {
+            smr.enabled = false;
+        }
+
+        //Turn off colliders
+        player.GetComponent<CapsuleCollider>().enabled = false;
+        player.GetComponent<CharacterController>().enabled = false;
+
+        if (target.GetComponent<playerPossession>() == null)
+            target.AddComponent<playerPossession>();
+
+        //target.GetComponent<playerPossession>().PossessedItem = target;
+
+
+        //switch off gravity for the target
+        target.GetComponent<Rigidbody>().useGravity = true;
+        target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
+
+        //switch the camera back on to follow the player
+        Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+        hidden = true; //set that we are now hidden in an object
     }
 
     //enable player
@@ -474,8 +463,8 @@ public class playerPossession : MonoBehaviour
     }
 
     //This ONLY returns if an ITEM has been hit - I can make this general if need be - Jak
-    //Can pass in a variable to store the object if needed
-    GameObject RaycastCheckItem()
+    //Stores the ITEM that was hit in "target" gameobject
+    void RaycastCheckItem()
     {
         //try to posess an item
         RaycastHit hit;
@@ -488,27 +477,37 @@ public class playerPossession : MonoBehaviour
         {
             if(hit.transform.tag == "Item")
             {
-                return hit.collider.gameObject;
+                target = hit.collider.gameObject;
+                targetSet = true;
+            }
+            else
+            {
+                target = null;
+                targetSet = false;
             }
         }
-
-        //Return false if Item wasnt hit
-        return new GameObject();
     }
 
     //Coroutines
-    IEnumerator Hide()
+    IEnumerator ParticleTransition()
     {
-        //Add the raycast check here and initiate disolve
-        while (disolveScript.transferred != true)
+        RaycastCheckItem();
+
+        if (targetSet == true)
         {
-            Debug.Log("hasParticlesFinished - No");
-            yield return null; // wait until next frame
+            disolveScript.target = target;
+            disolveScript.startDissolve = true;
+
+            //Wait until the animation is finished
+            while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
+            {
+                //Debug.Log("hasParticlesFinished - No");
+                yield return null; // wait until next frame
+            }
+
+            //Actual hide code once possesion anim is complete
+            H();
         }
-
-        //Actual hide code once possesion anim is complete
-        H();
-
     }
 
     static bool lastClicked = false; //needs to be static as this code is called from multiple objects 
