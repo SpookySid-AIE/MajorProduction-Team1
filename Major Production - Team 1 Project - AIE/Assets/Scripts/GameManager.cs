@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Quit();
+
         //timeLeft = timer;
         txt_npcCount.text = NPCcount.ToString();
         //txt_playerHealth.text = player.health.ToString() + "%";
@@ -141,8 +144,9 @@ public class GameManager : MonoBehaviour {
         //}
 
         //Gameover State
-        if(gameObject.GetComponentInParent<playerController>().Ectoplasm == 0)
+        if(gameObject.GetComponentInParent<playerController>().Ectoplasm <= 0)
         {
+            gameObject.GetComponentInParent<playerController>().Ectoplasm = 0;
             canvasWinOrLose.gameObject.SetActive(true);
             loseText.gameObject.SetActive(true);
             Camera.main.GetComponent<CamLock>().enabled = false;
@@ -188,4 +192,13 @@ public class GameManager : MonoBehaviour {
     //    }
     //}
 
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }//End Class

@@ -151,6 +151,7 @@ public class CivillianController : MonoBehaviour
             //Debug.Log("In sight!");
             ItemScaryRating = sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().ItemScaryRating;
             TRIGGERED_floating = true; //This needs to be set to update the code in CIV_Retreat
+            Debug.Log("TRIGGERED FLOATING");
             m_stateMachine.ChangeState(this, new CIV_Retreat());
 
             civIconStateScript.myState = script_civilianIconState.gameState.retreat;// 19-12-2017 Added by Mark 
@@ -161,6 +162,7 @@ public class CivillianController : MonoBehaviour
         {
             m_stateMachine.ChangeState(this, new CIV_Alert());
             alertedByItem = false;
+            civIconStateScript.myState = script_civilianIconState.gameState.alerted;
         }
 
         //State changing to Retreat, because the repel mechanic was used in playerPosession
@@ -168,6 +170,7 @@ public class CivillianController : MonoBehaviour
         {
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
+            civIconStateScript.myState = script_civilianIconState.gameState.retreat;
         }
 
         //Call update from this agents FSM
