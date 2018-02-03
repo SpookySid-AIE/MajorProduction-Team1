@@ -13,7 +13,7 @@ public class playerPossession : MonoBehaviour
     public GameObject PossessedItem;
 
     private GameObject target; //Global target once that is set when we RaycastCheckItem is run
-    private bool targetSet;
+    private bool targetSet; //Flag to let us know if the raycast hit an object and set the target
 
     public Color possessionColour = Color.cyan;// Added by Mark - Added possession color for outline
     public float HeightAdjustment = .4f; //where to start the ray - need to align the spotlight to this position
@@ -25,6 +25,11 @@ public class playerPossession : MonoBehaviour
     public bool CheckIsPossesed()
     {
         return isPossesed;
+    }
+
+    public bool isHidden()
+    {
+        return hidden;
     }
 
     public float throwVelocity = 30;
@@ -272,19 +277,21 @@ public class playerPossession : MonoBehaviour
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
         if (player.GetComponent<MeshCollider>() != null)
         {
-            player.layer = 9;
+            player.layer = 8;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            yield return new WaitForSeconds(1.00f);
-            player.layer = 0;
             UnpossessItem();
+            yield return new WaitForSeconds(1.00f);        
+            
+            player.layer = 0;
         }
         else
         {
-            player.layer = 9;
+            player.layer = 8;
             player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            yield return new WaitForSeconds(1.00f);
-            player.layer = 0;
             UnpossessItem();
+            yield return new WaitForSeconds(1.00f);
+            
+            player.layer = 0;
         }
     }
 
@@ -364,6 +371,8 @@ public class playerPossession : MonoBehaviour
 
         sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         sneakTest.GetComponent<CharacterController>().enabled = true;
+        sneakTest.GetComponent<playerController>().speed = 5;
+
 
         //switch on gravity for the target
         target.GetComponent<Rigidbody>().useGravity = true;
@@ -383,21 +392,22 @@ public class playerPossession : MonoBehaviour
     }
 
     //written by Jak - copypasted some stuff from "PossessItem()"
-    void H()
+    public void H()
     {
-        Debug.Log("Hide Started: " + Time.deltaTime);
+        Debug.Log("Hide Started: " + Time.time);
         //disable camera whilst we change the cameras target to the newly possesed item
-        Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+        
+        //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = false;
 
         //rename the player tag so they dont participate in any collisions
         player.tag = "Sneak";
 
-        Debug.Log("HIDE called at: " + Time.time);
+        //Debug.Log("HIDE called at: " + Time.time);
 
-        //name it player so that it behaves like one in collisions
+        ////name it player so that it behaves like one in collisions
         target.tag = "Player";
 
-        //At this point - playerPossession.cs is still active on Player
+        ////At this point - playerPossession.cs is still active on Player
         oldPlayerPos = gameObject.transform.position;
         oldPlayerRot = gameObject.transform.rotation;
 
@@ -408,7 +418,9 @@ public class playerPossession : MonoBehaviour
                 childCompnent.enabled = false;
         }
 
-        //turn off all player renderers
+        //this.enabled = true;
+
+        //////turn off all player renderers
         SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
 
         foreach (SkinnedMeshRenderer smr in meshRenderer)
@@ -416,24 +428,30 @@ public class playerPossession : MonoBehaviour
             smr.enabled = false;
         }
 
-        //Turn off colliders
+        ////Turn off colliders
         player.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<CharacterController>().enabled = false;
+        
+
+        //////switch off gravity for the target
+        target.GetComponent<Rigidbody>().useGravity = true;
+        target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
+
 
         if (target.GetComponent<playerPossession>() == null)
             target.AddComponent<playerPossession>();
 
-        //target.GetComponent<playerPossession>().PossessedItem = target;
+        target.GetComponent<playerPossession>().PossessedItem = target;
 
-
-        //switch off gravity for the target
-        target.GetComponent<Rigidbody>().useGravity = true;
-        target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
+        //this.enabled = false;
 
         //switch the camera back on to follow the player
-        Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+       // Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+
+        //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
+
         hidden = true; //set that we are now hidden in an object
-        Debug.Log("Hide finished: " + Time.deltaTime);
+        Debug.Log("Hide finished: " + Time.time);
     }
 
     //enable player
@@ -501,9 +519,11 @@ public class playerPossession : MonoBehaviour
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<CharacterController>().enabled = false;
 
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+
             disolveScript.target = target;
             disolveScript.startDissolve = true;
-
+            
             //Wait until the animation is finished
             while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
             {
@@ -513,6 +533,9 @@ public class playerPossession : MonoBehaviour
             //yield return new WaitForSeconds(disolveScript.particleTimer + 0.5f);
             //Actual hide code once possesion anim is complete
             H();
+
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+
             targetSet = false;
         }
     }

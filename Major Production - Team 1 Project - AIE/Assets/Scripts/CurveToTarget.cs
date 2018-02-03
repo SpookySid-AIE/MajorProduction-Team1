@@ -33,7 +33,7 @@ public class CurveToTarget : MonoBehaviour {
 
         if (Time.time >= particleLaunchTimer)
         {
-            finishedAnim = false;
+            //finishedAnim = false;
             incrementor += speed;
             currentPos = Vector3.Lerp(startPos, endPos, incrementor);
             currentPos.y += lerpHeight * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
@@ -47,16 +47,16 @@ public class CurveToTarget : MonoBehaviour {
             //Through testing i found that the distance between the target and Camera should always be less than 2.3, so if errors in transitions, this could be why
             float dist = Vector3.Distance(Camera.main.transform.position, target.transform.position);
 
-            if (dist <= 2.3f)
+            if (dist <= 2.3f && finishedAnim == false)
             {
-                Debug.Log(dist);
                 finishedAnim = true;
-                Debug.Log(finishedAnim);
+
+                //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().playerRef.H();
+               // Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = target.transform;
+                //Camera.main.GetComponent<CamLock>().player = target.gameObject;
+                //Camera.main.GetComponent<CamLock>().enabled = false;
+                //Debug.Log("Curve.cs After: " + finishedAnim);
             }
         }
-
-        Debug.Log(finishedAnim);
-
-
     }
 }

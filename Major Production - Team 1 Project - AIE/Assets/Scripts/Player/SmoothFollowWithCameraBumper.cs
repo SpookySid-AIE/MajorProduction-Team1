@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,8 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 {
 
     [SerializeField]
-    private Transform target = null;
+    public Transform target = null;
+    public Transform newTarget = null;
     [SerializeField]
     public float distance;
     [SerializeField]
@@ -29,12 +30,15 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     private Vector3 bumperRayOffset; // allows offset of the bumper ray from target origin
 
+    [HideInInspector]public playerPossession playerRef;
+
     /// <Summary>
     /// If the target moves, the camera should child the target to allow for smoother movement. DR
     /// </Summary>
     private void Awake()
     {
         Camera.main.transform.parent = target;
+        playerRef = target.GetComponent<playerPossession>();
     }
 
     private void FixedUpdate()
@@ -76,6 +80,12 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         }
         else
             transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
+
+        //if (Input.GetKeyDown(KeyCode.Q) == true)
+        //{
+        //    target = newTarget;
+        //    gameObject.GetComponent<CamLock>().player = newTarget.gameObject;
+        //}
     }
     static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end)
     {

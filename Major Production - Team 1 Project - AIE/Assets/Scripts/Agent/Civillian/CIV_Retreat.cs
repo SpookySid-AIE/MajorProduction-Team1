@@ -182,7 +182,7 @@ public class CIV_Retreat : State_CIV
             scared = true;
 
             //Update animator
-            currentAgent.navAgent.speed = 1.5f; //Add some additional speed to make them feel really spooked
+            currentAgent.navAgent.speed = 5f; //Add some additional speed to make them feel really spooked
             currentAgent.m_Animator.SetBool("Scared", true);
 
             //Run to exit point

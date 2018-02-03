@@ -20,6 +20,9 @@ public class script_WillDissolve : MonoBehaviour {
     private Renderer[] rend; // Reference for renderers in each characterObject
     private Material mat;// Mat to be used for each characterObject
 
+    private CurveToTarget curveRef; //Used to temp store other curve ref to try and get correct timing of the particle transition
+    private bool curveRefSet;
+
     void Start()
     {
         rend = new Renderer[characterObjects.Length];
@@ -61,16 +64,34 @@ public class script_WillDissolve : MonoBehaviour {
         currentTime = Time.time;
         if (Time.time > particleTimer && startDissolve)
         {
+            transferred = false;
             GameObject particle = Instantiate(particlePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + particleVerticleOffset, gameObject.transform.position.z), Quaternion.identity);
             CurveToTarget curveToTarget = particle.GetComponent<CurveToTarget>();
             curveToTarget.target = target;
             curveToTarget.particleLaunchDelay = particleLaunchDelay;
-            //Debug.Log("Yo");
+
+            //Debug.Log("In Time function" + Time.deltaTime);
+
             startDissolve = false;
 
-            if (curveToTarget.finishedAnim == true)
-                Debug.Log("ANIM COMPLETE");
+            //Debug.Log("scriptWillDisolve: " + curveToTarget.finishedAnim);
+
+            curveRef = curveToTarget;
+            curveRefSet = true;
         }
+
+        if (startDissolve == false && curveRefSet == true)
+        {
+            if (curveRef.finishedAnim == true)
+            {
+                //Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
+                transferred = true;
+                curveRefSet = false;
+                currentDissolve = 3;
+                mat.SetFloat("_ParticleMaskingPosition", currentDissolve);
+            }                
+        }
+        
 
 
         if (currentDissolve < -2 && dissolve)

@@ -23,7 +23,7 @@ public class CamLock : MonoBehaviour
     [HideInInspector]
     public float floatSpeedOfSid = 0.0f;
     private bool isController = false;
-    private GameObject player;
+    public GameObject player;
     private Rigidbody playerrb;
 
     private RaycastHit rc;
@@ -104,22 +104,22 @@ public class CamLock : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //calculate the amount to rotate the player
-        Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
+        if (player.GetComponent<playerPossession>().isHidden())
+        {
+            Debug.Log("CamLock rotateAround");
+            Camera.main.transform.LookAt(player.transform);
+        }
+        else
+        {
+            //calculate the amount to rotate the player
+            Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
 
-        //rotate the player
-        player.transform.rotation = rotation;
+            //rotate the player
+            player.transform.rotation = rotation;
 
-        //adjust beacuse the players pivot point is at its base and the camera needs to be behind the player
-        Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * cameraHeightAdjustment);
-        Vector3 adjustedCameraPosition = player.transform.forward * cameraDistanceAdjustment;
-     
+            //adjust beacuse the players pivot point is at its base and the camera needs to be behind the player
+            Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * cameraHeightAdjustment);
+            Vector3 adjustedCameraPosition = player.transform.forward * cameraDistanceAdjustment;
+        }
     }
-
-
-
-private void LateUpdate()
-{
-}
-         
 }
