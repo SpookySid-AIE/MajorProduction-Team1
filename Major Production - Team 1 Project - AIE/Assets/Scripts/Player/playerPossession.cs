@@ -81,6 +81,7 @@ public class playerPossession : MonoBehaviour
             }
             else if(isPossesed)
             {
+                player.layer = 8;
                 StartCoroutine(ThrowPossessedItemAway());
                 
             }
@@ -275,24 +276,13 @@ public class playerPossession : MonoBehaviour
     {
         //throw the object;
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
-        if (player.GetComponent<MeshCollider>() != null)
-        {
-            player.layer = 8;
-            player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            UnpossessItem();
-            yield return new WaitForSeconds(1.00f);        
+
+        UnpossessItem();
+        player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
             
-            player.layer = 0;
-        }
-        else
-        {
-            player.layer = 8;
-            player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            UnpossessItem();
-            yield return new WaitForSeconds(1.00f);
-            
-            player.layer = 0;
-        }
+        yield return new WaitForSeconds(1.00f);
+
+        player.layer = 0;
     }
 
     public void UnpossessItem()
