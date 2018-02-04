@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: mat_Possession Aura Toon
+  m_Shader: {fileID: 4800000, guid: a75e61e64cea3b64ebbb7da199e90aac, type: 3}
+  m_ShaderKeywords: _AURAONOFF_ON _AURAON_ON _TOGGLESWITCH0_ON _TOGGLESWITCH1_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AuraTexture:
+        m_Texture: {fileID: 2800000, guid: 31e417e2506e4bf4cbc2b47d5fc113ea, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AuraTexture2:
+        m_Texture: {fileID: 2800000, guid: b421d29166302904bb5635fcaf078249, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Colo:
+        m_Texture: {fileID: 2800000, guid: ad810fac74d0185479af096d5d3ab3a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Color:
+        m_Texture: {fileID: 2800000, guid: ad810fac74d0185479af096d5d3ab3a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ObjectTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: ad810fac74d0185479af096d5d3ab3a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: b156185c9bc76ae4a83b389ee27cb66c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 31e417e2506e4bf4cbc2b47d5fc113ea, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 2800000, guid: ad810fac74d0185479af096d5d3ab3a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSampleAura:
+        m_Texture: {fileID: 2800000, guid: 31e417e2506e4bf4cbc2b47d5fc113ea, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ASEOutlineWidth: 0.01
+    - _Aura: 0.74
+    - _AuraBrightness: 1.55
+    - _AuraFall: 0.74
+    - _AuraFallOf: 0.74
+    - _AuraFalloff: 0.74
+    - _AuraFalloff1: 1.77
+    - _AuraFalloff2: 0.67
+    - _AuraOn: 1
+    - _AuraOnOff: 1
+    - _Float0: 0.64
+    - _Float1: 1.84
+    - _Float3: 1.62
+    - _Float4: -0.93
+    - _Float5: 0
+    - _Float6: 1.55
+    - _InvertAura: 0
+    - _RimPower: 6.13
+    - _ToggleSwitch0: 1
+    - _ToggleSwitch1: 1
+    - __dirty: 0
+    - _max: 5
+    - _min: 0
+    m_Colors:
+    - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Au: {r: 0, g: 0.8758621, b: 1, a: 0}
+    - _AuraColor: {r: 0, g: 0.8758621, b: 1, a: 0}
+    - _AuraColour: {r: 0, g: 0.958621, b: 1, a: 0}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
+    - _Color2: {r: 1, g: 1, b: 1, a: 0}
+    - _Vector0: {r: -0.72, g: -6.33, b: 0, a: 0}
+    - _Vector1: {r: 0.61, g: 1.5, b: 0, a: 0}
+    - _Vector2: {r: 0, g: 1, b: 0, a: 0}
