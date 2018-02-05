@@ -50,10 +50,16 @@ public class CamLock : MonoBehaviour
     //Called from playerPossession
     private void OnEnable()
     {
+        
         player = GameObject.FindGameObjectWithTag("Player");
         playerrb = player.GetComponent<Rigidbody>();
+
+        
+
         currentHorizontal = player.transform.eulerAngles.y;
         currentVertical = player.transform.eulerAngles.x;
+
+        
 
     }
     // Update is called once per frame
@@ -99,7 +105,15 @@ public class CamLock : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
             }
         }
-        currentVertical = Mathf.Clamp(currentVertical, VerticleAngleMinRotation, VerticalAngleMaxRotation);
+        //If the script is coming from recently unpossessing an item, set currentVertical to be looking at the item thrown
+        if (player.GetComponent<playerPossession>().hasItemBeenThrown == true)
+        {
+            currentVertical = player.transform.position.x - player.GetComponent<playerPossession>().lastThrownItem.transform.position.x;
+            player.GetComponent<playerPossession>().hasItemBeenThrown = false;
+        }
+
+        //otherwise, maths
+        else currentVertical = Mathf.Clamp(currentVertical, VerticleAngleMinRotation, VerticalAngleMaxRotation);
     }
 
     private void FixedUpdate()
@@ -115,6 +129,7 @@ public class CamLock : MonoBehaviour
             //adjust beacuse the players pivot point is at its base and the camera needs to be behind the player
             Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * cameraHeightAdjustment);
             Vector3 adjustedCameraPosition = player.transform.forward * cameraDistanceAdjustment;
+            
         }
     }
 }
