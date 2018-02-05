@@ -27,8 +27,8 @@ public class CamLock : MonoBehaviour
     private Rigidbody playerrb;
 
     private RaycastHit rc;
-    private float currentHorizontal = 0;
-    private float currentVertical = 0;
+    [HideInInspector]public float currentHorizontal = 0;
+    [HideInInspector]public float currentVertical = 0;
 
     [HideInInspector] public bool isWin; //if the winscreen is on, then this will show the cursor
 
@@ -104,12 +104,7 @@ public class CamLock : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.GetComponent<playerPossession>().isHidden())
-        {
-            Debug.Log("CamLock rotateAround");
-            Camera.main.transform.LookAt(player.transform);
-        }
-        else
+        if (!player.GetComponent<playerPossession>().isHidden())
         {
             //calculate the amount to rotate the player
             Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);

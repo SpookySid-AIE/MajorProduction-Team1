@@ -80,11 +80,12 @@ public class script_WillDissolve : MonoBehaviour {
             curveRefSet = true;
         }
 
+        //Reset particle anim
         if (startDissolve == false && curveRefSet == true)
         {
             if (curveRef.finishedAnim == true)
             {
-                //Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
+                Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
                 transferred = true;
                 curveRefSet = false;
                 currentDissolve = 3;

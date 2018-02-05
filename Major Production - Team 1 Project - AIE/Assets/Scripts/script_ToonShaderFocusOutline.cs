@@ -37,7 +37,7 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
             if (oldToonOutline == null)
                 Debug.Log("CANT FIND RENDERER");
 
-            toonOutline.material.SetColor("_OutlineColor", defaultColor);
+            toonOutline.material.SetColor("_ASEOutlineColor", defaultColor);
             
         }
     }
@@ -56,7 +56,7 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
             {
                 passInObject = hit.collider.gameObject;
                 toonOutline = passInObject.GetComponentInChildren<Renderer>();
-                toonOutline.material.SetColor("_OutlineColor", focusColor);
+                toonOutline.material.SetColor("_ASEOutlineColor", focusColor);
             }
             else
             {
@@ -73,7 +73,7 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
         {
             if (oldToonOutline != null)
             {
-                oldToonOutline.material.SetColor("_OutlineColor", defaultColor);
+                oldToonOutline.material.SetColor("_ASEOutlineColor", defaultColor);
                 //Debug.Log("No way");
             }
             oldToonOutline = toonOutline;

@@ -8,7 +8,6 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
     [SerializeField]
     public Transform target = null;
-    public Transform newTarget = null;
     [SerializeField]
     public float distance;
     [SerializeField]
@@ -30,15 +29,30 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     private Vector3 bumperRayOffset; // allows offset of the bumper ray from target origin
 
-    [HideInInspector]public playerPossession playerRef;
+    [HideInInspector]public playerPossession playerPosRef;
+    
+    //Camera Orbiting during hide
+    [HideInInspector]public Transform CameraTransform;
+    [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
+    private float currentHorizontal = 0;
+    private float currentVertical = 0;
 
     /// <Summary>
     /// If the target moves, the camera should child the target to allow for smoother movement. DR
     /// </Summary>
     private void Awake()
     {
-        Camera.main.transform.parent = target;
-        playerRef = target.GetComponent<playerPossession>();
+        //Camera.main.transform.parent = target;
+        //playerRef = target.GetComponent<playerPossession>();
+    }
+
+    //Setting camera orbit transforms for hide
+    private void Start()
+    {
+        playerPosRef = Camera.main.GetComponent<CamLock>().player.GetComponent<playerPossession>();
+        CameraTransform = this.transform; //This script should be attached to the camera, so we grab its transform
+        //CameraParent = this.transform.parent;
+        //CREATE NEW EMPTY PIVOT OBJECT AT TARGET HIDE LOCATION
     }
 
     private void FixedUpdate()
@@ -81,12 +95,33 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         else
             transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
 
-        //if (Input.GetKeyDown(KeyCode.Q) == true)
-        //{
-        //    target = newTarget;
-        //    gameObject.GetComponent<CamLock>().player = newTarget.gameObject;
-        //}
     }
+
+    private void LateUpdate()
+    {
+        //This code orbits the camera during hide mode
+        if (playerPosRef.isHidden())
+        {
+            CameraParent = this.gameObject.transform.parent;
+            currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
+            currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
+
+            //Actual Camera Rig Transformations
+            Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
+
+            //Have to rotate the invis pivot object during "hide mode" so it doesnt break the clipping code
+            //reupdate the target when we leave hide mode NOTE
+            target = this.CameraParent;
+            this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
+
+            //if (this.CameraTransform.localPosition.z != this.distance * -1f)
+            //{
+            //        //    Debug.Log("Weird distance check called");
+            //    this.CameraTransform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(this.CameraTransform.localPosition.z, this.distance * -1f, Time.deltaTime * 6f));
+            //}
+        }
+    }
+
     static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end)
     {
         Vector3 result = new Vector3((start.x + end.x) * 0.1f, (start.y + end.y) * 0.1f, (start.z + end.z) * 0.1f);

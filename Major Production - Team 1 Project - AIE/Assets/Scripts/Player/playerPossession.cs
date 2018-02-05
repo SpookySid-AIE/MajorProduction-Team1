@@ -12,6 +12,8 @@ public class playerPossession : MonoBehaviour
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
 
+    private GameObject pivot;
+
     private GameObject target; //Global target once that is set when we RaycastCheckItem is run
     private bool targetSet; //Flag to let us know if the raycast hit an object and set the target
 
@@ -342,7 +344,15 @@ public class playerPossession : MonoBehaviour
 
         //Set the current position of the player back to the oldPosition from when they hid
         sneakTest.transform.position = oldPlayerPos;
-        sneakTest.transform.rotation = oldPlayerRot;        
+        sneakTest.transform.rotation = oldPlayerRot;
+
+        //Disable hide effect
+        target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
+
+        //Child camera to player point
+        Camera.main.transform.SetParent(sneakTest.transform);
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
+        Destroy(pivot);
 
         //turn onn all player scripts
         foreach (Behaviour childCompnent in sneakTest.GetComponentsInChildren<Behaviour>())
@@ -421,7 +431,17 @@ public class playerPossession : MonoBehaviour
         ////Turn off colliders
         player.GetComponent<CapsuleCollider>().enabled = false;
         player.GetComponent<CharacterController>().enabled = false;
-        
+
+        //Enable hide aura
+        target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 1);
+        target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
+
+        //Create pivot object for camera orbiting
+        pivot = new GameObject("Pivot");
+        pivot.transform.position = target.transform.position;
+
+        //Child camera to pivot point
+        Camera.main.transform.SetParent(pivot.transform);
 
         //////switch off gravity for the target
         target.GetComponent<Rigidbody>().useGravity = true;
@@ -441,7 +461,7 @@ public class playerPossession : MonoBehaviour
         //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
         hidden = true; //set that we are now hidden in an object
-        Debug.Log("Hide finished: " + Time.time);
+        //Debug.Log("Hide finished: " + Time.time);
     }
 
     //enable player
@@ -503,16 +523,18 @@ public class playerPossession : MonoBehaviour
     {        
         RaycastCheckItem();
 
-        if (targetSet == true)
-        {            
+        if (targetSet == true && disolveScript.startDissolve == false)
+        {
+            disolveScript.target = target;
+            disolveScript.startDissolve = true; 
+            
             //Stop movement on sid while transitioning
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
-            disolveScript.target = target;
-            disolveScript.startDissolve = true;
+            
             
             //Wait until the animation is finished
             while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
@@ -526,7 +548,10 @@ public class playerPossession : MonoBehaviour
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
 
+            //Reset variables for next animation
             targetSet = false;
+            disolveScript.target = null;
+            disolveScript.transferred = false;
         }
     }
 

@@ -48,12 +48,10 @@ public class playerController : MonoBehaviour
         moveDirection *= speed;
 
         // Move Character Controller
-        controller.Move(moveDirection * Time.deltaTime);
+        if(controller.enabled == true)
+            controller.Move(moveDirection * Time.deltaTime);
     }
 
-
-
-    // Is this redundant? Shooting no longer uses game objects - MP
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
