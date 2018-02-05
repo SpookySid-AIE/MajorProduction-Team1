@@ -11,6 +11,8 @@ public class playerPossession : MonoBehaviour
 
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
+    public bool hasItemBeenThrown;
+    public Transform lastThrownItem;
 
     private GameObject target; //Global target once that is set when we RaycastCheckItem is run
     private bool targetSet; //Flag to let us know if the raycast hit an object and set the target
@@ -266,7 +268,6 @@ public class playerPossession : MonoBehaviour
                         Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
                     isPossesed = true;
                     Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
-                    //Debug.Log(isPossesed);
                 }
             }
         }
@@ -279,7 +280,8 @@ public class playerPossession : MonoBehaviour
 
         UnpossessItem();
         player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-            
+        sneakTest.GetComponent<playerPossession>().hasItemBeenThrown = true;
+        lastThrownItem = player.transform;
         yield return new WaitForSeconds(1.00f);
 
         player.layer = 0;
@@ -470,6 +472,7 @@ public class playerPossession : MonoBehaviour
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
 
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+        
     }
 
     //This ONLY returns if an ITEM has been hit - I can make this general if need be - Jak
