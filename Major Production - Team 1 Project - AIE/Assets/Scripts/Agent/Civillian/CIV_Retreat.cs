@@ -73,7 +73,7 @@ public class CIV_Retreat : State_CIV
         agent.TRIGGERED_hit = false;
         agent.TRIGGERED_repel = false;
         agent.hasDroppedEcto = false;
-        currentAgent.navAgent.speed = 1;
+        currentAgent.navAgent.speed = 1.5f;
         currentAgent.m_Animator.SetBool("Scared", false);
         
         //Reset target item that hit us

@@ -15,6 +15,7 @@ public class script_WillDissolve : MonoBehaviour {
     public float currentTime; // Current Time
     public float particleLaunchDelay = 0.2f; // Delay for Particle to start moving to target
     public bool transferred = false; // Used while transfering into an object - when to trigger final transition into hide() method inside playerPossesion
+    public bool transferring = false; //Used to only trigger transition once in playerPoession
 
     private bool dissolve; // Used during disolve
     private Renderer[] rend; // Reference for renderers in each characterObject
@@ -85,7 +86,7 @@ public class script_WillDissolve : MonoBehaviour {
         {
             if (curveRef.finishedAnim == true)
             {
-                Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
+                //Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
                 transferred = true;
                 curveRefSet = false;
                 currentDissolve = 3;

@@ -107,7 +107,7 @@ public class AgentController : MonoBehaviour
 
         //This is stupid and expensive, surely there is another way, just havnt thought about it much
         //Probably should move this GetComponent call out of update
-        if (target.GetComponent<playerPossession>().CheckIsPossesed() == true)
+        if (target.GetComponent<playerPossession>().isPossessed() == true)
         {
             target = GameObject.FindGameObjectWithTag("Player"); //find the new possesed item and change the target on the agent controller
         }
