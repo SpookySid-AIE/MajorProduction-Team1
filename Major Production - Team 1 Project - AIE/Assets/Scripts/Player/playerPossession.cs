@@ -18,7 +18,7 @@ public class playerPossession : MonoBehaviour
     [HideInInspector]public GameObject pivot;
     private static bool CamPivotSet = false;
 
-    private GameObject target; //Global target once that is set when we RaycastCheckItem is run
+    private static GameObject target; //Global target once that is set when we RaycastCheckItem is run
     private bool targetSet; //Flag to let us know if the raycast hit an object and set the target
 
     public Color possessionColour = Color.cyan;// Added by Mark - Added possession color for outline
@@ -356,7 +356,7 @@ public class playerPossession : MonoBehaviour
         //sneakTest.tag = "Player";
 
         //set the taget to what was hit in the raycast
-        GameObject target = this.gameObject; //Target equals the current object that this script is on(aka ITEM at this stage)
+        //GameObject target = this.gameObject; //Target equals the current object that this script is on(aka ITEM at this stage)
 
         //Rename the item
         //target.tag = "Item";
@@ -367,6 +367,7 @@ public class playerPossession : MonoBehaviour
 
         //Turn off hide effect
         target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
+        target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
 
         //Revert Camera back, possibly no longer parent if ben implements those camera changes
         Camera.main.transform.SetParent(sneakTest.transform);
