@@ -108,7 +108,7 @@ public class CamLock : MonoBehaviour
         //If the script is coming from recently unpossessing an item, set currentVertical to be looking at the item thrown
         if (player.GetComponent<playerPossession>().hasItemBeenThrown == true)
         {
-            currentVertical = player.transform.position.x - player.GetComponent<playerPossession>().lastThrownItem.transform.position.x;
+            currentVertical = player.transform.position.x - playerPossession.lastThrownItem.position.x;
             player.GetComponent<playerPossession>().hasItemBeenThrown = false;
         }
 
