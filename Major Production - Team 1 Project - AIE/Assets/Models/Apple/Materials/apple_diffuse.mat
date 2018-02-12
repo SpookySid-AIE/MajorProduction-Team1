@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: apple_diffuse
-  m_Shader: {fileID: 4800000, guid: a75e61e64cea3b64ebbb7da199e90aac, type: 3}
+  m_Shader: {fileID: 4800000, guid: 94c03bcf8685c26498d962b8a5e7660d, type: 3}
   m_ShaderKeywords: _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,6 +54,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ObjectTexture:
         m_Texture: {fileID: 2800000, guid: 6b657c6cadd1dbc4ca1778eb16621eeb, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,6 +79,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ALPHA: 0
     - _ASEOutlineWidth: 0.0001
     - _AuraBrightness: 0.41
     - _AuraFalloff1: 2.11
@@ -84,13 +89,17 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DisAmount: 0
+    - _DisLineWidth: 0
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _InvertAura: 1
+    - _LIGHTMAP: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NScale: 1
     - _OcclusionStrength: 1
     - _Outline: 0.005
     - _Parallax: 0.02
@@ -106,6 +115,8 @@ Material:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _AuraColour: {r: 0, g: 0.8758621, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DisLineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DisLineColorEx: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

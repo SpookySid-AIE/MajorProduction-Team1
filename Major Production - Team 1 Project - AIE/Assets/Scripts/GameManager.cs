@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
     private bool paused;
     private bool win;
 
-    private playerController player;
+    [HideInInspector]public playerPossession player;
 
     private void Awake()
     {
@@ -144,17 +144,19 @@ public class GameManager : MonoBehaviour {
         //}
 
         //Gameover State
-        if(gameObject.GetComponentInParent<playerController>().Ectoplasm <= 0)
+        if (!player.isHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
         {
-            gameObject.GetComponentInParent<playerController>().Ectoplasm = 0;
-            canvasWinOrLose.gameObject.SetActive(true);
-            loseText.gameObject.SetActive(true);
-            Camera.main.GetComponent<CamLock>().enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            gameObject.GetComponentInParent<CharacterController>().enabled = false;
-            gameObject.GetComponentInParent<playerController>().enabled = false;
+            if (gameObject.GetComponentInParent<playerController>().Ectoplasm <= 0)
+            {
+                gameObject.GetComponentInParent<playerController>().Ectoplasm = 0;
+                canvasWinOrLose.gameObject.SetActive(true);
+                loseText.gameObject.SetActive(true);
+                Camera.main.GetComponent<CamLock>().enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                gameObject.GetComponentInParent<CharacterController>().enabled = false;
+                gameObject.GetComponentInParent<playerController>().enabled = false;
+            }
         }
-
     } //End update
 
 

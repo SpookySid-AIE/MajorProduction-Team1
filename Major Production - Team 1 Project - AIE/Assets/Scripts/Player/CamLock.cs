@@ -65,50 +65,16 @@ public class CamLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            if (isController == true)
-                isController = false;
-            else isController = true;
-        }
-        if (!invert)
-        {
-            if (isController == true)
-            {
-                currentHorizontal += Input.GetAxis("CameraHorizontal") * controllerSensitivityX;
-                currentVertical -= Input.GetAxis("CameraVertical") * controllerSensitivityY;
 
-                Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
-            }
-            else
-            {
-                currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
-                currentVertical -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
+        currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
+        currentVertical -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
 
-                Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
-            }
-        }
-        else
-        {
-            if (isController == true)
-            {
-                currentHorizontal += Input.GetAxis("CameraHorizontal") * controllerSensitivityX;
-                currentVertical += Input.GetAxis("CameraVertical") * controllerSensitivityY;
-
-                Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
-            }
-            else
-            {
-                currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
-                currentVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-
-                Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
-            }
-        }
+        Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
+        
         //If the script is coming from recently unpossessing an item, set currentVertical to be looking at the item thrown
         if (player.GetComponent<playerPossession>().hasItemBeenThrown == true)
         {
-            currentVertical = player.transform.position.x - player.GetComponent<playerPossession>().lastThrownItem.transform.position.x;
+            currentVertical = player.transform.position.x - playerPossession.lastThrownItem.position.x;
             player.GetComponent<playerPossession>().hasItemBeenThrown = false;
         }
 
