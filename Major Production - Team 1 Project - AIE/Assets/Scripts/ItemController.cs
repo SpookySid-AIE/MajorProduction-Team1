@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 
 public class ItemController : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class ItemController : MonoBehaviour
     public int baseScariness;
     [HideInInspector]
     public int ectoCost;
+    //[HideInInspector]
+    public Vector3 targetOffset;
+    //[HideInInspector]
+    public float distance;
 
     //Animation boolean - turns off/on the animation
     [HideInInspector]public bool scare = false;
@@ -34,6 +39,55 @@ public class ItemController : MonoBehaviour
     {
         gameObject.AddComponent<NavMeshObstacle>();
         gameObject.GetComponent<NavMeshObstacle>().carving = true;
+    }
+
+    void OnValidate()
+    {
+        switch (itemSize) // == ItemController.Size.Miniature)
+        {
+            case Size.Miniature:
+                distance = 1.95f;
+                targetOffset = new Vector3(0, 1.25f, 1.25f);
+                break;
+
+            case Size.Small:
+                distance = 2.25f;
+                targetOffset = new Vector3(0, 1, 1);
+                break;
+
+            case Size.Large:
+               distance = 7.0f;
+                targetOffset = new Vector3(0, 0, 0);
+                break;
+        }
+    }
+
+    private void Reset()
+    {
+        if (CameraTransform() == null)
+        {
+            UnityEditor.EditorUtility.DisplayDialog("Error","ItemController requires a camera pin object as a child","Cancel");
+        }
+    }
+
+    Transform CameraTransform()
+    {
+        int count = 0;
+        Transform pinned = null;
+        foreach( Transform child in transform)
+        {
+            if (child.tag == "CameraPin")
+            {
+                count++;
+                pinned = child.transform;
+            }
+        }
+        if (count == 1)
+            return pinned;
+        else
+        {
+            return null;
+        }
     }
 
     void Start()
@@ -53,8 +107,8 @@ public class ItemController : MonoBehaviour
             //    txtValue.text = "";
         }
 #endif
-        //Check for an animator controller - error checking
-        anim = GetComponent<Animator>();
+            //Check for an animator controller - error checking
+            anim = GetComponent<Animator>();
 
         if (ItemScaryRating == Orientation.Least_Scary)
         {
@@ -78,7 +132,10 @@ public class ItemController : MonoBehaviour
     {
 
         if (transform.position.y < -0.5)
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.rotation);
+        {
+            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            //transform.rotation);
+        }
         //Animation activation for repel
         if (anim != null) //Error checking incase an Item doesnt have a controller
         {
@@ -108,7 +165,7 @@ public class ItemController : MonoBehaviour
     {
         if(tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
         {
-            other.GetComponent<CivillianController>().navAgent.isStopped = true;
+            other.GetComponent<CivillianController>().navAgent.Stop();//.isStopped = true;
 
             //Play thinking? animation here
 
@@ -120,7 +177,7 @@ public class ItemController : MonoBehaviour
     {
         if (tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
         {
-            other.GetComponent<CivillianController>().navAgent.isStopped = true;
+            other.GetComponent<CivillianController>().navAgent.Stop();// = true;
 
             //Play thinking? animation here
 
