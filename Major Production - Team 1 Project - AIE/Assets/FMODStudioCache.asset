@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 114977923799175324}
   MasterBankRef: {fileID: 114739904051016552}
   StringsBankRef: {fileID: 114887034936834894}
-  stringsBankWriteTime: 636535334295934056
+  stringsBankWriteTime: 636541670373710423
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -149,6 +149,21 @@ MonoBehaviour:
   Max: 1
   Default: 1
 --- !u!114 &114053641247465802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114054008060686318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -358,7 +373,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114087348649504670}
+  - {fileID: 114763569428500798}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114207436564388852
@@ -972,7 +987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:\Kips\Desktop\SpookySid\MajorProduction-Team1\Major Production - Team 1
     Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
-  lastModified: 636535334295924036
+  lastModified: 636541670373695374
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1000,6 +1015,21 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
 --- !u!114 &114745547824205348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114763569428500798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1104,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636535334295934056
+  lastModified: 636541670373710423
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1262,7 +1292,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114062217580966486}
+  - {fileID: 114054008060686318}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114982516029782070
