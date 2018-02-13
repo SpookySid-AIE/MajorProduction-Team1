@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23208981136969896}
   - component: {fileID: 54953124693167372}
   - component: {fileID: 64185427819479346}
-  - component: {fileID: 114427474397331324}
   - component: {fileID: 114585427348503344}
   m_Layer: 0
   m_Name: obj_cutUpFishDisplay
@@ -191,18 +190,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: ad4b31a00567a8b49a922da0bcc01c46, type: 3}
---- !u!114 &114427474397331324
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1253160606939342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!114 &114585427348503344
 MonoBehaviour:
   m_ObjectHideFlags: 1

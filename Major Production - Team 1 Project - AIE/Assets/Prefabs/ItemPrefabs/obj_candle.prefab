@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 64393503723529242}
   - component: {fileID: 54448956636269826}
   - component: {fileID: 114676635047515714}
-  - component: {fileID: 114227051689730500}
   m_Layer: 0
   m_Name: obj_candle
   m_TagString: Item
@@ -115,18 +114,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 0f7be23211c8c254bb547e728150fd2d, type: 3}
---- !u!114 &114227051689730500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1870508431599940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!114 &114676635047515714
 MonoBehaviour:
   m_ObjectHideFlags: 1

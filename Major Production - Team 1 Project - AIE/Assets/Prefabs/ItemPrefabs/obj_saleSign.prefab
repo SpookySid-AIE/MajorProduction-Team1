@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 65105308033749766}
   - component: {fileID: 54770032664868248}
   - component: {fileID: 114766832026553400}
-  - component: {fileID: 114054250628879860}
   m_Layer: 0
   m_Name: obj_saleSign
   m_TagString: Item
@@ -247,18 +246,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114054250628879860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1432266017723172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!114 &114766832026553400
 MonoBehaviour:
   m_ObjectHideFlags: 1
