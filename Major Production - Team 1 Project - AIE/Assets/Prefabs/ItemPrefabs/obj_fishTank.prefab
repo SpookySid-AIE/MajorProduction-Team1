@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 95095876028440054}
   - component: {fileID: 65879551920971132}
   - component: {fileID: 114051091734154718}
-  - component: {fileID: 114231923150943442}
   m_Layer: 0
   m_Name: obj_fishTank
   m_TagString: Item
@@ -308,15 +307,3 @@ MonoBehaviour:
   ectoCost: 0
   scare: 0
   scaryObject: 1
---- !u!114 &114231923150943442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1435953153750702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0

@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 95168112507569924}
   - component: {fileID: 54913035742001164}
   - component: {fileID: 65872054256276786}
-  - component: {fileID: 114527887443839900}
   - component: {fileID: 114169357224729064}
   m_Layer: 0
   m_Name: obj_plant_scare
@@ -395,15 +394,3 @@ MonoBehaviour:
   ectoCost: 0
   scare: 0
   scaryObject: 0
---- !u!114 &114527887443839900
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1490523191656828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
