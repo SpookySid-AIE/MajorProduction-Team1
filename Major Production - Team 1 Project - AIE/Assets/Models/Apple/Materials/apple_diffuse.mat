@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: apple_diffuse
-  m_Shader: {fileID: 4800000, guid: 1632b54afb3c36a478597149f7e4c270, type: 3}
+  m_Shader: {fileID: 4800000, guid: 94c03bcf8685c26498d962b8a5e7660d, type: 3}
   m_ShaderKeywords: _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: fa4f3e5dbb578cb4b90d4721023d975c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ObjectTexture:
@@ -79,7 +79,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - PixelSnap: 0
     - _ALPHA: 0
     - _ASEOutlineWidth: 0.0001
     - _AuraBrightness: 0.41
@@ -93,13 +92,11 @@ Material:
     - _DisAmount: 0
     - _DisLineWidth: 0
     - _DstBlend: 0
-    - _Edges: 0.15
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _InvertAura: 1
     - _LIGHTMAP: 0
-    - _Level: 0
     - _Metallic: 0
     - _Mode: 0
     - _NScale: 1
@@ -120,8 +117,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DisLineColor: {r: 1, g: 1, b: 1, a: 1}
     - _DisLineColorEx: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColour1: {r: 0.5401168, g: 0.8241186, b: 0.99264705, a: 1}
-    - _EdgeColour2: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
