@@ -11,7 +11,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     public float distance;
     [SerializeField]
-    private float height = 1.0f;
+    public float height = 1.0f;
     [SerializeField]
     private float damping = 5.0f;
     [SerializeField]
@@ -53,14 +53,15 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         if (Physics.Raycast(lookPosition, back, out hit, bumperDistanceCheck)
             && hit.transform != target) // ignore ray-casts that hit the user. DR
         {
-            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition );
+            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition);
 
-            Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
-            // clamp wanted position to hit position
+            wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f));
+            //Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
+            //// clamp wanted position to hit position
 
-            wantedPosition.x = theHitPositionMinusABit.x;
-            wantedPosition.z = theHitPositionMinusABit.z;
-            wantedPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
+            //wantedPosition.x = theHitPositionMinusABit.x;
+            //wantedPosition.z = theHitPositionMinusABit.z;
+            //wantedPosition.y = theHitPositionMinusABit.y; // Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
 
         }
 
