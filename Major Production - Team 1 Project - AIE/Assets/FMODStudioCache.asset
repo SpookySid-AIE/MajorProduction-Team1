@@ -18,14 +18,18 @@ MonoBehaviour:
   - {fileID: 114229846688869788}
   - {fileID: 114322672341485368}
   - {fileID: 114409201455707948}
-  - {fileID: 114897221475089230}
   - {fileID: 114018852811376328}
   - {fileID: 114005560484048728}
   - {fileID: 114203032383265716}
   - {fileID: 114977923799175324}
+  - {fileID: 114482530960697642}
+  - {fileID: 114676708687536264}
+  - {fileID: 114595299711703222}
+  - {fileID: 114339677770938810}
+  - {fileID: 114791192419399354}
   MasterBankRef: {fileID: 114015571287496002}
   StringsBankRef: {fileID: 114887034936834894}
-  stringsBankWriteTime: 636530052972823073
+  stringsBankWriteTime: 636541402523517572
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -91,11 +95,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636530052972757950
+  lastModified: 636541402523412410
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 3107712
+    Value: 3374880
   Exists: 1
 --- !u!114 &114018852811376328
 MonoBehaviour:
@@ -148,6 +152,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114045725912333848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114053641247465802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +273,36 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114122406820487922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114127719088225216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114132337938142136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +377,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114108068738517296}
+  - {fileID: 114903051229763046}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114207436564388852
@@ -479,6 +528,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114331751600186450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114333248396464592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +577,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114339677770938810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/G-Patrol_Charge
+  guid: 7a6b0d1a2799ea45a5b33a73a1aa0dfa
+  Banks:
+  - {fileID: 114015571287496002}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114343684377984320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,6 +649,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114403400806680348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114406281022618304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,6 +715,51 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114413929469241678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114449756574446502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114449816986448102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114451571846564854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +790,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114482530960697642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Sid_Lure
+  guid: 074fdefbe2f6234687c9e444a4fdf45a
+  Banks:
+  - {fileID: 114015571287496002}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114519586846356266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,6 +915,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114595299711703222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/G-Patrol_Fire
+  guid: f999a68f7d9bfc4a819d114c75fdf3b5
+  Banks:
+  - {fileID: 114015571287496002}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114599327468543310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +1037,42 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3107712
   Exists: 0
+--- !u!114 &114676708687536264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Sid_Scare
+  guid: 287f72a0b2dfc7469db3d6b3f8f25899
+  Banks:
+  - {fileID: 114015571287496002}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114686341980083914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114691768704792840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,6 +1103,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114710736058531100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114720328795200006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +1153,21 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114731659842040764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114736501285265858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -965,6 +1218,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114752783657413374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114785462854824876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +1252,42 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3107712
   Exists: 0
+--- !u!114 &114791192419399354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/NPC_Scared_F
+  guid: f0783b09bf961e49ac3d5e420118f243
+  Banks:
+  - {fileID: 114015571287496002}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114793156109869142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114807751440707890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,6 +1326,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3107712
   Exists: 0
+--- !u!114 &114833122118405306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114875040598583770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,11 +1374,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636530052972823073
+  lastModified: 636541402523517572
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1088
+    Value: 1266
   Exists: 1
 --- !u!114 &114897221475089230
 MonoBehaviour:
@@ -1100,6 +1419,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1088
   Exists: 1
+--- !u!114 &114903051229763046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114903479710429650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,6 +1456,21 @@ MonoBehaviour:
   - {fileID: 114343684377984320}
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114908279387824584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114928130445645680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,7 +1562,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114029699117936746}
+  - {fileID: 114127719088225216}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114982516029782070
