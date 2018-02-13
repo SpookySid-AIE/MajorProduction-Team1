@@ -172,121 +172,104 @@ public class playerPossession : MonoBehaviour
     // Update is called once per frame
     void PossessItem()
     {
-        //keeping old raycast code here just incase possession breaks
-        //RaycastHit hit;
-        //Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
-
-        //Ray testRay = new Ray(adjustedPlayerPosition, player.transform.forward);
-        ////Debug.DrawRay(adjustedPlayerPosition, player.transform.forward * allowablePosessionRange, Color.yellow ,3f);
-
-        //if (Physics.Raycast(testRay, out hit, allowablePosessionRange))
-        //{
-        //    if (hit.transform.tag == "Item")
-        //    {
-
-        RaycastCheckItem();
-
-        if (targetSet)
+        if (player.GetComponent<playerController>().Ectoplasm > 0.0f)
         {
-            if (player.GetComponent<playerController>().Ectoplasm > 0.0f)
-            {
-                Camera.main.GetComponent<CamLock>().floatSpeedOfSid = player.GetComponent<playerController>().floatSpeed;
+            Camera.main.GetComponent<CamLock>().floatSpeedOfSid = player.GetComponent<playerController>().floatSpeed;
                
-                //Super quick fix to give inf ecto in other test scenes
-                //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level_1"))
+            //Super quick fix to give inf ecto in other test scenes
+            //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level_1"))
 
-                //At this point playerPossesion 'should' be attached to the player so minus the ecto cost
-                this.GetComponent<playerController>().Ectoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
+            //At this point playerPossesion 'should' be attached to the player so minus the ecto cost
+            this.GetComponent<playerController>().Ectoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
 
-                //disable camera whilst we change the cameras target to the newly possesed item
-                Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+            //disable camera whilst we change the cameras target to the newly possesed item
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
-                //rename the player tag so they dont participate in any collisions
-                player.tag = "Sneak";
+            //rename the player tag so they dont participate in any collisions
+            player.tag = "Sneak";
+            player.GetComponent<CapsuleCollider>().enabled = false;
+
+            //set the taget to what was hit in the raycast
+            //GameObject target = hit.collider.gameObject;
+
+            //name it player so that it behaves like one in collisions
+            target.tag = "Player";
+
+            //oldPlayerPos = gameObject.transform.position;
+
+            //change the colour so we know we have selected it
+            eRenderer = target.GetComponentInChildren<Renderer>();
+            mat = eRenderer.material;
+            //EmitColour(Color.green, .5f);
+
+            //turn off the real players renderer, colliders and control scripts
+            SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+            foreach (SkinnedMeshRenderer smr in meshRenderer)
+            {
+                if (smr.transform.name != "geo_willTongue_low")
+                    smr.enabled = false;
+            }
+
+            if (player.GetComponent<CapsuleCollider>())
                 player.GetComponent<CapsuleCollider>().enabled = false;
 
-                //set the taget to what was hit in the raycast
-                //GameObject target = hit.collider.gameObject;
+            player.GetComponent<playerController>().enabled = false;
+            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak, setting the newly added playerPossession scipt to a new target
+            player.GetComponent<playerPossession>().enabled = false;
+            player.GetComponent<CharacterController>().enabled = false;
+            player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
 
-                //name it player so that it behaves like one in collisions
-                target.tag = "Player";
+            //set up the target with these scripts
+            if (target.GetComponent<playerController>() == null)
+                target.AddComponent<playerController>();
+            else
+                target.GetComponent<playerController>().enabled = true;
 
-                //oldPlayerPos = gameObject.transform.position;
+            target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
 
-                //change the colour so we know we have selected it
-                eRenderer = target.GetComponentInChildren<Renderer>();
-                mat = eRenderer.material;
-                //EmitColour(Color.green, .5f);
-
-                //turn off the real players renderer, colliders and control scripts
-                SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
-
-                foreach (SkinnedMeshRenderer smr in meshRenderer)
-                {
-                    if (smr.transform.name != "geo_willTongue_low")
-                        smr.enabled = false;
-                }
-
-                if (player.GetComponent<CapsuleCollider>())
-                    player.GetComponent<CapsuleCollider>().enabled = false;
-
-                player.GetComponent<playerController>().enabled = false;
-                player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak, setting the newly added playerPossession scipt to a new target
-                player.GetComponent<playerPossession>().enabled = false;
-                player.GetComponent<CharacterController>().enabled = false;
-                player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
-
-                //set up the target with these scripts
-                if (target.GetComponent<playerController>() == null)
-                    target.AddComponent<playerController>();
-                else
-                    target.GetComponent<playerController>().enabled = true;
-
-                target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
-
-                if (target.GetComponent<playerPossession>() == null)
-                {
-                    target.AddComponent<playerPossession>();
-                }
-                else
-                {
-                    target.GetComponent<playerPossession>().enabled = true;
-                }
-
-                //Add the Character controller so we can move the item - Jak - 13/11/17
-                if (target.GetComponent<CharacterController>() == null)
-                {
-                    target.AddComponent<CharacterController>();
-                }
-
-                //target.GetComponent<CharacterController>().enabled = true;
-
-                //switch off gravity for the target
-                target.GetComponent<Rigidbody>().useGravity = false;
-                target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
-
-                //turn off the item controller script
-                target.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
-
-                //switch the camera back on to follow the player
-                Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-                target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
-                if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
-                {
-                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 1.95f;
-                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1.25f, 1.25f);
-                }
-                else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Small)
-                {
-                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 2.25f;
-                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
-                }
-
-                else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
-                    Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
-                possessed = true;
-                //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
+            if (target.GetComponent<playerPossession>() == null)
+            {
+                target.AddComponent<playerPossession>();
             }
+            else
+            {
+                target.GetComponent<playerPossession>().enabled = true;
+            }
+
+            //Add the Character controller so we can move the item - Jak - 13/11/17
+            if (target.GetComponent<CharacterController>() == null)
+            {
+                target.AddComponent<CharacterController>();
+            }
+
+            //target.GetComponent<CharacterController>().enabled = true;
+
+            //switch off gravity for the target
+            target.GetComponent<Rigidbody>().useGravity = false;
+            target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
+
+            //turn off the item controller script
+            target.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
+
+            //switch the camera back on to follow the player
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+            target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
+            if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
+            {
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 1.95f;
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1.25f, 1.25f);
+            }
+            else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Small)
+            {
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 2.25f;
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
+            }
+
+            else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
+            possessed = true;
+            //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);            
         }
     }
 
