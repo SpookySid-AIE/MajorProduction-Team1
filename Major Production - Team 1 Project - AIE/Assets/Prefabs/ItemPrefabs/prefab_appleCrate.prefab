@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65910905708830720}
   - component: {fileID: 54945364139934908}
   - component: {fileID: 114674327147633964}
+  - component: {fileID: 95600987559028946}
   m_Layer: 0
   m_Name: prefab_appleCrate
   m_TagString: Item
@@ -37,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1927879172630720}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -137.75, y: 0.6903845, z: 59.72}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -157.56514, y: 1.6804072e-18, z: 28.33212}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23636481971540978
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -58,29 +59,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
-  - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
   - {fileID: 2100000, guid: c69317e385c682c4f8a5f05663e7fac1, type: 2}
   - {fileID: 2100000, guid: 11dcb66a657954948876571fd03ed2d6, type: 2}
   m_StaticBatchInfo:
@@ -108,7 +86,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1927879172630720}
-  m_Mesh: {fileID: 4300000, guid: 08a2433be36ab6d4aa872991b55157f8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: b1e37bab412e4bc4d8e64ecc47f049e7, type: 3}
 --- !u!54 &54945364139934908
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -134,8 +112,25 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 159.5664, y: 138.0769, z: 159.56636}
-  m_Center: {x: 1.5409164, y: 0, z: -0.3246995}
+  m_Size: {x: 1.5956638, y: 1.3807691, z: 1.5956635}
+  m_Center: {x: -0.0014159381, y: 0.69038445, z: 0.06986621}
+--- !u!95 &95600987559028946
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927879172630720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f3e0ff45bb6f924a9ac0074ec10ecca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114674327147633964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 1
   ItemScaryRating: 0
   itemSize: 0
   hasBeenThrown: 0
