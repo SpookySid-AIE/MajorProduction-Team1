@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class playerPossession : MonoBehaviour
 {
     private GameObject player; //could be the real player or a possessed item
-    private GameObject sneakTest;
+    private GameObject sneakTest; //Store old player here while possessing
 
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
@@ -140,11 +140,11 @@ public class playerPossession : MonoBehaviour
                 Hide();
             }
         }
-        else if (possessed && hidden)
+        else if (possessed && hidden && player.GetComponent<Rigidbody>().IsSleeping() == true)
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Debug.Log("Unhide");
+                //Debug.Log("Unhide");
                 Unhide(); //Revert back to possess
             }
         }
@@ -155,7 +155,7 @@ public class playerPossession : MonoBehaviour
         //At this point, HIDE has been called, therefore the script is no longer on player, but the ITEM - so player = item
         if (hidden && player.GetComponent<Rigidbody>().IsSleeping() == true && !CamPivotSet)
         {
-            Debug.Log(player.name + " grounded");
+            //Debug.Log(player.name + " grounded");
             
             //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
             pivot = new GameObject("Pivot");
@@ -166,6 +166,7 @@ public class playerPossession : MonoBehaviour
 
             //Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
+            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
             CamPivotSet = true;
         }
@@ -358,9 +359,9 @@ public class playerPossession : MonoBehaviour
         target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
 
         //Revert Camera back, possibly no longer parent if ben implements those camera changes
-        Camera.main.transform.SetParent(sneakTest.transform);
+        Camera.main.transform.SetParent(null);
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
-        Destroy(target.GetComponent<playerPossession>().pivot);
+        //Destroy(target.GetComponent<playerPossession>().pivot);
 
         ////turn onn all player scripts
         //foreach (Behaviour childCompnent in target.GetComponentsInChildren<Behaviour>())
@@ -443,8 +444,9 @@ public class playerPossession : MonoBehaviour
         possessedItem.GetComponent<CharacterController>().enabled = false;
         possessedItem.GetComponent<playerController>().enabled = false;
 
-        //Disable rotation while falling
+        //Disable camera rotation while falling
         Camera.main.GetComponent<CamLock>().enabled = false;
+        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = false;
 
         //////switch off gravity for the target
         possessedItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
@@ -462,7 +464,6 @@ public class playerPossession : MonoBehaviour
 
         //switch the camera back on to follow the player
        // Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-
         //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
 

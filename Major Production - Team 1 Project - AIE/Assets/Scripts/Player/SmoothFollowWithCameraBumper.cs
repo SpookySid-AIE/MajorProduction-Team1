@@ -102,7 +102,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     private void LateUpdate()
     {
         //This code orbits the camera during hide mode
-        if (playerPosRef.isHidden())
+        if (playerPosRef.isHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true)
         {
             CameraParent = this.gameObject.transform.parent;
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
@@ -113,7 +113,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
             //Have to rotate the invis pivot object during "hide mode" so it doesnt break the clipping code
             //reupdate the target when we leave hide mode NOTE
-            target = this.CameraParent;
+            target = CameraParent;
             this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
 
             //if (this.CameraTransform.localPosition.z != this.distance * -1f)
