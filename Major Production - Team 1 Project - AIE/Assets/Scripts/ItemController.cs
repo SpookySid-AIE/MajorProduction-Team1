@@ -14,9 +14,13 @@ public class ItemController : MonoBehaviour
 
     public enum Orientation { Least_Scary, Medium_Scary, Most_Scary }
     public enum Size { Miniature, Small, Medium, Large }
+    public int timesThrownBeforeDestroyed = 1;
+    private int timesThrown = 0;
     public Orientation ItemScaryRating;
     public Size itemSize;
     public bool hasBeenThrown;
+    private bool hasBeenDamaged = false;
+
 
     [HideInInspector]
     public float timer = 0;
@@ -74,6 +78,21 @@ public class ItemController : MonoBehaviour
         else Debug.LogError("ItemScaryRating Error! No values selected for: " + gameObject.name);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (timesThrown == timesThrownBeforeDestroyed)
+        {
+            if (hasBeenDamaged)
+            {             
+                GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+
+                Destroy(gameObject);
+                DestroyObject(crashClone, 2.0f); 
+
+            }
+        }
+    }
+
     void Update()
     {
 
@@ -94,13 +113,21 @@ public class ItemController : MonoBehaviour
 
         if (hasBeenThrown)
         {
+            if (hasBeenDamaged == false)
+            {
+                timesThrown++;
+                hasBeenDamaged = true;               
+            }
+
             timer += Time.deltaTime;
             if (timer >= 3)
             {
                 timer = 0;
                 hasBeenThrown = false;
+                hasBeenDamaged = false;
             }
             
+        
         }
     } //End update
 
