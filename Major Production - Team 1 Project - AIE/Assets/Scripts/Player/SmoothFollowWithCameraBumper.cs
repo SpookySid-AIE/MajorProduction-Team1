@@ -36,6 +36,9 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
     private float currentHorizontal = 0;
     private float currentVertical = 0;
+
+    //Used in CurveToTarget.cs - Retargets the camera on possession - fixes the issue of two snapping
+    [HideInInspector] public bool updatePosition = true;
     
     /// <Summary>
     /// If the target moves, the camera should child the target to allow for smoother movement. DR
@@ -54,11 +57,11 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         //CameraParent = this.transform.parent;
         //CREATE NEW EMPTY PIVOT OBJECT AT TARGET HIDE LOCATION
     }
-    
-    private void FixedUpdate()
+
+    private void Update()
     {
         //Get desired position/rotation IN WORLD SPACE and lerp.
-        Debug.Log(target);
+        //Debug.Log(target);
         Vector3 wantedPosition = target.TransformPoint(0, height, -distance);
         Vector3 lookPosition = target.TransformPoint(targetLookAtOffset);
 
@@ -82,10 +85,10 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
         }
 
-        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
+        //if (updatePosition)
+            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
 
         Debug.DrawLine(lookPosition, wantedPosition);
-        
 
         if (smoothRotation)
         {

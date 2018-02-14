@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
+//#OPTIMISE - CACHE ALL OVERUSED GETCOMPONENT CALLS
+
 public class playerPossession : MonoBehaviour
 {
     private GameObject player; //could be the real player or a possessed item
@@ -182,12 +184,12 @@ public class playerPossession : MonoBehaviour
             //At this point playerPossesion 'should' be attached to the player so minus the ecto cost
             this.GetComponent<playerController>().Ectoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
 
-            //disable camera whilst we change the cameras target to the newly possesed item
-            Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+            ////disable camera whilst we change the cameras target to the newly possesed item
+            //Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
             //rename the player tag so they dont participate in any collisions
             player.tag = "Sneak";
-            player.GetComponent<CapsuleCollider>().enabled = false;
+            //player.GetComponent<CapsuleCollider>().enabled = false;
 
             //set the taget to what was hit in the raycast
             //GameObject target = hit.collider.gameObject;
@@ -211,8 +213,8 @@ public class playerPossession : MonoBehaviour
                     smr.enabled = false;
             }
 
-            if (player.GetComponent<CapsuleCollider>())
-                player.GetComponent<CapsuleCollider>().enabled = false;
+            //if (player.GetComponent<CapsuleCollider>())
+            //    player.GetComponent<CapsuleCollider>().enabled = false;
 
             player.GetComponent<playerController>().enabled = false;
             player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak, setting the newly added playerPossession scipt to a new target
@@ -252,9 +254,10 @@ public class playerPossession : MonoBehaviour
             //turn off the item controller script
             target.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
 
-            //switch the camera back on to follow the player
-            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+            ////switch the camera back on to follow the player
+            //Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
             target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
+
             if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
             {
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 1.95f;
@@ -268,7 +271,9 @@ public class playerPossession : MonoBehaviour
 
             else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
+
             possessed = true;
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
             //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);            
         }
     }
@@ -321,7 +326,7 @@ public class playerPossession : MonoBehaviour
 
         sneakTest.tag = "Player";//need to do this here as the agent code needs a player at all times
         //sneakTest.transform.position = oldPlayerPos;
-        sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+        //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
         //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
@@ -547,7 +552,7 @@ public class playerPossession : MonoBehaviour
         //Destroy the old possession componenet on the last possessed object
         Destroy(player.GetComponent<playerPossession>());
 
-        sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+        //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         sneakTest.GetComponent<CharacterController>().enabled = true;
 
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
@@ -598,6 +603,7 @@ public class playerPossession : MonoBehaviour
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = false;
 
             //Wait until the animation is finished
             while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
@@ -606,16 +612,20 @@ public class playerPossession : MonoBehaviour
             }
             
             //Call possess code once possesion anim is complete
-            PossessItem();
-
-            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+            PossessItem();            
 
             //Reset variables for next animation
             targetSet = false;
             disolveScript.target = null;
             disolveScript.transferred = false;
             disolveScript.transferring = false;
+
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = true; //This will also Refind the new player which is now the item
+            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = true;
+
             gameObject.GetComponent<playerController>().speed = oldSpeed;
+
+            
         }
     }
 

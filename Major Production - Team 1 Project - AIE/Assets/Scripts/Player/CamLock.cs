@@ -23,7 +23,7 @@ public class CamLock : MonoBehaviour
     [HideInInspector]
     public float floatSpeedOfSid = 0.0f;
     private bool isController = false;
-    [HideInInspector]public GameObject player;
+    public GameObject player;
     private Rigidbody playerrb;
 
     private RaycastHit rc;

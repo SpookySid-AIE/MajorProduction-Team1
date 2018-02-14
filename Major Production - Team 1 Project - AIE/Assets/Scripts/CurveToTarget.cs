@@ -40,8 +40,10 @@ public class CurveToTarget : MonoBehaviour {
             transform.position = currentPos;
 
             Vector3 curPos = new Vector3(currentPos.x, currentPos.y + 2, currentPos.z);
+
             curPos.x += .5f;
             curPos.z += 1f;
+
             Camera.main.transform.position = curPos;
 
             //Through testing i found that the distance between the target and Camera should always be less than 2.3, so if errors in transitions, this could be why
@@ -49,10 +51,11 @@ public class CurveToTarget : MonoBehaviour {
 
             if (dist <= 2.3f && finishedAnim == false)
             {
+                //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = false;
                 finishedAnim = true;
+                //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = true;
 
-                //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().playerRef.H();
-               // Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = target.transform;
+                // Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = target.transform;
                 //Camera.main.GetComponent<CamLock>().player = target.gameObject;
                 //Camera.main.GetComponent<CamLock>().enabled = false;
                 //Debug.Log("Curve.cs After: " + finishedAnim);
