@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     public float distance;
     [SerializeField]
-    private float height = 1.0f;
+    public float height = 1.0f;
     [SerializeField]
     private float damping = 5.0f;
     [SerializeField]
@@ -29,6 +29,17 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     private Vector3 bumperRayOffset; // allows offset of the bumper ray from target origin
 
+    [HideInInspector]public playerPossession playerPosRef;
+    
+    //Camera Orbiting during hide
+    [HideInInspector]public Transform CameraTransform;
+    [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
+    private float currentHorizontal = 0;
+    private float currentVertical = 0;
+
+    //Used in CurveToTarget.cs - Retargets the camera on possession - fixes the issue of two snapping
+    [HideInInspector] public bool updatePosition = true;
+    
     /// <Summary>
     /// If the target moves, the camera should child the target to allow for smoother movement. DR
     /// </Summary>
@@ -38,10 +49,19 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         //Already attached to main camera, don't need to do this here'
     }
 
-    private void FixedUpdate()
+    //Setting camera orbit transforms for hide
+    private void Start()
+    {
+        playerPosRef = Camera.main.GetComponent<CamLock>().player.GetComponent<playerPossession>();
+        CameraTransform = this.transform; //This script should be attached to the camera, so we grab its transform
+        //CameraParent = this.transform.parent;
+        //CREATE NEW EMPTY PIVOT OBJECT AT TARGET HIDE LOCATION
+    }
+
+    private void Update()
     {
         //Get desired position/rotation IN WORLD SPACE and lerp.
-        Debug.Log(target);
+        //Debug.Log(target);
         Vector3 wantedPosition = target.TransformPoint(0, height, -distance);
         Vector3 lookPosition = target.TransformPoint(targetLookAtOffset);
 
@@ -53,21 +73,22 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         if (Physics.Raycast(lookPosition, back, out hit, bumperDistanceCheck)
             && hit.transform != target) // ignore ray-casts that hit the user. DR
         {
-            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition );
+            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition);
 
-            Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
-            // clamp wanted position to hit position
+            wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f));
+            //Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
+            //// clamp wanted position to hit position
 
-            wantedPosition.x = theHitPositionMinusABit.x;
-            wantedPosition.z = theHitPositionMinusABit.z;
-            wantedPosition.y = Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
+            //wantedPosition.x = theHitPositionMinusABit.x;
+            //wantedPosition.z = theHitPositionMinusABit.z;
+            //wantedPosition.y = theHitPositionMinusABit.y; // Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
 
         }
 
-        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
+        //if (updatePosition)
+            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
 
         Debug.DrawLine(lookPosition, wantedPosition);
-        
 
         if (smoothRotation)
         {
@@ -77,11 +98,35 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         else
             transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
     }
+    
+    private void LateUpdate()
+    {
+        //This code orbits the camera during hide mode
+        if (playerPosRef.isHidden())
+        {
+            CameraParent = this.gameObject.transform.parent;
+            currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
+            currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
+
+            //Actual Camera Rig Transformations
+            Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
+
+            //Have to rotate the invis pivot object during "hide mode" so it doesnt break the clipping code
+            //reupdate the target when we leave hide mode NOTE
+            target = this.CameraParent;
+            this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
+
+            //if (this.CameraTransform.localPosition.z != this.distance * -1f)
+            //{
+            //        //    Debug.Log("Weird distance check called");
+            //    this.CameraTransform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(this.CameraTransform.localPosition.z, this.distance * -1f, Time.deltaTime * 6f));
+            //}
+        }
+    }
+    
     static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end)
     {
         Vector3 result = new Vector3((start.x + end.x) * 0.1f, (start.y + end.y) * 0.1f, (start.z + end.z) * 0.1f);
         return result;
     }
 }
-
-
