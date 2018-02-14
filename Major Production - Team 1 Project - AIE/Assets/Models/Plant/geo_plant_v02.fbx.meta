@@ -1,30 +1,53 @@
 fileFormatVersion: 2
-guid: b473f7ad00afef94e864d88cca91bcb9
-timeCreated: 1517200488
-licenseType: Pro
+guid: 4552781c5f6e2444bbf7747ff8a822ed
+timeCreated: 1518587727
+licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: geo_camera
-    100002: geo_cameraNeck
-    100004: //RootNode
-    400000: geo_camera
-    400002: geo_cameraNeck
-    400004: //RootNode
-    2300000: geo_camera
-    2300002: geo_cameraNeck
-    3300000: geo_camera
-    3300002: geo_cameraNeck
-    4300000: geo_camera
-    4300002: geo_cameraNeck
-    7400000: Take 001
+    100000: arm_Plant1
+    100002: bne_branch1.000
+    100004: bne_branch1.001
+    100006: bne_branch1.001_end
+    100008: bne_branch2.000
+    100010: bne_branch2.001
+    100012: bne_branch2.001_end
+    100014: bne_root
+    100016: bne_trunk.000
+    100018: bne_trunk.001
+    100020: bne_trunk.002
+    100022: bne_trunk.002_end
+    100024: bne_vase.000
+    100026: bne_vase.001
+    100028: //RootNode
+    100030: geo_plantVase
+    400000: arm_Plant1
+    400002: bne_branch1.000
+    400004: bne_branch1.001
+    400006: bne_branch1.001_end
+    400008: bne_branch2.000
+    400010: bne_branch2.001
+    400012: bne_branch2.001_end
+    400014: bne_root
+    400016: bne_trunk.000
+    400018: bne_trunk.001
+    400020: bne_trunk.002
+    400022: bne_trunk.002_end
+    400024: bne_vase.000
+    400026: bne_vase.001
+    400028: //RootNode
+    400030: geo_plantVase
+    4300000: geo_plantVase
+    7400000: arm_Plant1|arm_0plantIdle
+    7400002: arm_Plant1|arm_possessed
     9500000: //RootNode
+    13700000: geo_plantVase
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: shd_securityCamera
-    second: {fileID: 2100000, guid: 1b84338737f2d214abd5d5f3a1dd158b, type: 2}
+      name: shd_plant
+    second: {fileID: 2100000, guid: 02ad6c3ffefa3314f9e7cba6a9213936, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -52,10 +75,38 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 145
+      name: arm_Plant1|arm_0plantIdle
+      takeName: arm_Plant1|arm_0plantIdle
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: arm_Plant1|arm_possessed
+      takeName: arm_Plant1|arm_possessed
+      firstFrame: 0
+      lastFrame: 34
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

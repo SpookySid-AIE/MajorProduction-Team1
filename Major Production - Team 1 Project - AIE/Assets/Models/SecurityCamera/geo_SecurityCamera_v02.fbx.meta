@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: b473f7ad00afef94e864d88cca91bcb9
-timeCreated: 1517200488
-licenseType: Pro
+guid: edc0e660e89672a4da4bd613540c9d39
+timeCreated: 1518589803
+licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -15,9 +15,9 @@ ModelImporter:
     2300002: geo_cameraNeck
     3300000: geo_camera
     3300002: geo_cameraNeck
-    4300000: geo_camera
-    4300002: geo_cameraNeck
-    7400000: Take 001
+    4300000: geo_cameraNeck
+    4300002: geo_camera
+    7400000: geo_camera|geo_camera|Take 001|BaseLayer
     9500000: //RootNode
   externalObjects:
   - first:
@@ -52,10 +52,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 145
+      name: geo_camera|geo_camera|Take 001|BaseLayer
+      takeName: geo_camera|geo_camera|Take 001|BaseLayer
+      firstFrame: 0
+      lastFrame: 143
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
