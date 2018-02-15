@@ -85,9 +85,11 @@ public class ItemController : MonoBehaviour
             if (hasBeenDamaged)
             {             
                 GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-
-                Destroy(gameObject);
-                DestroyObject(crashClone, 2.0f); 
+                gameObject.GetComponentInChildren<Renderer>().enabled = false;
+                gameObject.tag = "Untagged";
+                DestroyObject(gameObject, 2.0f);
+                DestroyObject(crashClone, 2.0f);
+                timesThrown = 0;
 
             }
         }

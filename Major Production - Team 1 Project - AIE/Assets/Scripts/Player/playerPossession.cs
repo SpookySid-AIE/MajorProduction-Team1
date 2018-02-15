@@ -11,6 +11,9 @@ public class playerPossession : MonoBehaviour
     private GameObject player; //could be the real player or a possessed item
     private GameObject sneakTest; //Store old player here while possessing
 
+    private float timer;
+    private bool resettingSidInvis;
+
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
     public bool hasItemBeenThrown;
@@ -84,6 +87,21 @@ public class playerPossession : MonoBehaviour
         //GameManager.Instance.player = player.GetComponent<playerPossession>();
     }
 
+    private void FixedUpdate()
+    {
+        if (resettingSidInvis)
+        {
+            timer += Time.deltaTime;
+            if (timer >= 0.25f)
+            {
+                timer = 0;
+                player.layer = 0;
+                resettingSidInvis = false;
+                Debug.Log("Reset");
+            }
+        }
+    }
+
     private void Update()
     {
         if (sneakTest)
@@ -113,6 +131,7 @@ public class playerPossession : MonoBehaviour
             {
                 player.layer = 8;
                 StartCoroutine(ThrowPossessedItemAway());
+                resettingSidInvis = true;
             }
         }
 
@@ -283,15 +302,12 @@ public class playerPossession : MonoBehaviour
     {
         //throw the object;
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
-
         UnpossessItem();
         player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
         sneakTest.GetComponent<playerPossession>().hasItemBeenThrown = true;
         lastThrownItem = this.gameObject.transform;
-        yield return new WaitForSeconds(1.00f);
 
-        Debug.Log("layer change hit");
-        player.layer = 0;
+        yield return new WaitForSeconds(0);
     }
 
     public void UnpossessItem()
@@ -331,7 +347,7 @@ public class playerPossession : MonoBehaviour
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
         //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
-        Invoke("EnablePlayer", .25f);//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
+        EnablePlayer();//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
 
     //Written by Jak
