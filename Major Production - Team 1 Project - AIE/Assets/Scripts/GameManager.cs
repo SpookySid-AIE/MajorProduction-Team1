@@ -146,15 +146,18 @@ public class GameManager : MonoBehaviour {
         //Gameover State
         if (!player.isHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
         {
-            if (gameObject.GetComponentInParent<playerController>().Ectoplasm <= 0)
+            if (gameObject.GetComponentInParent<playerController>())
             {
-                gameObject.GetComponentInParent<playerController>().Ectoplasm = 0;
-                canvasWinOrLose.gameObject.SetActive(true);
-                loseText.gameObject.SetActive(true);
-                Camera.main.GetComponent<CamLock>().enabled = false;
-                Cursor.lockState = CursorLockMode.None;
-                gameObject.GetComponentInParent<CharacterController>().enabled = false;
-                gameObject.GetComponentInParent<playerController>().enabled = false;
+                if (gameObject.GetComponentInParent<playerController>().Ectoplasm <= 0)
+                {
+                    gameObject.GetComponentInParent<playerController>().Ectoplasm = 0;
+                    canvasWinOrLose.gameObject.SetActive(true);
+                    loseText.gameObject.SetActive(true);
+                    Camera.main.GetComponent<CamLock>().enabled = false;
+                    Cursor.lockState = CursorLockMode.None;
+                    gameObject.GetComponentInParent<CharacterController>().enabled = false;
+                    gameObject.GetComponentInParent<playerController>().enabled = false;
+                }
             }
         }
     } //End update
