@@ -71,8 +71,11 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
         // cast the bumper ray out from rear and check to see if there is anything behind
         if (Physics.Raycast(lookPosition, back, out hit, bumperDistanceCheck)
-            && hit.transform != target) // ignore ray-casts that hit the user. DR
+            && (hit.transform.GetComponent<Collider>().tag != "Player"))//hit.transform.tag != target.tag) // ignore ray-casts that hit the user. DR
         {
+            //Debug.Log("Transform Hit: " + hit.transform.tag);
+            //Debug.Log("Target: " + target.tag);
+
             Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition);
 
             wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f));

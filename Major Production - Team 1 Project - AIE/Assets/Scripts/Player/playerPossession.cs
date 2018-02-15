@@ -237,7 +237,7 @@ public class playerPossession : MonoBehaviour
             //    player.GetComponent<CapsuleCollider>().enabled = false;
 
             player.GetComponent<playerController>().enabled = false;
-            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak, setting the newly added playerPossession scipt to a new target
+            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak
             player.GetComponent<playerPossession>().enabled = false;
             player.GetComponent<CharacterController>().enabled = false;
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
@@ -273,11 +273,11 @@ public class playerPossession : MonoBehaviour
 
             //turn off the item controller script
             target.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
-
-            ////switch the camera back on to follow the player
-            //Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+            
+            //Carry over the float speed to the possessed item
             target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
 
+            //Adjusts camera distance based on item size
             if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
             {
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 1.95f;
@@ -292,7 +292,9 @@ public class playerPossession : MonoBehaviour
             else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
 
+            //Tell the other scripts we are now possessed
             possessed = true;
+
             Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
             //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);            
         }
@@ -306,7 +308,6 @@ public class playerPossession : MonoBehaviour
         player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
         sneakTest.GetComponent<playerPossession>().hasItemBeenThrown = true;
         lastThrownItem = this.gameObject.transform;
-
         yield return new WaitForSeconds(0);
     }
 
@@ -322,7 +323,7 @@ public class playerPossession : MonoBehaviour
         Destroy(player.GetComponent<playerController>());
         Destroy(player.GetComponent<CharacterController>());
 
-        player.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
+        //player.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
         player.GetComponent<ItemController>().hasBeenThrown = true;
 
         //disable the items
@@ -346,7 +347,7 @@ public class playerPossession : MonoBehaviour
         //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
-        //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);
+
         EnablePlayer();//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
 
@@ -575,7 +576,6 @@ public class playerPossession : MonoBehaviour
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
 
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-        
     }
 
     //This ONLY returns if an ITEM has been hit - I can make this general if need be - Jak
