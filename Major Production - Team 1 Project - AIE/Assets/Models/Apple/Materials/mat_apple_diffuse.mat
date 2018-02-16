@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: mat_apple_diffuse
   m_Shader: {fileID: 4800000, guid: 1632b54afb3c36a478597149f7e4c270, type: 3}
-  m_ShaderKeywords: _INVERTAURA_ON
+  m_ShaderKeywords: ALPHA LIGHTMAP _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -80,7 +80,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _ALPHA: 0
+    - _ALPHA: 1
     - _ASEOutlineWidth: 0.0001
     - _AuraBrightness: 0.41
     - _AuraFalloff1: 2.11
@@ -98,11 +98,11 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _InvertAura: 1
-    - _LIGHTMAP: 0
-    - _Level: 0
+    - _LIGHTMAP: 1
+    - _Level: 0.13
     - _Metallic: 0
     - _Mode: 0
-    - _NScale: 1
+    - _NScale: 5.93
     - _OcclusionStrength: 1
     - _Outline: 0.005
     - _Parallax: 0.02
