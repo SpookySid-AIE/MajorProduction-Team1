@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: b7e8a27d299922b42ab74e091a935acb
+timeCreated: 1518925672
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: geo_dinoCrate
+    100002: geo_dinosaur
+    100004: grp_dinoRig
+    100006: Head
+    100008: Hips
+    100010: LeftArm
+    100012: LeftFoot
+    100014: LeftForeArm
+    100016: LeftHand
+    100018: LeftLeg
+    100020: LeftShoulder
+    100022: LeftToeBase
+    100024: LeftUpLeg
+    100026: Neck
+    100028: //RootNode
+    100030: QuickRigCharacter_Ctrl_ChestEndEffector
+    100032: QuickRigCharacter_Ctrl_ChestOriginEffector
+    100034: QuickRigCharacter_Ctrl_Head
+    100036: QuickRigCharacter_Ctrl_HeadEffector
+    100038: QuickRigCharacter_Ctrl_Hips
+    100040: QuickRigCharacter_Ctrl_HipsEffector
+    100042: QuickRigCharacter_Ctrl_LeftAnkleEffector
+    100044: QuickRigCharacter_Ctrl_LeftArm
+    100046: QuickRigCharacter_Ctrl_LeftElbowEffector
+    100048: QuickRigCharacter_Ctrl_LeftFoot
+    100050: QuickRigCharacter_Ctrl_LeftFootEffector
+    100052: QuickRigCharacter_Ctrl_LeftForeArm
+    100054: QuickRigCharacter_Ctrl_LeftHand
+    100056: QuickRigCharacter_Ctrl_LeftHipEffector
+    100058: QuickRigCharacter_Ctrl_LeftKneeEffector
+    100060: QuickRigCharacter_Ctrl_LeftLeg
+    100062: QuickRigCharacter_Ctrl_LeftShoulder
+    100064: QuickRigCharacter_Ctrl_LeftShoulderEffector
+    100066: QuickRigCharacter_Ctrl_LeftToeBase
+    100068: QuickRigCharacter_Ctrl_LeftUpLeg
+    100070: QuickRigCharacter_Ctrl_LeftWristEffector
+    100072: QuickRigCharacter_Ctrl_Neck
+    100074: QuickRigCharacter_Ctrl_Reference
+    100076: QuickRigCharacter_Ctrl_RightAnkleEffector
+    100078: QuickRigCharacter_Ctrl_RightArm
+    100080: QuickRigCharacter_Ctrl_RightElbowEffector
+    100082: QuickRigCharacter_Ctrl_RightFoot
+    100084: QuickRigCharacter_Ctrl_RightFootEffector
+    100086: QuickRigCharacter_Ctrl_RightForeArm
+    100088: QuickRigCharacter_Ctrl_RightHand
+    100090: QuickRigCharacter_Ctrl_RightHipEffector
+    100092: QuickRigCharacter_Ctrl_RightKneeEffector
+    100094: QuickRigCharacter_Ctrl_RightLeg
+    100096: QuickRigCharacter_Ctrl_RightShoulder
+    100098: QuickRigCharacter_Ctrl_RightShoulderEffector
+    100100: QuickRigCharacter_Ctrl_RightToeBase
+    100102: QuickRigCharacter_Ctrl_RightUpLeg
+    100104: QuickRigCharacter_Ctrl_RightWristEffector
+    100106: QuickRigCharacter_Ctrl_Spine
+    100108: QuickRigCharacter_Ctrl_Spine1
+    100110: QuickRigCharacter_Ctrl_Spine2
+    100112: QuickRigCharacter_Guides
+    100114: QuickRigCharacter_Head
+    100116: QuickRigCharacter_Hips
+    100118: QuickRigCharacter_LeftArm
+    100120: QuickRigCharacter_LeftFoot
+    100122: QuickRigCharacter_LeftForeArm
+    100124: QuickRigCharacter_LeftHand
+    100126: QuickRigCharacter_LeftLeg
+    100128: QuickRigCharacter_LeftShoulder
+    100130: QuickRigCharacter_LeftToeBase
+    100132: QuickRigCharacter_LeftUpLeg
+    100134: QuickRigCharacter_Neck
+    100136: QuickRigCharacter_Reference
+    100138: QuickRigCharacter_RightArm
+    100140: QuickRigCharacter_RightFoot
+    100142: QuickRigCharacter_RightForeArm
+    100144: QuickRigCharacter_RightHand
+    100146: QuickRigCharacter_RightLeg
+    100148: QuickRigCharacter_RightShoulder
+    100150: QuickRigCharacter_RightToeBase
+    100152: QuickRigCharacter_RightUpLeg
+    100154: QuickRigCharacter_Spine
+    100156: QuickRigCharacter_Spine1
+    100158: QuickRigCharacter_Spine2
+    100160: Reference
+    100162: RightArm
+    100164: RightFoot
+    100166: RightForeArm
+    100168: RightHand
+    100170: RightLeg
+    100172: RightShoulder
+    100174: RightToeBase
+    100176: RightUpLeg
+    100178: Spine
+    100180: Spine1
+    100182: Spine2
+    400000: geo_dinoCrate
+    400002: geo_dinosaur
+    400004: grp_dinoRig
+    400006: Head
+    400008: Hips
+    400010: LeftArm
+    400012: LeftFoot
+    400014: LeftForeArm
+    400016: LeftHand
+    400018: LeftLeg
+    400020: LeftShoulder
+    400022: LeftToeBase
+    400024: LeftUpLeg
+    400026: Neck
+    400028: //RootNode
+    400030: QuickRigCharacter_Ctrl_ChestEndEffector
+    400032: QuickRigCharacter_Ctrl_ChestOriginEffector
+    400034: QuickRigCharacter_Ctrl_Head
+    400036: QuickRigCharacter_Ctrl_HeadEffector
+    400038: QuickRigCharacter_Ctrl_Hips
+    400040: QuickRigCharacter_Ctrl_HipsEffector
+    400042: QuickRigCharacter_Ctrl_LeftAnkleEffector
+    400044: QuickRigCharacter_Ctrl_LeftArm
+    400046: QuickRigCharacter_Ctrl_LeftElbowEffector
+    400048: QuickRigCharacter_Ctrl_LeftFoot
+    400050: QuickRigCharacter_Ctrl_LeftFootEffector
+    400052: QuickRigCharacter_Ctrl_LeftForeArm
+    400054: QuickRigCharacter_Ctrl_LeftHand
+    400056: QuickRigCharacter_Ctrl_LeftHipEffector
+    400058: QuickRigCharacter_Ctrl_LeftKneeEffector
+    400060: QuickRigCharacter_Ctrl_LeftLeg
+    400062: QuickRigCharacter_Ctrl_LeftShoulder
+    400064: QuickRigCharacter_Ctrl_LeftShoulderEffector
+    400066: QuickRigCharacter_Ctrl_LeftToeBase
+    400068: QuickRigCharacter_Ctrl_LeftUpLeg
+    400070: QuickRigCharacter_Ctrl_LeftWristEffector
+    400072: QuickRigCharacter_Ctrl_Neck
+    400074: QuickRigCharacter_Ctrl_Reference
+    400076: QuickRigCharacter_Ctrl_RightAnkleEffector
+    400078: QuickRigCharacter_Ctrl_RightArm
+    400080: QuickRigCharacter_Ctrl_RightElbowEffector
+    400082: QuickRigCharacter_Ctrl_RightFoot
+    400084: QuickRigCharacter_Ctrl_RightFootEffector
+    400086: QuickRigCharacter_Ctrl_RightForeArm
+    400088: QuickRigCharacter_Ctrl_RightHand
+    400090: QuickRigCharacter_Ctrl_RightHipEffector
+    400092: QuickRigCharacter_Ctrl_RightKneeEffector
+    400094: QuickRigCharacter_Ctrl_RightLeg
+    400096: QuickRigCharacter_Ctrl_RightShoulder
+    400098: QuickRigCharacter_Ctrl_RightShoulderEffector
+    400100: QuickRigCharacter_Ctrl_RightToeBase
+    400102: QuickRigCharacter_Ctrl_RightUpLeg
+    400104: QuickRigCharacter_Ctrl_RightWristEffector
+    400106: QuickRigCharacter_Ctrl_Spine
+    400108: QuickRigCharacter_Ctrl_Spine1
+    400110: QuickRigCharacter_Ctrl_Spine2
+    400112: QuickRigCharacter_Guides
+    400114: QuickRigCharacter_Head
+    400116: QuickRigCharacter_Hips
+    400118: QuickRigCharacter_LeftArm
+    400120: QuickRigCharacter_LeftFoot
+    400122: QuickRigCharacter_LeftForeArm
+    400124: QuickRigCharacter_LeftHand
+    400126: QuickRigCharacter_LeftLeg
+    400128: QuickRigCharacter_LeftShoulder
+    400130: QuickRigCharacter_LeftToeBase
+    400132: QuickRigCharacter_LeftUpLeg
+    400134: QuickRigCharacter_Neck
+    400136: QuickRigCharacter_Reference
+    400138: QuickRigCharacter_RightArm
+    400140: QuickRigCharacter_RightFoot
+    400142: QuickRigCharacter_RightForeArm
+    400144: QuickRigCharacter_RightHand
+    400146: QuickRigCharacter_RightLeg
+    400148: QuickRigCharacter_RightShoulder
+    400150: QuickRigCharacter_RightToeBase
+    400152: QuickRigCharacter_RightUpLeg
+    400154: QuickRigCharacter_Spine
+    400156: QuickRigCharacter_Spine1
+    400158: QuickRigCharacter_Spine2
+    400160: Reference
+    400162: RightArm
+    400164: RightFoot
+    400166: RightForeArm
+    400168: RightHand
+    400170: RightLeg
+    400172: RightShoulder
+    400174: RightToeBase
+    400176: RightUpLeg
+    400178: Spine
+    400180: Spine1
+    400182: Spine2
+    2300000: geo_dinoCrate
+    3300000: geo_dinoCrate
+    4300000: geo_dinosaur
+    4300002: geo_dinoCrate
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: geo_dinosaur
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__shd_dinosaur1
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__shd_dinosaur1
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__shd_dinosaur1
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_dinosaur
+    second: {fileID: 2100000, guid: bc9fdc1d2f1533348a916c7a434b249d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_woodenCrate
+    second: {fileID: 2100000, guid: ee225fd5c9f90594f80cc378193a4216, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
