@@ -48,9 +48,10 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
         Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
 
         Ray testRay = new Ray(adjustedPlayerPosition, player.transform.forward);
+        Ray secondTest = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         //Debug.DrawRay(adjustedPlayerPosition, player.transform.forward * allowablePosessionRange, Color.yellow, .1f);
 
-        if (Physics.Raycast(testRay, out hit, allowablePosessionRange))
+        if (Physics.Raycast(secondTest, out hit, allowablePosessionRange))
         {
             if (hit.transform.tag == "Item")
             {

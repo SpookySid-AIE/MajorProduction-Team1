@@ -10,6 +10,7 @@ public class playerPossession : MonoBehaviour
 {
     private GameObject player; //could be the real player or a possessed item
     private GameObject sneakTest; //Store old player here while possessing
+    public GameObject Reticle;
 
     private float timer;
     private bool resettingSidInvis;
@@ -125,13 +126,14 @@ public class playerPossession : MonoBehaviour
             //Moved possessItem() around to left click - Jak
             if (!possessed) //The hidden flag only detects when a player is hiding in an item, not POSSESSED - Jak
             {
-                StartCoroutine(ParticleTransition());//PossessItem();
+                StartCoroutine(ParticleTransition());//PossessItem(); 
             }
             else if (possessed && !hidden)
             {
                 player.layer = 8;
                 StartCoroutine(ThrowPossessedItemAway());
                 resettingSidInvis = true;
+                // Reticle.GetComponent<Canvas>().enabled = true;
             }
         }
 
@@ -587,9 +589,10 @@ public class playerPossession : MonoBehaviour
         Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * HeightAdjustment); //adjust beacuse the players pivot point is at its base
 
         Ray testRay = new Ray(adjustedPlayerPosition, player.transform.forward);
+        Ray secondTest = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         //Debug.DrawRay(adjustedPlayerPosition, player.transform.forward * allowablePosessionRange, Color.yellow ,3f);
 
-        if (Physics.Raycast(testRay, out hit, allowablePosessionRange))
+        if (Physics.Raycast(secondTest, out hit, allowablePosessionRange))
         {
             if(hit.transform.tag == "Item")
             {
@@ -621,7 +624,7 @@ public class playerPossession : MonoBehaviour
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
             //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = false;
-
+            //Reticle.GetComponent<Canvas>().enabled = false; 
             //Wait until the animation is finished
             while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
             {
