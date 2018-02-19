@@ -3775,52 +3775,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 21
       objectReference: {fileID: 0}
-    - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
-        type: 2}
-      propertyPath: wanderRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
-        type: 2}
-      propertyPath: ShowRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
-        type: 2}
-      propertyPath: audioSearch
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1182107029286222, guid: 12af551361bc69d40871feeacc7b295d, type: 2}
       propertyPath: m_Name
       value: CivilianV5 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4434642054978988, guid: 12af551361bc69d40871feeacc7b295d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
+    - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1742644323}
     - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
         type: 2}
       propertyPath: endPoint
       value: 
       objectReference: {fileID: 1310765582}
-    - target: {fileID: 1182107029286222, guid: 12af551361bc69d40871feeacc7b295d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114319273047871860, guid: 12af551361bc69d40871feeacc7b295d,
-        type: 2}
-      propertyPath: enableWander
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585393533884122, guid: 12af551361bc69d40871feeacc7b295d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 137468008215039138, guid: 12af551361bc69d40871feeacc7b295d,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 022f61e51ea56e444ae0ddfa134ce148, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 12af551361bc69d40871feeacc7b295d, type: 2}
   m_IsPrefabParent: 0
