@@ -156,7 +156,7 @@ public class CivillianController : MonoBehaviour
         else
             Move(Vector3.zero, false, false);
 
-        if (isInLineOfSight() == true && sid.GetComponent<playerPossession>().isPossessed() == true && TRIGGERED_floating == false)
+        if (isInLineOfSight() == true && sid.GetComponent<playerPossession>().isPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().isHidden() == false)
         {
             //Debug.Log("In sight!");
             ItemScaryRating = sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().ItemScaryRating;

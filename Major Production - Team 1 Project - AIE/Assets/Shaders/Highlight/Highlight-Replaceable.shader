@@ -11,7 +11,7 @@ Shader "Jak's Shaders/Highlight-Replaceable"
 	Properties
 	{
 		_Color("Main Color", Color) = (1,1,1,1)
-		_HighlightColour("Highlight Colour", Color) = (0,0,0,0)
+		_EdgeColor("Highlight Colour", Color) = (0,0,0,0) //_EdgeColor returned from "Highlight"
 		_MainTex("Base (RGB)", 2D) = "white" {}
 	}
 

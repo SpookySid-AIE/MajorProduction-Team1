@@ -10,7 +10,6 @@ public class playerPossession : MonoBehaviour
 {
     private GameObject player; //could be the real player or a possessed item
     private GameObject sneakTest; //Store old player here while possessing
-    public GameObject Reticle;
 
     private float timer;
     private bool resettingSidInvis;
@@ -48,7 +47,9 @@ public class playerPossession : MonoBehaviour
     
     private static bool hidden = false; //Determines when we can use the "Lure/Repel" ability
     private static bool lureUsed = false; //Lets us know when we have used Lure, so we can Repel afterwards only
-    bool click = false;
+
+    bool click = false; //?? not used anyway - Jak
+
     //Player's position is stored here when the use the hide mechanic, so when we unhide they resume from the old position
     public static Vector3 oldPlayerPos;
     public static Quaternion oldPlayerRot;
@@ -57,6 +58,8 @@ public class playerPossession : MonoBehaviour
     float oldSpeed;
 
     public int lureRange = 10; //Range at which the lure ability will attract the ai
+    [Header("Highlight Mat for Civ")]public Material highlightMat; //Material that will be set on the civillians
+    [Header("LureSphere Prefab")] public GameObject lureSphere;
 
     //Cached script_willDisolve, Script that sends camera and particles over to the intended object
     script_WillDissolve disolveScript;
@@ -86,7 +89,7 @@ public class playerPossession : MonoBehaviour
 
         //Update playerPossession Reference in gamemanager
         //GameManager.Instance.player = player.GetComponent<playerPossession>();
-    }
+    }    
 
     private void FixedUpdate()
     {
@@ -177,13 +180,16 @@ public class playerPossession : MonoBehaviour
         if (hidden && player.GetComponent<Rigidbody>().IsSleeping() == true && !CamPivotSet)
         {
             //Debug.Log(player.name + " grounded");
-            
+
             //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
             pivot = new GameObject("Pivot");
             pivot.transform.position = player.transform.position;
 
             //Child camera to pivot point
             Camera.main.transform.SetParent(pivot.transform);
+
+            //Spawn lureSphere
+            Instantiate(lureSphere, player.transform);
 
             //Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
@@ -239,7 +245,7 @@ public class playerPossession : MonoBehaviour
             //    player.GetComponent<CapsuleCollider>().enabled = false;
 
             player.GetComponent<playerController>().enabled = false;
-            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak
+            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak            
             player.GetComponent<playerPossession>().enabled = false;
             player.GetComponent<CharacterController>().enabled = false;
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
@@ -253,13 +259,15 @@ public class playerPossession : MonoBehaviour
             target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
 
             if (target.GetComponent<playerPossession>() == null)
-            {
                 target.AddComponent<playerPossession>();
-            }
             else
-            {
                 target.GetComponent<playerPossession>().enabled = true;
-            }
+
+            //Copy the material reference over
+            target.GetComponent<playerPossession>().highlightMat = highlightMat;
+            //Copy the prefab reference over
+            target.GetComponent<playerPossession>().lureSphere = lureSphere;
+
 
             //Add the Character controller so we can move the item - Jak - 13/11/17
             if (target.GetComponent<CharacterController>() == null)
@@ -377,7 +385,7 @@ public class playerPossession : MonoBehaviour
         target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
         target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
 
-        //Revert Camera back, possibly no longer parent if ben implements those camera changes
+        //Revert Camera back
         Camera.main.transform.SetParent(null);
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
         //Destroy(target.GetComponent<playerPossession>().pivot);
@@ -398,6 +406,9 @@ public class playerPossession : MonoBehaviour
         target.GetComponent<Rigidbody>().useGravity = false;
         target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
 
+        //Remove lure sphere
+        Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
+
         //switch the camera back on to follow the player
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
 
@@ -408,7 +419,7 @@ public class playerPossession : MonoBehaviour
         hidden = false;
 
         //destroy this script instance from the ITEM
-        //Destroy(target.GetComponent<playerPossession>());
+        Destroy(target.GetComponent<playerPossession>().pivot);
     }
 
     //written by Jak - copypasted some stuff from "PossessItem()"
@@ -461,7 +472,7 @@ public class playerPossession : MonoBehaviour
 
         //Disable movement
         possessedItem.GetComponent<CharacterController>().enabled = false;
-        possessedItem.GetComponent<playerController>().enabled = false;
+        possessedItem.GetComponent<playerController>().enabled = false;        
 
         //Disable camera rotation while falling
         Camera.main.GetComponent<CamLock>().enabled = false;
