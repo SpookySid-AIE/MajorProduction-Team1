@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4557831048251386}
   - component: {fileID: 33716237497651968}
   - component: {fileID: 23151738432938698}
-  - component: {fileID: 65880063087024692}
   - component: {fileID: 54521528811700588}
   - component: {fileID: 114745580024109540}
+  - component: {fileID: 65859980069888680}
   m_Layer: 0
   m_Name: prefab_cardboardBox_Smashed
   m_TagString: Item
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1360060163448284}
-  m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: 0.50000006, w: -0.49999997}
-  m_LocalPosition: {x: -179.974, y: 2.995, z: 0.23}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -179.71, y: 0.2, z: 1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65880063087024692
+--- !u!65 &65859980069888680
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0251684, y: 2.0607097, z: 2.1366353}
-  m_Center: {x: 0.0057397485, y: -0.029194357, z: 0.027582886}
+  m_Size: {x: 0.38165814, y: 0.39572027, z: 0.46103474}
+  m_Center: {x: -0.0054069906, y: 0.0051085427, z: 0.001306675}
 --- !u!114 &114745580024109540
 MonoBehaviour:
   m_ObjectHideFlags: 1
