@@ -100,15 +100,16 @@ public class ItemController : MonoBehaviour
 
         if (transform.position.y < -0.5)
             transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.rotation);
+
         //Animation activation for repel
         if (anim != null) //Error checking incase an Item doesnt have a controller
         {
             if (scaryObject)
             {
                 if (scare == true)                
-                    anim.SetBool("scare", scare); //This also means every Item that has a scared animation need this boolean in the controller
+                    anim.SetBool("possessed", scare); //This also means every Item that has a scared animation need this boolean in the controller
                 else                
-                    anim.SetBool("scare", scare);                
+                    anim.SetBool("possessed", scare);                
             }
    
         }
