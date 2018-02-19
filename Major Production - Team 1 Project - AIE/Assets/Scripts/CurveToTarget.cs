@@ -7,7 +7,7 @@ public class CurveToTarget : MonoBehaviour {
 
     public GameObject target;
     public float lerpHeight = 4.0f;
-    public float speed = 0.04f;
+    public float speed = 10;
     public float particleLaunchDelay;
     public float destroyTimer = 2.0f;
 

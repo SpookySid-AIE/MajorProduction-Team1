@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114887034936834894}
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   EditorEvents:
   - {fileID: 114229846688869788}
   - {fileID: 114322672341485368}
@@ -27,9 +27,9 @@ MonoBehaviour:
   - {fileID: 114341841705949528}
   - {fileID: 114418425677374108}
   - {fileID: 114937819915991616}
-  MasterBankRef: {fileID: 114927359822587270}
+  MasterBankRef: {fileID: 114752739657948468}
   StringsBankRef: {fileID: 114887034936834894}
-  stringsBankWriteTime: 636543274983328583
+  stringsBankWriteTime: 636543813124180512
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   Path: event:/NPC_Scared_M
   guid: d89efc79ac1336439fff1c3b7bb85086
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: event:/G-Patrol_Charging
   guid: 84bdd0b5b8bb5a42ae8c6f4a9b0b9626
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   Path: event:/Ecto_pickup
   guid: c81032e3671331438a65d789a3ec11d7
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -461,12 +461,12 @@ MonoBehaviour:
   Path: event:/Crowd_Shopping_Mall_Large_Ambience_01
   guid: db57490bc3d0c344a10d29b36a574716
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114479684034645592}
+  - {fileID: 114779988815887328}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114207436564388852
@@ -546,7 +546,7 @@ MonoBehaviour:
   Path: event:/NPC_Startled_F
   guid: 5e3f4eaf915b7440a7e3e15733bcdaf0
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -685,7 +685,7 @@ MonoBehaviour:
   Path: event:/Iron_Gate_Squeaky_Swing_Open_01
   guid: a72d5ca558ebac4dbaaecd30c8e7ba1d
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -774,7 +774,7 @@ MonoBehaviour:
   Path: event:/NPC_Scared_F
   guid: e78916134836514c96f62c906cfcf4dd
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -891,7 +891,7 @@ MonoBehaviour:
   Path: event:/NPC_Startled_M
   guid: b1f294e5f215c44484591db77f3e5c06
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
   Path: event:/Sid_Lure_Whistle
   guid: d5f477fb3a047642bfdfd917e4bc06ff
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -1282,6 +1282,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3107712
   Exists: 0
+--- !u!114 &114670157143055034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114670502122867984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,6 +1506,25 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114752739657948468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Kips\Desktop\SpookySid\MajorProduction-Team1\Major Production - Team 1
+    Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.bank
+  lastModified: 636543813124165471
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 3376160
+  Exists: 1
 --- !u!114 &114763569428500798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,6 +1541,21 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114765705398921738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114779988815887328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1611,7 +1660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636543274983328583
+  lastModified: 636543813124180512
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1631,7 +1680,7 @@ MonoBehaviour:
   Path: event:/Sid_Scare_Laugh
   guid: bd5696ca722ca041b33dcfa364af9cb8
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1711,7 +1760,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 3376160
-  Exists: 1
+  Exists: 0
 --- !u!114 &114928130445645680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1777,7 +1826,7 @@ MonoBehaviour:
   Path: event:/G-Patrol_Fire
   guid: 4fb167144b19374693ddf9d7fe6562d5
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1868,12 +1917,12 @@ MonoBehaviour:
   Path: event:/MainTheme
   guid: e86babdb7f422541a6a8da723ec57342
   Banks:
-  - {fileID: 114927359822587270}
+  - {fileID: 114752739657948468}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114930824811805392}
+  - {fileID: 114670157143055034}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114982516029782070

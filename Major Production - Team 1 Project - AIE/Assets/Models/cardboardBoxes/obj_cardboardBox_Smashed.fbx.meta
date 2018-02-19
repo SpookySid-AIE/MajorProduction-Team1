@@ -1,21 +1,25 @@
 fileFormatVersion: 2
-guid: a7747e09b40c18a41957218f4ac89b0a
-timeCreated: 1503152058
+guid: 290c0b54fe8bb884f8ab337018054e68
+timeCreated: 1519014465
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: geo_box
+    100000: geo_smashedUpBox
+    100002: //RootNode
+    400000: geo_smashedUpBox
+    400002: //RootNode
+    2300000: geo_smashedUpBox
+    2300002: //RootNode
+    3300000: geo_smashedUpBox
+    3300002: //RootNode
+    4300000: geo_smashedUpBox
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: shd_box
-    second: {fileID: 2100000, guid: e3cd99f111b7629419687ed56dcf1e52, type: 2}
+    second: {fileID: 2100000, guid: 2bddbcec0edd7b044a95cf7eca99c099, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -48,10 +52,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -62,12 +66,12 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 0
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
