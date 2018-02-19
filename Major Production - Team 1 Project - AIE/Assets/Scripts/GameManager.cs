@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
     // private Text txt_timerText;
     private Text txt_npcCount;
     private Text txt_playerHealth;
+    private Vector3 screenDimension;
+    private GameObject cursor;
 
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
@@ -67,8 +69,13 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        cursor = GameObject.Find("BlackReticle");
+        screenDimension = new Vector3(Screen.width, Screen.height);
+        cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x / 2, screenDimension.y / 2, cursor.GetComponent<RectTransform>().position.z);
+        if (screenDimension.x > 1000)
+            cursor.GetComponent<Text>().fontSize = 25;
 
-
+        else cursor.GetComponent<Text>().fontSize = 50;
 
         //txt_timerText = GameObject.Find("Timer").GetComponent<Text>();
         txt_npcCount = GameObject.Find("NPC's Left").GetComponent<Text>();
@@ -89,6 +96,17 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
+        {
+            screenDimension = new Vector3(Screen.width / 2, Screen.height / 2);
+            cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x, screenDimension.y, cursor.GetComponent<RectTransform>().position.z);
+            if (screenDimension.x > 900)
+                cursor.GetComponent<Text>().fontSize = 25;
+
+            else cursor.GetComponent<Text>().fontSize = 50;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Quit();

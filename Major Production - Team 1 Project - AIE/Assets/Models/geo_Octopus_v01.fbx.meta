@@ -1,0 +1,260 @@
+fileFormatVersion: 2
+guid: 67c8a8f920c0e1742b12132bb4e2ee48
+timeCreated: 1518961333
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: arm_OctopussDisplay
+    100002: bne_body.000
+    100004: bne_body.001
+    100006: bne_body.002
+    100008: bne_body.003
+    100010: bne_body.003_end
+    100012: bne_Eyes
+    100014: bne_Eyes_end
+    100016: bne_mouth.000
+    100018: bne_mouth.001
+    100020: bne_mouth.002
+    100022: bne_mouth.002_end
+    100024: bne_root
+    100026: bne_root_end
+    100028: bne_tenticleA.000
+    100030: bne_tenticleA.001
+    100032: bne_tenticleA.002
+    100034: bne_tenticleA.003
+    100036: bne_tenticleA.004
+    100038: bne_tenticleA.004_end
+    100040: bne_tenticleB.000
+    100042: bne_tenticleB.001
+    100044: bne_tenticleB.002
+    100046: bne_tenticleB.003
+    100048: bne_tenticleB.004
+    100050: bne_tenticleB.004_end
+    100052: bne_tenticleE.000
+    100054: bne_tenticleE.001
+    100056: bne_tenticleE.002
+    100058: bne_tenticleE.003
+    100060: bne_tenticleE.004
+    100062: bne_tenticleE.004_end
+    100064: bne_tenticleF.000
+    100066: bne_tenticleF.001
+    100068: bne_tenticleF.002
+    100070: bne_tenticleF.003
+    100072: bne_tenticleF.004
+    100074: bne_tenticleF.004_end
+    100076: //RootNode
+    100078: geo_octopusDisplay
+    400000: arm_OctopussDisplay
+    400002: bne_body.000
+    400004: bne_body.001
+    400006: bne_body.002
+    400008: bne_body.003
+    400010: bne_body.003_end
+    400012: bne_Eyes
+    400014: bne_Eyes_end
+    400016: bne_mouth.000
+    400018: bne_mouth.001
+    400020: bne_mouth.002
+    400022: bne_mouth.002_end
+    400024: bne_root
+    400026: bne_root_end
+    400028: bne_tenticleA.000
+    400030: bne_tenticleA.001
+    400032: bne_tenticleA.002
+    400034: bne_tenticleA.003
+    400036: bne_tenticleA.004
+    400038: bne_tenticleA.004_end
+    400040: bne_tenticleB.000
+    400042: bne_tenticleB.001
+    400044: bne_tenticleB.002
+    400046: bne_tenticleB.003
+    400048: bne_tenticleB.004
+    400050: bne_tenticleB.004_end
+    400052: bne_tenticleE.000
+    400054: bne_tenticleE.001
+    400056: bne_tenticleE.002
+    400058: bne_tenticleE.003
+    400060: bne_tenticleE.004
+    400062: bne_tenticleE.004_end
+    400064: bne_tenticleF.000
+    400066: bne_tenticleF.001
+    400068: bne_tenticleF.002
+    400070: bne_tenticleF.003
+    400072: bne_tenticleF.004
+    400074: bne_tenticleF.004_end
+    400076: //RootNode
+    400078: geo_octopusDisplay
+    4300000: geo_octopusDisplay
+    7400000: arm_OctopussDisplay|anim_0Idle
+    7400002: arm_OctopussDisplay|anim_possessed
+    7400004: arm_OctopussDisplay|anim_scare
+    9500000: //RootNode
+    13700000: geo_octopusDisplay
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_OctopussDisplay
+    second: {fileID: 2100000, guid: 5cc3bb7c11c354942bc323f5f286927e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: arm_OctopussDisplay|anim_0Idle
+      takeName: arm_OctopussDisplay|anim_0Idle
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: arm_OctopussDisplay|anim_possessed
+      takeName: arm_OctopussDisplay|anim_possessed
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: arm_OctopussDisplay|anim_scare
+      takeName: arm_OctopussDisplay|anim_scare
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
