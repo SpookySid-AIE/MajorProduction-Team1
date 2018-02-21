@@ -31,14 +31,15 @@ public class playerPossession : MonoBehaviour
 
     public float allowablePosessionRange = 10;
 
-    private static bool possessed = false;
+    //Renamed possessed -> moveModeActive 
+    private static bool moveModeActive = false;
 
-    public bool isPossessed()
+    public bool IsPossessed()
     {
-        return possessed;
+        return moveModeActive;
     }
 
-    public bool isHidden()
+    public bool IsHidden()
     {
         return hidden;
     }
@@ -47,8 +48,6 @@ public class playerPossession : MonoBehaviour
     
     private static bool hidden = false; //Determines when we can use the "Lure/Repel" ability
     private static bool lureUsed = false; //Lets us know when we have used Lure, so we can Repel afterwards only
-
-    bool click = false; //?? not used anyway - Jak
 
     //Player's position is stored here when the use the hide mechanic, so when we unhide they resume from the old position
     public static Vector3 oldPlayerPos;
@@ -63,6 +62,10 @@ public class playerPossession : MonoBehaviour
 
     //Cached script_willDisolve, Script that sends camera and particles over to the intended object
     script_WillDissolve disolveScript;
+
+    //Lure/Scare particle effects references
+    private GameObject lureEffect;
+    private GameObject scareEffect;
 
 
     // Use this for initialization - note that the player could be real or could be an item
@@ -116,60 +119,63 @@ public class playerPossession : MonoBehaviour
 
         //Streamlined Controls
         //Everything is only run once an item is possessed
-        //LMB -> Possess()
-        //"PossessMode"->LMB->UnPossess()
-        //"PossessMode -> RMB -> Hide()
+        //LMB -> Hide()
         //"HideMode"->LMB - > Lure()
         //"HideMode"->LMB AFTER Lure() -> Repel()
-        //"HideMode -> RMB -> UnHide(Revert to PossessMode)
+        //"HideMode -> RMB -> MoveMode(Go to PossessMode)
+        //PossessMode - Free moving object
+        //"PossessMode"->LMB->UnPossess/Throw()
+        //"PossessMode -> E -> DropItem()
+        //"PossessMode" -> RMB -> Back to Hide()
 
         //LMB - Possess/Throw
         if (Input.GetMouseButtonDown(0))
         {
-            //Moved possessItem() around to left click - Jak
-            if (!possessed) //The hidden flag only detects when a player is hiding in an item, not POSSESSED - Jak
+            if (!hidden && !moveModeActive) //The hidden flag only detects when a player is hiding in an item - Jak
             {
-                StartCoroutine(ParticleTransition());//PossessItem(); 
+                StartCoroutine(ParticleTransition());
             }
-            else if (possessed && !hidden)
+            else if (!hidden && moveModeActive)
             {
                 player.layer = 8;
                 StartCoroutine(ThrowPossessedItemAway());
                 resettingSidInvis = true;
-                // Reticle.GetComponent<Canvas>().enabled = true;
             }
         }
 
         //Lure/Repel mechanics
-        if (possessed && hidden && !lureUsed)
+        if (hidden && GetComponent<Animator>() != null && GetComponent<ItemController>().isScaryObject())
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!lureUsed && CamPivotSet)
             {
-                Lure();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Lure();
+                }
             }
-        }
-        else if(lureUsed)
-        {
-            if (Input.GetMouseButtonDown(0))
+            else if (lureUsed)
             {
-                Repel();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Repel();
+                }
             }
         }
 
-        //RMB - Hide/Unhide      
-        if (possessed && !hidden)
+        //RMB - Possess/Revert to Hide      
+        if (hidden && !moveModeActive)
         {
             if (Input.GetMouseButtonDown(1))
             {
-                Hide();
+                MoveMode(); //Allow moving the item around
             }
         }
-        else if (possessed && hidden && player.GetComponent<Rigidbody>().IsSleeping() == true)
+        else if (moveModeActive)
         {
             if (Input.GetMouseButtonDown(1))
             {
-                //Debug.Log("Unhide");
-                Unhide(); //Revert back to possess
+                //Revert back to Hide
+                Hide();
             }
         }
 
@@ -189,104 +195,105 @@ public class playerPossession : MonoBehaviour
             Camera.main.transform.SetParent(pivot.transform);
 
             //Spawn lureSphere
-            Instantiate(lureSphere, player.transform);
+            if(player.GetComponent<ItemController>().isScaryObject())
+                Instantiate(lureSphere, player.transform);
 
             //Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
+
             //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
             CamPivotSet = true;
         }
     }
 
-    // Update is called once per frame
+    //Enabling the movement on the Possessed object that we control, splitting up "PossessItem"
+    void MoveMode()
+    {
+        hidden = false;
+
+        Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
+
+        //Remove lure sphere
+        if (target.GetComponent<ItemController>().isScaryObject())
+            Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
+
+        //Enable movement
+         
+        target.GetComponent<CharacterController>().enabled = true;
+        target.GetComponent<CharacterController>().detectCollisions = false; //Disable collision detection on the controller so we use the item collision instead
+        target.GetComponent<playerController>().speed = 5;        
+        target.GetComponent<playerController>().enabled = true;
+
+        //Switch off gravity for the target
+        target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        target.GetComponent<Rigidbody>().useGravity = false;
+        //target.GetComponent<Rigidbody>().freezeRotation = true;
+        
+        target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
+        target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
+
+        //Revert Camera back
+        Camera.main.transform.SetParent(null);
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
+
+        //switch the camera back on to follow the player
+        Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
+
+        //Stop the scare animation incase it is still playing when we eject
+        this.GetComponent<ItemController>().SetAnimScare(false);
+
+        moveModeActive = true;
+    }
+
+    //This method is now just the adding and pre-setup to becoming an item
+    //Hide(), MoveMode() will be controling the specific actions of what the item can do
     void PossessItem()
     {
         if (player.GetComponent<playerController>().Ectoplasm > 0.0f)
         {
             Camera.main.GetComponent<CamLock>().floatSpeedOfSid = player.GetComponent<playerController>().floatSpeed;
-               
-            //Super quick fix to give inf ecto in other test scenes
-            //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level_1"))
 
             //At this point playerPossesion 'should' be attached to the player so minus the ecto cost
             this.GetComponent<playerController>().Ectoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
 
-            ////disable camera whilst we change the cameras target to the newly possesed item
-            //Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
-
             //rename the player tag so they dont participate in any collisions
             player.tag = "Sneak";
-            //player.GetComponent<CapsuleCollider>().enabled = false;
-
-            //set the taget to what was hit in the raycast
-            //GameObject target = hit.collider.gameObject;
 
             //name it player so that it behaves like one in collisions
             target.tag = "Player";
-
-            //oldPlayerPos = gameObject.transform.position;
-
-            //change the colour so we know we have selected it
-            eRenderer = target.GetComponentInChildren<Renderer>();
-            mat = eRenderer.material;
-            //EmitColour(Color.green, .5f);
-
-            //turn off the real players renderer, colliders and control scripts
+            
             SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
-
+            
+            //turn off the real players renderer
             foreach (SkinnedMeshRenderer smr in meshRenderer)
             {
                 if (smr.transform.name != "geo_willTongue_low")
                     smr.enabled = false;
             }
 
-            //if (player.GetComponent<CapsuleCollider>())
-            //    player.GetComponent<CapsuleCollider>().enabled = false;
-
+            //Disable old player scripts because we are becoming a new item
             player.GetComponent<playerController>().enabled = false;
             player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak            
             player.GetComponent<playerPossession>().enabled = false;
             player.GetComponent<CharacterController>().enabled = false;
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
 
-            //set up the target with these scripts
-            if (target.GetComponent<playerController>() == null)
-                target.AddComponent<playerController>();
-            else
-                target.GetComponent<playerController>().enabled = true;
+            //set up the new possesed object with these scripts
+            //playerController, playerPossession, CharacterController are all disabled here because the other methods decides what to do with them
+            target.AddComponent<playerController>();
+            target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;            
+            target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid; //Carry over the float speed to the possessed item
+            target.GetComponent<playerController>().enabled = false;
 
-            target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
+            target.AddComponent<playerPossession>();                           
+            target.GetComponent<playerPossession>().highlightMat = highlightMat;//Copy the material reference over           
+            target.GetComponent<playerPossession>().lureSphere = lureSphere; //Copy the prefab reference over
+            target.GetComponent<playerPossession>().enabled = false;
 
-            if (target.GetComponent<playerPossession>() == null)
-                target.AddComponent<playerPossession>();
-            else
-                target.GetComponent<playerPossession>().enabled = true;
-
-            //Copy the material reference over
-            target.GetComponent<playerPossession>().highlightMat = highlightMat;
-            //Copy the prefab reference over
-            target.GetComponent<playerPossession>().lureSphere = lureSphere;
-
-
-            //Add the Character controller so we can move the item - Jak - 13/11/17
-            if (target.GetComponent<CharacterController>() == null)
-            {
-                target.AddComponent<CharacterController>();
-            }
-
-            //target.GetComponent<CharacterController>().enabled = true;
-
-            //switch off gravity for the target
-            target.GetComponent<Rigidbody>().useGravity = false;
-            target.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
-
-            //turn off the item controller script
-            target.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
+            target.AddComponent<CharacterController>();
+            target.GetComponent<CharacterController>().enabled = false;
             
-            //Carry over the float speed to the possessed item
-            target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid;
-
             //Adjusts camera distance based on item size
             if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
             {
@@ -303,10 +310,7 @@ public class playerPossession : MonoBehaviour
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
 
             //Tell the other scripts we are now possessed
-            possessed = true;
-
-            Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-            //Debug.Log(Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance);            
+            moveModeActive = true;        
         }
     }
 
@@ -343,10 +347,8 @@ public class playerPossession : MonoBehaviour
         mat = eRenderer.material; //let the code know which objects renderer to change
         mat.SetColor("_Color", Color.white);// Added by Mark - Change main colour of object back to white
         mat.SetColor("_OutlineColor", Color.black);// Added by Mark - Change  colour of object outline back to black
-        //player.GetComponent<ItemController>().TriggerHitByPlayerRemotely(); //this way the item thinks it is hit by the playr and can participate in scoring.
 
-        //Invoke("EmitNothing", 2f);//this reset the emission to off
-        possessed = false;
+        moveModeActive = false;
         PossessedItem = null;
 
         //switch off the camera tracking whilst we reset the player back to what it is supposed to be
@@ -407,13 +409,14 @@ public class playerPossession : MonoBehaviour
         target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
 
         //Remove lure sphere
-        Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
+        if(target.GetComponent<ItemController>().isScaryObject())
+            Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
 
         //switch the camera back on to follow the player
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
 
         //Stop the scare animation if it is still playing when we eject
-        this.GetComponent<ItemController>().scare = false;
+        this.GetComponent<ItemController>().SetAnimScare(false);
 
         //Tell everyone that SID is no longer hidden
         hidden = false;
@@ -426,140 +429,106 @@ public class playerPossession : MonoBehaviour
     public void Hide()
     {
         Debug.Log("Hide Called");
-        //disable camera whilst we change the cameras target to the newly possesed item        
-        //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = false;
 
-        //rename the player tag so they dont participate in any collisions
-        //player.tag = "Sneak";
+        moveModeActive = false;
 
-        //Debug.Log("HIDE called at: " + Time.time);
+        //Disable camera rotation
+        Camera.main.GetComponent<CamLock>().enabled = false; //This is renabled when we the object has stopped moving in update
 
-        ////name it player so that it behaves like one in collisions
-        //target.tag = "Player";
-
-        ////At this point - playerPossession.cs is still active on Player
-        //oldPlayerPos = gameObject.transform.position;
-        //oldPlayerRot = gameObject.transform.rotation;
-
-        //turn off all player scripts
-        //foreach (Behaviour childCompnent in player.GetComponentsInChildren<Behaviour>())
-        //{
-        //    if (childCompnent.tag != "MainCamera")
-        //        childCompnent.enabled = false;
-        //}
-
-        //this.enabled = true;
-
-        //////turn off all player renderers
-        //SkinnedMeshRenderer[] meshRenderer = player.GetComponentsInChildren<SkinnedMeshRenderer>();
-
-        //foreach (SkinnedMeshRenderer smr in meshRenderer)
-        //{
-        //    smr.enabled = false;
-        //}
-
-        ////Turn off colliders
-        //player.GetComponent<CapsuleCollider>().enabled = false;
-        //player.GetComponent<CharacterController>().enabled = false;
-
-        hidden = true; //set that we are now hidden in an object
-
-        //Enable hide aura
-        //By the time Hide is called, SneakTest is now the "Player" and Player is now the PossessedItem
-        playerPossession possessedItem = player.GetComponent<playerPossession>();
-        possessedItem.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 1);
-        possessedItem.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
+        playerPossession possessedItem = target.GetComponent<playerPossession>();
+        possessedItem.enabled = true; //Enable the item playerPossesion script
 
         //Disable movement
+        possessedItem.GetComponent<CharacterController>().detectCollisions = false;
         possessedItem.GetComponent<CharacterController>().enabled = false;
-        possessedItem.GetComponent<playerController>().enabled = false;        
-
-        //Disable camera rotation while falling
-        Camera.main.GetComponent<CamLock>().enabled = false;
-        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = false;
+        possessedItem.GetComponent<playerController>().enabled = false;
 
         //////switch off gravity for the target
         possessedItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         possessedItem.GetComponent<Rigidbody>().useGravity = true;
         possessedItem.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
 
+        possessedItem.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 1);
+        possessedItem.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
+
         CamPivotSet = false;
-
-        //if (target.GetComponent<playerPossession>() == null)
-        //    target.AddComponent<playerPossession>();
-
-        //target.GetComponent<playerPossession>().PossessedItem = target;
-
-        //this.enabled = false;
-
-        //switch the camera back on to follow the player
-       // Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-        //Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
-
-
-        //Debug.Log("Hide finished: " + Time.time);
+        hidden = true; //set that we are now hidden in an object
     }
 
     //#OPTIMISE - These two methods both run physics.overlap, possibly merge that call into one list for use in repel, and if repel detects that list empty, then run its own?
     //Gotta think about how id do it, what happens if list has 1, but then 4 AI walk in during a repel...
-    void Lure()
+    void Lure() //Written by Jak
     {
-        //Start of lure mechanic - Jak
-        if (GetComponent<Animator>() != null)
+        Debug.Log("Lure Called.");
+
+        //Destroy the scareEffect incase it hasnt already.
+        if (scareEffect != null)
+            Destroy(scareEffect);
+
+        lureEffect = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().lureEffect, this.gameObject.transform);
+        lureEffect.transform.localPosition = new Vector3(0, 0, 0);
+
+        //Lure Enemies to us
+        //#OPTIMISE //Refactor this so it finds tags first instead of all colliders
+        Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange);
+
+        //Sample this object position before sending it to the ai
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(this.gameObject.transform.position, out navHit, lureRange, -1);
+
+        foreach (Collider civ in civillians)
         {
-            Debug.Log("Lure Called.");
-            //Lure Enemies to us
-            //#OPTIMISE //Refactor this so it finds tags first instead of all colliders
-            Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange);
-
-            //Sample this object position before sending it to the ai
-            NavMeshHit navHit;
-            NavMesh.SamplePosition(this.gameObject.transform.position, out navHit, lureRange, -1);
-
-            foreach (Collider civ in civillians)
+            if (civ.tag == "Civillian")
             {
-                if (civ.tag == "Civillian")
-                {
-                    CivillianController civillian = civ.GetComponent<CivillianController>();
+                CivillianController civillian = civ.GetComponent<CivillianController>();
 
-                    if (civillian.currentState != State.State_Retreat) //Only LURE the CIVS if they arent already in a retreat state / Prevents spam
-                    {
-                        civillian.itemPosition = navHit.position;
-                        civillian.alertedByItem = true;
-                    }
+                if (civillian.currentState != State.State_Retreat) //Only LURE the CIVS if they arent already in a retreat state / Prevents spam
+                {
+                    civillian.itemPosition = navHit.position;
+                    civillian.alertedByItem = true;
                 }
             }
-
-            lureUsed = true;
         }
+
+        Destroy(lureEffect, 2.0f);
+
+        lureUsed = true;        
     }
 
-    void Repel()
+    void Repel()//Written by Jak
     {
         //Repel - Jak
-        if (GetComponent<Animator>() != null)
+        Debug.Log("Repel Called.");
+
+        //Destroy the lureEffect incase it hasnt already.
+        if(lureEffect != null)
+            Destroy(lureEffect);
+
+        //Spawn scareEffect
+        scareEffect = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().scareEffect, this.gameObject.transform);
+        scareEffect.transform.localPosition = new Vector3(0, 0, 0);
+
+        //Play scare animation
+        GetComponent<ItemController>().SetAnimScare(true);
+
+        //Get all colliders
+        //#OPTIMISE
+        Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange); //Refactor this so it finds tags first instead of all colliders
+
+        foreach (Collider civ in civillians)
         {
-            Debug.Log("Repel Called.");
-            //Play scare animation
-            //We assume that we are correctly hidden in an ITEM, so they MUST have a ItemController script attached
-            GetComponent<ItemController>().scare = true;
-
-            //Get all colliders
-            //#OPTIMISE
-            Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange); //Refactor this so it finds tags first instead of all colliders
-
-            foreach (Collider civ in civillians)
+            if (civ.tag == "Civillian")
             {
-                if (civ.tag == "Civillian")
-                {
-                    //I change the target gameobject in the civillians, so we can easily access the ItemScaryRating
-                    //The target is also used in CIV_Retreat to know which item to run away from
-                    civ.GetComponent<CivillianController>().target = gameObject;
-                    civ.GetComponent<CivillianController>().TRIGGERED_repel = true;
-                }
+                //I change the target gameobject in the civillians, so we can easily access the ItemScaryRating
+                //The target is also used in CIV_Retreat to know which item to run away from
+                civ.GetComponent<CivillianController>().target = gameObject;
+                civ.GetComponent<CivillianController>().TRIGGERED_repel = true;
             }
-            lureUsed = false;
         }
+
+        Destroy(scareEffect, 2.0f);
+
+        lureUsed = false;
         //End Repel - Jak
     }
 
@@ -634,16 +603,16 @@ public class playerPossession : MonoBehaviour
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
-            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = false;
-            //Reticle.GetComponent<Canvas>().enabled = false; 
+
             //Wait until the animation is finished
             while (disolveScript.transferred != true) //This will change to true in script_WillDisolve once the animation is done
             {
                 yield return null; // wait until next frame
             }
-            
-            //Call possess code once possesion anim is complete
-            PossessItem();            
+
+            //PossessItem() sets up the target item with all the scripts, then we immediatly call Hide()
+            PossessItem();
+            Hide();            
 
             //Reset variables for next animation
             targetSet = false;
@@ -651,64 +620,12 @@ public class playerPossession : MonoBehaviour
             disolveScript.transferred = false;
             disolveScript.transferring = false;
 
-            Camera.main.gameObject.GetComponent<CamLock>().enabled = true; //This will also Refind the new player which is now the item
+            Camera.main.gameObject.GetComponent<CamLock>().enabled = true; //This will also Re-find the new player which is now the item
             //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = true;
 
-            gameObject.GetComponent<playerController>().speed = oldSpeed;
-
-            
+            gameObject.GetComponent<playerController>().speed = oldSpeed;            
         }
-    }
-
-    static bool lastClicked = false; //needs to be static as this code is called from multiple objects 
-
-    bool leftTriggerClicked()
-    {
-        bool tryingToClick = Input.GetAxis("LeftTrigger") > .25f;//code to determine if trigger has been pressed as it is an axis it has no keydown event
-
-        //handle selecting the trigger
-        if (!lastClicked && tryingToClick)
-        {
-            lastClicked = tryingToClick;
-            //Debug.Log("ClickingLeft");
-            return true;
-        }
-        else
-        {
-            // handle when deselecting the trigger
-            if (lastClicked && !tryingToClick)
-            {
-                lastClicked = tryingToClick;
-                //Debug.Log("ResettingLeft");
-            }
-            return false;
-        }
-    }
-
-    static bool lastClickedRight = false;//needs to be static as this code is called from multiple objects
-
-    bool RightTriggerClicked()
-    {
-        bool tryingToClick = Input.GetAxis("RightTrigger") > .25f;//code to determine if trigger has been pressed as it is an axis it has no keydown event
-
-        //handle selecting the trigger
-        if (!lastClickedRight && tryingToClick)
-        {
-            lastClickedRight = tryingToClick;
-            // Debug.Log("ClickingRight");
-            return true;
-        }
-        else
-        {
-            // handle when deselecting the trigger
-            if (lastClickedRight && !tryingToClick)
-            {
-                lastClickedRight = tryingToClick;
-                // Debug.Log("ResettingRight");
-            }
-            return false;
-        }
-    }
+    }    
 
     private Renderer eRenderer;
     private Material mat;

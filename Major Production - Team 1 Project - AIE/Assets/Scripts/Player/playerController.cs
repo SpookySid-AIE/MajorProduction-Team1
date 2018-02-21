@@ -61,6 +61,11 @@ public class playerController : MonoBehaviour
         //transform.rotation = rot;
     }
 
+    private void OnDisable()
+    {
+        //controller.Move(Vector3.zero);
+    }
+
 
 
     // Is this redundant? Shooting no longer uses game objects - MP

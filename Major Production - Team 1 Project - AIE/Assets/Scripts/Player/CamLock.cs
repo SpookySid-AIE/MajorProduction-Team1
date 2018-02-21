@@ -84,7 +84,7 @@ public class CamLock : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!player.GetComponent<playerPossession>().isHidden())
+        if (!player.GetComponent<playerPossession>().IsHidden())
         {
             //calculate the amount to rotate the player
             Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);

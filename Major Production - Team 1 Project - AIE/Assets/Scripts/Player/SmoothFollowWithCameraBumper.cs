@@ -36,6 +36,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
     private float currentHorizontal = 0;
     private float currentVertical = 0;
+    public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
 
     //Used in CurveToTarget.cs - Retargets the camera on possession - fixes the issue of two snapping
     [HideInInspector] public bool updatePosition = true;
@@ -105,8 +106,9 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     private void LateUpdate()
     {
         //This code orbits the camera during hide mode
-        if (playerPosRef.isHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true)
+        if (playerPosRef.IsHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true)
         {
+            //Debug.Log("hidden");
             CameraParent = this.gameObject.transform.parent;
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
             currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
@@ -116,9 +118,12 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
             //Have to rotate the invis pivot object during "hide mode" so it doesnt break the clipping code
             //reupdate the target when we leave hide mode NOTE
-            target = CameraParent;
-            this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
 
+            if (CameraParent != null)
+            {
+                target = CameraParent;
+                this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
+            }
             //if (this.CameraTransform.localPosition.z != this.distance * -1f)
             //{
             //        //    Debug.Log("Weird distance check called");

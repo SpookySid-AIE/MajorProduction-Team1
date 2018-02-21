@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour {
         //}
 
         //Gameover State
-        if (!player.isHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
+        if (!player.IsHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
         {
             if (gameObject.GetComponentInParent<playerController>())
             {

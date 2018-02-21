@@ -30,5 +30,16 @@ public class CIV_Alert : State_CIV
     public void STATE_Update(CivillianController agent, StateMachine_CIV stateMachine, float deltaTime)
     {
         currentAgent.navAgent.SetDestination(itemPos);
+
+        float stoppingdist = 2.0f;
+
+        if (stoppingdist >= Vector3.Distance(currentAgent.transform.position, currentAgent.target.transform.position))
+        { 
+            currentAgent.navAgent.isStopped = true;
+
+        //    //Play thinking? animation here
+
+            currentAgent.GetComponent<Animator>().enabled = false;
+        }
     }
 }
