@@ -39,7 +39,7 @@ GameObject:
   m_Name: geo_bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1470195753265976
@@ -59,7 +59,7 @@ GameObject:
   m_Name: prefab_bottle
   m_TagString: Item
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1621949746504970
@@ -197,8 +197,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470195753265976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -187.5, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.029, y: -19.19, z: 4.507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4083847022099180}
@@ -312,7 +312,6 @@ MonoBehaviour:
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 1
 --- !u!136 &136468170463976414
 CapsuleCollider:
