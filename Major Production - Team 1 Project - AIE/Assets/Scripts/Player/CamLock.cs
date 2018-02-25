@@ -27,8 +27,10 @@ public class CamLock : MonoBehaviour
     private Rigidbody playerrb;
 
     private RaycastHit rc;
-    [HideInInspector]public float currentHorizontal = 0;
-    [HideInInspector]public float currentVertical = 0;
+    
+    [Header("---DEBUGGING---")]
+    public float currentHorizontal = 0;
+    public float currentVertical = 0;
 
     [HideInInspector] public bool isWin; //if the winscreen is on, then this will show the cursor
 
@@ -43,6 +45,8 @@ public class CamLock : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerrb = player.GetComponent<Rigidbody>();
+
+        //Set the current camera rotation to the starting rotation of whatever item it possesses
         currentHorizontal = player.transform.eulerAngles.y;
         currentVertical = player.transform.eulerAngles.x;
     }
@@ -54,12 +58,15 @@ public class CamLock : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerrb = player.GetComponent<Rigidbody>();
 
-        
 
-        currentHorizontal = player.transform.eulerAngles.y;
-        currentVertical = player.transform.eulerAngles.x;
+        //This sets the camera rotation to the back of the object according to its rotation
+        //Need to carry over old currentHorizontal so no snapping
+        //currentHorizontal = 0;
+        //currentVertical = 0;
 
-        
+        //Old
+        //currentHorizontal = player.transform.eulerAngles.y;
+        //currentVertical = player.transform.eulerAngles.x;
 
     }
     // Update is called once per frame
@@ -75,6 +82,7 @@ public class CamLock : MonoBehaviour
         if (player.GetComponent<playerPossession>().hasItemBeenThrown == true)
         {
             currentVertical = player.transform.position.x - playerPossession.lastThrownItem.position.x;
+            //Debug.Log(currentVertical);
             player.GetComponent<playerPossession>().hasItemBeenThrown = false;
         }
 
@@ -86,6 +94,7 @@ public class CamLock : MonoBehaviour
     {
         if (!player.GetComponent<playerPossession>().IsHidden())
         {
+            Debug.Log("Rotate Item - Camlock");
             //calculate the amount to rotate the player
             Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
 
@@ -95,7 +104,7 @@ public class CamLock : MonoBehaviour
             //adjust beacuse the players pivot point is at its base and the camera needs to be behind the player
             Vector3 adjustedPlayerPosition = player.transform.position + (player.transform.up * cameraHeightAdjustment);
             Vector3 adjustedCameraPosition = player.transform.forward * cameraDistanceAdjustment;
-            
+
         }
     }
 }

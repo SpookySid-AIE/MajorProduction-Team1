@@ -34,9 +34,13 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     //Camera Orbiting during hide
     [HideInInspector]public Transform CameraTransform;
     [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
-    private float currentHorizontal = 0;
-    private float currentVertical = 0;
-    public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
+
+    //Made public for debugging
+    [Header("---DEBUGGING---")]
+    public float currentHorizontal = 0;
+    public float currentVertical = 0;
+    
+    //public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
 
     //Used in CurveToTarget.cs - Retargets the camera on possession - fixes the issue of two snapping
     [HideInInspector] public bool updatePosition = true;
@@ -113,22 +117,14 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
             currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
 
-            //Actual Camera Rig Transformations
+            //Create rotation
             Quaternion rotation = Quaternion.Euler(currentVertical, currentHorizontal, 0);
-
-            //Have to rotate the invis pivot object during "hide mode" so it doesnt break the clipping code
-            //reupdate the target when we leave hide mode NOTE
 
             if (CameraParent != null)
             {
                 target = CameraParent;
                 this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
             }
-            //if (this.CameraTransform.localPosition.z != this.distance * -1f)
-            //{
-            //        //    Debug.Log("Weird distance check called");
-            //    this.CameraTransform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(this.CameraTransform.localPosition.z, this.distance * -1f, Time.deltaTime * 6f));
-            //}
         }
     }
     

@@ -55,12 +55,14 @@ public class playerPossession : MonoBehaviour
 
     //Store old speed here to easily renable later
     float oldSpeed;
+    static float oldColliderRadius; //Radius of "sids" character controller which is stored when we possess
+    static float oldColliderHeight;
 
     public int lureRange = 10; //Range at which the lure ability will attract the ai
     [Header("Highlight Mat for Civ")]public Material highlightMat; //Material that will be set on the civillians
     [Header("LureSphere Prefab")] public GameObject lureSphere;
 
-    //Cached script_willDisolve, Script that sends camera and particles over to the intended object
+    //Cached script_willDisolve, Script that transitions camera and particles over to the intended object
     script_WillDissolve disolveScript;
 
     //Lure/Scare particle effects references
@@ -114,7 +116,7 @@ public class playerPossession : MonoBehaviour
         if (sneakTest)
         {
             sneakTest.transform.position = player.transform.position;
-            sneakTest.transform.rotation = player.transform.rotation;
+            //sneakTest.transform.rotation = player.transform.rotation;
         }
 
         //Streamlined Controls
@@ -191,17 +193,17 @@ public class playerPossession : MonoBehaviour
             pivot = new GameObject("Pivot");
             pivot.transform.position = player.transform.position;
 
-            //Child camera to pivot point
+            ////Child camera to pivot point
             Camera.main.transform.SetParent(pivot.transform);
 
             //Spawn lureSphere
-            if(player.GetComponent<ItemController>().isScaryObject())
+            if (player.GetComponent<ItemController>().isScaryObject())
                 Instantiate(lureSphere, player.transform);
 
-            //Renable rotation while falling
+            ////Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
 
-            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
+            ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
             CamPivotSet = true;
         }
@@ -218,24 +220,25 @@ public class playerPossession : MonoBehaviour
         if (target.GetComponent<ItemController>().isScaryObject())
             Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
 
-        //Enable movement
-         
+        //Enable movement         
         target.GetComponent<CharacterController>().enabled = true;
-        target.GetComponent<CharacterController>().detectCollisions = false; //Disable collision detection on the controller so we use the item collision instead
         target.GetComponent<playerController>().speed = 5;        
         target.GetComponent<playerController>().enabled = true;
 
         //Switch off gravity for the target
         target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         target.GetComponent<Rigidbody>().useGravity = false;
-        //target.GetComponent<Rigidbody>().freezeRotation = true;
         
         target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
         target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
 
         //Revert Camera back
         Camera.main.transform.SetParent(null);
-        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = target.transform;
+
+        //Testing camera snap fix - now the snap bug should only happen when going into move mode
+        Camera.main.gameObject.GetComponent<CamLock>().currentHorizontal = target.transform.eulerAngles.y;
+        Camera.main.gameObject.GetComponent<CamLock>().currentVertical = target.transform.eulerAngles.x;
 
         //switch the camera back on to follow the player
         Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
@@ -276,6 +279,8 @@ public class playerPossession : MonoBehaviour
             player.GetComponent<playerController>().enabled = false;
             player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak            
             player.GetComponent<playerPossession>().enabled = false;
+            oldColliderHeight = player.GetComponent<CharacterController>().height;
+            oldColliderRadius = player.GetComponent<CharacterController>().radius;
             player.GetComponent<CharacterController>().enabled = false;
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
 
@@ -292,6 +297,8 @@ public class playerPossession : MonoBehaviour
             target.GetComponent<playerPossession>().enabled = false;
 
             target.AddComponent<CharacterController>();
+            //target.GetComponent<CharacterController>().height = 0.01f;
+            //target.GetComponent<CharacterController>().radius = 0.01f;
             target.GetComponent<CharacterController>().enabled = false;
             
             //Adjusts camera distance based on item size
@@ -359,6 +366,7 @@ public class playerPossession : MonoBehaviour
         //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
+        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
 
         EnablePlayer();//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
@@ -433,7 +441,7 @@ public class playerPossession : MonoBehaviour
         moveModeActive = false;
 
         //Disable camera rotation
-        Camera.main.GetComponent<CamLock>().enabled = false; //This is renabled when we the object has stopped moving in update
+        Camera.main.GetComponent<CamLock>().enabled = false; //This is renabled when the object has stopped moving in update
 
         playerPossession possessedItem = target.GetComponent<playerPossession>();
         possessedItem.enabled = true; //Enable the item playerPossesion script
@@ -553,6 +561,8 @@ public class playerPossession : MonoBehaviour
         Destroy(player.GetComponent<playerPossession>());
 
         //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+        //sneakTest.GetComponent<CharacterController>().height = oldColliderHeight;
+        //sneakTest.GetComponent<CharacterController>().radius = oldColliderRadius;
         sneakTest.GetComponent<CharacterController>().enabled = true;
 
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
@@ -600,6 +610,7 @@ public class playerPossession : MonoBehaviour
             
             //Stop movement on sid while transitioning
             gameObject.GetComponent<playerController>().speed = 0;
+            gameObject.GetComponent<playerController>().enabled = false;
             gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;

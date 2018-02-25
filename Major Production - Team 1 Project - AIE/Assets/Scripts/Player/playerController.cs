@@ -57,7 +57,7 @@ public class playerController : MonoBehaviour
 
         //tilt Sid over
         var rot = transform.rotation;
-            rot.eulerAngles = transform.rotation.eulerAngles + new Vector3(staticmove.z * 5.0f, 0, staticmove.x * 5.0f);
+        rot.eulerAngles = transform.rotation.eulerAngles + new Vector3(staticmove.z * 5.0f, 0, staticmove.x * 5.0f);
         //transform.rotation = rot;
     }
 
