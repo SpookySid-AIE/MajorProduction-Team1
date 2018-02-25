@@ -84,8 +84,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432266017723172}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -175.84087, y: 1.919, z: 64.83546}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.7789, y: -18.783985, z: 5.418173}
   m_LocalScale: {x: 0.0076824115, y: 0.0076824115, z: 0.0076824115}
   m_Children:
   - {fileID: 4443987659331954}
@@ -257,11 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 1
   ItemScaryRating: 0
   itemSize: 0
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 1
