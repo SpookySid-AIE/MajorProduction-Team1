@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 65201249561188840}
   - component: {fileID: 54721737728120992}
   - component: {fileID: 114151662117543242}
-  - component: {fileID: 114796050498552156}
   m_Layer: 0
   m_Name: prefab_VendingMachine_Chips
   m_TagString: Item
@@ -273,15 +272,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012926464910512}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -200.82, y: -7.028485e-18, z: 63.33}
+  m_LocalRotation: {x: 0, y: -0.46174863, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: -188.74, y: -2.043445e-18, z: 47.354652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4476060083172516}
   - {fileID: 4640315136600318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -55, z: 0}
 --- !u!4 &4311502417729074
 Transform:
   m_ObjectHideFlags: 1
@@ -388,7 +387,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1347430644817886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.76, y: 0, z: -1.78}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4177718202653098}
@@ -447,8 +446,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1628233, y: 2.0080428, z: 1}
+  m_Center: {x: 0.006515324, y: 1.0267785, z: -2.1954047e-10}
 --- !u!95 &95981658668527686
 Animator:
   serializedVersion: 3
@@ -477,26 +476,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 1
   ItemScaryRating: 1
   itemSize: 3
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 1
---- !u!114 &114796050498552156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1012926464910512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!137 &137381965745998470
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -504,7 +504,6 @@ GameObject:
   - component: {fileID: 65912447986242180}
   - component: {fileID: 54227285605158910}
   - component: {fileID: 114008472343678124}
-  - component: {fileID: 114641135998945260}
   m_Layer: 0
   m_Name: prefab_venusFlytrap
   m_TagString: Item
@@ -951,7 +950,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1666560798661248}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -180.50975, y: 0.987, z: 70.35}
+  m_LocalPosition: {x: -163.54, y: -6.2265834e-18, z: 70.80348}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4217743367471044}
@@ -1384,19 +1383,7 @@ MonoBehaviour:
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 1
---- !u!114 &114641135998945260
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666560798661248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!137 &137272565789764346
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

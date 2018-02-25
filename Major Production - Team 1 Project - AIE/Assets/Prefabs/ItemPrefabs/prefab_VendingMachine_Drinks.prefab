@@ -83,7 +83,6 @@ GameObject:
   - component: {fileID: 65379272064076296}
   - component: {fileID: 54445522130802036}
   - component: {fileID: 114292512448440360}
-  - component: {fileID: 114281412623570022}
   m_Layer: 0
   m_Name: prefab_VendingMachine_Drinks
   m_TagString: Item
@@ -400,15 +399,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484568660964176}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -200.75, y: -6.0174147e-18, z: 61.62}
+  m_LocalRotation: {x: 0, y: -0.46174863, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: -189.86, y: -1.7590699e-18, z: 45.76057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4014523501250404}
   - {fileID: 4022612998761852}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -55, z: 0}
 --- !u!4 &4924036329249282
 Transform:
   m_ObjectHideFlags: 1
@@ -447,8 +446,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2237564, y: 2.0349026, z: 1.0920192}
+  m_Center: {x: 0.0022452765, y: 1.0205088, z: -0.04600954}
 --- !u!95 &95156024243624180
 Animator:
   serializedVersion: 3
@@ -466,18 +465,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114281412623570022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484568660964176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b73e5f63d3e9345b76eb737e02a5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scare: 0
 --- !u!114 &114292512448440360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,13 +476,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 1
   ItemScaryRating: 1
   itemSize: 3
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 1
 --- !u!137 &137262275233456914
 SkinnedMeshRenderer:

@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Butcher1_diffuse
   m_Shader: {fileID: 4800000, guid: a75e61e64cea3b64ebbb7da199e90aac, type: 3}
-  m_ShaderKeywords: _AURAONOFF_ON _INVERTAURA_ON
+  m_ShaderKeywords: _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,11 +19,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AuraTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bc0ee30a83e3ee44baab49c2f8c6c7d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AuraTexture2:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bc0ee30a83e3ee44baab49c2f8c6c7d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ObjectTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 66a4e87a850922e4c985733344ba37d6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -71,12 +71,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ASEOutlineWidth: 0.0001
+    - _ASEOutlineWidth: 0.001
     - _AuraBrightness: 4
     - _AuraFalloff1: 1.87
     - _AuraFalloff2: 0.68
-    - _AuraOnOff: 1
-    - _AuraTextureSize: 1
+    - _AuraOnOff: 0
+    - _AuraTextureSize: 3
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
