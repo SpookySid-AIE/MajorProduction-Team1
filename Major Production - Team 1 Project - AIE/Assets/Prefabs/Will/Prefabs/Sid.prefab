@@ -611,8 +611,8 @@ GameObject:
   - component: {fileID: 4847295489334760}
   - component: {fileID: 95229392859053942}
   - component: {fileID: 54215367114573594}
+  - component: {fileID: 136474453137505488}
   - component: {fileID: 114777026968608658}
-  - component: {fileID: 143192119463792556}
   - component: {fileID: 114185990757327232}
   - component: {fileID: 114126233695381150}
   - component: {fileID: 114116339927566238}
@@ -1439,7 +1439,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770363062168760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -172.6, y: 1, z: 7.43}
+  m_LocalPosition: {x: 16.67, y: 2.04, z: -29.76}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4810589716007910}
@@ -1687,7 +1687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13b0d6108829b4a9a24f7537df67d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reticle: {fileID: 0}
   PossessedItem: {fileID: 0}
   hasItemBeenThrown: 0
   pivot: {fileID: 0}
@@ -1695,7 +1694,9 @@ MonoBehaviour:
   HeightAdjustment: 0.4
   allowablePosessionRange: 15
   throwVelocity: 30
-  lureRange: 50
+  lureRange: 10
+  highlightMat: {fileID: 2100000, guid: 022f61e51ea56e444ae0ddfa134ce148, type: 2}
+  lureSphere: {fileID: 1331233204573888, guid: 0159d61dc539b4b4580d462bc1ed8636, type: 2}
 --- !u!114 &114185990757327232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1710,9 +1711,9 @@ MonoBehaviour:
   Ectoplasm: 100
   ectoplasmValue: 0
   speed: 5
-  floatSpeed: 0.75
-  sinkspeed: 1
-  controller: {fileID: 143192119463792556}
+  floatSpeed: 2
+  sinkspeed: 1.75
+  controller: {fileID: 0}
 --- !u!114 &114294829516336740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1839,6 +1840,19 @@ MonoBehaviour:
   particleLaunchDelay: 0.2
   transferred: 0
   transferring: 0
+--- !u!136 &136474453137505488
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770363062168760}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137475286814414080
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2025,20 +2039,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.221533, y: 0.012865931, z: 0.000000014901161}
     m_Extent: {x: 0.28390366, y: 0.22365367, z: 0.23454785}
   m_DirtyAABB: 0
---- !u!143 &143192119463792556
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1770363062168760}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
