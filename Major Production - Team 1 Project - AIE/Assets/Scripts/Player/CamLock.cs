@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class CamLock : MonoBehaviour
 {
-    public float mouseSensitivityY;
-    public float mouseSensitivityX;
-    public float controllerSensitivityY = 1; //Y axis for Controller Sensitivity
-    public float controllerSensitivityX = 1.25f; //X axis for Controller Sensitivity
+    public float mouseSensitivityY; //Mouse sensitivity for Y
+    public float mouseSensitivityX; //Mouse sensitivity for X
     public float cameraHeightAdjustment = 2; //where to place the camera
     public float cameraDistanceAdjustment = -2; //where to place the camera
     public float minCameraDistanceFromPlayer = 2f; //stops the player from going past the camera when moving backwards
     public float smoothTime = 0.3F; //how long to take to catch-up with the player rotation and movement
-    public bool invert = false;
+    public bool invert = false; //Inverted controls
 
-    private Vector3 velocity = Vector3.zero;
+    private Vector3 velocity = Vector3.zero; //Velocity for camera
 
     private float VerticleAngleMinRotation = -45f; //making these private as > 45 causes the camera to flip
-    private float VerticalAngleMaxRotation = 45f;
+    private float VerticalAngleMaxRotation = 45f; //Going above 45 makes the camera flip
     private float minCameraDistance = 3f; //stops the player from going past the camera when moving backwards
 
     [HideInInspector]
-    public float floatSpeedOfSid = 0.0f;
-    private bool isController = false;
-    public GameObject player;
-    private Rigidbody playerrb;
+    public float floatSpeedOfSid = 0.0f; //Speed of sid 
+    public GameObject player; //Player GameObject
+    private Rigidbody playerrb; //Players Rigidbody
 
-    private RaycastHit rc;
+    private RaycastHit rc; //Raycast
     
     [Header("---DEBUGGING---")]
     public float currentHorizontal = 0;
@@ -37,13 +34,11 @@ public class CamLock : MonoBehaviour
     void Start()
     {
         //All values for sensitivity are taken from the controls menu - UpdateSensTxt.cs - Jak
-        mouseSensitivityX = UpdateSensTxt.mouseSensX;
+        mouseSensitivityX = UpdateSensTxt.mouseSensX; 
         mouseSensitivityY = UpdateSensTxt.mouseSensY;
-        controllerSensitivityX = UpdateSensTxt.controllerSensX;
-        controllerSensitivityY = UpdateSensTxt.controllerSensY;
         invert = UpdateSensTxt.invertToSend;
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player"); //Sets player and players rigidbody to the appropriate values
         playerrb = player.GetComponent<Rigidbody>();
 
         //Set the current camera rotation to the starting rotation of whatever item it possesses
@@ -55,7 +50,7 @@ public class CamLock : MonoBehaviour
     private void OnEnable()
     {
         
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player"); //Sets player and players rigidbody to the appropriate values
         playerrb = player.GetComponent<Rigidbody>();
 
 
