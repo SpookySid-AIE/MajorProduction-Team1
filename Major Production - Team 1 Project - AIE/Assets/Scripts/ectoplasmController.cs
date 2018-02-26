@@ -5,7 +5,7 @@ using UnityEngine;
 public class ectoplasmController : MonoBehaviour
 {
     public float currentEctoplasmValue; //Set in editor, this is the amount of Ectoplasm you receive for picking up this item.
-    public int modifier;
+    public int modifier; //The modifier for the ectoplasm value. Base value is multiplied by this. - Ben
     public GameObject Ectoplasm; //Also set in editer, this determines the color of the Ectoplasm. - Ben
 
     // Use this for initialization
@@ -22,9 +22,9 @@ public class ectoplasmController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player") //If item that's collided with is tagged as, "Player"
         {
-            if ((other.gameObject.GetComponent<playerController>().Ectoplasm += (currentEctoplasmValue * modifier)) > 100.0f)
+            if ((other.gameObject.GetComponent<playerController>().Ectoplasm += (currentEctoplasmValue * modifier)) > 100.0f) 
                 other.gameObject.GetComponent<playerController>().Ectoplasm = 100.0f; //If the number of ectoplasm being added exceeds 100, then just set it to 100.
             else other.gameObject.GetComponent<playerController>().Ectoplasm += (currentEctoplasmValue * modifier); //Otherwise, add the full amount.
 

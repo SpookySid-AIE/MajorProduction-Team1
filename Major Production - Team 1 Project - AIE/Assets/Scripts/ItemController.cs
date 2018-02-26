@@ -12,22 +12,22 @@ using UnityEngine.AI;
 public class ItemController : MonoBehaviour
 {
 
-    public enum Orientation { Least_Scary, Medium_Scary, Most_Scary }
-    public enum Size { Miniature, Small, Medium, Large }
-    public int timesThrownBeforeDestroyed = 1;
-    private int timesThrown = 0;
-    public Orientation ItemScaryRating;
-    public Size itemSize;
-    public bool hasBeenThrown;
-    private bool hasBeenDamaged = false;
+    public enum Orientation { Least_Scary, Medium_Scary, Most_Scary } //A created variable used to determine the scariness of an item and therefore, values received for scaring with it.
+    public enum Size { Miniature, Small, Medium, Large } //A created variable used to determine the size of an object, and therefore the camera distance.
+    public int timesThrownBeforeDestroyed = 1; //The number of times an item can be thrown before it's destroyed. Default is once, can be edited without repercussion.
+    private int timesThrown = 0; //A counter that tracks the number of times and item has been thrown. 
+    public Orientation ItemScaryRating; // Creating a variable for scary ratings, using the first line of code above this.
+    public Size itemSize; //Same as "ItemScaryRating" except for item size.
+    public bool hasBeenThrown; //A boolean to check whether an item has been thrown or not.
+    private bool hasBeenDamaged = false; //A boolean to check whether an item has been damaged recently. Prevents an item breaking instantly.
 
 
     [HideInInspector]
-    public float timer = 0;
+    public float timer = 0; //A timer used for calculating when an item can be classified as not thrown again.
     [HideInInspector]
-    public int baseScariness;
+    public int baseScariness; //The base scariness of an item.
     [HideInInspector]
-    public int ectoCost;
+    public int ectoCost; //The cost in ectoplasm for throwing a given item.
 
     //Animation boolean - turns off/on the animation
     private bool scare = false;
@@ -95,16 +95,16 @@ public class ItemController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (timesThrown == timesThrownBeforeDestroyed)
+        if (timesThrown == timesThrownBeforeDestroyed) //If an item reaches the "TimesThrownBeforeDestroyed" Threshold.
         {
-            if (hasBeenDamaged)
+            if (hasBeenDamaged) //If it collides with something one last time
             {             
-                GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-                gameObject.GetComponentInChildren<Renderer>().enabled = false;
-                gameObject.tag = "Untagged";
-                DestroyObject(gameObject, 2.0f);
-                DestroyObject(crashClone, 2.0f);
-                timesThrown = 0;
+                GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation); //Creates the explosion effect, from the prefab controller.
+                gameObject.GetComponentInChildren<Renderer>().enabled = false; //Derenders the thrown item.
+                gameObject.tag = "Untagged"; //Removes the items tag.
+                DestroyObject(gameObject, 2.0f); //Destroys the item after two seconds, to prevent it disappearing before sid is reactivated.
+                DestroyObject(crashClone, 2.0f); //Removes the crash effect after two seconds. This is a magic number that is equal to how long the crash takes to play once.
+                timesThrown = 0; //Resets the times thrown value.
 
             }
         }
@@ -114,7 +114,7 @@ public class ItemController : MonoBehaviour
     {
 
         if (transform.position.y < -0.5)
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.rotation);
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.rotation); //If an item glitches below -0.5 on height, then move it to 0.5 (If something goes underground, put it above ground)
 
         //Animation activation for repel
         if (anim != null) //Error checking incase an Item doesnt have a controller
@@ -129,20 +129,20 @@ public class ItemController : MonoBehaviour
    
         }
 
-        if (hasBeenThrown)
+        if (hasBeenThrown) //If something has been thrown.
         {
-            if (hasBeenDamaged == false)
+            if (hasBeenDamaged == false) //If the hasBeenDamaged hasn't been set yet.
             {
-                timesThrown++;
-                hasBeenDamaged = true;               
+                timesThrown++; //Add one to times thrown
+                hasBeenDamaged = true; //Set item has been thrown to true
             }
 
-            timer += Time.deltaTime;
-            if (timer >= 3)
+            timer += Time.deltaTime; //Add real time to the timer
+            if (timer >= 3) //If it hasn't been three seconds yet.
             {
-                timer = 0;
-                hasBeenThrown = false;
-                hasBeenDamaged = false;
+                timer = 0; //Reset the timer
+                hasBeenThrown = false; //Reset the has been thrown check
+                hasBeenDamaged = false; //Reset the has been damaged check
             }
             
         
