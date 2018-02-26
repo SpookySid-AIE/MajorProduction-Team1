@@ -25,7 +25,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         // Store reference to attached component
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
         txt_ectoplasm = GameObject.Find("Ectoplasm").GetComponent<Text>();
     }
 
@@ -43,17 +43,25 @@ public class playerController : MonoBehaviour
         moveDirection.y = 0;
         if (Input.GetKey(KeyCode.Space))
         {
-            moveDirection.y = floatSpeed;
+            //moveDirection.y = floatSpeed;
+            transform.Translate(0, floatSpeed * Time.deltaTime, 0);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveDirection.y = -sinkspeed;
+            //moveDirection.y = -sinkspeed;
+            transform.Translate(0, -sinkspeed * Time.deltaTime, 0);
         }
 
         moveDirection *= speed;
 
         // Move Character Controller
-        controller.Move(moveDirection * Time.deltaTime);
+        //controller.Move(moveDirection * Time.deltaTime);
+
+        //Forward / Back
+        transform.Translate(0, 0, (staticmove.z *= speed) * Time.deltaTime);
+
+        //Left / Right
+        transform.Translate((staticmove.x *= speed) * Time.deltaTime, 0, 0);
 
         //tilt Sid over
         var rot = transform.rotation;

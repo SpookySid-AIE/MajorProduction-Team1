@@ -68,7 +68,7 @@ public class CamLock : MonoBehaviour
     void Update()
     {
 
-        currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
+        currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX; //Multiplies mouse movement based on sensitivity
         currentVertical -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
 
         Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak

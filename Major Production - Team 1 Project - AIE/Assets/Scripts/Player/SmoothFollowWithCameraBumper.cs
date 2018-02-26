@@ -6,19 +6,17 @@ using UnityEngine;
 public class SmoothFollowWithCameraBumper : MonoBehaviour
 {
 
-    [SerializeField]
-    public Transform target = null;
-    [SerializeField]
-    public float distance;
-    [SerializeField]
-    public float height = 1.0f;
-    [SerializeField]
-    private float damping = 5.0f;
-    [SerializeField]
-    private bool smoothRotation = true;
-    [SerializeField]
-    private float rotationDamping = 10.0f;
+    public Transform target = null; //Camera's target
+    public float distance; //Distance maintained from target
+    public float height = 1.0f; //Height of Camera
 
+    [SerializeField]
+    private float damping = 5.0f; //How much the lerp should be slowed
+    [SerializeField]
+    private bool smoothRotation = true; //Whether or not smooth rotation is enabled
+    [SerializeField]
+    private float rotationDamping = 10.0f; //Damping on camera rotation
+     
     [SerializeField]
     public Vector3 targetLookAtOffset; // allows offsetting of camera lookAt, very useful for low bumper heights
 
@@ -29,10 +27,10 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [SerializeField]
     private Vector3 bumperRayOffset; // allows offset of the bumper ray from target origin
 
-    [HideInInspector]public playerPossession playerPosRef;
+    [HideInInspector]public playerPossession playerPosRef; //A reference to the players position
     
     //Camera Orbiting during hide
-    [HideInInspector]public Transform CameraTransform;
+    [HideInInspector]public Transform CameraTransform; //Cameras transform
     [HideInInspector]public Transform CameraParent; //Parent transform for camera to pivot around
 
     //Made public for debugging
@@ -81,9 +79,9 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
             //Debug.Log("Transform Hit: " + hit.transform.tag);
             //Debug.Log("Target: " + target.tag);
 
-            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition);
+            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition); //Presetting a ray
 
-            wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f));
+            wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f)); //Finds a point on the ray that's been colliding with an item
             //Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
             //// clamp wanted position to hit position
 
@@ -94,25 +92,24 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         }
 
         //if (updatePosition)
-            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
+            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
 
-        Debug.DrawLine(lookPosition, wantedPosition);
+        //Debug.DrawLine(lookPosition, wantedPosition);
 
-        if (smoothRotation)
+        if (smoothRotation) //If smooth rotation's enabled
         {
             Quaternion wantedRotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping);
+            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping); //Dampen the speed of rotation based of "rotationDamping"
         }
         else
-            transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
+            transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up); //Rotate the camera without damping
     }
     
     private void LateUpdate()
     {
         //This code orbits the camera during hide mode
-        if (playerPosRef.IsHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true)
+        if (playerPosRef.IsHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true) 
         {
-            //Debug.Log("hidden");
             CameraParent = this.gameObject.transform.parent;
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
             currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
@@ -128,7 +125,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         }
     }
     
-    static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end)
+    static Vector3 ninetyPercentPoint(Vector3 start, Vector3 end) //Calculates a point on the edge of the collided item, for repositioning purposes
     {
         Vector3 result = new Vector3((start.x + end.x) * 0.1f, (start.y + end.y) * 0.1f, (start.z + end.z) * 0.1f);
         return result;

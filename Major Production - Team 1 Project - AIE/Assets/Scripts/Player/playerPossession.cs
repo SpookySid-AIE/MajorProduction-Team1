@@ -221,7 +221,7 @@ public class playerPossession : MonoBehaviour
             Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
 
         //Enable movement         
-        target.GetComponent<CharacterController>().enabled = true;
+        //target.GetComponent<CharacterController>().enabled = true;
         target.GetComponent<playerController>().speed = 5;        
         target.GetComponent<playerController>().enabled = true;
 
@@ -279,9 +279,10 @@ public class playerPossession : MonoBehaviour
             player.GetComponent<playerController>().enabled = false;
             player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak            
             player.GetComponent<playerPossession>().enabled = false;
-            oldColliderHeight = player.GetComponent<CharacterController>().height;
-            oldColliderRadius = player.GetComponent<CharacterController>().radius;
-            player.GetComponent<CharacterController>().enabled = false;
+            //oldColliderHeight = player.GetComponent<CharacterController>().height;
+            //oldColliderRadius = player.GetComponent<CharacterController>().radius;
+            //player.GetComponent<CharacterController>().enabled = false;
+            player.GetComponent<CapsuleCollider>().enabled = false;
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
 
             //set up the new possesed object with these scripts
@@ -296,10 +297,10 @@ public class playerPossession : MonoBehaviour
             target.GetComponent<playerPossession>().lureSphere = lureSphere; //Copy the prefab reference over
             target.GetComponent<playerPossession>().enabled = false;
 
-            target.AddComponent<CharacterController>();
+            //target.AddComponent<CharacterController>();
             //target.GetComponent<CharacterController>().height = 0.01f;
             //target.GetComponent<CharacterController>().radius = 0.01f;
-            target.GetComponent<CharacterController>().enabled = false;
+            //target.GetComponent<CharacterController>().enabled = false;
             
             //Adjusts camera distance based on item size
             if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
@@ -342,7 +343,7 @@ public class playerPossession : MonoBehaviour
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; //Added by Jak - 4/12/17
 
         Destroy(player.GetComponent<playerController>());
-        Destroy(player.GetComponent<CharacterController>());
+        //Destroy(player.GetComponent<CharacterController>());
 
         //player.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
         player.GetComponent<ItemController>().hasBeenThrown = true;
@@ -363,7 +364,8 @@ public class playerPossession : MonoBehaviour
 
         sneakTest.tag = "Player";//need to do this here as the agent code needs a player at all times
         //sneakTest.transform.position = oldPlayerPos;
-        //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+        sneakTest.GetComponent<CapsuleCollider>().enabled = true;
+
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().distance = 3.0f;
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 1, 1);
         Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
@@ -447,8 +449,8 @@ public class playerPossession : MonoBehaviour
         possessedItem.enabled = true; //Enable the item playerPossesion script
 
         //Disable movement
-        possessedItem.GetComponent<CharacterController>().detectCollisions = false;
-        possessedItem.GetComponent<CharacterController>().enabled = false;
+        //possessedItem.GetComponent<CharacterController>().detectCollisions = false;
+        //possessedItem.GetComponent<CharacterController>().enabled = false;
         possessedItem.GetComponent<playerController>().enabled = false;
 
         //////switch off gravity for the target
@@ -563,7 +565,7 @@ public class playerPossession : MonoBehaviour
         //sneakTest.GetComponent<CapsuleCollider>().enabled = true;
         //sneakTest.GetComponent<CharacterController>().height = oldColliderHeight;
         //sneakTest.GetComponent<CharacterController>().radius = oldColliderRadius;
-        sneakTest.GetComponent<CharacterController>().enabled = true;
+        //sneakTest.GetComponent<CharacterController>().enabled = true;
 
         sneakTest.GetComponent<script_ToonShaderFocusOutline>().enabled = true;// Added by Mark - Reenable outline focus script on sid
 
@@ -611,7 +613,7 @@ public class playerPossession : MonoBehaviour
             //Stop movement on sid while transitioning
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<playerController>().enabled = false;
-            gameObject.GetComponent<CharacterController>().enabled = false;
+            //gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
