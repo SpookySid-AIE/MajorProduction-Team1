@@ -10,7 +10,7 @@ public class playerHealth : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player"); //Gets All necessary values from tags, and sets players current health.
         playerrb = player.GetComponent<Rigidbody>();
         sneakTest = GameObject.FindGameObjectWithTag("Sneak");        
         currentPlayerHealth = 100.0f;
