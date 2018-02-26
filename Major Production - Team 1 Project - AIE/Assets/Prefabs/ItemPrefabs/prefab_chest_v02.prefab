@@ -65,9 +65,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4319613874255596}
   - component: {fileID: 95541220633975600}
+  - component: {fileID: 54527083839136182}
+  - component: {fileID: 65917218167773836}
+  - component: {fileID: 114679893940767948}
   m_Layer: 0
   m_Name: prefab_chest_v02
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,12 +99,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4974412814242064}
   - component: {fileID: 137002015984054464}
-  - component: {fileID: 54248148608175540}
-  - component: {fileID: 65931661992465372}
-  - component: {fileID: 114743843834157342}
   m_Layer: 0
   m_Name: geo_chestBottom
-  m_TagString: Item
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,12 +218,12 @@ Transform:
   m_Father: {fileID: 4319613874255596}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54248148608175540
+--- !u!54 &54527083839136182
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905162074001384}
+  m_GameObject: {fileID: 1497393641297210}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -233,18 +233,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65931661992465372
+--- !u!65 &65917218167773836
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905162074001384}
+  m_GameObject: {fileID: 1497393641297210}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0054361625, y: 0.0045470055, z: 0.004423701}
-  m_Center: {x: -0.00002665328, y: 0.000049155173, z: 0.0022337972}
+  m_Size: {x: 0.5, y: 0.44, z: 0.5}
+  m_Center: {x: 0, y: 0.22, z: 0}
 --- !u!95 &95541220633975600
 Animator:
   serializedVersion: 3
@@ -262,12 +262,12 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114743843834157342
+--- !u!114 &114679893940767948
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1905162074001384}
+  m_GameObject: {fileID: 1497393641297210}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
   ItemScaryRating: 0
-  itemSize: 2
+  itemSize: 0
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
