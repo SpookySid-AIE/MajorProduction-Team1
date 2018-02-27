@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4278764584608630}
   - component: {fileID: 33686812078015442}
   - component: {fileID: 23944539333822052}
-  - component: {fileID: 64744214354523348}
+  - component: {fileID: 64483186137673982}
   m_Layer: 0
   m_Name: geo_warehouseShelfs_prefab
   m_TagString: Untagged
@@ -35,13 +35,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176572807291918}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.7700043, y: 2.45, z: -6.03}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -1.1600037, y: 3.25, z: 38.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23944539333822052
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -56,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2990628d15f914240a44d11b162792a0, type: 2}
+  - {fileID: 2100000, guid: 04dceb459a3f37442a9c95d71d0fe61a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176572807291918}
   m_Mesh: {fileID: 4300000, guid: a94cc851980fa5445a75bbac940ad815, type: 3}
---- !u!64 &64744214354523348
+--- !u!64 &64483186137673982
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
