@@ -12,69 +12,79 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    public float Ectoplasm = 100.0f;
-    [HideInInspector] public float ectoplasmValue; // What is this for? Why is this hidden? - MP
-    public float speed = 6.0f;
-    public float floatSpeed; //Speed of how fasty you float upwards when holding space.
-    public float sinkspeed = 1.0f;
+    [HideInInspector]public float Ectoplasm = 100.0f;
+    [Range(1, 20)]public float speed = 5.0f;
+    
+    [Header("Rigidbody drag should be same as this value.")][Range(1, 5)]public float floatSpeed = 3; //Speed of how fasty you float upwards when holding space.
+    [Range(1, 4.75f)]public float sinkspeed = 2.75f;
 
     private Text txt_ectoplasm;
     private Vector3 moveDirection = Vector3.zero;
-    public CharacterController controller;
+    //public CharacterController controller;
+    private Rigidbody rigid;
+    Vector3 staticmove;
 
     void Start()
     {
         // Store reference to attached component
         //controller = GetComponent<CharacterController>();
+        rigid = GetComponent<Rigidbody>();
         txt_ectoplasm = GameObject.Find("Ectoplasm").GetComponent<Text>();
     }
 
     void Update()
     {
-
+        //Update health on UI
         txt_ectoplasm.text = Ectoplasm.ToString() + "%";
         
         // Use input "W" and "S" for direction, multiplied by speed
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        var staticmove = moveDirection;
+
+        staticmove = moveDirection; //Store moveDirection before we transform it
        
+        //transform moveDirection to worldspace coordinates
         moveDirection = transform.TransformDirection(moveDirection);
         
+        //Cancel out y vector incase anything is stored
         moveDirection.y = 0;
+
         if (Input.GetKey(KeyCode.Space))
         {
-            //moveDirection.y = floatSpeed;
-            transform.Translate(0, floatSpeed * Time.deltaTime, 0);
+            moveDirection.y = floatSpeed;
+            rigid.velocity = new Vector3(0, moveDirection.y, 0);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            //moveDirection.y = -sinkspeed;
-            transform.Translate(0, -sinkspeed * Time.deltaTime, 0);
+            moveDirection.y = -sinkspeed;
+            rigid.velocity = new Vector3(0, moveDirection.y, 0);
         }
 
-        moveDirection *= speed;
+        //moveDirection *= speed;
 
         // Move Character Controller
         //controller.Move(moveDirection * Time.deltaTime);
 
-        //Forward / Back
-        transform.Translate(0, 0, (staticmove.z *= speed) * Time.deltaTime);
+        //New movement - Jak
+        Vector3 newVelocity = (moveDirection *= speed);
 
-        //Left / Right
-        transform.Translate((staticmove.x *= speed) * Time.deltaTime, 0, 0);
+        //Keep the y current velocity.
+        newVelocity.y = rigid.velocity.y;
+        rigid.velocity = newVelocity; //Set velocity directly(could behave weirdly). Its easier because we just need the simple movement/collision detection
+                                      //Could cause some physics issues
+
 
         //tilt Sid over
-        var rot = transform.rotation;
-        rot.eulerAngles = transform.rotation.eulerAngles + new Vector3(staticmove.z * 5.0f, 0, staticmove.x * 5.0f);
+        //var rot = transform.rotation;
+        //rot.eulerAngles = transform.rotation.eulerAngles + new Vector3(staticmove.z * 5.0f, 0, staticmove.x * 5.0f);
         //transform.rotation = rot;
     }
 
-    private void OnDisable()
+    private void FixedUpdate()
     {
-        //controller.Move(Vector3.zero);
+        ////Forward / Back
+        //rigid.MovePosition((transform.position + new Vector3(staticmove.x *= speed,0,staticmove.z *= speed) * Time.deltaTime));
+        //rigid.AddForce(new Vector3(0, 0, (staticmove.z *= speed) * Time.deltaTime));
     }
-
-
 
     // Is this redundant? Shooting no longer uses game objects - MP
     private void OnTriggerEnter(Collider other)
