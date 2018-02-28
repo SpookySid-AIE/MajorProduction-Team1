@@ -12,7 +12,7 @@ public class playerPossession : MonoBehaviour
     private GameObject sneakTest; //Store old player here while possessing
 
     private float timer;
-    private bool resettingSidInvis;
+    private static bool resettingSidInvis;
 
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
@@ -48,6 +48,7 @@ public class playerPossession : MonoBehaviour
     
     private static bool hidden = false; //Determines when we can use the "Lure/Repel" ability
     private static bool lureUsed = false; //Lets us know when we have used Lure, so we can Repel afterwards only
+    private static bool lureSphereCreated = false;
 
     //Player's position is stored here when the use the hide mechanic, so when we unhide they resume from the old position
     public static Vector3 oldPlayerPos;
@@ -75,10 +76,8 @@ public class playerPossession : MonoBehaviour
         public static float rigidAngDrag;
     }
 
+    //Lets us know when the values in the struct have been set
     private static bool oldSidValuesSet = false;
-
-    //Initialise Struct
-    OldSidValues oldSidValues;  
 
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
@@ -87,7 +86,7 @@ public class playerPossession : MonoBehaviour
         disolveScript = player.GetComponent<script_WillDissolve>();
 
         //This only works because the one instance of playerPossession exists on "Sid" so it grabs the correct values
-        //from then forward items with this script attached can no longer edit the OldSidValues Struct
+        //from then forward items with this script attached can no longer edit the OldSidValues Struct which is good
         if(!oldSidValuesSet)
         {
             //Store old values in the struct for unpossesion            
@@ -218,15 +217,74 @@ public class playerPossession : MonoBehaviour
             Camera.main.transform.SetParent(pivot.transform);
 
             //Spawn lureSphere
-            if (player.GetComponent<ItemController>().isScaryObject())
+            if (player.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
+            {
                 Instantiate(lureSphere, player.transform);
-
+                lureSphereCreated = true;
+            }
             ////Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
 
             ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
             CamPivotSet = true;
+        }
+
+        if(IsHidden())
+        {
+            Collider col = GetComponent<Collider>();
+            Vector3 v = transform.position;
+
+            v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
+            //Debug.DrawRay(v, Vector3.forward * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.back * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, -Vector3.right * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.down * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.up * 3, Color.red);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if (IsHidden() || IsPossessed())
+            {
+                RaycastHit hit;
+                float length = 3;
+                Collider col = GetComponent<Collider>();
+                Vector3 v = transform.position;
+                Vector3 dir;
+
+                //Increase z component of vector so i can use this same vector for the Random.Range calculation
+                v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
+                dir = transform.forward * length;
+
+                if (!Physics.Raycast(v, dir, out hit, length))
+                {
+                    dir = new Vector3(0, 0, dir.z); //Cancel any other vector components and keep "forward z"
+                    Debug.Log(dir);
+                    Vector3 newPos = dir * Random.Range(0.5f, length) / length;
+                    newPos = new Vector3(transform.position.x, transform.position.y, newPos.z);
+                    Debug.Log(newPos);
+                    sneakTest.transform.position = newPos; //random point along vector in direction of 
+                    UnpossessItem();
+                    
+                }
+                else
+                {
+                    Debug.Log(hit.collider.name);
+                }
+
+                Debug.DrawRay(v, dir, Color.red, 99f);
+
+
+
+            }
+                
         }
     }
 
@@ -238,9 +296,11 @@ public class playerPossession : MonoBehaviour
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
         //Remove lure sphere
-        if (target.GetComponent<ItemController>().isScaryObject())
+        if (lureSphereCreated)
+        {
             Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
-
+            lureSphereCreated = false;
+        }
         //Enable movement         
         //target.GetComponent<CharacterController>().enabled = true;
         //target.GetComponent<playerController>().speed = oldSidValues.speed;
@@ -394,6 +454,7 @@ public class playerPossession : MonoBehaviour
 
         //Reset variables
         moveModeActive = false;
+        hidden = false;
         PossessedItem = null;
 
         //switch off the camera tracking whilst we reset the player back to what it is supposed to be
