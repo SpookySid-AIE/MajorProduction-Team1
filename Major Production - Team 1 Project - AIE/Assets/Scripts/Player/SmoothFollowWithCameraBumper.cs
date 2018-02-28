@@ -39,9 +39,6 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     public float currentVertical = 0;
     
     //public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
-
-    //Used in CurveToTarget.cs - Retargets the camera on possession - fixes the issue of two snapping
-    [HideInInspector] public bool updatePosition = true;
     
     /// <Summary>
     /// If the target moves, the camera should child the target to allow for smoother movement. DR
@@ -91,8 +88,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
         }
 
-        //if (updatePosition)
-            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
+        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
 
         //Debug.DrawLine(lookPosition, wantedPosition);
 

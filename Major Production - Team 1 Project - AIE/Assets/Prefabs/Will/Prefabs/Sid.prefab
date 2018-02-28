@@ -1597,9 +1597,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770363062168760}
   serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Mass: 1
+  m_Drag: 3
+  m_AngularDrag: 3
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeightAdjustment: 0.4
-  allowablePosessionRange: 15
+  allowablePosessionRange: 10
   passInObject: {fileID: 0}
   oldToonOutline: {fileID: 0}
   toonOutline: {fileID: 0}
@@ -1692,7 +1692,7 @@ MonoBehaviour:
   pivot: {fileID: 0}
   possessionColour: {r: 0, g: 1, b: 1, a: 1}
   HeightAdjustment: 0.4
-  allowablePosessionRange: 15
+  allowablePosessionRange: 10
   throwVelocity: 30
   lureRange: 10
   highlightMat: {fileID: 2100000, guid: 022f61e51ea56e444ae0ddfa134ce148, type: 2}
@@ -1709,11 +1709,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ectoplasm: 100
-  ectoplasmValue: 0
   speed: 5
-  floatSpeed: 2
-  sinkspeed: 1.75
-  controller: {fileID: 0}
+  floatSpeed: 3
+  sinkspeed: 2.75
 --- !u!114 &114294829516336740
 MonoBehaviour:
   m_ObjectHideFlags: 1

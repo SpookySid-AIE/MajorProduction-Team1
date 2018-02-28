@@ -12,7 +12,7 @@ public class playerPossession : MonoBehaviour
     private GameObject sneakTest; //Store old player here while possessing
 
     private float timer;
-    private bool resettingSidInvis;
+    private static bool resettingSidInvis;
 
     //Stores a reference to the current item we are possesing, used in CIV_Retreat
     public GameObject PossessedItem;
@@ -48,15 +48,11 @@ public class playerPossession : MonoBehaviour
     
     private static bool hidden = false; //Determines when we can use the "Lure/Repel" ability
     private static bool lureUsed = false; //Lets us know when we have used Lure, so we can Repel afterwards only
+    private static bool lureSphereCreated = false;
 
     //Player's position is stored here when the use the hide mechanic, so when we unhide they resume from the old position
     public static Vector3 oldPlayerPos;
     public static Quaternion oldPlayerRot;
-
-    //Store old speed here to easily renable later
-    float oldSpeed;
-    static float oldColliderRadius; //Radius of "sids" character controller which is stored when we possess
-    static float oldColliderHeight;
 
     public int lureRange = 10; //Range at which the lure ability will attract the ai
     [Header("Highlight Mat for Civ")]public Material highlightMat; //Material that will be set on the civillians
@@ -68,7 +64,20 @@ public class playerPossession : MonoBehaviour
     //Lure/Scare particle effects references
     private GameObject lureEffect;
     private GameObject scareEffect;
+    
+    //Storing old speed values here to easily renable later
+    struct OldSidValues
+    {
+        public static float speed;
+        public static float floatspeed;
+        public static float sinkspeed;
+        public static float rigidMass;
+        public static float rigidDrag;
+        public static float rigidAngDrag;
+    }
 
+    //Lets us know when the values in the struct have been set
+    private static bool oldSidValuesSet = false;
 
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
@@ -76,8 +85,19 @@ public class playerPossession : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         disolveScript = player.GetComponent<script_WillDissolve>();
 
-        //Set old speed to revert to after hide
-        oldSpeed = player.GetComponent<playerController>().speed;
+        //This only works because the one instance of playerPossession exists on "Sid" so it grabs the correct values
+        //from then forward items with this script attached can no longer edit the OldSidValues Struct which is good
+        if(!oldSidValuesSet)
+        {
+            //Store old values in the struct for unpossesion            
+            OldSidValues.speed = player.GetComponent<playerController>().speed;
+            OldSidValues.floatspeed = player.GetComponent<playerController>().floatSpeed;
+            OldSidValues.sinkspeed = player.GetComponent<playerController>().sinkspeed;
+            OldSidValues.rigidMass = player.GetComponent<Rigidbody>().mass;
+            OldSidValues.rigidDrag = player.GetComponent<Rigidbody>().drag;
+            OldSidValues.rigidAngDrag = player.GetComponent<Rigidbody>().angularDrag;
+            oldSidValuesSet = true;
+        }
 
         //Update playerPossession Reference in gamemanager
         GameManager.Instance.player = player.GetComponent<playerPossession>();
@@ -106,7 +126,7 @@ public class playerPossession : MonoBehaviour
                 timer = 0;
                 player.layer = 0;
                 resettingSidInvis = false;
-                Debug.Log("Reset");
+                //Debug.Log("Reset");
             }
         }
     }
@@ -197,15 +217,74 @@ public class playerPossession : MonoBehaviour
             Camera.main.transform.SetParent(pivot.transform);
 
             //Spawn lureSphere
-            if (player.GetComponent<ItemController>().isScaryObject())
+            if (player.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
+            {
                 Instantiate(lureSphere, player.transform);
-
+                lureSphereCreated = true;
+            }
             ////Renable rotation while falling
             Camera.main.GetComponent<CamLock>().enabled = true;
 
             ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
             CamPivotSet = true;
+        }
+
+        if(IsHidden())
+        {
+            Collider col = GetComponent<Collider>();
+            Vector3 v = transform.position;
+
+            v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
+            //Debug.DrawRay(v, Vector3.forward * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.back * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, -Vector3.right * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.down * 3, Color.red);
+
+            //Debug.DrawRay(transform.position, Vector3.up * 3, Color.red);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if (IsHidden() || IsPossessed())
+            {
+                RaycastHit hit;
+                float length = 3;
+                Collider col = GetComponent<Collider>();
+                Vector3 v = transform.position;
+                Vector3 dir;
+
+                //Increase z component of vector so i can use this same vector for the Random.Range calculation
+                v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
+                dir = transform.forward * length;
+
+                if (!Physics.Raycast(v, dir, out hit, length))
+                {
+                    dir = new Vector3(0, 0, dir.z); //Cancel any other vector components and keep "forward z"
+                    Debug.Log(dir);
+                    Vector3 newPos = dir * Random.Range(0.5f, length) / length;
+                    newPos = new Vector3(transform.position.x, transform.position.y, newPos.z);
+                    Debug.Log(newPos);
+                    sneakTest.transform.position = newPos; //random point along vector in direction of 
+                    UnpossessItem();
+                    
+                }
+                else
+                {
+                    Debug.Log(hit.collider.name);
+                }
+
+                Debug.DrawRay(v, dir, Color.red, 99f);
+
+
+
+            }
+                
         }
     }
 
@@ -217,18 +296,25 @@ public class playerPossession : MonoBehaviour
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
         //Remove lure sphere
-        if (target.GetComponent<ItemController>().isScaryObject())
+        if (lureSphereCreated)
+        {
             Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
-
+            lureSphereCreated = false;
+        }
         //Enable movement         
         //target.GetComponent<CharacterController>().enabled = true;
-        target.GetComponent<playerController>().speed = 5;        
+        //target.GetComponent<playerController>().speed = oldSidValues.speed;
+        //target.GetComponent<playerController>().floatSpeed = oldSidValues.floatspeed;
+        //target.GetComponent<playerController>().sinkspeed = oldSidValues.sinkspeed;
         target.GetComponent<playerController>().enabled = true;
 
-        //Switch off gravity for the target
-        target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //Switch off gravity for the target and redo the rigidbody values so they are correct for movement
+        target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        target.GetComponent<Rigidbody>().drag = OldSidValues.rigidDrag;
+        target.GetComponent<Rigidbody>().angularDrag = OldSidValues.rigidAngDrag;
         target.GetComponent<Rigidbody>().useGravity = false;
         
+        //Switch off the hide aura
         target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
         target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
 
@@ -277,7 +363,7 @@ public class playerPossession : MonoBehaviour
 
             //Disable old player scripts because we are becoming a new item
             player.GetComponent<playerController>().enabled = false;
-            player.GetComponent<playerPossession>().PossessedItem = target.gameObject; //Added by Jak            
+            player.GetComponent<playerPossession>().PossessedItem = target.gameObject;          
             player.GetComponent<playerPossession>().enabled = false;
             //oldColliderHeight = player.GetComponent<CharacterController>().height;
             //oldColliderRadius = player.GetComponent<CharacterController>().radius;
@@ -286,11 +372,19 @@ public class playerPossession : MonoBehaviour
             player.GetComponent<script_ToonShaderFocusOutline>().enabled = false; // Added by Mark - Disable toon focus outline script on player so it stops annoying me
 
             //set up the new possesed object with these scripts
-            //playerController, playerPossession, CharacterController are all disabled here because the other methods decides what to do with them
+            //playerController, playerPossession, are all disabled here because the other methods decides what to do with them
             target.AddComponent<playerController>();
-            target.GetComponent<playerController>().Ectoplasm = player.GetComponent<playerController>().Ectoplasm;            
-            target.GetComponent<playerController>().floatSpeed = Camera.main.GetComponent<CamLock>().floatSpeedOfSid; //Carry over the float speed to the possessed item
-            target.GetComponent<playerController>().enabled = false;
+            playerController playerController = target.GetComponent<playerController>();
+
+            //Carry over all sid values to the item
+            playerController.Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
+            playerController.speed = OldSidValues.speed;
+            playerController.floatSpeed = OldSidValues.floatspeed;
+            playerController.sinkspeed = OldSidValues.sinkspeed;
+            target.GetComponent<Rigidbody>().mass = OldSidValues.rigidMass;
+            target.GetComponent<Rigidbody>().drag = OldSidValues.rigidDrag;
+            target.GetComponent<Rigidbody>().angularDrag = OldSidValues.rigidAngDrag;
+            playerController.enabled = false;
 
             target.AddComponent<playerPossession>();                           
             target.GetComponent<playerPossession>().highlightMat = highlightMat;//Copy the material reference over           
@@ -336,8 +430,10 @@ public class playerPossession : MonoBehaviour
     public void UnpossessItem()
     {
         //turn this item back into a regular item
-        //At this point the player reference has changed is the Possessed Item
+        //At this point the player reference has changed it is the Possessed Item
         player.tag = "Item";
+        player.GetComponent<Rigidbody>().drag = 0;
+        player.GetComponent<Rigidbody>().angularDrag = 0;
         player.GetComponent<Rigidbody>().useGravity = true;
         player.GetComponent<Rigidbody>().freezeRotation = false; //Added by Jak - 13/11/17
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; //Added by Jak - 4/12/17
@@ -356,7 +452,9 @@ public class playerPossession : MonoBehaviour
         mat.SetColor("_Color", Color.white);// Added by Mark - Change main colour of object back to white
         mat.SetColor("_OutlineColor", Color.black);// Added by Mark - Change  colour of object outline back to black
 
+        //Reset variables
         moveModeActive = false;
+        hidden = false;
         PossessedItem = null;
 
         //switch off the camera tracking whilst we reset the player back to what it is supposed to be
@@ -373,73 +471,9 @@ public class playerPossession : MonoBehaviour
         EnablePlayer();//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
 
-    //Written by Jak
-    void Unhide()
-    {
-        //Debug.Log("Unhide Called.");
-        //disable camera while we switch back to the real player
-        Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
-
-        //rename the player
-        //sneakTest.tag = "Player";
-
-        //set the taget to what was hit in the raycast
-        //GameObject target = this.gameObject; //Target equals the current object that this script is on(aka ITEM at this stage)
-
-        //Rename the item
-        //target.tag = "Item";
-
-        //Set the current position of the player back to the oldPosition from when they hid
-        //sneakTest.transform.position = oldPlayerPos;
-        //sneakTest.transform.rotation = oldPlayerRot;
-
-        //Turn off hide effect
-        target.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
-        target.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.yellow);
-
-        //Revert Camera back
-        Camera.main.transform.SetParent(null);
-        Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = sneakTest.transform;
-        //Destroy(target.GetComponent<playerPossession>().pivot);
-
-        ////turn onn all player scripts
-        //foreach (Behaviour childCompnent in target.GetComponentsInChildren<Behaviour>())
-        //{
-        //    if (childCompnent.tag != "MainCamera")
-        //        childCompnent.enabled = true;
-        //}
-
-        
-        target.GetComponent<playerController>().speed = 5;
-        target.GetComponent<playerController>().enabled = true;
-        target.GetComponent<CharacterController>().enabled = true;
-
-        //switch on gravity for the target
-        target.GetComponent<Rigidbody>().useGravity = false;
-        target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
-
-        //Remove lure sphere
-        if(target.GetComponent<ItemController>().isScaryObject())
-            Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
-
-        //switch the camera back on to follow the player
-        Camera.main.gameObject.GetComponent<CamLock>().enabled = true;
-
-        //Stop the scare animation if it is still playing when we eject
-        this.GetComponent<ItemController>().SetAnimScare(false);
-
-        //Tell everyone that SID is no longer hidden
-        hidden = false;
-
-        //destroy this script instance from the ITEM
-        Destroy(target.GetComponent<playerPossession>().pivot);
-    }
-
     //written by Jak - copypasted some stuff from "PossessItem()"
     public void Hide()
     {
-        Debug.Log("Hide Called");
-
         moveModeActive = false;
 
         //Disable camera rotation
@@ -453,8 +487,10 @@ public class playerPossession : MonoBehaviour
         //possessedItem.GetComponent<CharacterController>().enabled = false;
         possessedItem.GetComponent<playerController>().enabled = false;
 
-        //////switch off gravity for the target
+        //switch off gravity for the target
         possessedItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        possessedItem.GetComponent<Rigidbody>().drag = 0; //set drag to 0 so item falls like a sack of potatoes without affecting gravity
+        possessedItem.GetComponent<Rigidbody>().angularDrag = 0;
         possessedItem.GetComponent<Rigidbody>().useGravity = true;
         possessedItem.GetComponent<Rigidbody>().freezeRotation = true; //Freeze item rotation while possesed, caused the camera to glitch - Jak - 13/11/17
 
@@ -469,8 +505,6 @@ public class playerPossession : MonoBehaviour
     //Gotta think about how id do it, what happens if list has 1, but then 4 AI walk in during a repel...
     void Lure() //Written by Jak
     {
-        Debug.Log("Lure Called.");
-
         //Destroy the scareEffect incase it hasnt already.
         if (scareEffect != null)
             Destroy(scareEffect);
@@ -507,9 +541,6 @@ public class playerPossession : MonoBehaviour
 
     void Repel()//Written by Jak
     {
-        //Repel - Jak
-        Debug.Log("Repel Called.");
-
         //Destroy the lureEffect incase it hasnt already.
         if(lureEffect != null)
             Destroy(lureEffect);
@@ -552,8 +583,9 @@ public class playerPossession : MonoBehaviour
         {
             smr.enabled = true;
         }
-        
+
         //sneakTest.transform.position = player.transform.position;
+        sneakTest.GetComponent<playerController>().speed = OldSidValues.speed;
         sneakTest.GetComponent<playerController>().enabled = true;
 
         sneakTest.GetComponent<playerPossession>().PossessedItem = null; //Reset this object now that we are nolonger possessing something
@@ -634,9 +666,6 @@ public class playerPossession : MonoBehaviour
             disolveScript.transferring = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = true; //This will also Re-find the new player which is now the item
-            //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().updatePosition = true;
-
-            gameObject.GetComponent<playerController>().speed = oldSpeed;            
         }
     }    
 
