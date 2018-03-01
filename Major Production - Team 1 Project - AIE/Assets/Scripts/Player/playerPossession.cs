@@ -79,6 +79,18 @@ public class playerPossession : MonoBehaviour
     //Lets us know when the values in the struct have been set
     private static bool oldSidValuesSet = false;
 
+    //Enum to choose what direction to raycast to - Could be better?? - Used for the Quick-Drop
+    public enum RayDirection
+    {
+        FORWARD,
+        BACK, 
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN,
+        COUNT
+    }
+
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
     {
@@ -230,65 +242,97 @@ public class playerPossession : MonoBehaviour
             CamPivotSet = true;
         }
 
-        if(IsHidden())
-        {
-            Collider col = GetComponent<Collider>();
-            Vector3 v = transform.position;
-
-            v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
-            //Debug.DrawRay(v, Vector3.forward * 3, Color.red);
-
-            //Debug.DrawRay(transform.position, Vector3.back * 3, Color.red);
-
-            //Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
-
-            //Debug.DrawRay(transform.position, -Vector3.right * 3, Color.red);
-
-            //Debug.DrawRay(transform.position, Vector3.down * 3, Color.red);
-
-            //Debug.DrawRay(transform.position, Vector3.up * 3, Color.red);
-        }
-
-        if(Input.GetKeyDown(KeyCode.E))
+        //Quick Drop - Jak
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (IsHidden() || IsPossessed())
             {
-                RaycastHit hit;
-                float length = 3;
-                Collider col = GetComponent<Collider>();
-                Vector3 v = transform.position;
-                Vector3 dir;
+                Vector3 dir = Vector3.zero;
 
-                //Increase z component of vector so i can use this same vector for the Random.Range calculation
-                v = new Vector3(transform.position.x, transform.position.y, transform.position.z + col.bounds.extents.z);
+                for (int i = 0; i < (int)RayDirection.COUNT; i++)
+                {
+                    //Check for a valid spot in xyz directions to drop the item and pop sid out
+                    if (CheckForValidItemDrop((RayDirection)i, ref dir))
+                    {
+                        Vector3 newPos = sneakTest.transform.position;
+                        newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
+
+                        sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
+
+                        UnpossessItem();
+                        break;
+                    }
+                } //End loop
+            } //End If
+        }//End Quick-Drop
+    }//End update
+
+    //Raycast in a given direction - if nothing hit on the raycast then we set the new position to eject the player at
+    //Notes: Raycasts will not detect Colliders for which the Raycast origin is inside the Collider. <- Wish i bloody found that earlier
+    bool CheckForValidItemDrop(RayDirection rayDirection, ref Vector3 dir)
+    {
+        RaycastHit hit;
+        float length = 3;
+        Collider col = GetComponent<Collider>();
+
+        switch (rayDirection)
+        {
+            case RayDirection.FORWARD:
                 dir = transform.forward * length;
-
-                if (!Physics.Raycast(v, dir, out hit, length))
-                {
-                    dir = new Vector3(0, 0, dir.z); //Cancel any other vector components and keep "forward z"
-                    Debug.Log(dir);
-                    Vector3 newPos = dir * Random.Range(0.5f, length) / length;
-                    newPos = new Vector3(transform.position.x, transform.position.y, newPos.z);
-                    Debug.Log(newPos);
-                    sneakTest.transform.position = newPos; //random point along vector in direction of 
-                    UnpossessItem();
-                    
-                }
-                else
-                {
-                    Debug.Log(hit.collider.name);
-                }
-
-                Debug.DrawRay(v, dir, Color.red, 99f);
-
-
-
-            }
+                //Debug.DrawRay(transform.position, dir, Color.cyan, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
                 
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            case RayDirection.BACK:
+                dir = -transform.forward * length;
+                //Debug.DrawRay(transform.position, dir, Color.blue, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
+                
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            case RayDirection.LEFT:
+                dir = -transform.right * length;
+                //Debug.DrawRay(transform.position, dir, Color.red, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
+                
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            case RayDirection.RIGHT:
+                dir = transform.right * length;
+                //Debug.DrawRay(transform.position, dir, Color.red, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
+                
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            case RayDirection.UP:
+                dir = transform.up * length;
+                //Debug.DrawRay(transform.position, dir, Color.green, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
+                
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            case RayDirection.DOWN:
+                dir = -transform.up * length;
+                //Debug.DrawRay(transform.position, dir, Color.green, 10f);
+                if (!Physics.Raycast(transform.position, dir, out hit, length))
+                    return true;
+                
+                //Debug.Log("Object hit: " + gameObject.name);
+                break;
+            default:
+                break;
         }
+
+        return false;
     }
 
-    //Enabling the movement on the Possessed object that we control, splitting up "PossessItem"
+    //Enabling the movement on the Possessed object that we control, splitting up "PossessItem" - Jak
     void MoveMode()
     {
         hidden = false;
@@ -301,11 +345,8 @@ public class playerPossession : MonoBehaviour
             Destroy(target.GetComponentInChildren<TriggerHighlight>().gameObject);
             lureSphereCreated = false;
         }
+
         //Enable movement         
-        //target.GetComponent<CharacterController>().enabled = true;
-        //target.GetComponent<playerController>().speed = oldSidValues.speed;
-        //target.GetComponent<playerController>().floatSpeed = oldSidValues.floatspeed;
-        //target.GetComponent<playerController>().sinkspeed = oldSidValues.sinkspeed;
         target.GetComponent<playerController>().enabled = true;
 
         //Switch off gravity for the target and redo the rigidbody values so they are correct for movement
@@ -337,7 +378,8 @@ public class playerPossession : MonoBehaviour
 
     //This method is now just the adding and pre-setup to becoming an item
     //Hide(), MoveMode() will be controling the specific actions of what the item can do
-    void PossessItem()
+    //Mainly written by Ben - Jak tweaked here and there when restructuring player controls
+    void PossessItem() 
     {
         if (player.GetComponent<playerController>().Ectoplasm > 0.0f)
         {
@@ -416,6 +458,7 @@ public class playerPossession : MonoBehaviour
         }
     }
 
+    //Written by Ben
     IEnumerator ThrowPossessedItemAway()
     {
         //throw the object;
@@ -427,8 +470,16 @@ public class playerPossession : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
+    //Written by Ben - Jak tweaked here and there when restructuring player controls
     public void UnpossessItem()
     {
+        //Remove lure sphere incase it still exists
+        if (lureSphereCreated)
+        {
+            Destroy(player.GetComponentInChildren<TriggerHighlight>().gameObject);
+            lureSphereCreated = false;
+        }
+
         //turn this item back into a regular item
         //At this point the player reference has changed it is the Possessed Item
         player.tag = "Item";
@@ -437,6 +488,10 @@ public class playerPossession : MonoBehaviour
         player.GetComponent<Rigidbody>().useGravity = true;
         player.GetComponent<Rigidbody>().freezeRotation = false; //Added by Jak - 13/11/17
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None; //Added by Jak - 4/12/17
+
+        //Switch off the hide aura
+        player.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 0);
+        player.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
 
         Destroy(player.GetComponent<playerController>());
         //Destroy(player.GetComponent<CharacterController>());
@@ -471,7 +526,7 @@ public class playerPossession : MonoBehaviour
         EnablePlayer();//re-enable Player after a short time at this position  needed so that Player does not colide with the object he is unposessing
     }
 
-    //written by Jak - copypasted some stuff from "PossessItem()"
+    //written by Jak
     public void Hide()
     {
         moveModeActive = false;
@@ -514,6 +569,7 @@ public class playerPossession : MonoBehaviour
 
         //Lure Enemies to us
         //#OPTIMISE //Refactor this so it finds tags first instead of all colliders
+        //Or maybe have an already populated list of civs on startup that we loop through and check if in range?
         Collider[] civillians = Physics.OverlapSphere(transform.position, lureRange);
 
         //Sample this object position before sending it to the ai
