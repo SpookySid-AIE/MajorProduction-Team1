@@ -10594,12 +10594,12 @@ Prefab:
     - target: {fileID: 114469573082296200, guid: b55d871a540f3c54b80097ecb5b0da5e,
         type: 2}
       propertyPath: Emitters.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114469573082296200, guid: b55d871a540f3c54b80097ecb5b0da5e,
         type: 2}
       propertyPath: Emitters.Array.data[0].Params.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4802003386736734, guid: b55d871a540f3c54b80097ecb5b0da5e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -10649,7 +10649,7 @@ Prefab:
         type: 2}
       propertyPath: Emitters.Array.data[0].Target
       value: 
-      objectReference: {fileID: 1213356091}
+      objectReference: {fileID: 586710767}
     - target: {fileID: 114469573082296200, guid: b55d871a540f3c54b80097ecb5b0da5e,
         type: 2}
       propertyPath: Emitters.Array.data[0].Params.Array.data[0].Name
@@ -10660,6 +10660,11 @@ Prefab:
       propertyPath: Emitters.Array.data[0].Params.Array.data[0].Value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114469573082296200, guid: b55d871a540f3c54b80097ecb5b0da5e,
+        type: 2}
+      propertyPath: Emitters.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 1213356091}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b55d871a540f3c54b80097ecb5b0da5e, type: 2}
   m_IsPrefabParent: 0
@@ -19736,7 +19741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &554474540
 Transform:
   m_ObjectHideFlags: 0
@@ -21384,6 +21389,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4415722842805498, guid: aea22dd9cd450b7478c96c4adaafca72,
     type: 2}
   m_PrefabInternal: {fileID: 1452215934}
+--- !u!1 &586710758 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1770363062168760, guid: 61212dd804211d54a9c01ff218f91907,
+    type: 2}
+  m_PrefabInternal: {fileID: 1213356090}
+--- !u!114 &586710767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586710758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Crowd_Shopping_Mall_Large_Ambience_01
+  PlayEvent: 3
+  StopEvent: 4
+  CollisionTag: Player
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: SupermaketEntered
+    Value: 0.326
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1001 &588599519
 Prefab:
   m_ObjectHideFlags: 0
@@ -41107,6 +41141,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114777026968608658, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: Params.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4847295489334760, guid: 61212dd804211d54a9c01ff218f91907, type: 2}
       propertyPath: m_LocalPosition.x
       value: -172
@@ -41158,6 +41197,16 @@ Prefab:
     - target: {fileID: 4847295489334760, guid: 61212dd804211d54a9c01ff218f91907, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 114777026968608658, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: Params.Array.data[0].Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114777026968608658, guid: 61212dd804211d54a9c01ff218f91907,
+        type: 2}
+      propertyPath: Params.Array.data[0].Name
+      value: ThemeVolume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61212dd804211d54a9c01ff218f91907, type: 2}
@@ -60449,7 +60498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1761740640
 MeshRenderer:
   m_ObjectHideFlags: 0
