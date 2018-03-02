@@ -107,16 +107,13 @@ public class AgentController : MonoBehaviour
 
         //This is stupid and expensive, surely there is another way, just havnt thought about it much
         //Probably should move this GetComponent call out of update 
-        if (target.GetComponent<playerPossession>())
+        if (target.GetComponent<playerPossession>().IsPossessed() == true)
         {
-            if (target.GetComponent<playerPossession>().IsPossessed() == true)
-            {
-                target = GameObject.FindGameObjectWithTag("Player"); //find the new possesed item and change the target on the agent controller
-            }
-            else
-            {
-                target = GameObject.FindGameObjectWithTag("Player");
-            }
+            target = GameObject.FindGameObjectWithTag("Player"); //find the new possesed item and change the target on the agent controller
+        }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
         }
 
         //Show the current State they are in above their head
