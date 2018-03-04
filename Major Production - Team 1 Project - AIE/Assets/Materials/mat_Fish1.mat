@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: mat_Fish1
   m_Shader: {fileID: 4800000, guid: a75e61e64cea3b64ebbb7da199e90aac, type: 3}
-  m_ShaderKeywords: _AURAONOFF_ON _INVERTAURA_ON
+  m_ShaderKeywords: _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -79,7 +79,7 @@ Material:
     - _AuraBrightness: 4
     - _AuraFalloff1: 1.87
     - _AuraFalloff2: 0.68
-    - _AuraOnOff: 1
+    - _AuraOnOff: 0
     - _AuraTextureSize: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
