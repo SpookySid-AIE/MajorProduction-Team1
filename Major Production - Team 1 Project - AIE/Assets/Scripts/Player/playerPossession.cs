@@ -79,7 +79,7 @@ public class playerPossession : MonoBehaviour
     //Lets us know when the values in the struct have been set
     private static bool oldSidValuesSet = false;
 
-    //Enum to choose what direction to raycast to - Could be better?? - Used for the Quick-Drop
+    //Enum to choose what direction to raycast to - Could be better?? - Used for the Quick-Drop - Jak
     public enum RayDirection
     {
         FORWARD,
@@ -217,30 +217,30 @@ public class playerPossession : MonoBehaviour
         //Outside of hide, because if the object is falling, we have to wait before we add the pivot point
         //This could cause issues if the object is always moving
         //At this point, HIDE has been called, therefore the script is no longer on player, but the ITEM - so player = item
-        if (hidden && player.GetComponent<Rigidbody>().IsSleeping() == true && !CamPivotSet)
-        {
-            //Debug.Log(player.name + " grounded");
+        //if (hidden && player.GetComponent<Rigidbody>().IsSleeping() == true && !CamPivotSet)
+        //{
+        //    //Debug.Log(player.name + " grounded");
 
-            //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
-            pivot = new GameObject("Pivot");
-            pivot.transform.position = player.transform.position;
+        //    //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
+        //    pivot = new GameObject("Pivot");
+        //    pivot.transform.position = player.transform.position;
 
-            ////Child camera to pivot point
-            Camera.main.transform.SetParent(pivot.transform);
+        //    ////Child camera to pivot point
+        //    Camera.main.transform.SetParent(pivot.transform);
 
-            //Spawn lureSphere
-            if (player.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
-            {
-                Instantiate(lureSphere, player.transform);
-                lureSphereCreated = true;
-            }
-            ////Renable rotation while falling
-            Camera.main.GetComponent<CamLock>().enabled = true;
+        //    //Spawn lureSphere
+        //    if (player.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
+        //    {
+        //        Instantiate(lureSphere, player.transform);
+        //        lureSphereCreated = true;
+        //    }
+        //    ////Renable rotation while falling
+        //    Camera.main.GetComponent<CamLock>().enabled = true;
 
-            ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
+        //    ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
 
-            CamPivotSet = true;
-        }
+        //    CamPivotSet = true;
+        //}
 
         //Quick Drop - Jak
         if (Input.GetKeyDown(KeyCode.E))
@@ -335,8 +335,23 @@ public class playerPossession : MonoBehaviour
     //Enabling the movement on the Possessed object that we control, splitting up "PossessItem" - Jak
     void MoveMode()
     {
+        //We are no longer hidden
         hidden = false;
 
+        //Change UI
+        if (target.GetComponent<ItemController>().isScaryObject())
+        {
+            GameManager.Instance.EnableHideScaryLure(false);
+            GameManager.Instance.EnableHideScary(false);
+            GameManager.Instance.EnableMoveMode(true);
+        }
+        else
+        {
+            GameManager.Instance.EnableHideNonScary(false);
+            GameManager.Instance.EnableMoveMode(true);
+        }
+
+        //Turn off camera while we update the target with required values
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 
         //Remove lure sphere
@@ -437,7 +452,9 @@ public class playerPossession : MonoBehaviour
             //target.GetComponent<CharacterController>().height = 0.01f;
             //target.GetComponent<CharacterController>().radius = 0.01f;
             //target.GetComponent<CharacterController>().enabled = false;
-            
+
+            Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().target = target.transform;
+
             //Adjusts camera distance based on item size
             if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Miniature)
             {
@@ -473,6 +490,9 @@ public class playerPossession : MonoBehaviour
     //Written by Ben - Jak tweaked here and there when restructuring player controls
     public void UnpossessItem()
     {
+        //Change UI
+        GameManager.Instance.EnableMoveMode(false);
+
         //Remove lure sphere incase it still exists
         if (lureSphereCreated)
         {
@@ -552,14 +572,51 @@ public class playerPossession : MonoBehaviour
         possessedItem.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 1);
         possessedItem.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
 
-        CamPivotSet = false;
+        //CamPivotSet = false;
+        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = Camera.main.gameObject.transform;
+        
+
+        //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
+        pivot = new GameObject("Pivot");
+        pivot.transform.position = possessedItem.transform.position;
+        pivot.transform.rotation = possessedItem.transform.rotation;
+        pivot.transform.SetParent(possessedItem.transform);
+
+        //Child camera to pivot point
+        Camera.main.transform.SetParent(pivot.transform);
+
+        //Change UI
+        GameManager.Instance.EnableHideScaryLure(false);
+        GameManager.Instance.EnableMoveMode(false);
+
+        if (possessedItem.GetComponent<ItemController>().isScaryObject())
+            GameManager.Instance.EnableHideScary(true);
+        else
+            GameManager.Instance.EnableHideNonScary(true);
+
+        //Spawn lureSphere
+        if (possessedItem.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
+        {
+            Instantiate(lureSphere, possessedItem.transform);
+            lureSphereCreated = true;
+        }
+
+        ////Renable rotation while falling
+        Camera.main.GetComponent<CamLock>().enabled = true;
+
+        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enableRotation = false;
         hidden = true; //set that we are now hidden in an object
+        CamPivotSet = true;
     }
 
     //#OPTIMISE - These two methods both run physics.overlap, possibly merge that call into one list for use in repel, and if repel detects that list empty, then run its own?
     //Gotta think about how id do it, what happens if list has 1, but then 4 AI walk in during a repel...
     void Lure() //Written by Jak
     {
+        //Change UI
+        GameManager.Instance.EnableHideScary(false);
+        GameManager.Instance.EnableHideScaryLure(true);
+
         //Destroy the scareEffect incase it hasnt already.
         if (scareEffect != null)
             Destroy(scareEffect);
@@ -597,8 +654,12 @@ public class playerPossession : MonoBehaviour
 
     void Repel()//Written by Jak
     {
+        //Change UI
+        GameManager.Instance.EnableHideScaryLure(false);
+        GameManager.Instance.EnableHideScary(true);
+
         //Destroy the lureEffect incase it hasnt already.
-        if(lureEffect != null)
+        if (lureEffect != null)
             Destroy(lureEffect);
 
         //Spawn scareEffect
@@ -677,6 +738,7 @@ public class playerPossession : MonoBehaviour
             if(hit.transform.tag == "Item")
             {
                 target = hit.collider.gameObject;
+                //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.green, 100f);
                 targetSet = true;
             }
             else
@@ -695,10 +757,12 @@ public class playerPossession : MonoBehaviour
         if (targetSet == true && disolveScript.transferring == false)
         {
             disolveScript.transferring = true;
-            disolveScript.target = target;
+            disolveScript.target = target;            
             disolveScript.startDissolve = true;  //Start the particle transition
-            
+
             //Stop movement on sid while transitioning
+            GameManager.Instance.EnableItemSelect(false); //Incase "Hide Image" is still up
+            gameObject.GetComponent<script_ToonShaderFocusOutline>().enabled = false;
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<playerController>().enabled = false;
             //gameObject.GetComponent<CharacterController>().enabled = false;
@@ -713,8 +777,8 @@ public class playerPossession : MonoBehaviour
 
             //PossessItem() sets up the target item with all the scripts, then we immediatly call Hide()
             PossessItem();
-            Hide();            
-
+            Hide();
+           
             //Reset variables for next animation
             targetSet = false;
             disolveScript.target = null;

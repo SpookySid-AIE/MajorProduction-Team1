@@ -66,7 +66,7 @@ public class script_WillDissolve : MonoBehaviour {
         if (Time.time > particleTimer && startDissolve)
         {
             transferred = false;
-            GameObject particle = Instantiate(particlePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + particleVerticleOffset, gameObject.transform.position.z), Quaternion.identity);
+            GameObject particle = Instantiate(particlePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y/* + particleVerticleOffset*/, gameObject.transform.position.z), Quaternion.identity);
             CurveToTarget curveToTarget = particle.GetComponent<CurveToTarget>();
             curveToTarget.target = target;
             curveToTarget.particleLaunchDelay = particleLaunchDelay;

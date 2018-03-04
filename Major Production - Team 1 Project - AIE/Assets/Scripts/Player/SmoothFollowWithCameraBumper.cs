@@ -37,7 +37,9 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [Header("---DEBUGGING---")]
     public float currentHorizontal = 0;
     public float currentVertical = 0;
-    
+    public Vector3 wantedPosition;
+    public bool enableRotation = true;
+
     //public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
     
     /// <Summary>
@@ -62,7 +64,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     {
         //Get desired position/rotation IN WORLD SPACE and lerp.
         //Debug.Log(target);
-        Vector3 wantedPosition = target.TransformPoint(0, height, -distance);
+        wantedPosition = target.TransformPoint(0, height, -distance);
         Vector3 lookPosition = target.TransformPoint(targetLookAtOffset);
 
         // check to see if there is anything behind the target
@@ -88,23 +90,26 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
         }
 
-        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
+        //if (enableRotation)
+            transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
 
         //Debug.DrawLine(lookPosition, wantedPosition);
 
-        if (smoothRotation) //If smooth rotation's enabled
-        {
-            Quaternion wantedRotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping); //Dampen the speed of rotation based of "rotationDamping"
-        }
-        else
+        //if (smoothRotation) //If smooth rotation's enabled
+        //{
+        //    Quaternion wantedRotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping); //Dampen the speed of rotation based of "rotationDamping"
+        //}
+        //else
+
+        //if(enableRotation)
             transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up); //Rotate the camera without damping
     }
-    
+
     private void LateUpdate()
     {
         //This code orbits the camera during hide mode
-        if (playerPosRef.IsHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true) 
+        if (playerPosRef.IsHidden())
         {
             CameraParent = this.gameObject.transform.parent;
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
@@ -116,7 +121,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
             if (CameraParent != null)
             {
                 target = CameraParent;
-                this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
+                this.CameraParent.rotation = rotation/*Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping)*/;
             }
         }
     }

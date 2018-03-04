@@ -48,8 +48,7 @@ public class CamLock : MonoBehaviour
 
     //Called from playerPossession
     private void OnEnable()
-    {
-        
+    {        
         player = GameObject.FindGameObjectWithTag("Player"); //Sets player and players rigidbody to the appropriate values
         playerrb = player.GetComponent<Rigidbody>();
 

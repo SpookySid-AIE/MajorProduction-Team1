@@ -33,6 +33,21 @@ public class GameManager : MonoBehaviour {
 
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
+
+    //Storing all UI objects for the mouse images
+    [SerializeField]private GameObject itemSelect;
+    [SerializeField]private GameObject hideNonScary;
+    [SerializeField]private GameObject hideScary;
+    [SerializeField]private GameObject hideScaryLureUsed;
+    [SerializeField]private GameObject moveMode;
+
+    //Public accessor methods to set the gameobjects/on/off
+    public void EnableItemSelect(bool value) { itemSelect.SetActive(value); }
+    public void EnableHideNonScary(bool value) { hideNonScary.SetActive(value); }
+    public void EnableHideScary(bool value) { hideScary.SetActive(value); }
+    public void EnableHideScaryLure(bool value) { hideScaryLureUsed.SetActive(value); }
+    public void EnableMoveMode(bool value) { moveMode.SetActive(value); }
+
     // public Canvas canvasPause;
     private RectTransform winText; //Transforms of the child text objects
     private RectTransform loseText;
@@ -61,7 +76,7 @@ public class GameManager : MonoBehaviour {
 
         if (canvasWinOrLose == null)
             Debug.LogError("CanvasWinOrLose has not been set on GameManager.cs. Please set through the editor window.");
-        
+
         canvasWinOrLose.gameObject.SetActive(false);
         //canvasPause.gameObject.SetActive(false);
 
