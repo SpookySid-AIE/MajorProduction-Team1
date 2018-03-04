@@ -22,9 +22,12 @@ GameObject:
   - component: {fileID: 33611124431102792}
   - component: {fileID: 23403209920290352}
   - component: {fileID: 95916433477463408}
+  - component: {fileID: 114137822558675066}
+  - component: {fileID: 65474154696834624}
+  - component: {fileID: 54348978360564590}
   m_Layer: 0
   m_Name: frozenfood_01_prefab
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +86,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1218595037092364}
   m_Mesh: {fileID: 4300000, guid: 328b017ac88d7e0478e2db8c1d76baa6, type: 3}
+--- !u!54 &54348978360564590
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218595037092364}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65474154696834624
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218595037092364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35070783, y: 0.21453735, z: 0.074555516}
+  m_Center: {x: -0.00000008195639, y: 0.10726853, z: -0.00000007636845}
 --- !u!95 &95916433477463408
 Animator:
   serializedVersion: 3
@@ -100,3 +130,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114137822558675066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218595037092364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 1
+  ItemScaryRating: 0
+  itemSize: 0
+  hasBeenThrown: 0
+  timer: 0
+  baseScariness: 0
+  ectoCost: 0
+  scaryObject: 0
