@@ -494,7 +494,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1058060483683256
 GameObject:
@@ -1320,7 +1320,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1153670255990252
 GameObject:
@@ -1514,7 +1514,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1186411355946524
 GameObject:
@@ -4495,7 +4495,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1631381744870688
 GameObject:
@@ -4651,6 +4651,7 @@ GameObject:
   - component: {fileID: 4354011934670642}
   - component: {fileID: 33200735230333760}
   - component: {fileID: 23383180840749346}
+  - component: {fileID: 95834535582657026}
   m_Layer: 0
   m_Name: Drink_Can_prefab
   m_TagString: Untagged
@@ -8304,8 +8305,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1741366565891500}
-  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -40.015213, y: -17.135963, z: -6.6541166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -182.35149, y: 2.0706472, z: 15.294057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4354011934670642}
@@ -8701,7 +8702,7 @@ Transform:
   - {fileID: 4589295520403448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4169018827267350
 Transform:
   m_ObjectHideFlags: 1
@@ -35032,6 +35033,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95834535582657026
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643727949088416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a6df5ed8f4b0e4a4cb044fe361281f6a, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95839250836014402
 Animator:
   serializedVersion: 3
@@ -36132,10 +36150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
-  ItemScaryRating: 1
-  itemSize: 3
+  ItemScaryRating: 0
+  itemSize: 0
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scaryObject: 1
+  scaryObject: 0
