@@ -115,9 +115,10 @@ GameObject:
   - component: {fileID: 95944382489647120}
   - component: {fileID: 54655247176879822}
   - component: {fileID: 114665491970483994}
+  - component: {fileID: 65462014128803362}
   m_Layer: 0
   m_Name: prefab_breadShelf
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -129,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1921050242820590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -178.76588, y: -4.7465514e-18, z: 62.507072}
+  m_LocalPosition: {x: -165.48524, y: 0.00000047683716, z: 60.8584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4322942722432084}
@@ -234,6 +235,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!65 &65462014128803362
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1921050242820590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1617737, y: 2.499531, z: 1}
+  m_Center: {x: 0.010894775, y: 1.2430884, z: 0}
 --- !u!65 &65621906789519776
 BoxCollider:
   m_ObjectHideFlags: 1

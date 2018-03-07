@@ -6,11 +6,52 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: geo_baguette
+    100004: geo_bakeryDisplay
+    100006: geo_cakes
+    100008: geo_cookieCats
+    100010: geo_eclair
+    100012: geo_gingerbread
+    100014: geo_gingerbread_MeshPart0
+    100016: geo_gingerbread_MeshPart1
+    100018: geo_gingerbread_MeshPart2
     400000: //RootNode
+    400002: geo_baguette
+    400004: geo_bakeryDisplay
+    400006: geo_cakes
+    400008: geo_cookieCats
+    400010: geo_eclair
+    400012: geo_gingerbread
+    400014: geo_gingerbread_MeshPart0
+    400016: geo_gingerbread_MeshPart1
+    400018: geo_gingerbread_MeshPart2
     2300000: //RootNode
+    2300002: geo_baguette
+    2300004: geo_bakeryDisplay
+    2300006: geo_cakes
+    2300008: geo_cookieCats
+    2300010: geo_eclair
+    2300012: geo_gingerbread_MeshPart0
+    2300014: geo_gingerbread_MeshPart1
+    2300016: geo_gingerbread_MeshPart2
     3300000: //RootNode
+    3300002: geo_baguette
+    3300004: geo_bakeryDisplay
+    3300006: geo_cakes
+    3300008: geo_cookieCats
+    3300010: geo_eclair
+    3300012: geo_gingerbread_MeshPart0
+    3300014: geo_gingerbread_MeshPart1
+    3300016: geo_gingerbread_MeshPart2
     4300000: geo_bakeryDisplay
     4300002: geo_bakeryShelf
+    4300004: geo_baguette
+    4300006: geo_eclair
+    4300008: geo_gingerbread_MeshPart0
+    4300010: geo_gingerbread_MeshPart1
+    4300012: geo_gingerbread_MeshPart2
+    4300014: geo_cookieCats
+    4300016: geo_cakes
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -80,8 +121,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: shd_bakeryDisplay
+    second: {fileID: 2100000, guid: 8b148f0f99c0232438fea9bf5f52ca05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: shd_breadShelf
     second: {fileID: 2100000, guid: 43a5ddacbce3f8a4b853532194d2a8ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_cake
+    second: {fileID: 2100000, guid: 1d5949e631aa29f4e96fc4e2bd587454, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_desserts
+    second: {fileID: 2100000, guid: 2688025a625e33e4b8f629d33ad69ac8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_glass
+    second: {fileID: 2100000, guid: 295112a3ab78a344aa4787cdb4fea4be, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
