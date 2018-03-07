@@ -7,7 +7,7 @@ using UnityEngine.AI;
 //#OPTIMISE - CACHE ALL OVERUSED GETCOMPONENT CALLS
 
 public class playerPossession : MonoBehaviour
-{
+{    
     private GameObject player; //could be the real player or a possessed item
     private GameObject sneakTest; //Store old player here while possessing
 
@@ -59,7 +59,7 @@ public class playerPossession : MonoBehaviour
     [Header("LureSphere Prefab")] public GameObject lureSphere;
 
     //Cached script_willDisolve, Script that transitions camera and particles over to the intended object
-    script_WillDissolve disolveScript;
+    static script_WillDissolve disolveScript;
 
     //Lure/Scare particle effects references
     private GameObject lureEffect;
@@ -91,11 +91,15 @@ public class playerPossession : MonoBehaviour
         COUNT
     }
 
+    //Fmod audio instances - these are set in Lure/Repel
+    FMOD.Studio.EventInstance lureSound;
+    FMOD.Studio.EventInstance scareSound;
+
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        disolveScript = player.GetComponent<script_WillDissolve>();
+        
 
         //This only works because the one instance of playerPossession exists on "Sid" so it grabs the correct values
         //from then forward items with this script attached can no longer edit the OldSidValues Struct which is good
@@ -108,13 +112,17 @@ public class playerPossession : MonoBehaviour
             OldSidValues.rigidMass = player.GetComponent<Rigidbody>().mass;
             OldSidValues.rigidDrag = player.GetComponent<Rigidbody>().drag;
             OldSidValues.rigidAngDrag = player.GetComponent<Rigidbody>().angularDrag;
+            disolveScript = player.GetComponent<script_WillDissolve>();
             oldSidValuesSet = true;
         }
 
         //Update playerPossession Reference in gamemanager
         GameManager.Instance.player = player.GetComponent<playerPossession>();
 
-        //This doesnt exist yet???
+        //Setup the references
+        lureSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioLure);
+        scareSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioScare);
+
         sneakTest = GameObject.FindGameObjectWithTag("Sneak");
     }
 
@@ -136,9 +144,9 @@ public class playerPossession : MonoBehaviour
             if (timer >= 0.25f)
             {
                 timer = 0;
-                player.layer = 0;
+                player.layer = 0;                
                 resettingSidInvis = false;
-                //Debug.Log("Reset");
+                //Debug.Log("Sid Layer Reset");
             }
         }
     }
@@ -213,35 +221,6 @@ public class playerPossession : MonoBehaviour
             }
         }
 
-        //Camera Pivot during hide
-        //Outside of hide, because if the object is falling, we have to wait before we add the pivot point
-        //This could cause issues if the object is always moving
-        //At this point, HIDE has been called, therefore the script is no longer on player, but the ITEM - so player = item
-        //if (hidden && player.GetComponent<Rigidbody>().IsSleeping() == true && !CamPivotSet)
-        //{
-        //    //Debug.Log(player.name + " grounded");
-
-        //    //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
-        //    pivot = new GameObject("Pivot");
-        //    pivot.transform.position = player.transform.position;
-
-        //    ////Child camera to pivot point
-        //    Camera.main.transform.SetParent(pivot.transform);
-
-        //    //Spawn lureSphere
-        //    if (player.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
-        //    {
-        //        Instantiate(lureSphere, player.transform);
-        //        lureSphereCreated = true;
-        //    }
-        //    ////Renable rotation while falling
-        //    Camera.main.GetComponent<CamLock>().enabled = true;
-
-        //    ////Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enabled = true;
-
-        //    CamPivotSet = true;
-        //}
-
         //Quick Drop - Jak
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -259,7 +238,10 @@ public class playerPossession : MonoBehaviour
 
                         sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
 
+                        disolveScript.MakeSidVisible();
                         UnpossessItem();
+                        
+
                         break;
                     }
                 } //End loop
@@ -337,6 +319,9 @@ public class playerPossession : MonoBehaviour
     {
         //We are no longer hidden
         hidden = false;
+
+        //Reset the lureused
+        lureUsed = false;
 
         //Change UI
         if (target.GetComponent<ItemController>().isScaryObject())
@@ -480,9 +465,11 @@ public class playerPossession : MonoBehaviour
     {
         //throw the object;
         //may need to identify that the object was "hitby" will so that it will register a point of interest when it colides with something.
+        gameObject.GetComponent<playerPossession>().hasItemBeenThrown = true;
+        gameObject.GetComponent<ItemController>().hasBeenThrown = true;
         UnpossessItem();
-        player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;
-        sneakTest.GetComponent<playerPossession>().hasItemBeenThrown = true;
+        disolveScript.MakeSidVisible();
+        player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;        
         lastThrownItem = this.gameObject.transform;
         yield return new WaitForSeconds(0);
     }
@@ -490,9 +477,6 @@ public class playerPossession : MonoBehaviour
     //Written by Ben - Jak tweaked here and there when restructuring player controls
     public void UnpossessItem()
     {
-        //Change UI
-        GameManager.Instance.EnableMoveMode(false);
-
         //Remove lure sphere incase it still exists
         if (lureSphereCreated)
         {
@@ -517,7 +501,7 @@ public class playerPossession : MonoBehaviour
         //Destroy(player.GetComponent<CharacterController>());
 
         //player.GetComponent<ItemController>().enabled = true; //Added by Jak - 4/12/17
-        player.GetComponent<ItemController>().hasBeenThrown = true;
+        //player.GetComponent<ItemController>().hasBeenThrown = true;
 
         //disable the items
         player.GetComponent<playerPossession>().enabled = false;
@@ -527,10 +511,19 @@ public class playerPossession : MonoBehaviour
         mat.SetColor("_Color", Color.white);// Added by Mark - Change main colour of object back to white
         mat.SetColor("_OutlineColor", Color.black);// Added by Mark - Change  colour of object outline back to black
 
-        //Reset variables
+        //Reset variables - Jak
+        lureUsed = false;
         moveModeActive = false;
         hidden = false;
         PossessedItem = null;
+
+        //Disabling UI - just calling all of them for now, i could easily add a lastCalled variable
+        //and just disable that one, but i think its fine for the small amount we have currently - Jak
+        GameManager.Instance.EnableHideNonScary(false);
+        GameManager.Instance.EnableHideScary(false);
+        GameManager.Instance.EnableHideScaryLure(false);
+        GameManager.Instance.EnableItemSelect(false);
+        GameManager.Instance.EnableMoveMode(false);
 
         //switch off the camera tracking whilst we reset the player back to what it is supposed to be
         Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
@@ -558,8 +551,6 @@ public class playerPossession : MonoBehaviour
         possessedItem.enabled = true; //Enable the item playerPossesion script
 
         //Disable movement
-        //possessedItem.GetComponent<CharacterController>().detectCollisions = false;
-        //possessedItem.GetComponent<CharacterController>().enabled = false;
         possessedItem.GetComponent<playerController>().enabled = false;
 
         //switch off gravity for the target
@@ -572,10 +563,7 @@ public class playerPossession : MonoBehaviour
         possessedItem.GetComponentInChildren<Renderer>().material.SetFloat("_AuraOnOff", 1);
         possessedItem.GetComponentInChildren<Renderer>().material.SetColor("_ASEOutlineColor", Color.black);
 
-        //CamPivotSet = false;
-        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = Camera.main.gameObject.transform;
-        
-
+        //Camera Pivot setup
         //Create pivot object for camera orbiting - check when rigidbody is grounded, then add - might need to move this to update function
         pivot = new GameObject("Pivot");
         pivot.transform.position = possessedItem.transform.position;
@@ -584,6 +572,17 @@ public class playerPossession : MonoBehaviour
 
         //Child camera to pivot point
         Camera.main.transform.SetParent(pivot.transform);
+        
+        //Spawn lureSphere
+        if (possessedItem.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
+        {
+            Instantiate(lureSphere, possessedItem.transform);
+            lureSphereCreated = true;
+        }
+
+        //Renable rotation while falling
+        Camera.main.GetComponent<CamLock>().enabled = true;
+        //End Camera Orbit
 
         //Change UI
         GameManager.Instance.EnableHideScaryLure(false);
@@ -593,18 +592,8 @@ public class playerPossession : MonoBehaviour
             GameManager.Instance.EnableHideScary(true);
         else
             GameManager.Instance.EnableHideNonScary(true);
+        //End UI
 
-        //Spawn lureSphere
-        if (possessedItem.GetComponent<ItemController>().isScaryObject() && !lureSphereCreated)
-        {
-            Instantiate(lureSphere, possessedItem.transform);
-            lureSphereCreated = true;
-        }
-
-        ////Renable rotation while falling
-        Camera.main.GetComponent<CamLock>().enabled = true;
-
-        //Camera.main.GetComponent<SmoothFollowWithCameraBumper>().enableRotation = false;
         hidden = true; //set that we are now hidden in an object
         CamPivotSet = true;
     }
@@ -621,8 +610,31 @@ public class playerPossession : MonoBehaviour
         if (scareEffect != null)
             Destroy(scareEffect);
 
+        //Create particle effect
         lureEffect = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().lureEffect, this.gameObject.transform);
         lureEffect.transform.localPosition = new Vector3(0, 0, 0);
+
+        //Sound Effect ----------------------------------
+        FMOD.Studio.PLAYBACK_STATE stateLure;
+        FMOD.Studio.PLAYBACK_STATE stateScare;
+        lureSound.getPlaybackState(out stateLure); //Poll the audio events to see if playback is happening
+        scareSound.getPlaybackState(out stateScare);
+
+        //Check if any audio is still playing and stop it to prevent overlap - Then play the required clip
+        if (stateLure == FMOD.Studio.PLAYBACK_STATE.PLAYING || stateScare == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            lureSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            scareSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            lureSound.start(); // Starts the event
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(lureSound, GetComponent<Transform>(), GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+        }
+        else //If none is playing start immediatly
+        {
+            lureSound.start(); // Starts the event
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(lureSound, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        }
+        //End Sound Effect ----------------------------
 
         //Lure Enemies to us
         //#OPTIMISE //Refactor this so it finds tags first instead of all colliders
@@ -633,6 +645,7 @@ public class playerPossession : MonoBehaviour
         NavMeshHit navHit;
         NavMesh.SamplePosition(this.gameObject.transform.position, out navHit, lureRange, -1);
 
+        //Check for any civs in the radius and "lure" them to us
         foreach (Collider civ in civillians)
         {
             if (civ.tag == "Civillian")
@@ -640,7 +653,7 @@ public class playerPossession : MonoBehaviour
                 CivillianController civillian = civ.GetComponent<CivillianController>();
 
                 if (civillian.currentState != State.State_Retreat) //Only LURE the CIVS if they arent already in a retreat state / Prevents spam
-                {
+                {                    
                     civillian.itemPosition = navHit.position;
                     civillian.alertedByItem = true;
                 }
@@ -668,6 +681,28 @@ public class playerPossession : MonoBehaviour
 
         //Play scare animation
         GetComponent<ItemController>().SetAnimScare(true);
+
+        //Sound Effect ----------------------------------
+        FMOD.Studio.PLAYBACK_STATE stateLure;
+        FMOD.Studio.PLAYBACK_STATE stateScare;
+        lureSound.getPlaybackState(out stateLure); //Poll the audio events to see if playback is happening
+        scareSound.getPlaybackState(out stateScare);
+
+        //Check if any audio is still playing and stop it to prevent overlap - Then play the required clip
+        if (stateLure == FMOD.Studio.PLAYBACK_STATE.PLAYING || stateScare == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            lureSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            scareSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            scareSound.start(); // Starts the event
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(scareSound, GetComponent<Transform>(), GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+        }
+        else //If none is playing start immediatly
+        {
+            scareSound.start(); // Starts the event
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(scareSound, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        }
+        //End Sound Effect ----------------------------
 
         //Get all colliders
         //#OPTIMISE
@@ -765,6 +800,7 @@ public class playerPossession : MonoBehaviour
             gameObject.GetComponent<script_ToonShaderFocusOutline>().enabled = false;
             gameObject.GetComponent<playerController>().speed = 0;
             gameObject.GetComponent<playerController>().enabled = false;
+            //gameObject.GetComponent<playerPossession>().enabled = false;
             //gameObject.GetComponent<CharacterController>().enabled = false;
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;

@@ -39,6 +39,9 @@ public class CIV_Retreat : State_CIV
         if (currentAgent.m_Animator.enabled == false) //This is here temporarilly until we get a intriged animation going, this just unfreezes anim
             currentAgent.m_Animator.enabled = true;
 
+        //Play scared sound clip
+        FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioCivScared, currentAgent.transform.position);
+
         currentAgent.navAgent.speed = 5.0f; //Add some additional speed to make them feel really spooked
         currentAgent.m_Animator.SetBool("Scared", true);
 
