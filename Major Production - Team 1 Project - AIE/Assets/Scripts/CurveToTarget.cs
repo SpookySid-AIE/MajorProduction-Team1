@@ -7,7 +7,7 @@ public class CurveToTarget : MonoBehaviour {
 
     public GameObject target;
     public float lerpHeight = 4f;
-    public float speed = 10;
+    public float speed = 10f;
     public float particleLaunchDelay;
     public float destroyTimer = 2.0f;
 
@@ -30,35 +30,24 @@ public class CurveToTarget : MonoBehaviour {
 
     void Update()
     {
-        
-
-        //Lerp to the cameras wanted position - but it has to have the target item already set BUT without actually lerping ther itself
-
-
         if (Time.time >= particleLaunchTimer && finishedAnim != true)
         {
-            Debug.Log("Transition Running..");
+            //Debug.Log("Transition Running..");
             //finishedAnim = false;
-            incrementor += speed;
-            currentPos = Vector3.Lerp(startPos, endPos, incrementor);
-            //currentPos.y += lerpHeight * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
-            transform.position = currentPos;
 
-            //Vector3 curPos = new Vector3(currentPos.x, currentPos.y, currentPos.z);
+            //Old one before 6.3.18
+            //incrementor += speed;
+            //currentPos = Vector3.Lerp(startPos, endPos, incrementor);
+            ////currentPos.y += lerpHeight * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
+            //transform.position = currentPos;
 
-            //curPos.x -= 4f;
-            //curPos.y -= .5f;
-            //curPos.z -= 1f;
-
-            //Camera.main.transform.LookAt(curPos);
-            
+            //New
+            transform.position = Vector3.MoveTowards(transform.position, endPos, Time.deltaTime * 4);
             Camera.main.GetComponent<SmoothFollowWithCameraBumper>().target = transform;
-            //Camera.main.transform.position = currentPos;
-            //Camera.main.transform.rotation = transform.rotation;
-            
+
             //Through testing i found that the distance between the target and Camera should always be less than 2.3, so if errors in transitions, this could be why
             //float dist = Vector3.Distance(Camera.main.transform.position, Camera.main.GetComponent<SmoothFollowWithCameraBumper>().wantedPosition);
-            float dist = Vector3.Distance(Camera.main.transform.position, target.transform.position);
+            //float dist = Vector3.Distance(Camera.main.transform.position, target.transform.position);
             //Debug.DrawLine(Camera.main.transform.position, Camera.main.GetComponent<SmoothFollowWithCameraBumper>().wantedPosition, Color.green, 100f);
 
             //Debug.Log(dist);
