@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.10.00">
-    <object class="ParameterPreset" id="{1a386129-084f-47b8-896a-1ee04bf346c4}">
+    <object class="ParameterPreset" id="{fc4d89cd-adf1-439a-8846-14023ebf6aef}">
         <property name="name">
-            <value>SupermarketEntered</value>
+            <value>WarehouseEntered</value>
         </property>
         <relationship name="folder">
             <destination>{ee30e8c4-6b61-47d1-8859-2fc5cbfa098c}</destination>
         </relationship>
         <relationship name="parameter">
-            <destination>{10e4c0e2-0b88-4012-aa30-786ec0b3a4c7}</destination>
+            <destination>{f80458a8-ca30-4ae7-8ea6-fdb33fb14f58}</destination>
         </relationship>
     </object>
-    <object class="GameParameter" id="{10e4c0e2-0b88-4012-aa30-786ec0b3a4c7}">
+    <object class="GameParameter" id="{f80458a8-ca30-4ae7-8ea6-fdb33fb14f58}">
         <property name="initialValue">
             <value>0</value>
-        </property>
-        <property name="seekSpeed">
-            <value>0.33000001311302185</value>
         </property>
     </object>
 </objects>
