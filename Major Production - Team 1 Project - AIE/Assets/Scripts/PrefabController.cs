@@ -8,5 +8,8 @@ public class PrefabController : MonoBehaviour { //Has all the effects in it, so 
     public GameObject lureEffect;
     public GameObject scareEffect;
     public GameObject ghostEffect;
+    public GameObject greenEcto;
+    public GameObject pinkEcto;
+    public GameObject redEcto;
 
 }

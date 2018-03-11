@@ -453,7 +453,19 @@ public class playerPossession : MonoBehaviour
             }
 
             else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Large)
+            {
                 Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 7.0f;
+            }
+            else if (target.GetComponent<ItemController>().itemSize == ItemController.Size.Massive)
+            {
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().distance = 11.0f;
+                Camera.main.gameObject.GetComponent<SmoothFollowWithCameraBumper>().targetLookAtOffset = new Vector3(0, 20, 20);
+                Quaternion temp = gameObject.transform.rotation;
+                temp.x = -10;
+                gameObject.transform.rotation = temp;
+
+
+            }
 
             //Tell the other scripts we are now possessed
             moveModeActive = true;        

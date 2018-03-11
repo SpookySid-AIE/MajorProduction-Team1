@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour
 {
 
     public enum Orientation { Least_Scary, Medium_Scary, Most_Scary } //A created variable used to determine the scariness of an item and therefore, values received for scaring with it.
-    public enum Size { Miniature, Small, Medium, Large } //A created variable used to determine the size of an object, and therefore the camera distance.
+    public enum Size { Miniature, Small, Medium, Large, Massive } //A created variable used to determine the size of an object, and therefore the camera distance.
     public int timesThrownBeforeDestroyed = 1; //The number of times an item can be thrown before it's destroyed. Default is once, can be edited without repercussion.
     private int timesThrown = 0; //A counter that tracks the number of times and item has been thrown. 
     public Orientation ItemScaryRating; // Creating a variable for scary ratings, using the first line of code above this.
@@ -98,9 +98,12 @@ public class ItemController : MonoBehaviour
         if (timesThrown == timesThrownBeforeDestroyed) //If an item reaches the "TimesThrownBeforeDestroyed" Threshold.
         {
             if (hasBeenDamaged) //If it collides with something one last time
-            {             
+            {
+                hasBeenDamaged = false;
                 GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation); //Creates the explosion effect, from the prefab controller.
                 gameObject.GetComponentInChildren<Renderer>().enabled = false; //Derenders the thrown item.
+                if (gameObject.GetComponentInChildren<SkinnedMeshRenderer>())
+                gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 gameObject.tag = "Untagged"; //Removes the items tag.
                 DestroyObject(gameObject, 2.0f); //Destroys the item after two seconds, to prevent it disappearing before sid is reactivated.
                 DestroyObject(crashClone, 2.0f); //Removes the crash effect after two seconds. This is a magic number that is equal to how long the crash takes to play once.

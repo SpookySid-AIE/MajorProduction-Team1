@@ -22,7 +22,7 @@ public class CIV_Retreat : State_CIV
 
 #if UNITY_EDITOR
 
-    //GameObject ectoplasms = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/particleEctoplasm.prefab", typeof(GameObject)) as GameObject;
+    
 
 #endif
 
@@ -91,7 +91,7 @@ public class CIV_Retreat : State_CIV
         if (agent.hasDroppedEcto == false)
         {
             agent.hasDroppedEcto = true;
-            //GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
+            GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
         }
 
         //This is the code that makes the agent run away from whatever target has been set
