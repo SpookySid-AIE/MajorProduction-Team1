@@ -28,9 +28,10 @@ MonoBehaviour:
   - {fileID: 114937819915991616}
   - {fileID: 114213634212557034}
   - {fileID: 114731205871990642}
+  - {fileID: 114303193632873178}
   MasterBankRef: {fileID: 114662725510375024}
   StringsBankRef: {fileID: 114887034936834894}
-  stringsBankWriteTime: 636563198390046785
+  stringsBankWriteTime: 636563791488304954
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -159,6 +160,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114019019082438568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114023225376498984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,7 +816,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114809788018177390}
+  - {fileID: 114019019082438568}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114224278511935642
@@ -1000,6 +1016,27 @@ MonoBehaviour:
   Banks:
   - {fileID: 114555378161913390}
   IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+--- !u!114 &114303193632873178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Title_Theme_Toccata and Fugue in D Minor
+  guid: a2a3262753b67f41bf04f99ac5b48a4c
+  Banks:
+  - {fileID: 114662725510375024}
+  IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters: []
@@ -1854,6 +1891,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114578406642307376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114583647145898542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2152,11 +2204,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636563198389971428
+  lastModified: 636563791488249869
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 3755712
+    Value: 11348064
   Exists: 1
 --- !u!114 &114663112830953208
 MonoBehaviour:
@@ -2369,7 +2421,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114605339157074910}
+  - {fileID: 114578406642307376}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114731659842040764
@@ -2698,6 +2750,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114856962611121058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114860625860217166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,11 +2858,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636563198390046785
+  lastModified: 636563791488304954
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1336
+    Value: 1406
   Exists: 1
 --- !u!114 &114887721855614298
 MonoBehaviour:
@@ -3211,7 +3278,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114614590611809236}
+  - {fileID: 114856962611121058}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114982516029782070

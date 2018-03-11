@@ -234,7 +234,8 @@ Prefab:
       propertyPath: StopEvent
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114016049163917862, guid: 42c537c1d73ed5b4ea62cd14b833eb98, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 42c537c1d73ed5b4ea62cd14b833eb98, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &515131215
@@ -768,12 +769,12 @@ Prefab:
     - target: {fileID: 224961081354445510, guid: 15ef3a33e9d3e4b4f86d0ad3de74bde7,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -742
+      value: -766
       objectReference: {fileID: 0}
     - target: {fileID: 224961081354445510, guid: 15ef3a33e9d3e4b4f86d0ad3de74bde7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -742
+      value: -766
       objectReference: {fileID: 0}
     - target: {fileID: 224457296903428358, guid: 15ef3a33e9d3e4b4f86d0ad3de74bde7,
         type: 2}
@@ -864,6 +865,7 @@ GameObject:
   - component: {fileID: 743125760}
   - component: {fileID: 743125759}
   - component: {fileID: 743125758}
+  - component: {fileID: 743125762}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -938,6 +940,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &743125762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 743125757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Title_Theme_Toccata and Fugue in D Minor
+  PlayEvent: 1
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1135218132
 GameObject:
   m_ObjectHideFlags: 0
