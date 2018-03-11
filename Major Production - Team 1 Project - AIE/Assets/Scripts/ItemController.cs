@@ -20,6 +20,8 @@ public class ItemController : MonoBehaviour
     public Size itemSize; //Same as "ItemScaryRating" except for item size.
     public bool hasBeenThrown; //A boolean to check whether an item has been thrown or not.
     private bool hasBeenDamaged = false; //A boolean to check whether an item has been damaged recently. Prevents an item breaking instantly.
+    private bool itemDestroying = false;
+    private bool noCollideSet;
 
 
     [HideInInspector]
@@ -97,8 +99,9 @@ public class ItemController : MonoBehaviour
     {
         if (timesThrown == timesThrownBeforeDestroyed) //If an item reaches the "TimesThrownBeforeDestroyed" Threshold.
         {
-            if (hasBeenDamaged) //If it collides with something one last time
+            if (hasBeenDamaged && !itemDestroying) //If it collides with something one last time
             {
+                itemDestroying = true;
                 hasBeenDamaged = false;
                 GameObject crashClone = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().explosionEffect, gameObject.transform.position, gameObject.transform.rotation); //Creates the explosion effect, from the prefab controller.
                 gameObject.GetComponentInChildren<Renderer>().enabled = false; //Derenders the thrown item.
@@ -106,9 +109,7 @@ public class ItemController : MonoBehaviour
                 gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 gameObject.tag = "Untagged"; //Removes the items tag.
                 DestroyObject(gameObject, 2.0f); //Destroys the item after two seconds, to prevent it disappearing before sid is reactivated.
-                DestroyObject(crashClone, 2.0f); //Removes the crash effect after two seconds. This is a magic number that is equal to how long the crash takes to play once.
                 timesThrown = 0; //Resets the times thrown value.
-
             }
         }
     }
@@ -134,6 +135,12 @@ public class ItemController : MonoBehaviour
 
         if (hasBeenThrown) //If something has been thrown.
         {
+            if (!noCollideSet)
+            {
+                gameObject.layer = 8;
+                noCollideSet = true;
+            }
+
             if (hasBeenDamaged == false) //If the hasBeenDamaged hasn't been set yet.
             {
                 timesThrown++; //Add one to times thrown
@@ -141,11 +148,17 @@ public class ItemController : MonoBehaviour
             }
 
             timer += Time.deltaTime; //Add real time to the timer
+
+            if (timer >= 0.25 && gameObject.layer != 1)
+                gameObject.layer = 1;
+
             if (timer >= 3) //If it hasn't been three seconds yet.
-            {
+            {               
                 timer = 0; //Reset the timer
                 hasBeenThrown = false; //Reset the has been thrown check
                 hasBeenDamaged = false; //Reset the has been damaged check
+                gameObject.layer = 1;
+                noCollideSet = false;
             }
             
         

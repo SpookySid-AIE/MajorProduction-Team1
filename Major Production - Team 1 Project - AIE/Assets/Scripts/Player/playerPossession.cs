@@ -18,6 +18,7 @@ public class playerPossession : MonoBehaviour
     public GameObject PossessedItem;
     public bool hasItemBeenThrown;
     public static Transform lastThrownItem;
+    public GameObject itemThrown;
 
     //Used during hide for camera pivot
     [HideInInspector]public GameObject pivot;
@@ -143,8 +144,7 @@ public class playerPossession : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= 0.25f)
             {
-                timer = 0;
-                player.layer = 0;                
+                timer = 0;              
                 resettingSidInvis = false;
                 //Debug.Log("Sid Layer Reset");
             }
@@ -179,7 +179,6 @@ public class playerPossession : MonoBehaviour
             }
             else if (!hidden && moveModeActive)
             {
-                player.layer = 8;
                 StartCoroutine(ThrowPossessedItemAway());
                 resettingSidInvis = true;
             }

@@ -90,7 +90,7 @@ public class CIV_Retreat : State_CIV
 
         if (agent.hasDroppedEcto == false)
         {
-            agent.hasDroppedEcto = true;
+            agent.hasDroppedEcto = true;    
             GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
         }
 
