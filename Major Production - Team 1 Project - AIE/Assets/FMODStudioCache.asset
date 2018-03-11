@@ -28,10 +28,10 @@ MonoBehaviour:
   - {fileID: 114937819915991616}
   - {fileID: 114213634212557034}
   - {fileID: 114731205871990642}
-  - {fileID: 114303193632873178}
+  - {fileID: 114463737621832304}
   MasterBankRef: {fileID: 114662725510375024}
   StringsBankRef: {fileID: 114887034936834894}
-  stringsBankWriteTime: 636563791488304954
+  stringsBankWriteTime: 636563990231658684
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -522,6 +522,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114111727119618600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114113129510460770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +831,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114019019082438568}
+  - {fileID: 114794654124669854}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114224278511935642
@@ -910,6 +925,21 @@ MonoBehaviour:
   - {fileID: 114519586846356266}
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114244931275229176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114245979669337280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,6 +1327,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114374528670141274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114378197156777942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,6 +1583,27 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114463737621832304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Title_Theme_Ghost_Dance
+  guid: 26d3c83b4050f849a2ee04ad7abfa8d6
+  Banks:
+  - {fileID: 114662725510375024}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
 --- !u!114 &114463977087536368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1765,6 +1831,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: SupermaketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114541183394582964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
   Min: 0
   Max: 1
   Default: 0
@@ -2204,11 +2285,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636563791488249869
+  lastModified: 636563990231603605
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 11348064
+    Value: 4548256
   Exists: 1
 --- !u!114 &114663112830953208
 MonoBehaviour:
@@ -2421,7 +2502,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114578406642307376}
+  - {fileID: 114374528670141274}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114731659842040764
@@ -2667,6 +2748,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3107712
   Exists: 0
+--- !u!114 &114794654124669854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114807751440707890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2858,11 +2954,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636563791488304954
+  lastModified: 636563990231658684
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1406
+    Value: 1390
   Exists: 1
 --- !u!114 &114887721855614298
 MonoBehaviour:
@@ -3225,6 +3321,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114970211332569236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114972943140124342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3278,7 +3389,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114856962611121058}
+  - {fileID: 114970211332569236}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114982516029782070
