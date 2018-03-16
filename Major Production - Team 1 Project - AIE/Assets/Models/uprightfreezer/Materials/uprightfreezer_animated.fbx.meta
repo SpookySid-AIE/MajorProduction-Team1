@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: 9957988f824d6cf4a92c55829543205a
+timeCreated: 1520976682
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: basecontainer1
+    100002: door_01
+    100004: door_01 1
+    100006: door_02
+    100008: door_02 1
+    100010: door_03
+    100012: door_03 1
+    100014: door_04
+    100016: door_04 1
+    100018: drink_can
+    100020: drink_can13
+    100022: drink_can14
+    100024: drink_can21
+    100026: glass_01
+    100028: glass_02
+    100030: glass_03
+    100032: glass_04
+    100034: icecoffecarton3
+    100036: icecoffecarton5
+    100038: milk_carton4
+    100040: milk_carton9
+    100042: milkbottle15
+    100044: milkbottle3
+    100046: milkbottle7
+    100048: milkbottle8
+    100050: milkGlass10
+    100052: milkGlass19
+    100054: milkGlass20
+    100056: milkGlass25
+    100058: milkGlass3
+    100060: milkGlass30
+    100062: milkGlass35
+    100064: milkGlass9
+    100066: //RootNode
+    400000: basecontainer1
+    400002: door_01
+    400004: door_01 1
+    400006: door_02
+    400008: door_02 1
+    400010: door_03
+    400012: door_03 1
+    400014: door_04
+    400016: door_04 1
+    400018: drink_can
+    400020: drink_can13
+    400022: drink_can14
+    400024: drink_can21
+    400026: glass_01
+    400028: glass_02
+    400030: glass_03
+    400032: glass_04
+    400034: icecoffecarton3
+    400036: icecoffecarton5
+    400038: milk_carton4
+    400040: milk_carton9
+    400042: milkbottle15
+    400044: milkbottle3
+    400046: milkbottle7
+    400048: milkbottle8
+    400050: milkGlass10
+    400052: milkGlass19
+    400054: milkGlass20
+    400056: milkGlass25
+    400058: milkGlass3
+    400060: milkGlass30
+    400062: milkGlass35
+    400064: milkGlass9
+    400066: //RootNode
+    2300000: basecontainer1
+    2300002: door_01 1
+    2300004: door_02 1
+    2300006: door_03 1
+    2300008: door_04 1
+    2300010: drink_can
+    2300012: drink_can13
+    2300014: drink_can14
+    2300016: drink_can21
+    2300018: glass_01
+    2300020: glass_02
+    2300022: glass_03
+    2300024: glass_04
+    2300026: icecoffecarton3
+    2300028: icecoffecarton5
+    2300030: milk_carton4
+    2300032: milk_carton9
+    2300034: milkbottle15
+    2300036: milkbottle3
+    2300038: milkbottle7
+    2300040: milkbottle8
+    2300042: milkGlass10
+    2300044: milkGlass19
+    2300046: milkGlass20
+    2300048: milkGlass25
+    2300050: milkGlass3
+    2300052: milkGlass30
+    2300054: milkGlass35
+    2300056: milkGlass9
+    3300000: basecontainer1
+    3300002: door_01 1
+    3300004: door_02 1
+    3300006: door_03 1
+    3300008: door_04 1
+    3300010: drink_can
+    3300012: drink_can13
+    3300014: drink_can14
+    3300016: drink_can21
+    3300018: glass_01
+    3300020: glass_02
+    3300022: glass_03
+    3300024: glass_04
+    3300026: icecoffecarton3
+    3300028: icecoffecarton5
+    3300030: milk_carton4
+    3300032: milk_carton9
+    3300034: milkbottle15
+    3300036: milkbottle3
+    3300038: milkbottle7
+    3300040: milkbottle8
+    3300042: milkGlass10
+    3300044: milkGlass19
+    3300046: milkGlass20
+    3300048: milkGlass25
+    3300050: milkGlass3
+    3300052: milkGlass30
+    3300054: milkGlass35
+    3300056: milkGlass9
+    4300000: drink_can13
+    4300002: drink_can14
+    4300004: basecontainer1
+    4300006: drink_can
+    4300008: milkGlass35
+    4300010: milkGlass30
+    4300012: milkGlass20
+    4300014: milkGlass19
+    4300016: milkGlass10
+    4300018: drink_can21
+    4300020: milkbottle3
+    4300022: milkbottle7
+    4300024: milkbottle8
+    4300026: milkbottle15
+    4300028: milkGlass25
+    4300030: milkGlass9
+    4300032: icecoffecarton3
+    4300034: icecoffecarton5
+    4300036: milk_carton4
+    4300038: milk_carton9
+    4300040: milkGlass3
+    4300042: glass_04
+    4300044: door_01
+    4300046: glass_03
+    4300048: door_04
+    4300050: glass_02
+    4300052: door_03
+    4300054: glass_01
+    4300056: door_02
+    7400000: idle
+    7400002: lure
+    7400004: open
+    7400006: close
+    7400008: uprightfreezerScare
+    7400010: openlure
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 91ad6131595b0cb4ba858ef28e159d33, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 023f11eaca865c449931ba9ee1c2a1cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 09b06a37e770b9b4fbcc01e9c3610310, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: d2f26e11f5fdb9346a9a9d3623c20afb, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: lure
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: open
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: close
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: uprightfreezerScare
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: openlure
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
