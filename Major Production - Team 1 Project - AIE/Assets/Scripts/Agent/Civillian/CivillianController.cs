@@ -156,19 +156,26 @@ public class CivillianController : MonoBehaviour
         else
             Move(Vector3.zero, false, false);
 
-        if (isInLineOfSight() == true && sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false)
+        if (sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false)
         {
-            //Debug.Log("In sight!");
-            ItemScaryRating = sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().ItemScaryRating;
-            TRIGGERED_floating = true; //This needs to be set to update the code in CIV_Retreat
-            Debug.Log("TRIGGERED FLOATING");
-            m_stateMachine.ChangeState(this, new CIV_Retreat());
+            if (isInLineOfSight() == true)
+            {
+                //Debug.Log("In sight!");
+                ItemScaryRating = sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().ItemScaryRating;
+                TRIGGERED_floating = true; //This needs to be set to update the code in CIV_Retreat
+                                           //Debug.Log("TRIGGERED FLOATING");
+                FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioCivSpotted, transform.position);
+                m_stateMachine.ChangeState(this, new CIV_Retreat());
 
-            civIconStateScript.myState = script_civilianIconState.gameState.retreat;// 19-12-2017 Added by Mark 
+                civIconStateScript.myState = script_civilianIconState.gameState.retreat;// 19-12-2017 Added by Mark 
+            }
         }
+        //Debug.Log("Possessed: " + sid.GetComponent<playerPossession>().IsPossessed());
+        //Debug.Log("Triggered Float: " + TRIGGERED_floating);
+        //Debug.Log("Hidden: " + sid.GetComponent<playerPossession>().IsHidden());
 
         //State changing to INTRIGUED if an itemPosition has been set, that means the ai has been in range of a recent lure mechanic used by the player
-        if(alertedByItem && currentScareValue != scareThreshHoldMax)
+        if (alertedByItem && currentScareValue != scareThreshHoldMax)
         {
             m_stateMachine.ChangeState(this, new CIV_Alert());
             alertedByItem = false;
@@ -274,38 +281,39 @@ public class CivillianController : MonoBehaviour
         }
     }
 
-    public bool isInLineOfSight()
-    {
-        Vector3 targetAdjustedPosition = (sid.transform.position + (sid.transform.up * 1.1f));//aim for wills head
-        Vector3 adjustedPosition = (transform.position + (transform.up * 1.4f));//aim from the GP's head
+    public bool isInLineOfSight() //Adjusted to now only look for the "possessed item" instead of always sid
+    {        
+        //Vector3 targetAdjustedPosition = (sid.transform.position + (sid.transform.up * 1.1f));
+        playerPossession player = sid.GetComponent<playerPossession>();
+        //Debug.Log(player.PossessedItem.transform.position);
+        Vector3 targetAdjustedPosition = (player.PossessedItem.transform.position + (player.PossessedItem.transform.up * 1.1f));
+        Vector3 adjustedPosition = (transform.position + (transform.up * 1.4f));
 
         Vector3 direction = targetAdjustedPosition - adjustedPosition;
-        //height adjustments very important, without them you will not be hitting Will as it appears his center is above his actual collider
 
         float dot = Vector3.Dot(transform.TransformDirection(Vector3.forward).normalized, direction.normalized); //-1 = directly behind, 1=directly infront
 
-        //just draws a  line towards Will
         //Debug.DrawRay(adjustedPosition, direction, Color.red);
-
         //Debug.DrawRay(adjustedPosition, new Vector3(direction.x, direction.y, direction.z + dot));
 
-        //If Will is within the Agent's torch range and angle of the spotlight
+        //If Sid is within the Agent's torch range and angle of the spotlight
         if (direction.magnitude <= lineOfSight && dot > 0.8f)
         {
-            //Create a raycast from the AGENT to will to see if the AGENT has direct line of sight
+            //Create a raycast from the AGENT to sid to see if the AGENT has direct line of sight
             Ray ray = new Ray(adjustedPosition, direction); //-direction
             RaycastHit[] hits = Physics.RaycastAll(ray, lineOfSight); //Check all the objects within the torch range
 
             foreach (RaycastHit hit in hits)
             {
-                //Looks at all transforms in range and checks for line of sight towards will and whether they are in front of Will
-                if (hit.distance < direction.magnitude)
+                //Looks at all transforms in range and checks for line of sight towards will and whether they are in front of Sid
+                if (hit.distance < direction.magnitude && hit.collider.tag != "Player")
                 {
-                    //Debug.DrawRay(adjustedPosition, direction, Color.red);
+                    //Debug.DrawRay(adjustedPosition, direction, Color.red); //Draw the ray when another object has been hit that is not the target
                     //Debug.Log(hit.transform.name);
                     return false;
                 }
             }
+            //Debug.DrawRay(adjustedPosition, direction, Color.green); //Draw the ray when an object is insde the LOS
             return true;
         }
         else

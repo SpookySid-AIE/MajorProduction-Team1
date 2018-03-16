@@ -4,7 +4,6 @@
         <property name="name">
             <value>NPC_Scared_M</value>
         </property>
-        <property name="note"/>
         <property name="outputFormat">
             <value>2</value>
         </property>
@@ -71,9 +70,6 @@
         <relationship name="modules">
             <destination>{d1c1447c-4dd5-447f-a1b4-840034716f0e}</destination>
         </relationship>
-        <relationship name="markers">
-            <destination>{b52c062d-93dc-48e5-9575-419697df3597}</destination>
-        </relationship>
     </object>
     <object class="EventMixerMaster" id="{757cf36d-a482-4ea8-90da-d0b1f00c7ca8}">
         <relationship name="effectChain">
@@ -117,20 +113,6 @@
         </relationship>
         <relationship name="output">
             <destination>{757cf36d-a482-4ea8-90da-d0b1f00c7ca8}</destination>
-        </relationship>
-    </object>
-    <object class="LoopRegion" id="{b52c062d-93dc-48e5-9575-419697df3597}">
-        <property name="position">
-            <value>0</value>
-        </property>
-        <property name="length">
-            <value>1.0458503401360544</value>
-        </property>
-        <relationship name="timeline">
-            <destination>{42df8b58-7f3b-4720-817a-047bddd81934}</destination>
-        </relationship>
-        <relationship name="markerTrack">
-            <destination>{51c7adac-b150-433c-83d9-10dad3701bb2}</destination>
         </relationship>
     </object>
     <object class="MixerBusEffectChain" id="{62430428-4a2d-4573-b961-875a80b27133}">

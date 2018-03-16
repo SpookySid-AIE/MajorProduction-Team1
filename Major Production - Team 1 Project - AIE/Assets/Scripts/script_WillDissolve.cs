@@ -66,7 +66,7 @@ public class script_WillDissolve : MonoBehaviour {
         if (Time.time > particleTimer && startDissolve)
         {
             transferred = false;
-            GameObject particle = Instantiate(particlePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + particleVerticleOffset, gameObject.transform.position.z), Quaternion.identity);
+            GameObject particle = Instantiate(particlePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y/* + particleVerticleOffset*/, gameObject.transform.position.z), Quaternion.identity);
             CurveToTarget curveToTarget = particle.GetComponent<CurveToTarget>();
             curveToTarget.target = target;
             curveToTarget.particleLaunchDelay = particleLaunchDelay;
@@ -86,14 +86,15 @@ public class script_WillDissolve : MonoBehaviour {
         {
             if (curveRef.finishedAnim == true)
             {
-                //Debug.Log("Called from Outside of time loop: " + curveRef.finishedAnim);
+                //Debug.Log("Reset invis called");
                 transferred = true;
                 curveRefSet = false;
+
                 currentDissolve = 3;
                 mat.SetFloat("_ParticleMaskingPosition", currentDissolve);
-            }                
+            }
         }
-        
+
 
 
         if (currentDissolve < -2 && dissolve)
@@ -103,4 +104,11 @@ public class script_WillDissolve : MonoBehaviour {
         }
 
 	}
+
+    public void MakeSidVisible()
+    {
+        currentDissolve = 3;
+        mat.SetFloat("_ParticleMaskingPosition", currentDissolve);
+        Debug.Log("ForceSidVisible called");
+    }
 }

@@ -55,12 +55,13 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
         {
             if (hit.transform.tag == "Item")
             {
+                GameManager.Instance.EnableItemSelect(true);
                 passInObject = hit.collider.gameObject;
                 toonOutline = passInObject.GetComponentInChildren<Renderer>();
                 toonOutline.material.SetColor("_ASEOutlineColor", focusColor);
             }
             else
-            {
+            {                
                 passInObject = null;
                 toonOutline = null;
             }
@@ -75,6 +76,7 @@ public class script_ToonShaderFocusOutline : MonoBehaviour
             if (oldToonOutline != null)
             {
                 oldToonOutline.material.SetColor("_ASEOutlineColor", defaultColor);
+                GameManager.Instance.EnableItemSelect(false);
                 //Debug.Log("No way");
             }
             oldToonOutline = toonOutline;

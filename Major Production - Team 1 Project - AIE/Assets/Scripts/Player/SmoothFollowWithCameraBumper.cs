@@ -9,6 +9,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     public Transform target = null; //Camera's target
     public float distance; //Distance maintained from target
     public float height = 1.0f; //Height of Camera
+    public Vector3 camera_origin = new Vector3(0.0f, 0.3f, 0.0f); //target to move camera towards, to move away from hit with back raycast
 
     [SerializeField]
     private float damping = 5.0f; //How much the lerp should be slowed
@@ -37,7 +38,9 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     [Header("---DEBUGGING---")]
     public float currentHorizontal = 0;
     public float currentVertical = 0;
-    
+    public Vector3 wantedPosition;
+    public bool enableRotation = true;
+
     //public void setTarget(Transform newTarget) { target = newTarget; } //setTarget will be used in CamLock.cs to refollow the new target
     
     /// <Summary>
@@ -61,50 +64,37 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
     private void Update()
     {
         //Get desired position/rotation IN WORLD SPACE and lerp.
-        //Debug.Log(target);
-        Vector3 wantedPosition = target.TransformPoint(0, height, -distance);
+        wantedPosition = target.TransformPoint(0, height, -distance);
         Vector3 lookPosition = target.TransformPoint(targetLookAtOffset);
+        var bumperDistanceCheck = (wantedPosition - lookPosition).magnitude;
 
-        // check to see if there is anything behind the target
-        RaycastHit hit;
         Vector3 back = Vector3.Normalize(wantedPosition - lookPosition); //  target.transform.TransformDirection(-1 * Vector3.forward);
 
-        // cast the bumper ray out from rear and check to see if there is anything behind
-        if (Physics.Raycast(lookPosition, back, out hit, bumperDistanceCheck)
-            && (hit.transform.GetComponent<Collider>().tag != "Player"))//hit.transform.tag != target.tag) // ignore ray-casts that hit the user. DR
+        Debug.DrawLine(lookPosition, lookPosition + back * bumperDistanceCheck, new Color(1.0f, 0.0f, 1.0f));
+
+        RaycastHit rayToCameraInfo;
+        Vector3 target_origin = target.TransformPoint(camera_origin);
+        Vector3 wantedVector = wantedPosition - target_origin;
+        Debug.DrawLine(target_origin, wantedPosition, new Color(1.0f, 0.5f, 0.0f));
+        bool ray_to_camera_has_hit = Physics.Raycast(target_origin, wantedVector, out rayToCameraInfo);
+
+        if (ray_to_camera_has_hit && wantedVector.magnitude > rayToCameraInfo.distance && rayToCameraInfo.transform.tag != "Player")
         {
-            //Debug.Log("Transform Hit: " + hit.transform.tag);
-            //Debug.Log("Target: " + target.tag);
-
-            Ray theRayToCamera = new Ray(lookPosition, wantedPosition - lookPosition); //Presetting a ray
-
-            wantedPosition = theRayToCamera.GetPoint((hit.distance * 0.8f)); //Finds a point on the ray that's been colliding with an item
-            //Vector3 theHitPositionMinusABit = theRayToCamera.GetPoint((hit.distance * 0.8f));
-            //// clamp wanted position to hit position
-
-            //wantedPosition.x = theHitPositionMinusABit.x;
-            //wantedPosition.z = theHitPositionMinusABit.z;
-            //wantedPosition.y = theHitPositionMinusABit.y; // Mathf.Lerp(hit.point.y + bumperCameraHeight, wantedPosition.y, Time.deltaTime * damping);
-
+            Debug.DrawLine(wantedPosition, wantedPosition + wantedVector * rayToCameraInfo.distance, new Color(0, 1, 1));
+            wantedPosition = target_origin + wantedVector.normalized * (rayToCameraInfo.distance);
         }
 
+        //if (enableRotation)
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping); //Slowly transition from current camera position to wanted camera position based on deltaTime * damping (Set earlier)
 
-        //Debug.DrawLine(lookPosition, wantedPosition);
-
-        if (smoothRotation) //If smooth rotation's enabled
-        {
-            Quaternion wantedRotation = Quaternion.LookRotation(lookPosition - transform.position, target.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping); //Dampen the speed of rotation based of "rotationDamping"
-        }
-        else
-            transform.rotation = Quaternion.LookRotation(lookPosition - transform.position, target.up); //Rotate the camera without damping
+        //if(enableRotation)
+        transform.rotation = Quaternion.LookRotation(back * -1.0f, target.up); //Rotate the camera without damping
     }
-    
+
     private void LateUpdate()
     {
         //This code orbits the camera during hide mode
-        if (playerPosRef.IsHidden() && playerPosRef.GetComponent<Rigidbody>().IsSleeping() == true) 
+        if (playerPosRef.IsHidden())
         {
             CameraParent = this.gameObject.transform.parent;
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
@@ -116,7 +106,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
             if (CameraParent != null)
             {
                 target = CameraParent;
-                this.CameraParent.rotation = Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping);
+                this.CameraParent.rotation = rotation/*Quaternion.Lerp(this.CameraParent.rotation, rotation, Time.deltaTime * rotationDamping)*/;
             }
         }
     }
@@ -127,3 +117,4 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         return result;
     }
 }
+

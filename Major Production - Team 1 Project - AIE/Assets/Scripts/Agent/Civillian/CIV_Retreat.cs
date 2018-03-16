@@ -22,7 +22,7 @@ public class CIV_Retreat : State_CIV
 
 #if UNITY_EDITOR
 
-    //GameObject ectoplasms = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/particleEctoplasm.prefab", typeof(GameObject)) as GameObject;
+    
 
 #endif
 
@@ -38,6 +38,9 @@ public class CIV_Retreat : State_CIV
         //Update animator
         if (currentAgent.m_Animator.enabled == false) //This is here temporarilly until we get a intriged animation going, this just unfreezes anim
             currentAgent.m_Animator.enabled = true;
+
+        //Play scared sound clip
+        FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioCivScared, currentAgent.transform.position);
 
         currentAgent.navAgent.speed = 5.0f; //Add some additional speed to make them feel really spooked
         currentAgent.m_Animator.SetBool("Scared", true);
@@ -87,8 +90,8 @@ public class CIV_Retreat : State_CIV
 
         if (agent.hasDroppedEcto == false)
         {
-            agent.hasDroppedEcto = true;
-            //GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
+            agent.hasDroppedEcto = true;    
+            GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
         }
 
         //This is the code that makes the agent run away from whatever target has been set
