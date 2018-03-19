@@ -236,11 +236,7 @@ public class playerPossession : MonoBehaviour
                         newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
 
                         sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
-
-                        disolveScript.MakeSidVisible();
                         UnpossessItem();
-                        
-
                         break;
                     }
                 } //End loop
@@ -479,7 +475,6 @@ public class playerPossession : MonoBehaviour
         gameObject.GetComponent<playerPossession>().hasItemBeenThrown = true;
         gameObject.GetComponent<ItemController>().hasBeenThrown = true;
         UnpossessItem();
-        disolveScript.MakeSidVisible();
         player.GetComponent<Rigidbody>().velocity = player.GetComponent<Rigidbody>().transform.forward * throwVelocity;        
         lastThrownItem = this.gameObject.transform;
         yield return new WaitForSeconds(0);
@@ -797,8 +792,9 @@ public class playerPossession : MonoBehaviour
 
     //Coroutines
     IEnumerator ParticleTransition() //Written by Jak
-    {        
-        RaycastCheckItem();
+    {
+        if (targetSet == false)
+            RaycastCheckItem();
 
         if (targetSet == true && disolveScript.transferring == false)
         {

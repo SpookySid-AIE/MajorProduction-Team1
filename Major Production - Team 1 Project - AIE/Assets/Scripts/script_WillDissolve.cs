@@ -105,6 +105,9 @@ public class script_WillDissolve : MonoBehaviour {
 
 	}
 
+    //Trying to bugfix the random invis sid
+    //Actually seems to only happen in editor, cant replicate in proper build so seems to be fine
+    //Buyg occurs when spamming all controls while possessing, ends up making the shader re-invis sid and stays that way until proper possess
     public void MakeSidVisible()
     {
         currentDissolve = 3;
