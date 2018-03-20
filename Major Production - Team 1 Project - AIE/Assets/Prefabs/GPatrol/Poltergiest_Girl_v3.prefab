@@ -1836,24 +1836,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1919273182641196
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4215361656482126}
-  - component: {fileID: 33046899956846088}
-  - component: {fileID: 65787312192967352}
-  - component: {fileID: 114469306881927854}
-  m_Layer: 0
-  m_Name: SFX_Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1919368697063372
 GameObject:
   m_ObjectHideFlags: 1
@@ -2469,19 +2451,6 @@ Transform:
   m_Father: {fileID: 4733579896872224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4215361656482126
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1919273182641196}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 2.39, z: 4.17}
-  m_LocalScale: {x: 4.323731, y: 4.7492256, z: 8.219706}
-  m_Children: []
-  m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4221280975313128
 Transform:
   m_ObjectHideFlags: 1
@@ -2605,7 +2574,7 @@ Transform:
   m_LocalScale: {x: 4.2970896, y: 3.0418625, z: 4.2970877}
   m_Children: []
   m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4275203157920718
 Transform:
@@ -3699,19 +3668,18 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450087094757792}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.13, y: 0, z: 54.46}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 52.63738, y: -1.4269592e-17, z: 19.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224772743682053364}
   - {fileID: 4339655854196142}
   - {fileID: 4006961236220614}
   - {fileID: 4318019224498702}
-  - {fileID: 4215361656482126}
   - {fileID: 4274521821712886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4917373565319448
 Transform:
   m_ObjectHideFlags: 1
@@ -3974,13 +3942,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33046899956846088
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1919273182641196}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33372160473398652
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -4002,18 +3963,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039160064294502}
   m_Mesh: {fileID: 4300000, guid: 26b55ede1c03510409cd5f599d74cc81, type: 3}
---- !u!65 &65787312192967352
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1919273182641196}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95055663435800264
 Animator:
   serializedVersion: 3
@@ -4119,6 +4068,7 @@ MonoBehaviour:
   ShowState: 1
   target: {fileID: 0}
   anim: {fileID: 95835547430445098}
+  torchCone: {fileID: 1959891871707326}
   line: {fileID: 0}
   navAgent: {fileID: 0}
   txtState: {fileID: 0}
@@ -4127,28 +4077,6 @@ MonoBehaviour:
   bulletShootTime: 3
   bulletRecharge: 5
   enableWander: 1
---- !u!114 &114469306881927854
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1919273182641196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: event:/NPC_Startled_F
-  PlayEvent: 3
-  StopEvent: 4
-  CollisionTag: Player
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &114559768634516062
 MonoBehaviour:
   m_ObjectHideFlags: 1

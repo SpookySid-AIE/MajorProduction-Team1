@@ -18,6 +18,7 @@ public class AgentController : MonoBehaviour
     [Header("Display State Debug?")] public bool ShowState;
     [HideInInspector]public GameObject target; //used to SEEK or PURSUE a target eg. Will                                                                         
     [Header("Animation Controller")]public Animator anim;
+    [Header("Reference to the torch cone")] public GameObject torchCone;
 
     //Used in WanderState
     [HideInInspector] public LineRenderer line; //Used to draw a debug circle to show the search radius
@@ -76,7 +77,14 @@ public class AgentController : MonoBehaviour
         m_stateMachine = new StateMachine_GPATROL();
         m_stateMachine.ChangeState(this, new GPATROL_Wander());
 
-        if (ShowState == false) //Simply display the state above their head
+#if UNITY_EDITOR
+        {
+            ShowState = true;
+        }
+#endif
+        if (ShowState == true)
+            txtState.enabled = true;
+        else
             txtState.enabled = false;
 
         //Visual Debugging for the points of interest
@@ -127,6 +135,17 @@ public class AgentController : MonoBehaviour
             txtState.enabled = true;
         else
             txtState.enabled = false;
+
+        if (isWillInTorchLight() == true)
+        {
+            //8 41 17 - green RGB [0-255]
+            //41 7 0 - red RGB
+            //Converted [0-1] - divide by 255
+            //0.03, 0.16, 0.06 - green
+            //0.16, 0.02, 0 - red
+            Color myColor = new Color(0.16f, 0.02f, 0);
+            torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", myColor);
+        }
 
         //Call update from this agents FSM
         if (m_stateMachine != null)
@@ -209,7 +228,7 @@ public class AgentController : MonoBehaviour
         //Debug.DrawRay(adjustedPosition, direction, Color.white);
 
         //If Will is within the Agent's torch range and angle of the spotlight
-       if (direction.magnitude <= torch.range && dot > 0f)
+       if (direction.magnitude <= torch.range && dot > 0.8f)
         {
             //Create a raycast from the AGENT to will to see if the AGENT has direct line of sight
             Ray ray = new Ray(adjustedPosition, direction); //-direction

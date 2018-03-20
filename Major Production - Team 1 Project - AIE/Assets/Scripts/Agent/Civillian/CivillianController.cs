@@ -19,7 +19,7 @@ public class CivillianController : MonoBehaviour
     //[Header("Agent Move Speed")] public float movementSpeed;
     [Header("Audio Search Radius")] public float audioSearch; //The range at which the AGENT can hear the sound
     [Header("Show Search Radius")] public bool ShowRadius;
-    [Header("Display State Debug?")] public bool ShowState;
+    [SerializeField][Header("Display State Debug?")] private bool ShowState;
     public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
     [HideInInspector]public GameObject sid; //Permanent reference to the player object "sid"
 
@@ -101,6 +101,18 @@ public class CivillianController : MonoBehaviour
         //If the text canvas is not in this position - will throw an error
         txtState = transform.GetChild(0).GetChild(0).GetComponent<Text>(); //Accesses the txtState Text object in the heirachy attached to this Agent
         txtScaredValue = transform.GetChild(0).GetChild(1).GetComponent<Text>();
+
+        #if UNITY_EDITOR
+        {
+            ShowState = true;
+        }
+        #endif
+
+        if (ShowState == true)
+            txtState.enabled = true;
+        else
+            txtState.enabled = false;
+
 
         //Set target to run away from
         target = GameObject.FindGameObjectWithTag("Player");
@@ -326,6 +338,6 @@ public class CivillianController : MonoBehaviour
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(new Vector3(0, transform.position.y + 1.0f, 0 + (lineOfSight / 2)), new Vector3(1, 2, lineOfSight));
+        Gizmos.DrawWireCube(new Vector3(0, transform.position.y + 1.0f, 0 + (lineOfSight / 2)), new Vector3(1, 2, lineOfSight));        
     }
 }

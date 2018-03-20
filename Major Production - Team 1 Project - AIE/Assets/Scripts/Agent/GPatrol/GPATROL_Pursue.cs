@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // Author: <Jak Revai>                                     
 // Date Created: <03/08/17>                               
 // Brief: <Chases and shoots at Will until no longer in sight>  
@@ -121,6 +121,10 @@ public class GPATROL_Pursue : State_GPATROL
             protonBeam.fire = false;
             currentAgent.anim.SetBool("shoot", false);
             timer = 0;
+
+            //Change colour of torch cone to green
+            Color myColor = new Color(0.03f, 0.16f, 0.06f);
+            currentAgent.torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", myColor);
 
             //Will is now out of sight - go to where you last saw Will
             currentAgent.AddPointOfInterest(currentAgent.target.transform.position);
