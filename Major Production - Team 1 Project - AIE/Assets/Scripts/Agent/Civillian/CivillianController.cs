@@ -70,7 +70,7 @@ public class CivillianController : MonoBehaviour
     [Header("Dont Set. Showing target to follow")]public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
 
     //Testing - Mark
-    private script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
+    public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
     public Color civilianPantsColour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
@@ -89,6 +89,12 @@ public class CivillianController : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
 
+        //Find EndPoint
+        endPoint = GameObject.FindWithTag("EndPoint").transform;
+
+        //Assign a random priority to this agent, hopefully fixing the random npcs getting caught on eachother
+        navAgent.avoidancePriority = Random.Range(1, 100);
+
         //Increment the NPC count
         GameManager.Instance.NPCcount++;
 
@@ -99,7 +105,7 @@ public class CivillianController : MonoBehaviour
         //Show the debug states in editor
         #if UNITY_EDITOR
         {
-            ShowState = true;
+            ShowState = false;
         }
         #endif
 
@@ -112,13 +118,12 @@ public class CivillianController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         sid = target;
 
+        civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
+        civIconStateScript.myState = script_civilianIconState.gameState.normal;// 19-12-2017 Added by Mark 
+
         //StateMachine creation - Setting Default State - Will inherit this from inspector
         m_stateMachine = new StateMachine_CIV();
         m_stateMachine.ChangeState(this, new CIV_Wander());
-
-
-        civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
-        civIconStateScript.myState = script_civilianIconState.gameState.normal;// 19-12-2017 Added by Mark 
 
         rend = rendererGeo.GetComponent<Renderer>();// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_PantsColour", civilianPantsColour);// 31/01/2018 Added by Mark - For custom colours
@@ -171,9 +176,8 @@ public class CivillianController : MonoBehaviour
                 TRIGGERED_floating = true; //This needs to be set to update the code in CIV_Retreat
                                            //Debug.Log("TRIGGERED FLOATING");
                 FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioCivSpotted, transform.position);
-                m_stateMachine.ChangeState(this, new CIV_Retreat());
-
-                civIconStateScript.myState = script_civilianIconState.gameState.retreat;// 19-12-2017 Added by Mark 
+                
+                m_stateMachine.ChangeState(this, new CIV_Retreat());                
             }
         }
         //Debug.Log("Possessed: " + sid.GetComponent<playerPossession>().IsPossessed());
@@ -185,7 +189,7 @@ public class CivillianController : MonoBehaviour
         {
             m_stateMachine.ChangeState(this, new CIV_Alert());
             alertedByItem = false;
-            civIconStateScript.myState = script_civilianIconState.gameState.alerted;
+            //civIconStateScript.myState = script_civilianIconState.gameState.alerted;
         }
 
         //State changing to Retreat, because the repel mechanic was used in playerPosession
@@ -193,7 +197,7 @@ public class CivillianController : MonoBehaviour
         {
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
-            civIconStateScript.myState = script_civilianIconState.gameState.retreat;
+            //civIconStateScript.myState = script_civilianIconState.gameState.retreat;
         }
 
         //Call update from this agents FSM

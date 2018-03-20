@@ -19,6 +19,7 @@ public class CIV_Alert : State_CIV
     {
         currentAgent = agent;
         currentAgent.currentState = State.State_Alert;
+        agent.civIconStateScript.myState = script_civilianIconState.gameState.alerted;
         currentAgent.txtState.text = "ALERT";
         itemPos = currentAgent.itemPosition;
     }

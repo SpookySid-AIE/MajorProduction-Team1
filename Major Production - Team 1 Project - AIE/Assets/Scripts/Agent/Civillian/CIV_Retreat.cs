@@ -35,6 +35,9 @@ public class CIV_Retreat : State_CIV
         currentAgent = agent; //Storing reference
         currentAgent.currentState = State.State_Retreat; //Setting currentState - kinda temporary i hope
 
+        //Update icon
+        agent.civIconStateScript.myState = script_civilianIconState.gameState.retreat;
+
         //Update animator
         if (currentAgent.m_Animator.enabled == false) //This is here temporarilly until we get a intriged animation going, this just unfreezes anim
             currentAgent.m_Animator.enabled = true;
@@ -184,6 +187,9 @@ public class CIV_Retreat : State_CIV
             currentAgent.currentScareValue = currentAgent.scareThreshHoldMax;
 
             scared = true;
+
+            //Update Icon
+            currentAgent.civIconStateScript.myState = script_civilianIconState.gameState.scared;
 
             //Update animator
             currentAgent.navAgent.speed = 5f; //Add some additional speed to make them feel really spooked

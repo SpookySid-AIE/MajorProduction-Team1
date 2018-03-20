@@ -20,7 +20,17 @@ public class CIV_Wander : State_CIV
     {
         currentAgent = agent;
         //Debug.Log(currentAgent.gameObject.name + " State: WANDER");
+        agent.civIconStateScript.myState = script_civilianIconState.gameState.normal;
         agent.txtState.text = "WANDER";
+
+
+        //Testing
+        //Vector3 dir = agent.transform.forward * 15f;
+        //dir += agent.transform.position; //Update direction based on Agent's current position
+
+        //NavMeshHit navHit; //Stores the result of a NavMesh query
+        //NavMesh.SamplePosition(dir, out navHit, 15f, -1); //Returns the closest point where randDirection is situated on the NavMesh
+        //agent.navAgent.SetDestination(navHit.position);
     }
 
     public void OnExit(CivillianController agent)
@@ -42,11 +52,16 @@ public class CIV_Wander : State_CIV
                 agent.navAgent.ResetPath();
             }
 
+            //if (agent.navAgent.isPathStale == true)
+            //    Debug.Log(agent.name + " is stale");
+
             //if (agent.navAgent.remainingDistance > agent.navAgent.stoppingDistance)
             //    agent.Move(agent.navAgent.desiredVelocity, false, false);
             //else
             //    agent.Move(Vector3.zero, false, false);
         }
+
+
     }
 
     Vector3 PickNewWanderPoint()
