@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // Author: <Jak Revai>                                     
 // Date Created: <03/08/17>                               
 // Brief: <Simple rotation script for the canvas on the Agent>  
@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class RotateCanvas : MonoBehaviour {
 
+    private void Start()
+    {
+        #if !UNITY_EDITOR
+        {
+            this.enabled = false;
+        }
+        #endif
+    }
     // Update is called once per frame
     void Update()
     {

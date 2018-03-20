@@ -65,7 +65,6 @@ public class CivillianController : MonoBehaviour
     //DEBUGGING
     [Header("----[DEBUGGING]----")]
     public bool enableWander;
-    private bool ShowState = false;
     public State currentState;
     [Header("Dont Set. Showing target to follow")]public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
 
@@ -105,14 +104,15 @@ public class CivillianController : MonoBehaviour
         //Show the debug states in editor
         #if UNITY_EDITOR
         {
-            ShowState = false;
+            txtState.enabled = true;
+            txtScaredValue.enabled = true;
+        }
+        #else
+        {
+            txtState.enabled = false;
+            txtScaredValue.enabled = false;
         }
         #endif
-
-        if (ShowState == true)
-            txtState.enabled = true;
-        else
-            txtState.enabled = false;
 
         //Set target to run away from
         target = GameObject.FindGameObjectWithTag("Player");

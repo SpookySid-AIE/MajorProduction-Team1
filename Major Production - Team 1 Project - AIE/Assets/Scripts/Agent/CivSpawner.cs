@@ -9,11 +9,10 @@ using System.Collections;
 
 public class CivSpawner : MonoBehaviour
 {
-
     public float spawnRadius = 10;
     [Range(10, 50)]public int numberOfAgents = 40;
     public static int currentSpawned = 0;
-    public GameObject enemyPrefab;
+    public GameObject civPrefab;
     public Vector3 spherePos;
     private float timer = 0;
 
@@ -23,24 +22,31 @@ public class CivSpawner : MonoBehaviour
 
         if(timer >= 1 && currentSpawned < numberOfAgents) //Spawn a civ every .25 seconds
         {
-            Vector2 randomLoc2d = Random.insideUnitCircle * spawnRadius;
-            Vector3 randomLoc3d = new Vector3(transform.position.x + spherePos.x + randomLoc2d.x, transform.position.y, transform.position.z + spherePos.z + randomLoc2d.y);
+            Vector2 initialSpherePos = Random.insideUnitCircle * spawnRadius;
+            Vector3 adjustedSpawnPos = new Vector3(transform.position.x + spherePos.x + initialSpherePos.x, transform.position.y, transform.position.z + spherePos.z + initialSpherePos.y);
 
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomLoc3d, out hit, spawnRadius, -1))
+            if (NavMesh.SamplePosition(adjustedSpawnPos, out hit, spawnRadius, -1))
             {
-                randomLoc3d = hit.position;
+                adjustedSpawnPos = hit.position;
             }
 
             //Instantiate the civ at the spawners inital position, because i want them to "walk" into the shop as if its realistic ish
-            GameObject o = (GameObject)Instantiate(enemyPrefab, transform.position, transform.rotation);
-            o.GetComponent<NavMeshAgent>().SetDestination(randomLoc3d); //Path towards the random point found within the spherePos(should be inside the mall)
+            GameObject o = (GameObject)Instantiate(civPrefab, transform.position, transform.rotation);
+            o.GetComponent<NavMeshAgent>().SetDestination(adjustedSpawnPos); //Path towards the random point found within the spherePos(should be inside the mall)
+
+            //Randomise Colours
+            CivillianController civ = o.GetComponent<CivillianController>();
+            civ.civilianPantsColour = Random.ColorHSV(0, 1, .5f, .7f, .5f, 1, 1, 1);
+            civ.civilianTop1Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
+            civ.civilianTop2Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
 
             currentSpawned++;
             timer = 0;
         }
     }
 
+    //Debugging the radius
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
