@@ -3668,8 +3668,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450087094757792}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 52.63738, y: -1.4269592e-17, z: 19.86}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.65, y: -1.4269592e-17, z: 19.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224772743682053364}
@@ -3679,7 +3679,7 @@ Transform:
   - {fileID: 4274521821712886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4917373565319448
 Transform:
   m_ObjectHideFlags: 1
@@ -4061,11 +4061,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb87cbc3b32f804f9c982c4f6c4a330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRadius: 1
-  movementSpeed: 0
+  wanderRadius: 10
+  movementSpeed: 2
   audioSearch: 40
-  ShowRadius: 0
-  ShowState: 1
   target: {fileID: 0}
   anim: {fileID: 95835547430445098}
   torchCone: {fileID: 1959891871707326}
@@ -4076,6 +4074,8 @@ MonoBehaviour:
   gunAccuracy: 10
   bulletShootTime: 3
   bulletRecharge: 5
+  ShowRadius: 0
+  ShowState: 0
   enableWander: 1
 --- !u!114 &114559768634516062
 MonoBehaviour:

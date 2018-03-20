@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // Author: <Jak Revai>                                     
 // Date Created: <05/08/17>                               
 // Brief: <Runs in the opposite direction from the player and cower>  
@@ -18,6 +18,10 @@ public class GPATROL_Retreat : State_GPATROL
 
     public void OnEnter(AgentController agent)
     {
+        //Forcing a torch colour update incase they enter retreat state and the colour hasnt changed
+        Color myColor = new Color(0.03f, 0.16f, 0.06f);
+        agent.torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", myColor);
+
         currentAgent = agent;
         //Debug.Log(currentAgent.gameObject.name + " State: RETREAT");
         agent.txtState.text = "RETREAT";

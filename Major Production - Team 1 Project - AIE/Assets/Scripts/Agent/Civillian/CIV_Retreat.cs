@@ -90,8 +90,9 @@ public class CIV_Retreat : State_CIV
 
         if (agent.hasDroppedEcto == false)
         {
-            agent.hasDroppedEcto = true;    
-            GameObject.Instantiate(ectoplasm, currentAgent.transform.position, currentAgent.transform.rotation);
+            agent.hasDroppedEcto = true;
+            Vector3 dropPos = new Vector3(currentAgent.transform.position.x, currentAgent.transform.position.y + 1f, currentAgent.transform.position.z);
+            GameObject.Instantiate(ectoplasm, dropPos, currentAgent.transform.rotation);
         }
 
         //This is the code that makes the agent run away from whatever target has been set

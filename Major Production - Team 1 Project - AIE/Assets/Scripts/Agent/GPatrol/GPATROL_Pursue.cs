@@ -31,15 +31,24 @@ public class GPATROL_Pursue : State_GPATROL
     public void OnExit(AgentController agent)
     {
         agent.anim.SetBool("stream", false);
+
+        //Force stop shooting if early exit occurs
+        timer = 0;
+        internalTimer = 0;
+        protonBeam.fire = false;
+        agent.anim.SetBool("stream", false); //Stop stream animation
     }
 
     public void STATE_Update(AgentController agent, StateMachine_GPATROL stateMachine, float deltaTime)
     {
+        //Reset the path and velocity
         agent.navAgent.ResetPath();
         agent.navAgent.velocity = Vector3.zero;
+
+        //Store stateMachine so i can access it in a method(could probably just make the method accept a statemachine pointer)
         currentStateMachine = stateMachine;
 
-        //Rotating Agent to face Will - LookAt does snap towards Will, talk to designers and see if they want lerping instead
+        //Rotating Agent to face Will - LookAt does snap towards Will maybe lerp instead
         Vector3 v = agent.target.transform.position - agent.transform.position;
 
         //Remove the x and z components from the vector
@@ -60,7 +69,7 @@ public class GPATROL_Pursue : State_GPATROL
         {
             if (internalTimer < agent.bulletShootTime)
             {
-                Vector3 target = agent.target.transform.position + new Vector3(0, 0.4f, 0);
+                Vector3 target = agent.target.transform.position;// + new Vector3(0, 0.4f, 0);
                 //target.x += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
                 //target.y += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
                 //target.z += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
@@ -77,7 +86,7 @@ public class GPATROL_Pursue : State_GPATROL
                 timer = 0;
                 internalTimer = 0;
                 protonBeam.fire = false;
-                agent.anim.SetBool("stream", false); //Play stream animation
+                agent.anim.SetBool("stream", false); //Stop stream animation
                 initialEnter = false;
             }
         }
@@ -87,7 +96,7 @@ public class GPATROL_Pursue : State_GPATROL
             {
                 if (internalTimer < agent.bulletShootTime)
                 {
-                    Vector3 target = agent.target.transform.position + new Vector3(0, 0.4f, 0);
+                    Vector3 target = agent.target.transform.position;// + new Vector3(0, 0.4f, 0);
                     //target.x += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
                     //target.y += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
                     //target.z += UnityEngine.Random.Range(-agent.gunAccuracy, agent.gunAccuracy);
@@ -104,7 +113,7 @@ public class GPATROL_Pursue : State_GPATROL
                     timer = 0;
                     internalTimer = 0;
                     protonBeam.fire = false;
-                    agent.anim.SetBool("stream", false); //Play stream animation
+                    agent.anim.SetBool("stream", false); //Stop stream animation
                 }
             }
         } //End Else

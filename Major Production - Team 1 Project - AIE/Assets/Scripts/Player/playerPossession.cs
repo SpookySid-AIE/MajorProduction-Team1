@@ -118,7 +118,8 @@ public class playerPossession : MonoBehaviour
         }
 
         //Update playerPossession Reference in gamemanager
-        GameManager.Instance.player = player.GetComponent<playerPossession>();
+        if(GameManager.Instance.player == null)
+            GameManager.Instance.player = player.GetComponent<playerPossession>();
 
         //Setup the references
         lureSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioLure);
@@ -134,7 +135,8 @@ public class playerPossession : MonoBehaviour
         sneakTest = GameObject.FindGameObjectWithTag("Sneak");
 
         //Update playerPossession Reference in gamemanager
-        //GameManager.Instance.player = player.GetComponent<playerPossession>();
+        //if(player == null)
+        //    GameManager.Instance.player = player.GetComponent<playerPossession>();
     }    
 
     private void FixedUpdate()
@@ -242,6 +244,7 @@ public class playerPossession : MonoBehaviour
                 } //End loop
             } //End If
         }//End Quick-Drop
+        Debug.Log(hidden);
     }//End update
 
     //Raycast in a given direction - if nothing hit on the raycast then we set the new position to eject the player at

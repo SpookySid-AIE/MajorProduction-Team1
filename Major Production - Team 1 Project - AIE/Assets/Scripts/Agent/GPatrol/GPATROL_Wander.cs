@@ -45,12 +45,6 @@ public class GPATROL_Wander : State_GPATROL
         }
         #endregion
 
-        //Check if Will is in torchlight
-        if (agent.isWillInTorchLight() == true)
-        {
-            stateMachine.ChangeState(agent, new GPATROL_Pursue());
-        }
-
         if (agent.enableWander == true)
         {
             //If the agent doesnt have an INITIAL path then pick a new one 

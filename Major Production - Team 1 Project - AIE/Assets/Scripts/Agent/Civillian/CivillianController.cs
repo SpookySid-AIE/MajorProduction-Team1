@@ -16,71 +16,65 @@ public enum State
 public class CivillianController : MonoBehaviour
 {
     [Header("New Location Search Radius.")] public float wanderRadius; //Radius used to pick a new location within
-    //[Header("Agent Move Speed")] public float movementSpeed;
-    [Header("Audio Search Radius")] public float audioSearch; //The range at which the AGENT can hear the sound
-    [Header("Show Search Radius")] public bool ShowRadius;
-    [SerializeField][Header("Display State Debug?")] private bool ShowState;
-    public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
+    [Header("Audio Search Radius")] public float audioSearch; //The range at which the AGENT can hear the sound    
     [HideInInspector]public GameObject sid; //Permanent reference to the player object "sid"
-
     //Exit point that they will travel to and despawn
     [Header("Where the Civs run to despawn.")]public Transform endPoint;
-
-    [HideInInspector] public NavMeshAgent navAgent;
-
-    [HideInInspector]public int currentScareValue;
-
-    //Stores the item scary rating retrieved from the Item that was used to spook the ai
-    [HideInInspector] public ItemController.Orientation ItemScaryRating;
-
     public int scareThreshHoldMax;
-
-    [HideInInspector]public Animator m_Animator;
-    Rigidbody m_Rigidbody;
-
-    [HideInInspector] public Text txtState;
-    [HideInInspector] public Text txtScaredValue;
-
-    private StateMachine_CIV m_stateMachine;
-
-    //Forward and turn floats, changes animation
-    float m_TurnAmount;
-    float m_ForwardAmount;
-
     [Header("Range for LoS")] public float lineOfSight = 5;
+    
+    [Header("Particle References")]
+    //Public particle objects to spawn, here so it runs on builds until we can think of a better way
+    public GameObject ParticleGreen;
+    public GameObject ParticlePink;
+    public GameObject ParticleRed;
 
     //Flags for the different ways we trigger ectoplasm scoring
     [HideInInspector] public bool TRIGGERED_repel;
     [HideInInspector] public bool TRIGGERED_hit;
     [HideInInspector] public bool TRIGGERED_floating;
 
-    //Public particle objects to spawn, here so it runs on builds until we can think of a better way
-    public GameObject ParticleGreen;
-    public GameObject ParticlePink;
-    public GameObject ParticleRed;
-
-    Vector3 m_GroundNormal;
+    [HideInInspector]public NavMeshAgent navAgent;
+    [HideInInspector]public int currentScareValue;
+    //Stores the item scary rating retrieved from the Item that was used to spook the ai
+    [HideInInspector]public ItemController.Orientation ItemScaryRating;
+    [HideInInspector]public Animator m_Animator;
     
-    //TESTING - disables wander
-    public bool enableWander;
+    [HideInInspector] public Text txtState;
+    [HideInInspector] public Text txtScaredValue;
 
-    //Used to instantiate ectoplasm gameobjects
-    [HideInInspector]public bool hasDroppedEcto; 
+    [HideInInspector] public bool hasDroppedEcto;
 
     //These are set in playerPossession
     //Position storing used to send over into CIV_Alert state when the AI has been lured
-    [HideInInspector]public Vector3 itemPosition;
+    [HideInInspector] public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
 
+    private StateMachine_CIV m_stateMachine;
+    
+    private Rigidbody m_Rigidbody;
+
+    //Forward and turn floats, changes animation
+    private float m_TurnAmount;
+    private float m_ForwardAmount;
+
+    private Vector3 m_GroundNormal;
+
+    public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
+    
+    //DEBUGGING
+    [Header("----[DEBUGGING]----")]
+    public bool enableWander;
+    private bool ShowState = false;
     public State currentState;
+    [Header("Dont Set. Showing target to follow")]public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
 
     //Testing - Mark
-    public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
-
+    private script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
     public Color civilianPantsColour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
-    public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
+    
     private Renderer rend;   // 31/01/2018 Added by Mark  
 
     // Use this for initialization
@@ -102,6 +96,7 @@ public class CivillianController : MonoBehaviour
         txtState = transform.GetChild(0).GetChild(0).GetComponent<Text>(); //Accesses the txtState Text object in the heirachy attached to this Agent
         txtScaredValue = transform.GetChild(0).GetChild(1).GetComponent<Text>();
 
+        //Show the debug states in editor
         #if UNITY_EDITOR
         {
             ShowState = true;
@@ -112,7 +107,6 @@ public class CivillianController : MonoBehaviour
             txtState.enabled = true;
         else
             txtState.enabled = false;
-
 
         //Set target to run away from
         target = GameObject.FindGameObjectWithTag("Player");

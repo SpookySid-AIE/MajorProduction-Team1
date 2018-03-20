@@ -14,9 +14,7 @@ public class AgentController : MonoBehaviour
     [Header("New Location Search Radius.")] public float wanderRadius; //Radius used to pick a new location within
     [Header("Agent Move Speed")]public float movementSpeed;
     [Header("Audio Search Radius")] public float audioSearch; //The range at which the AGENT can hear the sound
-    [Header("Show Search Radius")] public bool ShowRadius;
-    [Header("Display State Debug?")] public bool ShowState;
-    [HideInInspector]public GameObject target; //used to SEEK or PURSUE a target eg. Will                                                                         
+    public GameObject target; //used to SEEK or PURSUE a target eg. Will                                                                         
     [Header("Animation Controller")]public Animator anim;
     [Header("Reference to the torch cone")] public GameObject torchCone;
 
@@ -32,7 +30,6 @@ public class AgentController : MonoBehaviour
     [Header("How long to wait before shooting again")]public float bulletRecharge;    
 
     //Used in AlertedState
-
     private SphereCollider colliderSphere; //Used to determine where an "Audio" point of interest has appeared
     private List<Vector3> pointsOfInterest;
     private StateMachine_GPATROL m_stateMachine;
@@ -42,8 +39,11 @@ public class AgentController : MonoBehaviour
     private GameObject POIPrefab;
     private List<GameObject> tempPOIList;
 
-    //TESTING - DISABLE WANDER BOOL
-    public bool enableWander;
+    //Debugging
+    [Header("----[DEBUGGING]----")]
+    [Header("Show Search Radius")] public bool ShowRadius;
+    [Header("Display State")] public bool ShowState;
+    [Header("Enable Wander")]public bool enableWander;
 
     //Possibly use this later for now unused
     //Agent_Blackboard blackboard = Agent_Blackboard.Instance;
@@ -113,39 +113,21 @@ public class AgentController : MonoBehaviour
         else //Agent stopped movement so stop animation   
             anim.SetFloat("speed", 0);
 
-        //This is stupid and expensive, surely there is another way, just havnt thought about it much
-        //Probably should move this GetComponent call out of update 
-        if (target)
-        {
-            if (target.GetComponent<playerPossession>())
-            {
-                if (target.GetComponent<playerPossession>().IsPossessed() == true)
-                {
-                    target = GameObject.FindGameObjectWithTag("Player"); //find the new possesed item and change the target on the agent controller
-                }
-                else
-                {
-                    target = GameObject.FindGameObjectWithTag("Player");
-                }
-            }
-        }
+        //Update to the new possessed item
+        //if (target)
+        //{
+        //    if (target.GetComponent<playerPossession>())
+        //        if (target.GetComponent<playerPossession>().IsPossessed() == true)
+        //            target = GameObject.FindGameObjectWithTag("Player");
+        //        else
+        //            target = GameObject.FindGameObjectWithTag("Player");
+        //}
 
         //Show the current State they are in above their head
         if (ShowState == true)
             txtState.enabled = true;
         else
             txtState.enabled = false;
-
-        if (isWillInTorchLight() == true)
-        {
-            //8 41 17 - green RGB [0-255]
-            //41 7 0 - red RGB
-            //Converted [0-1] - divide by 255
-            //0.03, 0.16, 0.06 - green
-            //0.16, 0.02, 0 - red
-            Color myColor = new Color(0.16f, 0.02f, 0);
-            torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", myColor);
-        }
 
         //Call update from this agents FSM
         if (m_stateMachine != null)
@@ -227,9 +209,14 @@ public class AgentController : MonoBehaviour
         //just draws a  line towards Will
         //Debug.DrawRay(adjustedPosition, direction, Color.white);
 
+        if(target.GetComponent<playerPossession>().IsHidden() == true)
+        {
+            return false; //Early break so we dont find sid while "hidden"
+        }
+
         //If Will is within the Agent's torch range and angle of the spotlight
        if (direction.magnitude <= torch.range && dot > 0.8f)
-        {
+       {
             //Create a raycast from the AGENT to will to see if the AGENT has direct line of sight
             Ray ray = new Ray(adjustedPosition, direction); //-direction
             RaycastHit[] hits = Physics.RaycastAll(ray, torch.range); //Check all the objects within the torch range
@@ -237,21 +224,48 @@ public class AgentController : MonoBehaviour
             foreach (RaycastHit hit in hits)
             {
                 //Looks at all transforms in range and checks for line of sight towards will and whether they are in front of Will
+                //This will always return false if the raycast towwards sid is blocked by another object
                 if (hit.transform.tag != "GPatrol" && hit.transform.name != "Beam" && hit.transform != target.transform && hit.distance < direction.magnitude)
                 {
+                    //Now, this code is only works while possessed, because the raycasts are working correctly,
+                    //it finds that sid is is behind another collider and returns false, but im overriding that and returning true 
+                    //if he is moving a possesed object so they attack him
+                    if (target.GetComponent<playerPossession>().IsPossessed())
+                    {
+                        if (hit.transform.tag == "Player")
+                        {
+                            Color c = new Color(0.16f, 0.02f, 0);
+                            torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", c);
+                            return true;
+                        }
+                    }
+  
                     //Debug.DrawRay(adjustedPosition, direction, Color.red);
                     //Debug.Log(hit.transform.name);
+
                     return false;
                 }
+                
+
+                
             }
             //Debug.DrawRay(adjustedPosition, direction, Color.green);
             //Debug.Log(direction.magnitude);
+
+            //Updating torch colour
+            //8 41 17 - green RGB [0-255]
+            //41 7 0 - red RGB
+            //Converted [0-1] - divide by 255
+            //0.03, 0.16, 0.06 - green
+            //0.16, 0.02, 0 - red
+            Color myColor = new Color(0.16f, 0.02f, 0);
+            torchCone.GetComponent<Renderer>().material.SetColor("_TintColor", myColor);
             return true;
-        }
-        else
-        {
-            return false;
-        }
+       }
+       else
+       {
+           return false;
+       }
     }
 
     //Bool to check if a point of interest is registered - Used to switch to Alert state

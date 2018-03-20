@@ -1264,7 +1264,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -17.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1273,7 +1273,7 @@ Transform:
   - {fileID: 4155261539220782}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4446180056941122
 Transform:
   m_ObjectHideFlags: 1
@@ -1894,38 +1894,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderRadius: 5
   audioSearch: 15
-  ShowRadius: 1
-  ShowState: 0
-  target: {fileID: 0}
   sid: {fileID: 0}
   endPoint: {fileID: 0}
-  navAgent: {fileID: 0}
-  currentScareValue: 0
-  ItemScaryRating: 0
   scareThreshHoldMax: 10
-  m_Animator: {fileID: 0}
-  txtState: {fileID: 0}
-  txtScaredValue: {fileID: 0}
   lineOfSight: 15
-  TRIGGERED_repel: 0
-  TRIGGERED_hit: 0
-  TRIGGERED_floating: 0
-  ParticleGreen: {fileID: 1961547314236882, guid: 1ac9631ad61895f418c9d37e670b3913,
+  ParticleGreen: {fileID: 1476844225496228, guid: d6ff438e2ab55114587b409ce9fc0248,
     type: 2}
   ParticlePink: {fileID: 1961547314236882, guid: 1ac9631ad61895f418c9d37e670b3913,
     type: 2}
   ParticleRed: {fileID: 1436193855775730, guid: ae339349500c2f843a351ca5a264e526,
     type: 2}
-  enableWander: 1
+  TRIGGERED_repel: 0
+  TRIGGERED_hit: 0
+  TRIGGERED_floating: 0
+  navAgent: {fileID: 0}
+  currentScareValue: 0
+  ItemScaryRating: 0
+  m_Animator: {fileID: 0}
+  txtState: {fileID: 0}
+  txtScaredValue: {fileID: 0}
   hasDroppedEcto: 0
   itemPosition: {x: 0, y: 0, z: 0}
   alertedByItem: 0
+  rendererGeo: {fileID: 1585393533884122}
+  enableWander: 1
   currentState: 2
-  civIconStateScript: {fileID: 0}
+  target: {fileID: 0}
   civilianPantsColour: {r: 0.025146209, g: 0.015138407, b: 0.14705884, a: 1}
   civilianTop1Colour: {r: 0, g: 0.5629819, b: 0.89705884, a: 1}
   civilianTop2Colour: {r: 0.3897059, g: 0.3897059, b: 0.3897059, a: 1}
-  rendererGeo: {fileID: 1585393533884122}
 --- !u!114 &114330523622685446
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436193855775730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.43, y: 1.57, z: 5.61}
+  m_LocalPosition: {x: 1.95, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4408883917371062}
@@ -148,6 +148,7 @@ MonoBehaviour:
   currentEctoplasmValue: 10
   modifier: 2
   Ectoplasm: {fileID: 1436193855775730}
+  ectoPickup: event:/Ecto_pickup
 --- !u!136 &136163372469322508
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -221,7 +222,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -376241001
+  randomSeed: 810848045
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1115,7 +1116,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -4432,7 +4433,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 1
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -7757,8 +7758,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.2032439, g: 0.9338235, b: 0.020599067, a: 0}
-        key1: {r: 0.2032439, g: 0.9338235, b: 0.020599067, a: 0.4862745}
+        key0: {r: 1, g: 0, b: 0, a: 0}
+        key1: {r: 1, g: 0, b: 0, a: 0.4862745}
         key2: {r: 0.5851535, g: 1, b: 0.76276845, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

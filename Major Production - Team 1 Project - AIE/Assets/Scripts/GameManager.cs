@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
     private bool paused;
     private bool win;
 
-    [HideInInspector]public playerPossession player;
+    [HideInInspector]public playerPossession player; //Reference will be updated once in playerPossess
 
     private void Awake()
     {

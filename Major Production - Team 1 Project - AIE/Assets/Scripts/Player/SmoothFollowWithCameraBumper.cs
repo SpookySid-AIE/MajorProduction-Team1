@@ -78,7 +78,7 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
         Debug.DrawLine(target_origin, wantedPosition, new Color(1.0f, 0.5f, 0.0f));
         bool ray_to_camera_has_hit = Physics.Raycast(target_origin, wantedVector, out rayToCameraInfo);
 
-        if (ray_to_camera_has_hit && wantedVector.magnitude > rayToCameraInfo.distance && rayToCameraInfo.transform.tag != "Player")
+        if (ray_to_camera_has_hit && wantedVector.magnitude > rayToCameraInfo.distance && rayToCameraInfo.transform.tag != "Player" && rayToCameraInfo.transform.tag != "Bullet")
         {
             Debug.DrawLine(wantedPosition, wantedPosition + wantedVector * rayToCameraInfo.distance, new Color(0, 1, 1));
             wantedPosition = target_origin + wantedVector.normalized * (rayToCameraInfo.distance);
@@ -93,10 +93,10 @@ public class SmoothFollowWithCameraBumper : MonoBehaviour
 
     private void LateUpdate()
     {
-        //This code orbits the camera during hide mode
+        //This code orbits the camera during hide mode - Jak
         if (playerPosRef.IsHidden())
         {
-            CameraParent = this.gameObject.transform.parent;
+            CameraParent = this.gameObject.transform.parent; //At this point, the parent object is an invisible point at the ITEM position that we now rotate
             currentHorizontal = Camera.main.GetComponent<CamLock>().currentHorizontal;
             currentVertical = Camera.main.GetComponent<CamLock>().currentVertical;
 
