@@ -34,11 +34,11 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public bool TRIGGERED_hit;
     [HideInInspector] public bool TRIGGERED_floating;
 
-    [HideInInspector]public NavMeshAgent navAgent;
-    [HideInInspector]public int currentScareValue;
+    [HideInInspector] public NavMeshAgent navAgent;
+    [HideInInspector] public int currentScareValue;
     //Stores the item scary rating retrieved from the Item that was used to spook the ai
-    [HideInInspector]public ItemController.Orientation ItemScaryRating;
-    [HideInInspector]public Animator m_Animator;
+    [HideInInspector] public ItemController.Orientation ItemScaryRating;
+    [HideInInspector] public Animator m_Animator;
     
     [HideInInspector] public Text txtState;
     [HideInInspector] public Text txtScaredValue;
@@ -49,6 +49,8 @@ public class CivillianController : MonoBehaviour
     //Position storing used to send over into CIV_Alert state when the AI has been lured
     [HideInInspector] public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
+
+    [HideInInspector] public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
 
     private StateMachine_CIV m_stateMachine;
     
@@ -161,6 +163,8 @@ public class CivillianController : MonoBehaviour
         //{
         //    navAgent.ResetPath();
         //}
+
+        
 
         if (navAgent.remainingDistance > navAgent.stoppingDistance)
             Move(navAgent.desiredVelocity, false, false);

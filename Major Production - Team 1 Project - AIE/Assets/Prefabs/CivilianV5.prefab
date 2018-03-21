@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faef6381cdf55bc418a518bea63ac66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRadius: 5
+  wanderRadius: 10
   audioSearch: 15
   sid: {fileID: 0}
   endPoint: {fileID: 0}
@@ -1916,8 +1916,9 @@ MonoBehaviour:
   hasDroppedEcto: 0
   itemPosition: {x: 0, y: 0, z: 0}
   alertedByItem: 0
+  initialSpawn: 0
   rendererGeo: {fileID: 1585393533884122}
-  enableWander: 1
+  enableWander: 0
   currentState: 2
   target: {fileID: 0}
   civIconStateScript: {fileID: 0}
@@ -2146,7 +2147,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 1.5

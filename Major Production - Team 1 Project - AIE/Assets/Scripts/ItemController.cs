@@ -55,6 +55,11 @@ public class ItemController : MonoBehaviour
     {
         gameObject.AddComponent<NavMeshObstacle>();
         gameObject.GetComponent<NavMeshObstacle>().carving = true;
+
+        if(gameObject.GetComponent<BoxCollider>())
+        {
+            gameObject.GetComponent<NavMeshObstacle>().size = gameObject.GetComponent<BoxCollider>().size;
+        }
     }
 
     void Start()
