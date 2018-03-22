@@ -31,6 +31,7 @@ public class CIV_Wander : State_CIV
         //NavMeshHit navHit; //Stores the result of a NavMesh query
         //NavMesh.SamplePosition(dir, out navHit, 15f, -1); //Returns the closest point where randDirection is situated on the NavMesh
         //agent.navAgent.SetDestination(navHit.position);
+        //agent.navAgent.SetDestination(agent.t.position);
     }
 
     public void OnExit(CivillianController agent)
@@ -40,18 +41,19 @@ public class CIV_Wander : State_CIV
 
     public void STATE_Update(CivillianController agent, StateMachine_CIV stateMachine, float deltaTime)
     {
-        if (agent.initialSpawn && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
-        {
-            agent.initialSpawn = false;
-            agent.enableWander = true;
-            //Debug.Log(agent.name + " first path reached.");            
-        }
+        //if (agent.initialSpawn && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.2f)
+        //{
+            
+        //    agent.initialSpawn = false;
+        //    agent.enableWander = true;
+        //    Debug.Log("first path reached.");            
+        //}
 
         if (agent.enableWander == true)
         {
             //If the agent doesnt have an INITIAL path then pick a new one 
             //This also picks a new one once the agent reaches the end of a path
-            if (agent.navAgent.hasPath == false)
+            if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
                 agent.navAgent.SetDestination(PickNewWanderPoint());
 
             if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)

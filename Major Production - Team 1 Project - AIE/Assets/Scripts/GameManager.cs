@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour {
 
@@ -118,6 +119,8 @@ public class GameManager : MonoBehaviour {
             if (text.name == "LoseText")
                 loseText = text;
         }
+
+        NavMesh.avoidancePredictionTime = 4f;
 
         //Debug.Log(UpdateSensTxt.mouseSensX);
     }

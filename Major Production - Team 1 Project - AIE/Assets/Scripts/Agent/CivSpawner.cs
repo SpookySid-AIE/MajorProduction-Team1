@@ -20,28 +20,31 @@ public class CivSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= Random.Range(1, 2) && currentSpawned < numberOfAgents) //Spawn a civ every .25 seconds
+        if(timer >= (float)Random.Range(1f, 5f) && currentSpawned < numberOfAgents) //Spawn a civ every x seconds
         {
+            timer = 0;
+
             Vector2 initialSpherePos = Random.insideUnitCircle * spawnRadius;
             Vector3 adjustedSpawnPos = new Vector3(transform.position.x + spherePos.x + initialSpherePos.x, transform.position.y, transform.position.z + spherePos.z + initialSpherePos.y);
 
             NavMeshHit hit;
             NavMesh.SamplePosition(adjustedSpawnPos, out hit, 100f, 1);
-            Debug.DrawLine(hit.position, new Vector3(hit.position.x, 20f, hit.position.z), Color.red, 99f);
             adjustedSpawnPos = hit.position;
 
 
             //Instantiate the civ at the spawners inital position, because i want them to "walk" into the shop as if its realistic ish
             GameObject o = Instantiate(civPrefab, transform.position, transform.rotation);
+            o.transform.parent = gameObject.transform;
 
             //Randomise Colours
             CivillianController civ = o.GetComponent<CivillianController>();
             civ.civilianPantsColour = Random.ColorHSV(0, 1, .5f, .7f, .5f, 1, 1, 1);
             civ.civilianTop1Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
             civ.civilianTop2Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
+            civ.initialSpawnDest = adjustedSpawnPos;
             civ.initialSpawn = true;
 
-            if (Time.time > .1f)
+            if (Time.time > .1f) //Delay the NavAgent component otherwise would bug out and not find the navmesh intime because it is still baking
             {
                 o.GetComponent<NavMeshAgent>().enabled = true;
                 o.GetComponent<NavMeshAgent>().SetDestination(adjustedSpawnPos); //Path towards the random point found within the spherePos(should be inside the mall)
@@ -49,12 +52,9 @@ public class CivSpawner : MonoBehaviour
 
 
             Debug.DrawLine(adjustedSpawnPos, new Vector3(adjustedSpawnPos.x, 20f, adjustedSpawnPos.z), Color.green, 99f);
-            
-
-
 
             currentSpawned++;
-            timer = 0;
+            
         }
     }
 
