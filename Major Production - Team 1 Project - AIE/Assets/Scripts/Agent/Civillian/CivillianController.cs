@@ -122,7 +122,7 @@ public class CivillianController : MonoBehaviour
 #endif
 
         //Set target to run away from
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameManager.Instance.player.gameObject;
         sid = target;
 
         civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
@@ -171,7 +171,7 @@ public class CivillianController : MonoBehaviour
                 gameObject.GetComponent<NavMeshObstacle>().enabled = false;
 
 
-                //
+                Debug.Log("Timer entered");
 
                 isStationary = false;
             }
@@ -293,11 +293,6 @@ public class CivillianController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
         if (other.gameObject.tag == "Civillian" && navAgent.remainingDistance < other.GetComponent<NavMeshAgent>().remainingDistance
             && other.GetComponent<NavMeshAgent>().enabled == true)
         {
@@ -320,6 +315,11 @@ public class CivillianController : MonoBehaviour
                 other.gameObject.GetComponent<CivillianController>().isStationary = true;
             }
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        
     }
 
     private void OnCollisionEnter(Collision collision)
