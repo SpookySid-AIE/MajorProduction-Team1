@@ -12,7 +12,9 @@ using UnityEngine.AI;
 public class GPATROL_Pursue : State_GPATROL
 {
     AgentController currentAgent;
-    script_ProtonBeam_v5 protonBeam;
+    script_ProtonBeam_v5 protonBeam; //Play particle system at each location whre protonbeam.fire is - turn the bullets "invis" but keep colliders
+                                     //Hackish way, but it needs to be done, i dont wanna rewrite a new shoot/accuracy mechanic with little time left
+    GameObject pBeam;
     StateMachine_GPATROL currentStateMachine;
     float timer;
     float internalTimer;
@@ -22,6 +24,7 @@ public class GPATROL_Pursue : State_GPATROL
     {
         currentAgent = agent;
         protonBeam = agent.GetComponent<script_ProtonBeam_v5>();
+        pBeam = protonBeam.particleBeam;
         ///Debug.Log(currentAgent.gameObject.name + " State: PURSUE");
         agent.txtState.text = "PURSUE";
         initialEnter = true;
@@ -36,6 +39,7 @@ public class GPATROL_Pursue : State_GPATROL
         timer = 0;
         internalTimer = 0;
         protonBeam.fire = false;
+        pBeam.SetActive(false);
         agent.anim.SetBool("stream", false); //Stop stream animation
     }
 
@@ -76,6 +80,7 @@ public class GPATROL_Pursue : State_GPATROL
 
                 protonBeam.target = target;
                 protonBeam.fire = true;
+                pBeam.SetActive(true);
                 agent.anim.SetBool("stream", true); //Play stream animation
 
                 internalTimer += Time.deltaTime;
@@ -86,6 +91,7 @@ public class GPATROL_Pursue : State_GPATROL
                 timer = 0;
                 internalTimer = 0;
                 protonBeam.fire = false;
+                pBeam.SetActive(false);
                 agent.anim.SetBool("stream", false); //Stop stream animation
                 initialEnter = false;
             }
@@ -103,6 +109,7 @@ public class GPATROL_Pursue : State_GPATROL
 
                     protonBeam.target = target;
                     protonBeam.fire = true;
+                    pBeam.SetActive(true);
                     agent.anim.SetBool("stream", true); //Play stream animation
 
                     internalTimer += Time.deltaTime;
@@ -113,6 +120,7 @@ public class GPATROL_Pursue : State_GPATROL
                     timer = 0;
                     internalTimer = 0;
                     protonBeam.fire = false;
+                    pBeam.SetActive(false);
                     agent.anim.SetBool("stream", false); //Stop stream animation
                 }
             }
@@ -128,6 +136,7 @@ public class GPATROL_Pursue : State_GPATROL
         if (currentAgent.isWillInTorchLight() == false)
         {
             protonBeam.fire = false;
+            pBeam.SetActive(false);
             currentAgent.anim.SetBool("shoot", false);
             timer = 0;
 

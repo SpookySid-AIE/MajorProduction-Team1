@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +21,7 @@ public class script_ProtonBeam_v5 : MonoBehaviour {
     //Used in Pursue State
     [HideInInspector]public Vector3 target;
     [Header("Transform from GeoGlock in the boneTree")]public Transform bulletspawn;
+    [Header("Particle Beam in the boneTree")] public GameObject particleBeam;
     [HideInInspector]public bool fire;
 
     private float percentCounter;
@@ -115,10 +116,12 @@ public class script_ProtonBeam_v5 : MonoBehaviour {
                     if (percentCounter <= 1)
                     {
                         beamClone.transform.LookAt(nextbeamPartPosition);
+                        //particleBeam.transform.LookAt(nextbeamPartPosition);
                     }
                     else
                     {
                         beamClone.transform.LookAt(target);
+                        particleBeam.GetComponentInChildren<Transform>().transform.LookAt(target);
 
                         if (beamDist >= dist /beamDist)
                         {
