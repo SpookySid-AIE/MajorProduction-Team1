@@ -2457,21 +2457,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224279023932999250, guid: 490b8c7190835c345a9e45724582c3ec,
+    - target: {fileID: 114541154830087024, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -783
-      objectReference: {fileID: 0}
-    - target: {fileID: 224279023932999250, guid: 490b8c7190835c345a9e45724582c3ec,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -2648.0842
-      objectReference: {fileID: 0}
-    - target: {fileID: 223259330941347652, guid: 490b8c7190835c345a9e45724582c3ec,
-        type: 2}
-      propertyPath: m_Camera
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 627388948}
+      objectReference: {fileID: 280524760}
+    - target: {fileID: 114754334595015252, guid: 490b8c7190835c345a9e45724582c3ec,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 280524760}
     - target: {fileID: 224432231083106344, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -2482,16 +2477,21 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -2671.2043
       objectReference: {fileID: 0}
-    - target: {fileID: 114754334595015252, guid: 490b8c7190835c345a9e45724582c3ec,
+    - target: {fileID: 223259330941347652, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 280524760}
-    - target: {fileID: 114541154830087024, guid: 490b8c7190835c345a9e45724582c3ec,
+      objectReference: {fileID: 627388948}
+    - target: {fileID: 224279023932999250, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 280524760}
+      propertyPath: m_LocalPosition.x
+      value: -783
+      objectReference: {fileID: 0}
+    - target: {fileID: 224279023932999250, guid: 490b8c7190835c345a9e45724582c3ec,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2648.0842
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 490b8c7190835c345a9e45724582c3ec, type: 2}
   m_IsPrefabParent: 0
