@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour {
            winText.gameObject.SetActive(true);
 
             Camera.main.GetComponent<CamLock>().enabled = false;
-            //Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.None;
         //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
         //    player.gameObject.GetComponent<playerPossession>().enabled = false;
         //    player.gameObject.GetComponent<AudioSource>().enabled = false;
@@ -269,11 +269,14 @@ public class GameManager : MonoBehaviour {
     {
         if (isPaused == true)
         {
+
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
             pauseMenu.SetActive(false);
+            controlsMenu.SetActive(false);
+            creditsMenu.SetActive(false);
 
             isPaused = false;
         }
