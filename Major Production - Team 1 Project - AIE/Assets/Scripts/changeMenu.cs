@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class changeMenu : MonoBehaviour
 {
@@ -13,13 +14,15 @@ public class changeMenu : MonoBehaviour
 
     public void controlsSwap()
     {
-        mainMenu.SetActive(false);
+        if (mainMenu)
+            mainMenu.SetActive(false);
         credits.SetActive(false);
         pause.SetActive(false);
 
         controls.SetActive(true);
 
-        sid.SetActive(false);
+        if (sid)
+            sid.SetActive(false);
     }
 
     public void mainSwap()
@@ -28,19 +31,46 @@ public class changeMenu : MonoBehaviour
         credits.SetActive(false);
         pause.SetActive(false);
 
-        mainMenu.SetActive(true);
+        if (mainMenu)
+            mainMenu.SetActive(true);
 
-        sid.SetActive(true);
+        if (sid)
+            sid.SetActive(true);
     }
 
     public void creditSwap()
     {
         controls.SetActive(false);
-        mainMenu.SetActive(false);
+        if (mainMenu)
+            mainMenu.SetActive(false);
         pause.SetActive(false);
-        
+
         credits.SetActive(true);
 
-        sid.SetActive(false);
+        if (sid)
+            sid.SetActive(false);
+    }
+
+    public void pauseSwap()
+    {
+        controls.SetActive(false);
+        if (mainMenu)
+            mainMenu.SetActive(false);
+        credits.SetActive(false);
+
+        pause.SetActive(true);
+
+        if (sid)
+            sid.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
     }
 }

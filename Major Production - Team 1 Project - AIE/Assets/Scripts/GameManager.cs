@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour {
     private Text txt_playerHealth;
     private Vector3 screenDimension;
     private GameObject cursor;
+    private GameObject pauseDirection;
 
+    public GameObject Menu;
+
+        
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
 
@@ -41,6 +45,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]private GameObject hideScary;
     [SerializeField]private GameObject hideScaryLureUsed;
     [SerializeField]private GameObject moveMode;
+    public GameObject pauseMenu;
+    public GameObject controlsMenu;
+    public GameObject creditsMenu;
+
 
     //Public accessor methods to set the UI gameobjects/on/off
     public void EnableItemSelect(bool value) { itemSelect.SetActive(value); }
@@ -60,7 +68,7 @@ public class GameManager : MonoBehaviour {
     private RectTransform winText; //Transforms of the child text objects
     private RectTransform loseText;
     private List<RectTransform> textList;
-
+    [HideInInspector] public bool isPaused = false;
     private bool gameover;
     // private float timeLeft;
     private bool paused;
@@ -98,6 +106,9 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         cursor = GameObject.Find("BlackReticle");
         screenDimension = new Vector3(Screen.width, Screen.height);
         cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x / 2, screenDimension.y / 2, cursor.GetComponent<RectTransform>().position.z);
@@ -127,6 +138,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.P))
+            Pause();
 
         if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
         {
@@ -242,6 +256,32 @@ public class GameManager : MonoBehaviour {
     //    }
     //}
 
+    public void Pause()
+    {
+        if (isPaused == true)
+        {
+            Time.timeScale = 1;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            pauseMenu.SetActive(false);
+
+            isPaused = false;
+        }
+        else
+        {
+            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            pauseMenu.SetActive(true);
+    
+            Time.timeScale = 0;
+
+            isPaused = true;
+
+        }
+    }
 
     public void Quit()
     {

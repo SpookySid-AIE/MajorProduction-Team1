@@ -66,11 +66,11 @@ public class CamLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX; //Multiplies mouse movement based on sensitivity
-        currentVertical -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
-
-        Cursor.lockState = CursorLockMode.Locked; //Lock cursor to center of screen and hide it - Jak
+        if (!Camera.main.GetComponent<GameManager>().isPaused)
+        {
+            currentHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX; //Multiplies mouse movement based on sensitivity
+            currentVertical -= Input.GetAxis("Mouse Y") * mouseSensitivityY;
+        }
         
         //If the script is coming from recently unpossessing an item, set currentVertical to be looking at the item thrown
         if (player.GetComponent<playerPossession>().hasItemBeenThrown == true)
