@@ -1918,10 +1918,10 @@ MonoBehaviour:
   itemPosition: {x: 0, y: 0, z: 0}
   alertedByItem: 0
   initialSpawn: 0
-  initialSpawnDest: {x: 0, y: 0, z: 0}
+  currentDest: {x: 0, y: 0, z: 0}
   rendererGeo: {fileID: 1585393533884122}
   t: {fileID: 0}
-  enableWander: 0
+  enableWander: 1
   currentState: 2
   target: {fileID: 0}
   civIconStateScript: {fileID: 0}

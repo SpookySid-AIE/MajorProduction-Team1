@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject controlsMenu;
     public GameObject creditsMenu;
-    private Image[] allStoryboard;
+    public Image[] allStoryboard;
 
     //Public accessor methods to set the UI gameobjects/on/off
     public void EnableItemSelect(bool value) { itemSelect.SetActive(value); }
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<playerPossession>();
         cursor = GameObject.Find("BlackReticle");
         screenDimension = new Vector3(Screen.width, Screen.height);
         cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x / 2, screenDimension.y / 2, cursor.GetComponent<RectTransform>().position.z);
@@ -140,6 +141,7 @@ public class GameManager : MonoBehaviour {
         NavMesh.avoidancePredictionTime = 4f;
 
         //Debug.Log(UpdateSensTxt.mouseSensX);
+        Time.timeScale = 0;
     }
 	
 	// Update is called once per frame
@@ -297,18 +299,26 @@ public class GameManager : MonoBehaviour {
 
     public void nextPanel()
     {
-        int a = 0;
-        foreach (Image t in allStoryboard)
-        {
-            a++;
-        }
-        Debug.Log(a);
+        //int a = 0;
+        //foreach (Transform t in allStoryboard)
+        //{
+        //    a++;
+        //}
+        //Debug.Log(a);
 
-        if (allStoryboard[currentStoryboard].tag != "EndPoint")
+        if (allStoryboard[currentStoryboard].tag != "StoryboardEnd")
         {
             allStoryboard[currentStoryboard].enabled = false;
+
+            if(allStoryboard[currentStoryboard].GetComponentInChildren<Text>() != null)
+                allStoryboard[currentStoryboard].GetComponentInChildren<Text>().enabled = false;
+
             currentStoryboard++;
+
             allStoryboard[currentStoryboard].enabled = true;
+
+            if (allStoryboard[currentStoryboard].GetComponentInChildren<Text>() != null)
+                allStoryboard[currentStoryboard].GetComponentInChildren<Text>().enabled = true;
         }
         else
         {
