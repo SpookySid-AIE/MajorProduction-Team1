@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour {
     private List<RectTransform> textList;
     public bool isPaused;
     private bool gameover;
+    private bool isStoryboardActive;
     // private float timeLeft;
     private bool paused;
     private bool win;
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        isStoryboardActive = true;
         allStoryboard = Storyboard.GetComponentsInChildren<Image>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -143,8 +145,15 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.P))
-            Pause();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isStoryboardActive)
+                Pause();
+            else
+            {
+                menuSkip();
+            }
+        }
 
         if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
         {
@@ -155,10 +164,6 @@ public class GameManager : MonoBehaviour {
 
             else cursor.GetComponent<Text>().fontSize = 50;
         }
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Quit();
 
         //timeLeft = timer;
         txt_npcCount.text = NPCcount.ToString();
@@ -193,7 +198,7 @@ public class GameManager : MonoBehaviour {
            winText.gameObject.SetActive(true);
 
             Camera.main.GetComponent<CamLock>().enabled = false;
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
         //    player.gameObject.GetComponent<playerPossession>().enabled = false;
         //    player.gameObject.GetComponent<AudioSource>().enabled = false;
@@ -317,6 +322,7 @@ public class GameManager : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
 
         isPaused = false;
+        isStoryboardActive = false;
 
         GameObject.Find("UI Canvas").GetComponent<Canvas>().enabled = true;
     }
