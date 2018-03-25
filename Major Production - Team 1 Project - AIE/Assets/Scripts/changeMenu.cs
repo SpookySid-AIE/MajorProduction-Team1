@@ -59,7 +59,6 @@ public class changeMenu : MonoBehaviour
         credits.SetActive(false);
 
         pause.SetActive(true);
-
         if (sid)
             sid.SetActive(false);
     }

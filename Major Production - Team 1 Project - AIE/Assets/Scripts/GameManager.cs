@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour {
     private GameObject cursor;
     private GameObject pauseDirection;
 
-    public GameObject Menu;
-
+    public GameObject Storyboard;
+    
         
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
@@ -45,10 +45,11 @@ public class GameManager : MonoBehaviour {
     [SerializeField]private GameObject hideScary;
     [SerializeField]private GameObject hideScaryLureUsed;
     [SerializeField]private GameObject moveMode;
+
     public GameObject pauseMenu;
     public GameObject controlsMenu;
     public GameObject creditsMenu;
-
+    private Image[] allStoryboard;
 
     //Public accessor methods to set the UI gameobjects/on/off
     public void EnableItemSelect(bool value) { itemSelect.SetActive(value); }
@@ -68,11 +69,13 @@ public class GameManager : MonoBehaviour {
     private RectTransform winText; //Transforms of the child text objects
     private RectTransform loseText;
     private List<RectTransform> textList;
-    public bool isPaused = false;
+    public bool isPaused;
     private bool gameover;
     // private float timeLeft;
     private bool paused;
     private bool win;
+
+    private int currentStoryboard = 1;
 
     [HideInInspector]public playerPossession player; //Reference will be updated once in playerPossess
 
@@ -106,8 +109,9 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        allStoryboard = Storyboard.GetComponentsInChildren<Image>();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         cursor = GameObject.Find("BlackReticle");
         screenDimension = new Vector3(Screen.width, Screen.height);
@@ -270,17 +274,51 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
             pauseMenu.SetActive(true);
-    
+
             Time.timeScale = 0;
 
             isPaused = true;
 
         }
+    }
+
+    public void nextPanel()
+    {
+        int a = 0;
+        foreach (Image t in allStoryboard)
+        {
+            a++;
+        }
+        Debug.Log(a);
+
+        if (allStoryboard[currentStoryboard].tag != "EndPoint")
+        {
+            allStoryboard[currentStoryboard].enabled = false;
+            currentStoryboard++;
+            allStoryboard[currentStoryboard].enabled = true;
+        }
+        else
+        {
+            menuSkip();
+        }
+    }
+
+    public void menuSkip()
+    {
+        GameObject.Find("Storyboard_Canvas_01").SetActive(false);
+
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        isPaused = false;
+
+        GameObject.Find("UI Canvas").GetComponent<Canvas>().enabled = true;
     }
 
     public void Quit()
