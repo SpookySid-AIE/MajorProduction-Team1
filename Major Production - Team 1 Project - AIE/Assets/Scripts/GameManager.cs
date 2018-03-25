@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
     private RectTransform winText; //Transforms of the child text objects
     private RectTransform loseText;
     private List<RectTransform> textList;
-    [HideInInspector] public bool isPaused = false;
+    public bool isPaused = false;
     private bool gameover;
     // private float timeLeft;
     private bool paused;
