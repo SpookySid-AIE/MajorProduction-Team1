@@ -41,7 +41,7 @@ public class CivSpawner : MonoBehaviour
             civ.civilianPantsColour = Random.ColorHSV(0, 1, .5f, .7f, .5f, 1, 1, 1);
             civ.civilianTop1Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
             civ.civilianTop2Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
-            civ.initialSpawnDest = adjustedSpawnPos;
+            civ.currentDest = adjustedSpawnPos;
             civ.initialSpawn = true;
 
             if (Time.time > .1f) //Delay the NavAgent component otherwise would bug out and not find the navmesh intime because it is still baking

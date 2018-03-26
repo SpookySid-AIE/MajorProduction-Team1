@@ -51,7 +51,7 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public bool alertedByItem;
 
     [HideInInspector] public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
-    [HideInInspector] public Vector3 initialSpawnDest;
+    [HideInInspector] public Vector3 currentDest;
 
     private StateMachine_CIV m_stateMachine;
 
@@ -160,29 +160,28 @@ public class CivillianController : MonoBehaviour
 
     private void Update()
     {
-        //Re-enable the stationary agent
-        if (isStationary)
-        {
-            stationaryTimer += Time.deltaTime;
+        ////Re-enable the stationary agent
+        //if (isStationary)
+        //{
+        //    stationaryTimer += Time.deltaTime;
 
-            if (stationaryTimer >= 1f)
-            {
-                stationaryTimer = 0;
-                gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-
-
-                Debug.Log("Timer entered");
-
-                isStationary = false;
-            }
-        } //NOTE: STORE THE CURRENT PATH END POINT, AND IF WE BECOME STATIONARY BEFORE REACHING THEN WE RECALCULATE A NEW PATH AND CONTINUE TO IT
-        else //Turn the nav agent back on in the next frame
-        {
-            if (!isStationary && !navAgent.enabled)
-            {
-                navAgent.enabled = true;
-            }
-        }
+        //    if (stationaryTimer >= 1f)
+        //    {
+        //        stationaryTimer = 0;
+        //        gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+        //        isStationary = false;
+        //    }
+        //} //NOTE: STORE THE CURRENT PATH END POINT, AND IF WE BECOME STATIONARY BEFORE REACHING THEN WE RECALCULATE A NEW PATH AND CONTINUE TO IT
+        //else //Turn the nav agent back on in the next frame
+        //{
+        //    if (!isStationary && navAgent.isStopped)
+        //    {
+        //        navAgent.isStopped = false;
+        //        NavMeshHit navHit;
+        //        NavMesh.SamplePosition(currentDest, out navHit, wanderRadius, -1);
+        //        navAgent.SetDestination(navHit.position);
+        //    }
+        //}
 
 
 
@@ -293,28 +292,33 @@ public class CivillianController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Civillian" && navAgent.remainingDistance < other.GetComponent<NavMeshAgent>().remainingDistance
-            && other.GetComponent<NavMeshAgent>().enabled == true)
-        {
-            Debug.Log("Trigger");
+        //if (other.gameObject.tag == "Civillian" && navAgent.remainingDistance < other.GetComponent<NavMeshAgent>().remainingDistance
+        //    && other.GetComponent<NavMeshAgent>().enabled == true            
+        //    && currentState != State.State_Retreat 
+        //    && other.GetComponent<CivillianController>().currentState != State.State_Retreat)
+        //{
+        //    CivillianController otherCiv = other.GetComponent<CivillianController>();
+        //    otherCiv.currentDest = other.GetComponent<NavMeshAgent>().pathEndPosition;
+        //    //Debug.DrawLine(other.GetComponent<NavMeshAgent>().pathEndPosition, new Vector3(other.GetComponent<NavMeshAgent>().pathEndPosition.z, 20f, other.GetComponent<NavMeshAgent>().pathEndPosition.z), Color.green, 99f);
 
-            other.GetComponent<NavMeshAgent>().enabled = false;
+        //    other.GetComponent<NavMeshAgent>().isStopped = true;
+        //    //other.GetComponent<NavMeshAgent>().enabled = false;
 
-            if (other.GetComponent<NavMeshObstacle>() == null)
-            {
-                NavMeshObstacle obstacle = other.gameObject.AddComponent<NavMeshObstacle>();
-                obstacle.shape = NavMeshObstacleShape.Capsule;
-                obstacle.radius = 0.3f;
-                obstacle.center = new Vector3(0, 1, 0);
-                obstacle.carving = true;
-                other.gameObject.GetComponent<CivillianController>().isStationary = true;
-            }
-            else
-            {
-                other.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                other.gameObject.GetComponent<CivillianController>().isStationary = true;
-            }
-        }
+        //    if (other.GetComponent<NavMeshObstacle>() == null)
+        //    {
+        //        NavMeshObstacle obstacle = other.gameObject.AddComponent<NavMeshObstacle>();
+        //        obstacle.shape = NavMeshObstacleShape.Capsule;
+        //        obstacle.radius = 0.3f;
+        //        obstacle.center = new Vector3(0, 1, 0);
+        //        obstacle.carving = true;
+        //        other.gameObject.GetComponent<CivillianController>().isStationary = true;
+        //    }
+        //    else
+        //    {
+        //        other.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+        //        other.gameObject.GetComponent<CivillianController>().isStationary = true;
+        //    }
+        //}
     }
 
     private void OnTriggerStay(Collider other)

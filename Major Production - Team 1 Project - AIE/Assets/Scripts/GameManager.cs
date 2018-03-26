@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+        // Comments are cool.
         isStoryboardActive = true;
         allStoryboard = Storyboard.GetComponentsInChildren<Image>();
         Cursor.visible = true;
