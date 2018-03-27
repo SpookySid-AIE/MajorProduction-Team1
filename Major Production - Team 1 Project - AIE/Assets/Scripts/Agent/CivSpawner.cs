@@ -28,7 +28,7 @@ public class CivSpawner : MonoBehaviour
             Vector3 adjustedSpawnPos = new Vector3(transform.position.x + spherePos.x + initialSpherePos.x, transform.position.y, transform.position.z + spherePos.z + initialSpherePos.y);
 
             NavMeshHit hit;
-            NavMesh.SamplePosition(adjustedSpawnPos, out hit, 100f, 1);
+            NavMesh.SamplePosition(adjustedSpawnPos, out hit, spawnRadius, 1);
             adjustedSpawnPos = hit.position;
 
 
@@ -41,7 +41,7 @@ public class CivSpawner : MonoBehaviour
             civ.civilianPantsColour = Random.ColorHSV(0, 1, .5f, .7f, .5f, 1, 1, 1);
             civ.civilianTop1Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
             civ.civilianTop2Colour = Random.ColorHSV(0, 1, .3f, .7f, .5f, 1, 1, 1);
-            civ.currentDest = adjustedSpawnPos;
+            civ.firstSpawnDest = adjustedSpawnPos;
             civ.initialSpawn = true;
 
             if (Time.time > .1f) //Delay the NavAgent component otherwise would bug out and not find the navmesh intime because it is still baking

@@ -60,6 +60,8 @@ public class ItemController : MonoBehaviour
         {
             gameObject.GetComponent<NavMeshObstacle>().size = gameObject.GetComponent<BoxCollider>().size;
         }
+
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void Start()

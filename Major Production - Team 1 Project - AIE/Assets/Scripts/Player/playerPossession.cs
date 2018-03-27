@@ -244,7 +244,7 @@ public class playerPossession : MonoBehaviour
                 } //End loop
             } //End If
         }//End Quick-Drop
-        Debug.Log(hidden);
+        //Debug.Log(hidden);
     }//End update
 
     //Raycast in a given direction - if nothing hit on the raycast then we set the new position to eject the player at

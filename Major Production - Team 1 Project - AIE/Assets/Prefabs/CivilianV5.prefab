@@ -170,7 +170,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4434642054978988}
   - component: {fileID: 95919619465918366}
-  - component: {fileID: 54875445053592374}
   - component: {fileID: 136059112613975644}
   - component: {fileID: 136586212405530436}
   - component: {fileID: 114991876231263102}
@@ -1773,21 +1772,6 @@ Transform:
   m_Father: {fileID: 4392045113889770}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54875445053592374
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1182107029286222}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!95 &95006349917540472
 Animator:
   serializedVersion: 3
@@ -1919,9 +1903,10 @@ MonoBehaviour:
   alertedByItem: 0
   initialSpawn: 0
   currentDest: {x: 0, y: 0, z: 0}
+  firstSpawnDest: {x: 0, y: 0, z: 0}
   rendererGeo: {fileID: 1585393533884122}
   t: {fileID: 0}
-  enableWander: 1
+  enableWander: 0
   currentState: 2
   target: {fileID: 0}
   civIconStateScript: {fileID: 0}
@@ -2169,7 +2154,7 @@ NavMeshAgent:
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 360
+  m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0

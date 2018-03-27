@@ -50,20 +50,19 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
 
-    [HideInInspector] public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
+    public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
+    [HideInInspector] public Vector3 firstSpawnDest;
     [HideInInspector] public Vector3 currentDest;
 
     private StateMachine_CIV m_stateMachine;
 
-    private Rigidbody m_Rigidbody;
+    //private Rigidbody m_Rigidbody;
 
     //Forward and turn floats, changes animation
     private float m_TurnAmount;
     private float m_ForwardAmount;
 
-    private float stationaryTimer;
-    private bool isStationary = false;
-
+    private Renderer rend;   // 31/01/2018 Added by Mark  
     private Vector3 m_GroundNormal;
 
     public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
@@ -81,7 +80,11 @@ public class CivillianController : MonoBehaviour
     public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
 
-    private Renderer rend;   // 31/01/2018 Added by Mark  
+    //Testing repathing when stuck
+    private float halfAvoidRadius;
+    public Transform otherAgent;
+    private float stationaryTimer;
+    private bool isStationary = false;
 
     // Use this for initialization
     void Start()
@@ -93,7 +96,7 @@ public class CivillianController : MonoBehaviour
         currentScareValue = 0;
         navAgent = gameObject.GetComponent<NavMeshAgent>();
         m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody>();
+        //m_Rigidbody = GetComponent<Rigidbody>();
 
         //Find EndPoint
         endPoint = GameObject.FindWithTag("EndPoint").transform;
@@ -136,6 +139,9 @@ public class CivillianController : MonoBehaviour
         rend.material.SetColor("_PantsColour", civilianPantsColour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top1Colour", civilianTop1Colour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
+
+        halfAvoidRadius = navAgent.radius;
+        Debug.Log(halfAvoidRadius);
     }
 
     private void FixedUpdate()
@@ -160,31 +166,104 @@ public class CivillianController : MonoBehaviour
 
     private void Update()
     {
-        ////Re-enable the stationary agent
-        //if (isStationary)
-        //{
-        //    stationaryTimer += Time.deltaTime;
+        RaycastHit hit;
 
-        //    if (stationaryTimer >= 1f)
-        //    {
-        //        stationaryTimer = 0;
-        //        gameObject.GetComponent<NavMeshObstacle>().enabled = false;
-        //        isStationary = false;
-        //    }
-        //} //NOTE: STORE THE CURRENT PATH END POINT, AND IF WE BECOME STATIONARY BEFORE REACHING THEN WE RECALCULATE A NEW PATH AND CONTINUE TO IT
-        //else //Turn the nav agent back on in the next frame
-        //{
-        //    if (!isStationary && navAgent.isStopped)
-        //    {
-        //        navAgent.isStopped = false;
-        //        NavMeshHit navHit;
-        //        NavMesh.SamplePosition(currentDest, out navHit, wanderRadius, -1);
-        //        navAgent.SetDestination(navHit.position);
-        //    }
-        //}
+        //Forward raycast checking for a possible blocked agent inside the avoid radius
+        if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, halfAvoidRadius + .5f)
+            && navAgent.isOnNavMesh && !initialSpawn)
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward *( halfAvoidRadius + .5f), Color.magenta);
 
+            if (hit.transform.tag == "Civillian" && hit.transform != this.transform)
+            {
+                if (hit.transform.GetComponent<CivillianController>().isStationary == false)
+                {
+                    //Stop this agent and wait until the other one repaths around you
+                    navAgent.isStopped = true;
+                    currentDest = navAgent.destination;
+                    navAgent.ResetPath();
+                    navAgent.enabled = false;
+                    isStationary = true;
+                    
 
+                    //Create nav obstacle
+                    if (gameObject.GetComponent<NavMeshObstacle>() == null)
+                    {
+                        NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
+                        obstacle.shape = NavMeshObstacleShape.Capsule;
+                        obstacle.radius = 0.3f;
+                        obstacle.center = new Vector3(0, 1, 0);
+                        obstacle.carving = true;
+                    }
+                    else //Obstacle has already been added first time around so enable from here on out
+                    {
+                        gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+                    }
 
+                    //Storing the hit agent
+                    otherAgent = hit.transform;
+                }
+            }
+        }
+        
+        //Turns on Wander once initial destination has been hit otherwise resample the location and continue moving there
+        if (initialSpawn && navAgent.enabled) 
+        {
+            //distance check? test if we have reached near the firstspawn dest?
+            //What if its no longer reachable? possible error
+            //if we have reached our destination (hopefully on the same path) then enable wander and disable this block
+            if (navAgent.hasPath)
+            {
+                if (Vector3.Distance(transform.position, firstSpawnDest) <= 1.0f)
+                {
+                    initialSpawn = false;
+                    enableWander = true;
+                }
+            }
+            else //Check incase one of the items update the navmesh and breaks the current agents pathing
+            {
+                NavMeshHit navHit;
+                NavMesh.SamplePosition(firstSpawnDest, out navHit, wanderRadius, -1);
+                navAgent.SetDestination(navHit.position); //No error checking so possible error if SamplePosition fails
+            }
+        }
+
+        //If otherAgent was found we wait until its out of the way before we repath
+        if (otherAgent != null)
+        {
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 dirToOther = otherAgent.position - transform.position;
+
+            if (dirToOther.magnitude >= 2f)
+            {
+                //Re-enable the stationary agent
+                if (isStationary)
+                {
+                    stationaryTimer += Time.deltaTime;
+
+                    if (stationaryTimer >= 1f)
+                    {
+                        stationaryTimer = 0;
+                        gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+                        isStationary = false;
+                    }
+                }
+                else //Turn the nav agent back on in the next update frame
+                {
+                    otherAgent = null;
+                    navAgent.enabled = true;
+                    navAgent.ResetPath();
+
+                    NavMeshHit navHit;
+                    NavMesh.SamplePosition(currentDest, out navHit, wanderRadius, -1);
+                    navAgent.SetDestination(navHit.position);
+
+                    navAgent.isStopped = false;
+                }
+            }
+        }
+
+        //Update the animator
         if (navAgent.enabled)
         {
             if (navAgent.remainingDistance > navAgent.stoppingDistance)
@@ -238,6 +317,7 @@ public class CivillianController : MonoBehaviour
         //transform.Translate(Vector3.forward * Time.deltaTime);
     }
 
+    //Original function was from the ThirdPersonController package, purely here now to update animation speed
     public void Move(Vector3 move, bool crouch, bool jump)
     {
         // convert the world relative moveInput vector into a local-relative
@@ -246,17 +326,17 @@ public class CivillianController : MonoBehaviour
         if (move.magnitude > 1f) move.Normalize();
         move = transform.InverseTransformDirection(move);
 
-        //RaycastHit hitInfo;
-        //if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, 0.1f))
-        //{
-        //    m_GroundNormal = hitInfo.normal;
-        //    m_Animator.applyRootMotion = true;
-        //}
-        //else
-        //{
-        //    m_GroundNormal = Vector3.up;
-        //    m_Animator.applyRootMotion = false;
-        //}
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, 0.1f))
+        {
+            m_GroundNormal = hitInfo.normal;
+            m_Animator.applyRootMotion = true;
+        }
+        else
+        {
+            m_GroundNormal = Vector3.up;
+            m_Animator.applyRootMotion = false;
+        }
 
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
         m_TurnAmount = Mathf.Atan2(move.x, move.z);

@@ -41,14 +41,6 @@ public class CIV_Wander : State_CIV
 
     public void STATE_Update(CivillianController agent, StateMachine_CIV stateMachine, float deltaTime)
     {
-        //if (agent.initialSpawn && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.2f)
-        //{
-            
-        //    agent.initialSpawn = false;
-        //    agent.enableWander = true;
-        //    Debug.Log("first path reached.");            
-        //}
-
         if (agent.enableWander == true)
         {
             //If the agent doesnt have an INITIAL path then pick a new one 
@@ -59,6 +51,7 @@ public class CIV_Wander : State_CIV
             if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
             {
                 agent.navAgent.ResetPath();
+                Debug.Log(agent.name + " Reset Called");
             }
 
             //if (agent.navAgent.isPathStale == true)
