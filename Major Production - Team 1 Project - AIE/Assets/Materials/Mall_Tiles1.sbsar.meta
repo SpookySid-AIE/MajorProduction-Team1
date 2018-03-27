@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6e90314ac9c22e44cba123585b86c0ee
-timeCreated: 1519998893
+timeCreated: 1522126074
 licenseType: Free
 SubstanceImporter:
   externalObjects: {}
@@ -11,7 +11,8 @@ SubstanceImporter:
     prototypeName: New_Graph
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+    shaderKeywords: _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+      _SPECULARHIGHLIGHTS_OFF
     renderQueue: -1
     lightmapFlags: 4
     inputs:
@@ -43,7 +44,7 @@ SubstanceImporter:
       texEnvs:
       - _BumpMap:
           texture: {instanceID: 0}
-          scale: {x: 10, y: 1}
+          scale: {x: 10, y: 10}
           offset: {x: 0, y: 0}
       - _DetailAlbedoMap:
           texture: {instanceID: 0}
@@ -67,15 +68,15 @@ SubstanceImporter:
           offset: {x: 0, y: 0}
       - _MetallicGlossMap:
           texture: {instanceID: 0}
-          scale: {x: 10, y: 1}
+          scale: {x: 10, y: 10}
           offset: {x: 0, y: 0}
       - _OcclusionMap:
           texture: {instanceID: 0}
-          scale: {x: 10, y: 1}
+          scale: {x: 10, y: 10}
           offset: {x: 0, y: 0}
       - _ParallaxMap:
           texture: {instanceID: 0}
-          scale: {x: 10, y: 1}
+          scale: {x: 10, y: 10}
           offset: {x: 0, y: 0}
       floats:
       - _BumpScale: 1
@@ -84,13 +85,13 @@ SubstanceImporter:
       - _DstBlend: 0
       - _GlossMapScale: 1
       - _Glossiness: 0.5
-      - _GlossyReflections: 1
+      - _GlossyReflections: 0
       - _Metallic: 0
       - _Mode: 0
       - _OcclusionStrength: 1
       - _Parallax: 0.02
       - _SmoothnessTextureChannel: 0
-      - _SpecularHighlights: 1
+      - _SpecularHighlights: 0
       - _SrcBlend: 1
       - _UVSec: 0
       - _ZWrite: 1
