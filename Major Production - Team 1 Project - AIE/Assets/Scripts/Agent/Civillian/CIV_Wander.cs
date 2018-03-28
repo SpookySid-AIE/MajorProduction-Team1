@@ -51,7 +51,6 @@ public class CIV_Wander : State_CIV
             if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
             {
                 agent.navAgent.ResetPath();
-                Debug.Log(agent.name + " Reset Called");
             }
 
             //if (agent.navAgent.isPathStale == true)

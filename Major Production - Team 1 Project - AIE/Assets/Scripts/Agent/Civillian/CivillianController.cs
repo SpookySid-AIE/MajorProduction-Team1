@@ -50,9 +50,8 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
 
-    public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
-    [HideInInspector] public Vector3 firstSpawnDest;
-    [HideInInspector] public Vector3 currentDest;
+    [HideInInspector] public Vector3 firstSpawnDest; //Position to travel to on spawn
+    [HideInInspector] public Vector3 currentDest; //I store a reference to the endPathDestination here, so the Civs can resume the same destination when waiting to move
 
     private StateMachine_CIV m_stateMachine;
 
@@ -71,6 +70,7 @@ public class CivillianController : MonoBehaviour
     [Header("----[DEBUGGING]----")]
     public Transform t;
     public bool enableWander;
+    public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
     public State currentState;
     [Header("Dont Set. Showing target to follow")] public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
 
@@ -89,7 +89,8 @@ public class CivillianController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine
+        //Debug.Log(GetInstanceID());
+        //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine but cant actually seem to get that working...
         currentState = State.State_Wander;
 
         hasDroppedEcto = false;
@@ -141,7 +142,6 @@ public class CivillianController : MonoBehaviour
         rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
 
         halfAvoidRadius = navAgent.radius;
-        Debug.Log(halfAvoidRadius);
     }
 
     private void FixedUpdate()
@@ -179,8 +179,11 @@ public class CivillianController : MonoBehaviour
                 if (hit.transform.GetComponent<CivillianController>().isStationary == false)
                 {
                     //Stop this agent and wait until the other one repaths around you
+                    m_Animator.SetBool("idle", true);
                     navAgent.isStopped = true;
+
                     currentDest = navAgent.destination;
+
                     navAgent.ResetPath();
                     navAgent.enabled = false;
                     isStationary = true;
@@ -252,25 +255,27 @@ public class CivillianController : MonoBehaviour
                 {
                     otherAgent = null;
                     navAgent.enabled = true;
-                    navAgent.ResetPath();
+                    navAgent.ResetPath(); //Clear any paths somehow created during the time navagent was turned off
 
-                    NavMeshHit navHit;
-                    NavMesh.SamplePosition(currentDest, out navHit, wanderRadius, -1);
-                    navAgent.SetDestination(navHit.position);
+                    //Calculate a new path to the same destination from when the agent was stopped
+                    NavMeshPath path = new NavMeshPath();
+                    navAgent.CalculatePath(currentDest, path);
+                    navAgent.SetPath(path);
 
                     navAgent.isStopped = false;
+                    m_Animator.SetBool("idle", false);
                 }
             }
         }
 
         //Update the animator
-        if (navAgent.enabled)
-        {
-            if (navAgent.remainingDistance > navAgent.stoppingDistance)
-                Move(navAgent.desiredVelocity, false, false);
-            else
-                Move(Vector3.zero, false, false);
-        }
+        //if (navAgent.enabled)
+        //{
+        //    if (navAgent.remainingDistance > navAgent.stoppingDistance)
+        //        Move(navAgent.desiredVelocity, false, false);
+        //    else
+        //        Move(Vector3.zero, false, false);
+        //}
 
 
         if (sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false)
