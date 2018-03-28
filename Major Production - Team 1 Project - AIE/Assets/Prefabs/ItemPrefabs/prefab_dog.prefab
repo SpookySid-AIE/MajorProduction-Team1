@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4736036184389114}
   - component: {fileID: 137674081301741572}
+  - component: {fileID: 208557672913127312}
   m_Layer: 0
   m_Name: geo_dog
   m_TagString: Untagged
@@ -624,7 +625,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309301353492522}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.52, z: 1.56}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4229713255904618}
@@ -637,7 +638,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783256400589148}
   m_LocalRotation: {x: -0, y: -0.5181923, z: -0, w: 0.85526425}
-  m_LocalPosition: {x: -135.85, y: 0.00000047683716, z: 49.17}
+  m_LocalPosition: {x: 9.454788, y: -19.20661, z: 28.205881}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4229713255904618}
@@ -866,3 +867,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000022724271, y: -0.0007545436, z: 0.016525256}
     m_Extent: {x: 0.012199242, y: 0.024668667, z: 0.019404897}
   m_DirtyAABB: 0
+--- !u!208 &208557672913127312
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309301353492522}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.015, y: 0.01, z: 0.015}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.01}
+  m_TimeToStationary: 0.5
