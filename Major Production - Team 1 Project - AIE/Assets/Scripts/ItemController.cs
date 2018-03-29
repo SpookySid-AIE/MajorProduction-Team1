@@ -27,9 +27,9 @@ public class ItemController : MonoBehaviour
     [HideInInspector]
     public float timer = 0; //A timer used for calculating when an item can be classified as not thrown again.
     [HideInInspector]
-    public int baseScariness; //The base scariness of an item.
+    public float baseScariness; //The base scariness of an item.
     [HideInInspector]
-    public int ectoCost; //The cost in ectoplasm for throwing a given item.
+    public float ectoCost; //The cost in ectoplasm for throwing a given item.
 
     //Animation boolean - turns off/on the animation
     private bool scare = false;
@@ -86,18 +86,18 @@ public class ItemController : MonoBehaviour
 
         if (ItemScaryRating == Orientation.Least_Scary)
         {
-            baseScariness = 2; //Edit this to edit how scared citizens get when struck with said item
-            ectoCost = 2; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the least expensive
+            baseScariness = Camera.main.GetComponent<valueController>().leastScaryNPCResponse; //Edit this to edit how scared citizens get when struck with said item
+            ectoCost = Camera.main.GetComponent<valueController>().leastScaryUsedCost; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the least expensive
         }
         else if (ItemScaryRating == Orientation.Medium_Scary)
         {
-            baseScariness = 5;//Edit this to edit how scared citizens get when struck with said item
-            ectoCost = 5; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the medium expensive
+            baseScariness = Camera.main.GetComponent<valueController>().mediumScaryNPCResponse; ;//Edit this to edit how scared citizens get when struck with said item
+            ectoCost = Camera.main.GetComponent<valueController>().mediumScaryUsedCost; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the medium expensive
         }
         else if (ItemScaryRating == Orientation.Most_Scary)
         {
-            baseScariness = 10;//Edit this to edit how scared citizens get when struck with said item
-            ectoCost = 10; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the most expensive
+            baseScariness = Camera.main.GetComponent<valueController>().mostScaryNPCResponse; ;//Edit this to edit how scared citizens get when struck with said item
+            ectoCost = Camera.main.GetComponent<valueController>().mostScaryUsedCost; ; //Edit this to edit the overall cost of ectoplasm for possesing an item that's the most expensive
         }
         else Debug.LogError("ItemScaryRating Error! No values selected for: " + gameObject.name);
     }

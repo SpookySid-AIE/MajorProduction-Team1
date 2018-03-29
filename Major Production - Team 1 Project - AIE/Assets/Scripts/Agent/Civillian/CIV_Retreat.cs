@@ -54,21 +54,24 @@ public class CIV_Retreat : State_CIV
         if (agent.TRIGGERED_floating)   //Was scared by a floating object - multiply base scariness by x 1
         {
             CheckScaryRating();
-            ectoplasm.GetComponent<ectoplasmController>().modifier = 1;
-            currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().PossessedItem.GetComponent<ItemController>().baseScariness * 2);
+            ectoplasm.GetComponent<ectoplasmController>().modifier = Camera.main.GetComponent<valueController>().EctoSidSeenScareValue;
+            currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().itemThrown.GetComponent<ItemController>().baseScariness);
         }
         else if (agent.TRIGGERED_hit)   //Was hit by an item - multiply base scariness by x2
         {
             CheckScaryRating();
-            ectoplasm.GetComponent<ectoplasmController>().modifier = 2;
-            currentAgent.currentScareValue += (currentAgent.target.GetComponent<ItemController>().baseScariness * 5);
+            ectoplasm.GetComponent<ectoplasmController>().modifier = Camera.main.GetComponent<valueController>().EctoThrowScareValue;
+            currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().itemThrown.GetComponent<ItemController>().baseScariness);
+            
         }
         else if (agent.TRIGGERED_repel) //Was lured to an item and spooked - multiply by x5??
         {
             CheckScaryRating();
-            ectoplasm.GetComponent<ectoplasmController>().modifier = 5;
-            currentAgent.currentScareValue += (currentAgent.target.GetComponent<ItemController>().baseScariness * 10);
+            ectoplasm.GetComponent<ectoplasmController>().modifier = Camera.main.GetComponent<valueController>().EctoRepelledScareValue;
+            currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().itemThrown.GetComponent<ItemController>().baseScariness);
         }
+
+        
 
     }
 

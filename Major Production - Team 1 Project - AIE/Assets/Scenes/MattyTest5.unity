@@ -6775,12 +6775,12 @@ Prefab:
     - target: {fileID: 224074028229359910, guid: 3fe43aaff0a14164cac4fa3f2c492b67,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 224074028229359910, guid: 3fe43aaff0a14164cac4fa3f2c492b67,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 229.5
+      value: 384
       objectReference: {fileID: 0}
     - target: {fileID: 224074028229359910, guid: 3fe43aaff0a14164cac4fa3f2c492b67,
         type: 2}
@@ -29210,12 +29210,12 @@ Prefab:
     - target: {fileID: 224519635397924602, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 224519635397924602, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 229.5
+      value: 384
       objectReference: {fileID: 0}
     - target: {fileID: 224519635397924602, guid: 490b8c7190835c345a9e45724582c3ec,
         type: 2}
@@ -30994,6 +30994,39 @@ Camera:
   m_PrefabParentObject: {fileID: 20254894005911344, guid: f12360d50c3906547827cafc4e4e9c97,
     type: 2}
   m_PrefabInternal: {fileID: 627388947}
+--- !u!1 &627388949 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1406373986358356, guid: f12360d50c3906547827cafc4e4e9c97,
+    type: 2}
+  m_PrefabInternal: {fileID: 627388947}
+--- !u!114 &627388950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627388949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc950e2cc329e041bf0bd91969e7678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leastScaryEctoDropValue: 2
+  mediumScaryEctoDropValue: 5
+  mostScaryEctoDropValue: 10
+  leastScaryNPCResponse: 2
+  mediumScaryNPCResponse: 5
+  mostScaryNPCResponse: 10
+  leastScaryUsedCost: 2
+  mediumScaryUsedCost: 5
+  mostScaryUsedCost: 10
+  EctoSidSeenScareValue: 1
+  EctoThrowScareValue: 2
+  EctoRepelledScareValue: 5
+  thrownItemVelocity: 30
+  lureRange: 10
+  possessionRange: 10
+  civillianLineOfSight: 5
+  cameraSmoothTime: 0.3
 --- !u!1001 &627855252
 Prefab:
   m_ObjectHideFlags: 0
@@ -84741,12 +84774,12 @@ Prefab:
     - target: {fileID: 224493787459119990, guid: 07f6fed542328654a874eb9cb4df536c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 224493787459119990, guid: 07f6fed542328654a874eb9cb4df536c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 229.5
+      value: 384
       objectReference: {fileID: 0}
     - target: {fileID: 224493787459119990, guid: 07f6fed542328654a874eb9cb4df536c,
         type: 2}
