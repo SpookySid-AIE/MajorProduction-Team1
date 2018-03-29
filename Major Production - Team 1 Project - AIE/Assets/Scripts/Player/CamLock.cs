@@ -9,7 +9,7 @@ public class CamLock : MonoBehaviour
     public float cameraHeightAdjustment = 2; //where to place the camera
     public float cameraDistanceAdjustment = -2; //where to place the camera
     public float minCameraDistanceFromPlayer = 2f; //stops the player from going past the camera when moving backwards
-    public float smoothTime = 0.3F; //how long to take to catch-up with the player rotation and movement
+    public float smoothTime; //how long to take to catch-up with the player rotation and movement
     public bool invert = false; //Inverted controls
 
     private Vector3 velocity = Vector3.zero; //Velocity for camera
@@ -37,6 +37,8 @@ public class CamLock : MonoBehaviour
         mouseSensitivityX = UpdateSensTxt.mouseSensX; 
         mouseSensitivityY = UpdateSensTxt.mouseSensY;
         invert = UpdateSensTxt.invertToSend;
+
+        smoothTime = Camera.main.GetComponent<valueController>().cameraSmoothTime;
 
         player = GameObject.FindGameObjectWithTag("Player"); //Sets player and players rigidbody to the appropriate values
         playerrb = player.GetComponent<Rigidbody>();

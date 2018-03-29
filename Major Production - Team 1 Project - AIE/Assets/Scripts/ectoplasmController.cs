@@ -5,7 +5,7 @@ using UnityEngine;
 public class ectoplasmController : MonoBehaviour
 {
     public float currentEctoplasmValue; //Set in editor, this is the amount of Ectoplasm you receive for picking up this item.
-    public int modifier; //The modifier for the ectoplasm value. Base value is multiplied by this. - Ben
+    public float modifier; //The modifier for the ectoplasm value. Base value is multiplied by this. - Ben
     public GameObject Ectoplasm; //Also set in editer, this determines the color of the Ectoplasm. - Ben
     [FMODUnity.EventRef]public string ectoPickup;
 

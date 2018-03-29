@@ -21,7 +21,7 @@ public class CivillianController : MonoBehaviour
     //Exit point that they will travel to and despawn
     [Header("Where the Civs run to despawn.")] public Transform endPoint;
     public int scareThreshHoldMax;
-    [Header("Range for LoS")] public float lineOfSight = 5;
+    [Header("Range for LoS")] public float lineOfSight;
 
     [Header("Particle References")]
     //Public particle objects to spawn, here so it runs on builds until we can think of a better way
@@ -35,7 +35,7 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public bool TRIGGERED_floating;
 
     [HideInInspector] public NavMeshAgent navAgent;
-    [HideInInspector] public int currentScareValue;
+    [HideInInspector] public float currentScareValue;
     //Stores the item scary rating retrieved from the Item that was used to spook the ai
     [HideInInspector] public ItemController.Orientation ItemScaryRating;
     [HideInInspector] public Animator m_Animator;
@@ -92,7 +92,7 @@ public class CivillianController : MonoBehaviour
         //Debug.Log(GetInstanceID());
         //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine but cant actually seem to get that working...
         currentState = State.State_Wander;
-
+        lineOfSight = Camera.main.GetComponent<valueController>().civillianLineOfSight;
         hasDroppedEcto = false;
         currentScareValue = 0;
         navAgent = gameObject.GetComponent<NavMeshAgent>();

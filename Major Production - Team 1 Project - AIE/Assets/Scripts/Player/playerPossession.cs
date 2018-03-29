@@ -30,7 +30,7 @@ public class playerPossession : MonoBehaviour
     public Color possessionColour = Color.cyan;// Added by Mark - Added possession color for outline
     public float HeightAdjustment = .4f; //where to start the ray - need to align the spotlight to this position
 
-    public float allowablePosessionRange = 10;
+    public float allowablePosessionRange;
 
     //Renamed possessed -> moveModeActive 
     private static bool moveModeActive = false;
@@ -45,7 +45,7 @@ public class playerPossession : MonoBehaviour
         return hidden;
     }
 
-    public float throwVelocity = 30;
+    public float throwVelocity;
     
     private static bool hidden = false; //Determines when we can use the "Lure/Repel" ability
     private static bool lureUsed = false; //Lets us know when we have used Lure, so we can Repel afterwards only
@@ -55,7 +55,7 @@ public class playerPossession : MonoBehaviour
     public static Vector3 oldPlayerPos;
     public static Quaternion oldPlayerRot;
 
-    public int lureRange = 10; //Range at which the lure ability will attract the ai
+    public float lureRange; //Range at which the lure ability will attract the ai
     [Header("Highlight Mat for Civ")]public Material highlightMat; //Material that will be set on the civillians
     [Header("LureSphere Prefab")] public GameObject lureSphere;
 
@@ -100,11 +100,13 @@ public class playerPossession : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+        lureRange = Camera.main.GetComponent<valueController>().lureRange;
+        throwVelocity = Camera.main.GetComponent<valueController>().thrownItemVelocity;
+        allowablePosessionRange = Camera.main.GetComponent<valueController>().possessionRange;
 
         //This only works because the one instance of playerPossession exists on "Sid" so it grabs the correct values
         //from then forward items with this script attached can no longer edit the OldSidValues Struct which is good
-        if(!oldSidValuesSet)
+        if (!oldSidValuesSet)
         {
             //Store old values in the struct for unpossesion            
             OldSidValues.speed = player.GetComponent<playerController>().speed;
@@ -403,7 +405,8 @@ public class playerPossession : MonoBehaviour
 
             //Disable old player scripts because we are becoming a new item
             player.GetComponent<playerController>().enabled = false;
-            player.GetComponent<playerPossession>().PossessedItem = target.gameObject;          
+            player.GetComponent<playerPossession>().PossessedItem = target.gameObject;
+            itemThrown = target.gameObject;        
             player.GetComponent<playerPossession>().enabled = false;
             //oldColliderHeight = player.GetComponent<CharacterController>().height;
             //oldColliderRadius = player.GetComponent<CharacterController>().radius;
