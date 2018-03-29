@@ -145,9 +145,12 @@ public class AgentController : MonoBehaviour
 
         if(collision.gameObject.tag == "Item")
         {
-            anim.SetBool("hit", true);
-            GetComponent<script_ProtonBeam_v5>().fire = false; //Stop shooting, noticed a bug that the beam would continue to fire when running away, hopefully this fixes it
-            m_stateMachine.ChangeState(this, new GPATROL_Retreat());
+            if (collision.gameObject.GetComponent<ItemController>().hasBeenThrown)
+            {
+                anim.SetBool("hit", true);
+                GetComponent<script_ProtonBeam_v5>().fire = false; //Stop shooting, noticed a bug that the beam would continue to fire when running away, hopefully this fixes it
+                m_stateMachine.ChangeState(this, new GPATROL_Retreat());
+            }
         }
     }
 
@@ -244,10 +247,7 @@ public class AgentController : MonoBehaviour
                     //Debug.Log(hit.transform.name);
 
                     return false;
-                }
-                
-
-                
+                } 
             }
             //Debug.DrawRay(adjustedPosition, direction, Color.green);
             //Debug.Log(direction.magnitude);

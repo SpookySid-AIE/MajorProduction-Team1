@@ -45,13 +45,13 @@ public class CIV_Wander : State_CIV
         {
             //If the agent doesnt have an INITIAL path then pick a new one 
             //This also picks a new one once the agent reaches the end of a path
-            if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
-                agent.navAgent.SetDestination(PickNewWanderPoint());
+            //if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
+            //    agent.navAgent.SetDestination(PickNewWanderPoint());
 
-            if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
-            {
-                agent.navAgent.ResetPath();
-            }
+            //if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
+            //{
+            //    agent.navAgent.ResetPath();
+            //}
 
             //if (agent.navAgent.isPathStale == true)
             //    Debug.Log(agent.name + " is stale");

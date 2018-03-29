@@ -80,16 +80,15 @@ public class CivillianController : MonoBehaviour
     public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
 
-    //Testing repathing when stuck
-    private float halfAvoidRadius;
-    public Transform otherAgent;
+    //Repathing variables when stuck
+    private Transform otherAgent;
     private float stationaryTimer;
     private bool isStationary = false;
 
     // Use this for initialization
     void Start()
     {
-        //Debug.Log(GetInstanceID());
+        Debug.Log(GetInstanceID());
         //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine but cant actually seem to get that working...
         currentState = State.State_Wander;
 
@@ -140,8 +139,6 @@ public class CivillianController : MonoBehaviour
         rend.material.SetColor("_PantsColour", civilianPantsColour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top1Colour", civilianTop1Colour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
-
-        halfAvoidRadius = navAgent.radius;
     }
 
     private void FixedUpdate()
@@ -169,10 +166,10 @@ public class CivillianController : MonoBehaviour
         RaycastHit hit;
 
         //Forward raycast checking for a possible blocked agent inside the avoid radius
-        if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, halfAvoidRadius + .5f)
+        if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, navAgent.radius + .5f)
             && navAgent.isOnNavMesh && !initialSpawn)
         {
-            Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward *( halfAvoidRadius + .5f), Color.magenta);
+            //Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward * ( navAgent.radius + .5f), Color.magenta);
 
             if (hit.transform.tag == "Civillian" && hit.transform != this.transform)
             {
@@ -244,7 +241,7 @@ public class CivillianController : MonoBehaviour
                 {
                     stationaryTimer += Time.deltaTime;
 
-                    if (stationaryTimer >= 1f)
+                    if (stationaryTimer >= .5f)
                     {
                         stationaryTimer = 0;
                         gameObject.GetComponent<NavMeshObstacle>().enabled = false;
@@ -374,42 +371,6 @@ public class CivillianController : MonoBehaviour
     //        m_Rigidbody.velocity = v;
     //    }
     //}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (other.gameObject.tag == "Civillian" && navAgent.remainingDistance < other.GetComponent<NavMeshAgent>().remainingDistance
-        //    && other.GetComponent<NavMeshAgent>().enabled == true            
-        //    && currentState != State.State_Retreat 
-        //    && other.GetComponent<CivillianController>().currentState != State.State_Retreat)
-        //{
-        //    CivillianController otherCiv = other.GetComponent<CivillianController>();
-        //    otherCiv.currentDest = other.GetComponent<NavMeshAgent>().pathEndPosition;
-        //    //Debug.DrawLine(other.GetComponent<NavMeshAgent>().pathEndPosition, new Vector3(other.GetComponent<NavMeshAgent>().pathEndPosition.z, 20f, other.GetComponent<NavMeshAgent>().pathEndPosition.z), Color.green, 99f);
-
-        //    other.GetComponent<NavMeshAgent>().isStopped = true;
-        //    //other.GetComponent<NavMeshAgent>().enabled = false;
-
-        //    if (other.GetComponent<NavMeshObstacle>() == null)
-        //    {
-        //        NavMeshObstacle obstacle = other.gameObject.AddComponent<NavMeshObstacle>();
-        //        obstacle.shape = NavMeshObstacleShape.Capsule;
-        //        obstacle.radius = 0.3f;
-        //        obstacle.center = new Vector3(0, 1, 0);
-        //        obstacle.carving = true;
-        //        other.gameObject.GetComponent<CivillianController>().isStationary = true;
-        //    }
-        //    else
-        //    {
-        //        other.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-        //        other.gameObject.GetComponent<CivillianController>().isStationary = true;
-        //    }
-        //}
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
