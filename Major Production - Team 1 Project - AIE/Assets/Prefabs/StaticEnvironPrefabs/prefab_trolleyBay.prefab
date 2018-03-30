@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4418198800599152}
   - component: {fileID: 33556499493121860}
   - component: {fileID: 23798481023688024}
-  - component: {fileID: 64716583521534950}
   m_Layer: 0
   m_Name: prefab_trolleyBay
   m_TagString: Untagged
@@ -35,8 +34,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689653066921254}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -200.15, y: 1.3, z: 67.68}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.41983, y: -3.3067353, z: -42.006973}
   m_LocalScale: {x: 1.0657972, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,18 +81,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689653066921254}
-  m_Mesh: {fileID: 4300000, guid: faaa5aa5b0d664e4ab3d4f7743194e7d, type: 3}
---- !u!64 &64716583521534950
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689653066921254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: faaa5aa5b0d664e4ab3d4f7743194e7d, type: 3}
