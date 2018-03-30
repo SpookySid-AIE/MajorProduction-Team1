@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114269014670452458}
   - component: {fileID: 114451969983063204}
   - component: {fileID: 114359543879008988}
+  - component: {fileID: 114845051975763170}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -225,16 +226,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCcount: 0
+  Storyboard: {fileID: 0}
   canvasWinOrLose: {fileID: 0}
   itemSelect: {fileID: 0}
   hideNonScary: {fileID: 0}
   hideScary: {fileID: 0}
   hideScaryLureUsed: {fileID: 0}
   moveMode: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  controlsMenu: {fileID: 0}
+  creditsMenu: {fileID: 0}
+  allStoryboard: []
   audioLure: event:/Sid_Lure_Whistle
   audioScare: event:/Sid_Scare_Laugh
   audioCivSpotted: event:/NPC_Startled_M
   audioCivScared: event:/NPC_Scared_M
+  isPaused: 1
   player: {fileID: 0}
 --- !u!114 &114451969983063204
 MonoBehaviour:
@@ -265,6 +272,34 @@ MonoBehaviour:
   currentVertical: 0
   wantedPosition: {x: 0, y: 0, z: 0}
   enableRotation: 1
+--- !u!114 &114845051975763170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406373986358356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc950e2cc329e041bf0bd91969e7678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leastScaryEctoDropValue: 2
+  mediumScaryEctoDropValue: 3
+  mostScaryEctoDropValue: 5
+  leastScaryNPCResponse: 2
+  mediumScaryNPCResponse: 5
+  mostScaryNPCResponse: 10
+  leastScaryUsedCost: 1
+  mediumScaryUsedCost: 2
+  mostScaryUsedCost: 3
+  EctoSidSeenScareValue: 1
+  EctoThrowScareValue: 2
+  EctoRepelledScareValue: 5
+  thrownItemVelocity: 30
+  lureRange: 10
+  possessionRange: 10
+  civillianLineOfSight: 4
+  cameraSmoothTime: 0.3
 --- !u!124 &124742300117456260
 Behaviour:
   m_ObjectHideFlags: 1
