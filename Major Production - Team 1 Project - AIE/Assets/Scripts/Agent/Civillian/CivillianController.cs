@@ -85,10 +85,17 @@ public class CivillianController : MonoBehaviour
     private float stationaryTimer;
     private bool isStationary = false;
 
+    //storing unique id here now, for some reason onTrigger in TriggerHighlight.cs started to trigger twice and giving a new id each time to the civs
+    private int id;
+    public int GetID() { return id; }
+
     // Use this for initialization
     void Start()
     {
-        Debug.Log(GetInstanceID());
+        //Debug.Log("GetInstanceID: " + GetInstanceID());
+        id = GetInstanceID();
+        //Debug.Log("GetID: " + GetID());
+
         //Temporary possibly - shouldnt need to setup an enum for currentState when i already  have a way to detect it in statemachine but cant actually seem to get that working...
         currentState = State.State_Wander;
         lineOfSight = Camera.main.GetComponent<valueController>().civillianLineOfSight;

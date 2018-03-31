@@ -25,7 +25,7 @@ public class TriggerHighlight : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Civillian")
+        if (other.tag == "Civillian" && !civData.ContainsKey(other.GetComponent<CivillianController>().GetID()))
         {
             //Build struct data
             CivValues v;
@@ -33,10 +33,14 @@ public class TriggerHighlight : MonoBehaviour
             v.oldMat = v.render.material;
 
             //Add the data into the dictionary so we can easily look up this civ and change its material in OnExit
-            civData.Add(other.GetInstanceID(), v);
+            civData.Add(other.GetComponent<CivillianController>().GetID(), v);
 
             //Highlight the current civ
             v.render.material = highlightMaterial;
+
+            //Debug.Log(v.oldMat);
+            //Debug.Log("TriggerHighlight: " + other.GetComponent<CivillianController>().GetID());
+
         }
     }
 
@@ -44,8 +48,8 @@ public class TriggerHighlight : MonoBehaviour
     {
         if (other.tag == "Civillian")
         {
-            civData[other.GetInstanceID()].render.material = civData[other.GetInstanceID()].oldMat; //Revert highlight back to old mat
-            civData.Remove(other.GetInstanceID());
+            civData[other.GetComponent<CivillianController>().GetID()].render.material = civData[other.GetComponent<CivillianController>().GetID()].oldMat; //Revert highlight back to old mat
+            civData.Remove(other.GetComponent<CivillianController>().GetID());
         }
     }
 

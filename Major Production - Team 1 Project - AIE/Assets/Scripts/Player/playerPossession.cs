@@ -92,7 +92,7 @@ public class playerPossession : MonoBehaviour
         COUNT
     }
 
-    //Fmod audio instances - these are set in Lure/Repel
+    //Fmod audio instances - these are set in Lure/Repel - Jak
     FMOD.Studio.EventInstance lureSound;
     FMOD.Studio.EventInstance scareSound;
 
@@ -163,7 +163,7 @@ public class playerPossession : MonoBehaviour
             //sneakTest.transform.rotation = player.transform.rotation;
         }
 
-        //Streamlined Controls
+        //Streamlined Controls - Jak
         //Everything is only run once an item is possessed
         //LMB -> Hide()
         //"HideMode"->LMB - > Lure()
@@ -174,7 +174,7 @@ public class playerPossession : MonoBehaviour
         //"PossessMode -> E -> DropItem()
         //"PossessMode" -> RMB -> Back to Hide()
 
-        //LMB - Possess/Throw
+        //LMB - Possess/Throw - Jak
         if (Input.GetMouseButtonDown(0))
         {
             if (!hidden && !moveModeActive) //The hidden flag only detects when a player is hiding in an item - Jak
@@ -230,88 +230,66 @@ public class playerPossession : MonoBehaviour
             if (IsHidden() || IsPossessed())
             {
                 Vector3 dir = Vector3.zero;
+                RaycastHit hit;
+                float length = 3;
+                Collider col = GetComponent<Collider>();
+                Vector3 colSize = transform.up * sneakTest.GetComponent<CapsuleCollider>().height / 2;
 
                 for (int i = 0; i < (int)RayDirection.COUNT; i++)
                 {
                     //Check for a valid spot in xyz directions to drop the item and pop sid out
-                    if (CheckForValidItemDrop((RayDirection)i, ref dir))
-                    {
-                        Vector3 newPos = sneakTest.transform.position;
-                        newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
+                    AssignRayDirection((RayDirection)i, ref dir);
 
-                        sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
-                        UnpossessItem();
-                        break;
-                    }
+                    Vector3 newPos = sneakTest.transform.position;
+                    newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
+
+                    Debug.DrawRay(transform.position, dir, Color.blue, 10f);
+                    Debug.DrawRay(newPos, colSize, Color.green, 10f);
+                    Debug.DrawRay(newPos, -colSize, Color.green, 10f);
+
+                    if (!Physics.Raycast(transform.position, dir, out hit, length)) //Original Direction
+                        if (!Physics.Raycast(newPos, colSize, out hit, sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Up
+                            if (!Physics.Raycast(newPos, -colSize, out hit, -sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Down
+                            {
+                                sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
+                                UnpossessItem();
+                                break;
+                            }
                 } //End loop
             } //End If
         }//End Quick-Drop
-        //Debug.Log(hidden);
+
+
     }//End update
 
-    //Raycast in a given direction - if nothing hit on the raycast then we set the new position to eject the player at
-    //Notes: Raycasts will not detect Colliders for which the Raycast origin is inside the Collider. <- Wish i bloody found that earlier
-    bool CheckForValidItemDrop(RayDirection rayDirection, ref Vector3 dir)
+    //Sets dir based on given rayDirection - Jak
+    void AssignRayDirection(RayDirection rayDirection, ref Vector3 dir)
     {
-        RaycastHit hit;
         float length = 3;
-        Collider col = GetComponent<Collider>();
 
         switch (rayDirection)
         {
             case RayDirection.FORWARD:
                 dir = transform.forward * length;
-                //Debug.DrawRay(transform.position, dir, Color.cyan, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             case RayDirection.BACK:
                 dir = -transform.forward * length;
-                //Debug.DrawRay(transform.position, dir, Color.blue, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             case RayDirection.LEFT:
                 dir = -transform.right * length;
-                //Debug.DrawRay(transform.position, dir, Color.red, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             case RayDirection.RIGHT:
                 dir = transform.right * length;
-                //Debug.DrawRay(transform.position, dir, Color.red, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             case RayDirection.UP:
                 dir = transform.up * length;
-                //Debug.DrawRay(transform.position, dir, Color.green, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             case RayDirection.DOWN:
                 dir = -transform.up * length;
-                //Debug.DrawRay(transform.position, dir, Color.green, 10f);
-                if (!Physics.Raycast(transform.position, dir, out hit, length))
-                    return true;
-                
-                //Debug.Log("Object hit: " + gameObject.name);
                 break;
             default:
                 break;
         }
-
-        return false;
     }
 
     //Enabling the movement on the Possessed object that we control, splitting up "PossessItem" - Jak

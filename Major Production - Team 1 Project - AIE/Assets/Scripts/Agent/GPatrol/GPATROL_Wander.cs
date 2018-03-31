@@ -45,7 +45,7 @@ public class GPATROL_Wander : State_GPATROL
         }
         #endregion
 
-        if (agent.enableWander == true)
+        if (agent.enableWander == true && Time.timeScale != 0)
         {
             //If the agent doesnt have an INITIAL path then pick a new one 
             //This also picks a new one once the agent reaches the end of a path

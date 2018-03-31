@@ -56,12 +56,12 @@ public class ItemController : MonoBehaviour
         gameObject.AddComponent<NavMeshObstacle>();
         gameObject.GetComponent<NavMeshObstacle>().carving = true;
 
-        if(gameObject.GetComponent<BoxCollider>())
+        if (gameObject.GetComponent<BoxCollider>())
         {
             gameObject.GetComponent<NavMeshObstacle>().size = gameObject.GetComponent<BoxCollider>().size;
         }
 
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     void Start()
@@ -171,29 +171,4 @@ public class ItemController : MonoBehaviour
         
         }
     } //End update
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if(tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
-        //{
-        //    other.GetComponent<CivillianController>().navAgent.isStopped = true;
-
-        //    //Play thinking? animation here
-
-        //    other.GetComponent<Animator>().enabled = false;
-        //}
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        //if (tag == "Player" && other.tag == "Civillian" && other.GetComponent<CivillianController>().currentState == State.State_Alert) //Only run this code once the player is hiding inside the item, and a civillian is alerted
-        //{
-        //    other.GetComponent<CivillianController>().navAgent.isStopped = true;
-
-        //    //Play thinking? animation here
-
-        //    other.GetComponent<Animator>().enabled = false;
-        //}
-    }
-
 }
