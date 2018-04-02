@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33754543740261418}
   - component: {fileID: 23490386733262914}
   - component: {fileID: 114499134555545700}
-  - component: {fileID: 54754381799428326}
   - component: {fileID: 65576134939279254}
+  - component: {fileID: 54754381799428326}
   m_Layer: 0
   m_Name: prefab_eggplantCrate
   m_TagString: Item
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423217307408178}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9048004, y: -18.307465, z: 51.35534}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -131.21544, y: 1.005, z: 68.18282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,22 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: b93ab0660600ca945b95e7463dae2da8, type: 2}
-  - {fileID: 2100000, guid: 0c754f8cd5be2df4996d4701ade546dd, type: 2}
+  - {fileID: 2100000, guid: ba2d532b6cc05a042abf2334242073c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +112,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6611291, y: 0.50445926, z: 0.83456707}
-  m_Center: {x: 0.041954264, y: -0.038498856, z: -0.000000044703484}
+  m_Center: {x: 0.041954383, y: -0.038498856, z: 0}
 --- !u!114 &114499134555545700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
   ItemScaryRating: 0
-  itemSize: 1
+  itemSize: 0
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
