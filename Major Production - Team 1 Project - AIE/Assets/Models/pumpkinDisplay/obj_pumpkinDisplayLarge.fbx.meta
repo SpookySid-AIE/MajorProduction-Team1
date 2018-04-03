@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 42574a7f4542470439c5064eda985c3f
-timeCreated: 1521624744
+timeCreated: 1522741556
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -29,6 +29,15 @@ ModelImporter:
     100042: transform21
     100044: transform22
     100046: transform23
+    100048: geo_largePumpkin
+    100050: geo_largePumpkinDisplay
+    100052: joint1
+    100054: joint2
+    100056: joint3
+    100058: joint4
+    100060: joint5
+    100062: joint6
+    100064: joint7
     400000: geo_pumpkinDisplay
     400002: geo_pumpkinDisplayLarge
     400004: //RootNode
@@ -53,14 +62,37 @@ ModelImporter:
     400042: transform21
     400044: transform22
     400046: transform23
+    400048: geo_largePumpkin
+    400050: geo_largePumpkinDisplay
+    400052: joint1
+    400054: joint2
+    400056: joint3
+    400058: joint4
+    400060: joint5
+    400062: joint6
+    400064: joint7
     2300000: geo_pumpkinDisplayLarge
+    2300002: geo_largePumpkin
+    2300004: geo_largePumpkinDisplay
     3300000: geo_pumpkinDisplayLarge
+    3300002: geo_largePumpkin
+    3300004: geo_largePumpkinDisplay
     4300000: geo_pumpkinDisplayLarge
+    4300002: geo_largePumpkin
+    4300004: geo_largePumpkinDisplay
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: geo_largePumpkin
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__pasted__shd_crate
+    second: {fileID: 2100000, guid: 0f3c9ba7ea4ed7847a2c304890b76cfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shd_crate
     second: {fileID: 2100000, guid: 0f3c9ba7ea4ed7847a2c304890b76cfe, type: 2}
   - first:
       type: UnityEngine:Material
@@ -83,14 +115,15 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -143,7 +176,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
