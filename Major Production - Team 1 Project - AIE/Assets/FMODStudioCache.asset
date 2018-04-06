@@ -32,7 +32,7 @@ MonoBehaviour:
   - {fileID: 114645184993550070}
   MasterBankRef: {fileID: 114029224138594728}
   StringsBankRef: {fileID: 114014774195711626}
-  stringsBankWriteTime: 636586247983366181
+  stringsBankWriteTime: 636586540729943517
   cacheVersion: 2
 --- !u!114 &114005560484048728
 MonoBehaviour:
@@ -85,6 +85,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114007911342616160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114007954777760702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\SharedFmodProject\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636586247983366181
+  lastModified: 636586540729943517
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -209,6 +224,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114021453237702556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114023225376498984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,11 +267,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\GitHub\MajorProduction-Team1\Major Production - Team 1 Project - AIE\Assets\FMOD\SharedFmodProject\Build\Desktop\Master
     Bank.bank
-  lastModified: 636586247983301058
+  lastModified: 636586540729868165
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 4562272
+    Value: 5895328
   Exists: 1
 --- !u!114 &114029699117936746
 MonoBehaviour:
@@ -675,6 +705,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114121088862330838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114121510441895312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,10 +821,10 @@ MonoBehaviour:
   Banks:
   - {fileID: 114029224138594728}
   IsStream: 1
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114186232867271506}
+  - {fileID: 114343833543420558}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114150279475668834
@@ -818,6 +863,21 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+--- !u!114 &114155573256842120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114158783910005052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,6 +927,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114168184034101500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114171273797742768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +1059,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114202915755583490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114203032383265716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,6 +1336,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114246904856063970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114252012729553074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1295,6 +1400,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 4548256
   Exists: 1
+--- !u!114 &114280381953511312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114281905873657262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,6 +1518,21 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
 --- !u!114 &114317406774609552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
+--- !u!114 &114320238522773338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1643,6 +1778,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114343833543420558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114346032166210116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,6 +1949,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114386095256856450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114392161449583932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,7 +1983,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114688955704526156}
+  - {fileID: 114007911342616160}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114392920705266510
@@ -1840,7 +2005,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114893343202886526}
+  - {fileID: 114709703203088248}
   MinDistance: 0
   MaxDistance: 0
 --- !u!114 &114398035871487674
@@ -1946,6 +2111,21 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114424443544703178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114426226648028802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2410,6 +2590,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114530845666573928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114533491760994266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2843,6 +3038,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114624112510108734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114624635570650840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3067,6 +3277,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114688729355277914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114688955704526156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3127,6 +3352,36 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114699926220833670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114701995437635180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114704386045994162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3142,6 +3397,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+--- !u!114 &114709703203088248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SupermarketEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114720328795200006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3737,6 +4007,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114843052143431230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114849021574662634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4061,6 +4346,21 @@ MonoBehaviour:
   - {fileID: 114343684377984320}
   MinDistance: 0
   MaxDistance: 0
+--- !u!114 &114916910197364698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: ThemeVolume
+  Min: 0
+  Max: 1
+  Default: 1
 --- !u!114 &114917827959522148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4292,6 +4592,21 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3422304
   Exists: 1
+--- !u!114 &114948275737334282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: WarehouseEntered
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114952418531008600
 MonoBehaviour:
   m_ObjectHideFlags: 0
