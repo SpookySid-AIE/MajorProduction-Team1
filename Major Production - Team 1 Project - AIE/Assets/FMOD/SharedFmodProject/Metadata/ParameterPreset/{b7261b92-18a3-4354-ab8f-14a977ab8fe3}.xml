@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{b7261b92-18a3-4354-ab8f-14a977ab8fe3}">
+        <property name="name">
+            <value>Spotted_2_On</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ee30e8c4-6b61-47d1-8859-2fc5cbfa098c}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{9cb9764f-4451-4c05-a1b2-5cf7941331f5}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{9cb9764f-4451-4c05-a1b2-5cf7941331f5}">
+        <property name="parameterType">
+            <value>1</value>
+        </property>
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+        <property name="seekSpeed">
+            <value>5</value>
+        </property>
+        <property name="isExposedRecursively">
+            <value>false</value>
+        </property>
+    </object>
+</objects>
