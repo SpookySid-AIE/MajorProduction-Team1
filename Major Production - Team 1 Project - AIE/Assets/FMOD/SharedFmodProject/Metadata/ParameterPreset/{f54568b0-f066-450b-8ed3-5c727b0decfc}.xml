@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{f54568b0-f066-450b-8ed3-5c727b0decfc}">
+        <property name="name">
+            <value>Sid_Spotted</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ee30e8c4-6b61-47d1-8859-2fc5cbfa098c}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{2ff6314f-e3dc-41b7-ba36-eba175892ac7}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{2ff6314f-e3dc-41b7-ba36-eba175892ac7}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

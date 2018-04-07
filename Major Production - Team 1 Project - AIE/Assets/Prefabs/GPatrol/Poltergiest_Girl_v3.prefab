@@ -1313,6 +1313,7 @@ GameObject:
   - component: {fileID: 4014888553187070}
   - component: {fileID: 135162003123279754}
   - component: {fileID: 114280131735820250}
+  - component: {fileID: 114795514861580690}
   m_Layer: 0
   m_Name: audio_Spotted_Trigger
   m_TagString: Untagged
@@ -2102,8 +2103,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1606824287989016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.994, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 4915228613401914}
   m_RootOrder: 0
@@ -4185,7 +4186,9 @@ MonoBehaviour:
   - Target: {fileID: 0}
     Params: []
   - Target: {fileID: 0}
-    Params: []
+    Params:
+    - Name: Sid_Spotted
+      Value: 1
   TriggerEvent: 3
   CollisionTag: Player
 --- !u!114 &114559768634516062
@@ -4255,6 +4258,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5a2ca5f0c484d4a95485b36948751b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114795514861580690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606824287989016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Emitters:
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params: []
+  - Target: {fileID: 0}
+    Params:
+    - Name: Sid_Spotted
+      Value: 0
+  TriggerEvent: 4
+  CollisionTag: Player
 --- !u!114 &114802939067555734
 MonoBehaviour:
   m_ObjectHideFlags: 1
