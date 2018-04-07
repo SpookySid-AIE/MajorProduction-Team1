@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// Author: <Jak Revai>                                     
+// Author: <Jak Revai + Ben Thompson>                                     
 // Date Created: <29/07/17>                               
 // Brief: <Handles the main game loop + Timer>  
 ////////////////////////////////////////////////////////////
@@ -169,43 +169,20 @@ public class GameManager : MonoBehaviour {
             else cursor.GetComponent<Text>().fontSize = 50;
         }
 
-        //timeLeft = timer;
         txt_npcCount.text = NPCcount.ToString();
-        //txt_playerHealth.text = player.health.ToString() + "%";
-
-        //Pause the game - kinda
-        //if (Input.GetKey(KeyCode.Escape) && !win)
-        //{
-        //    Time.timeScale = 0; //slow the game to a hault
-        //    canvasPause.gameObject.SetActive(true);
-        //    Camera.main.GetComponent<CamLock>().enabled = false;
-        //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
-        //    player.gameObject.GetComponent<playerPossession>().enabled = false;
-        //    player.gameObject.GetComponent<AudioSource>().enabled = false;
-        //    player.gameObject.GetComponent<PlayerController>().enabled = false;
-
-        //    AgentController[] agents = GameObject.FindObjectsOfType<AgentController>();
-
-        //    foreach (AgentController agent in agents)
-        //        agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = false;
-
-
-        //    paused = true;
-        //}
 
         //Winscreen
         if (NPCcount <= 0)
         {
             NPCcount = 0;
-        //    win = true;
+
            canvasWinOrLose.gameObject.SetActive(true);
            winText.gameObject.SetActive(true);
 
             Camera.main.GetComponent<CamLock>().enabled = false;
+
             Cursor.lockState = CursorLockMode.None;
-        //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
-        //    player.gameObject.GetComponent<playerPossession>().enabled = false;
-        //    player.gameObject.GetComponent<AudioSource>().enabled = false;
+
             gameObject.GetComponentInParent<CharacterController>().enabled = false;
             gameObject.GetComponentInParent<playerController>().enabled = false;
 
@@ -214,10 +191,6 @@ public class GameManager : MonoBehaviour {
             //    foreach (AgentController agent in agents)
             //        agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = false;
         }
-        //else
-        //{
-        //    timeLeft = timer - Time.time; //Countdown the timer
-        //}
 
         //Gameover State
         if (!player.IsHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
@@ -233,41 +206,6 @@ public class GameManager : MonoBehaviour {
             }            
         }
     } //End update
-
-
-    //void Gameover()
-    //{
-    //    timeLeft = 0;
-    //    player.health = 0;
-    //    txt_timerText.text = "0:00";
-    //    txt_playerHealth.text = player.health.ToString() + "%";
-    //    //Disable Scripts here
-    //    canvasWinOrLose.gameObject.SetActive(true);
-    //    loseText.gameObject.SetActive(true);
-    //    Time.timeScale = 0;
-    //    player.GetComponent<PlayerController>().enabled = false;        
-    //}
-
-    //public void ResumeGameplay()
-    //{
-    //    if (paused == true)
-    //    {
-    //        canvasPause.gameObject.SetActive(false);
-    //        Camera.main.GetComponent<CamLock>().enabled = true;
-    //        player.gameObject.GetComponent<playerCannonBall>().enabled = true;
-    //        player.gameObject.GetComponent<playerPossession>().enabled = true;
-    //        player.gameObject.GetComponent<AudioSource>().enabled = true;
-    //        player.gameObject.GetComponent<PlayerController>().enabled = true;
-
-    //        AgentController[] agents = GameObject.FindObjectsOfType<AgentController>();
-
-    //        foreach (AgentController agent in agents)
-    //            agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = true;
-
-    //        Time.timeScale = 1;
-    //        paused = true;
-    //    }
-    //}
 
     public void Pause()
     {
