@@ -1,15 +1,16 @@
+////////////////////////////////////////////////////////////
+// Author: <Ben Thompson(ORIGINAL) + Jak Revai>                                     
+// Date Created: <20/03/18>                               
+// Brief: <Basic Movement motion script + control animation params/states for Sid> 
+// Note: Original creator of this script was Ben Thompson, originally using a Character Controller here,
+// we moved away from that and used rigidbody instead, so i needed to create a basic movement system here - Jak.
+////////////////////////////////////////////////////////////
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-// This script controls: 
-// - character controller movement (up and down using left shift and space, forward and back using W and S)
-// - does not control Sids rotation
-// - the ectoplasm value (is the ectoplasm value being stored in more than one place? - MP)
-// - calculates ectoplasm damage based on a random accuracy range when Sid is hit (is this redundant? - MP)
-// - 
-
+[RequireComponent(typeof(Animator))] //Added by Jak 6.04.18
 public class playerController : MonoBehaviour
 {
     [HideInInspector]public float Ectoplasm = 100.0f;
@@ -20,15 +21,15 @@ public class playerController : MonoBehaviour
 
     private Text txt_ectoplasm;
     private Vector3 moveDirection = Vector3.zero;
-    //public CharacterController controller;
-    private Rigidbody rigid;
-    Vector3 staticmove;
+    private Rigidbody m_Rigid;
+    private Animator m_Anim;
+
+    public float velocity;
 
     void Start()
     {
-        // Store reference to attached component
-        //controller = GetComponent<CharacterController>();
-        rigid = GetComponent<Rigidbody>();
+        m_Rigid = GetComponent<Rigidbody>();
+        m_Anim = GetComponent<Animator>();
         txt_ectoplasm = GameObject.Find("Ectoplasm").GetComponent<Text>();
     }
 
@@ -39,8 +40,6 @@ public class playerController : MonoBehaviour
         
         // Use input "W" and "S" for direction, multiplied by speed
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        staticmove = moveDirection; //Store moveDirection before we transform it
        
         //transform moveDirection to worldspace coordinates
         moveDirection = transform.TransformDirection(moveDirection);
@@ -51,44 +50,37 @@ public class playerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             moveDirection.y = floatSpeed;
-            rigid.velocity = new Vector3(0, moveDirection.y, 0);
+            m_Rigid.velocity = new Vector3(0, moveDirection.y, 0);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
             moveDirection.y = -sinkspeed;
-            rigid.velocity = new Vector3(0, moveDirection.y, 0);
+            m_Rigid.velocity = new Vector3(0, moveDirection.y, 0);
         }
-
-        //moveDirection *= speed;
-
-        // Move Character Controller
-        //controller.Move(moveDirection * Time.deltaTime);
 
         //New movement - Jak
         Vector3 newVelocity = (moveDirection *= speed);
 
         //Keep the y current velocity.
-        newVelocity.y = rigid.velocity.y;
-        rigid.velocity = newVelocity; //Set velocity directly(could behave weirdly). Its easier because we just need the simple movement/collision detection
-                                      //Could cause some physics issues
+        newVelocity.y = m_Rigid.velocity.y;
+        m_Rigid.velocity = newVelocity; //Set velocity directly(could behave weirdly). Its easier because we just need the simple movement/collision detection
+                                        //Could cause some physics issues
 
-
-        //tilt Sid over
-        //var rot = transform.rotation;
-        //rot.eulerAngles = transform.rotation.eulerAngles + new Vector3(staticmove.z * 5.0f, 0, staticmove.x * 5.0f);
-        //transform.rotation = rot;
+        UpdateAnimator();
+        //Debug.Log(m_Rigid.velocity.magnitude);
     }
 
-    private void FixedUpdate()
+    //Update animator params - Jak
+    void UpdateAnimator()
     {
-        ////Forward / Back
-        //rigid.MovePosition((transform.position + new Vector3(staticmove.x *= speed,0,staticmove.z *= speed) * Time.deltaTime));
-        //rigid.AddForce(new Vector3(0, 0, (staticmove.z *= speed) * Time.deltaTime));
+        float m_vel = m_Rigid.velocity.magnitude;
+        velocity = m_vel;
+        m_Anim.SetFloat("Velocity", m_vel, 0.1f, Time.deltaTime);
     }
 
-    // Is this redundant? Shooting no longer uses game objects - MP
     private void OnTriggerEnter(Collider other)
     {
+        //Minus health if hit by a bullet and calculate accuracy from the agent - Jak
         if (other.gameObject.tag == "Bullet")
         {
             //Get the gun accuracy from the bullet - I store the gameobject that spawns the bullet in AgentReference - which is attached to the instantiated bullet
@@ -96,16 +88,12 @@ public class playerController : MonoBehaviour
             acc = acc / 100; //Convert to decimal based - easier for range Random.Range
 
             //If the range is LESS than the acc then shoot - so if the Accuracy is 5 percent(0.05), that means Random.Range has to return 0.05 or less for it to shoot
-            //Giving it a less likely chance to shoot
-
             if (Random.Range(0.0f, 1.0f) < acc) //Process if hit or not
             {
                 Ectoplasm--;
-                //Get the Agent that spawned the current bullet that hit //Access player object(current Item possesed) and unposses
-                //if (GetComponent<playerPossession>().CheckIsPossesed() == true)
-                //{
-                //    other.gameObject.GetComponent<AgentReference>().spawner.GetComponent<AgentController>().target.GetComponent<playerPossession>().UnpossessItem();
-                //}
+
+                if (m_Anim.GetBool("Damaged") == false)
+                    m_Anim.SetBool("Damaged", true);
             }
         }
 

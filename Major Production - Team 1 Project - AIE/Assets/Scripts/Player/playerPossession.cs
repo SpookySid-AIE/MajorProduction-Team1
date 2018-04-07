@@ -66,7 +66,7 @@ public class playerPossession : MonoBehaviour
     private GameObject lureEffect;
     private GameObject scareEffect;
     
-    //Storing old speed values here to easily renable later
+    //Storing old speed values here to easily renable later - Jak
     struct OldSidValues
     {
         public static float speed;
@@ -104,8 +104,8 @@ public class playerPossession : MonoBehaviour
         throwVelocity = Camera.main.GetComponent<valueController>().thrownItemVelocity;
         allowablePosessionRange = Camera.main.GetComponent<valueController>().possessionRange;
 
-        //This only works because the one instance of playerPossession exists on "Sid" so it grabs the correct values
-        //from then forward items with this script attached can no longer edit the OldSidValues Struct which is good
+        //Set once catch, setting all the old values for the first instance of playerPossession.cs.
+        //This lets us quickly unpossess, and look up the old values from the struct to return to our old "Sid" and no longer use the values from the item
         if (!oldSidValuesSet)
         {
             //Store old values in the struct for unpossesion            
@@ -237,7 +237,7 @@ public class playerPossession : MonoBehaviour
 
                 for (int i = 0; i < (int)RayDirection.COUNT; i++)
                 {
-                    //Check for a valid spot in xyz directions to drop the item and pop sid out
+                    //Pass in dir variable and assign correct direction vector based on direction passed in
                     AssignRayDirection((RayDirection)i, ref dir);
 
                     Vector3 newPos = sneakTest.transform.position;
@@ -251,7 +251,8 @@ public class playerPossession : MonoBehaviour
                         if (!Physics.Raycast(newPos, colSize, out hit, sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Up
                             if (!Physics.Raycast(newPos, -colSize, out hit, -sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Down
                             {
-                                sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector
+                                sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector                                                                      
+                                this.GetComponent<ItemController>().SetAnimScare(false);//Stop the scare animation incase it is still playing when we eject
                                 UnpossessItem();
                                 break;
                             }
@@ -706,6 +707,13 @@ public class playerPossession : MonoBehaviour
                 //The target is also used in CIV_Retreat to know which item to run away from
                 civ.GetComponent<CivillianController>().target = gameObject;
                 civ.GetComponent<CivillianController>().TRIGGERED_repel = true;
+
+                if (civ.GetComponent<NavMeshObstacle>() == null)
+                    continue;
+                else
+                    civ.GetComponent<NavMeshObstacle>().enabled = false;
+
+                civ.GetComponent<NavMeshAgent>().enabled = true;
             }
         }
 

@@ -19,7 +19,7 @@ public class CIV_Wander : State_CIV
     public void OnEnter(CivillianController agent)
     {
         currentAgent = agent;
-        //Debug.Log(currentAgent.gameObject.name + " State: WANDER");
+        currentAgent.currentState = State.State_Wander;
         agent.civIconStateScript.myState = script_civilianIconState.gameState.normal;
         agent.txtState.text = "WANDER";
 
@@ -31,7 +31,9 @@ public class CIV_Wander : State_CIV
         //NavMeshHit navHit; //Stores the result of a NavMesh query
         //NavMesh.SamplePosition(dir, out navHit, 15f, -1); //Returns the closest point where randDirection is situated on the NavMesh
         //agent.navAgent.SetDestination(navHit.position);
-        //agent.navAgent.SetDestination(agent.t.position);
+
+
+        //agent.navAgent.SetDestination(agent.testTarget.position);
     }
 
     public void OnExit(CivillianController agent)
@@ -43,15 +45,19 @@ public class CIV_Wander : State_CIV
     {
         if (agent.enableWander == true)
         {
-            //If the agent doesnt have an INITIAL path then pick a new one 
-            //This also picks a new one once the agent reaches the end of a path
-            //if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
-            //    agent.navAgent.SetDestination(PickNewWanderPoint());
+            //Just set a random destination
+            if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
+            {
+                agent.navAgent.SetDestination(PickNewWanderPoint());
+                //agent.currentDest = agent.navAgent.destination;
+            }
+            //Debug.Log(agent.navAgent.isPathStale);
 
-            //if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
-            //{
-            //    agent.navAgent.ResetPath();
-            //}
+            if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
+            {
+                //Debug.Log("Reset Called");
+                agent.navAgent.ResetPath();
+            }
 
             //if (agent.navAgent.isPathStale == true)
             //    Debug.Log(agent.name + " is stale");
@@ -67,6 +73,7 @@ public class CIV_Wander : State_CIV
 
     Vector3 PickNewWanderPoint()
     {
+        //Debug.Log("PickNewWander Called.");
         //Returns a random point inside 3D space to move towards
         Vector3 randDirection = Random.insideUnitSphere * currentAgent.wanderRadius;
 

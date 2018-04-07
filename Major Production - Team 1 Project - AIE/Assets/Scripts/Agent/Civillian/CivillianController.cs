@@ -20,8 +20,8 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public GameObject sid; //Permanent reference to the player object "sid"
     //Exit point that they will travel to and despawn
     [Header("Where the Civs run to despawn.")] public Transform endPoint;
-    public int scareThreshHoldMax;
-    [Header("Range for LoS")] public float lineOfSight;
+    [Header("Max Scare Threshold")]public int scareThreshHoldMax;
+    [HideInInspector]public float lineOfSight;
 
     [Header("Particle References")]
     //Public particle objects to spawn, here so it runs on builds until we can think of a better way
@@ -51,7 +51,7 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public bool alertedByItem;
 
     [HideInInspector] public Vector3 firstSpawnDest; //Position to travel to on spawn
-    [HideInInspector] public Vector3 currentDest; //I store a reference to the endPathDestination here, so the Civs can resume the same destination when waiting to move
+    public Vector3 currentDest; //I store a reference to the endPathDestination here, so the Civs can resume the same destination when waiting to move
 
     private StateMachine_CIV m_stateMachine;
 
@@ -66,28 +66,32 @@ public class CivillianController : MonoBehaviour
 
     public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
 
+    //Repathing variables when stuck
+    private Transform otherAgent;
+    private float stationaryTimer; //Timer to re-enable NavAgent
+    private bool isStationary = false;
+    private RaycastHit hit;    
+
+    //Store unique Agent ID for the TriggerHighlight.cs
+    private int id;
+    public int GetID() { return id; }
+
     //DEBUGGING
     [Header("----[DEBUGGING]----")]
-    public Transform t;
+    public Transform testTarget;
+    public GameObject testParticle;
     public bool enableWander;
+    public bool drawLineOfSight = false;
     public bool initialSpawn = false; //CivSpawner will set this, used in Civ_Wander
     public State currentState;
     [Header("Dont Set. Showing target to follow")] public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
-
+    public float stuckTimer; //Timer to count how long we are stuck on another agent for and when to turn into a obstacle
+    
     //Testing - Mark
     public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
     public Color civilianPantsColour = Color.black; // 31/01/2018 Added by Mark - For custom colours
     public Color civilianTop1Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
-    public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours
-
-    //Repathing variables when stuck
-    private Transform otherAgent;
-    private float stationaryTimer;
-    private bool isStationary = false;
-
-    //storing unique id here now, for some reason onTrigger in TriggerHighlight.cs started to trigger twice and giving a new id each time to the civs
-    private int id;
-    public int GetID() { return id; }
+    public Color civilianTop2Colour = Color.black; // 31/01/2018 Added by Mark - For custom colours    
 
     // Use this for initialization
     void Start()
@@ -148,41 +152,21 @@ public class CivillianController : MonoBehaviour
         rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
     }
 
-    private void FixedUpdate()
-    {
-        //if (navAgent.hasPath == false)
-        //{
-        //    Vector3 endPoint = new Vector3(this.transform.forward.x, this.transform.forward.y, this.transform.forward.z);//PickNewWanderPoint();
-        //    base.prefVelocity_ = (new Vector2(endPoint.x, endPoint.z) - base.position_).normalized * base.maxSpeed_;
-        //    navAgent.SetDestination(endPoint);
-        //}
-        //if(Input.GetKeyDown(KeyCode.E))
-        //{
-        //    prefVelocity_ = new Vector2(transform.right.x, this.transform.right.z) * this.maxSpeed_;
-        //}
-
-        //base.computeNeighbors();
-        //base.computeNewVelocity();
-        //base.update();
-        //base.transform.position = new Vector3(this.position_.x, this.transform.position.y, this.position_.y);
-        //transform.position = new Vector3(this.position_.x, this.transform.position.y, this.position_.y);
-    }
-
     private void Update()
     {
-        RaycastHit hit;
-
         //Forward raycast checking for a possible blocked agent inside the avoid radius
+        //Makes this agent a stationary obstacle if they have been blocked for a certain time
         if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, navAgent.radius + .5f)
             && navAgent.isOnNavMesh && !initialSpawn)
         {
-            //Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward * ( navAgent.radius + .5f), Color.magenta);
-
             if (hit.transform.tag == "Civillian" && hit.transform != this.transform)
             {
-                if (hit.transform.GetComponent<CivillianController>().isStationary == false)
+                stuckTimer += Time.deltaTime;
+
+                if (hit.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
                 {
                     //Stop this agent and wait until the other one repaths around you
+                    stuckTimer = 0;
                     m_Animator.SetBool("idle", true);
                     navAgent.isStopped = true;
 
@@ -191,7 +175,7 @@ public class CivillianController : MonoBehaviour
                     navAgent.ResetPath();
                     navAgent.enabled = false;
                     isStationary = true;
-                    
+
 
                     //Create nav obstacle
                     if (gameObject.GetComponent<NavMeshObstacle>() == null)
@@ -212,7 +196,11 @@ public class CivillianController : MonoBehaviour
                 }
             }
         }
-        
+        else
+        {
+            stuckTimer = 0;
+        }
+
         //Turns on Wander once initial destination has been hit otherwise resample the location and continue moving there
         if (initialSpawn && navAgent.enabled) 
         {
@@ -238,12 +226,11 @@ public class CivillianController : MonoBehaviour
         //If otherAgent was found we wait until its out of the way before we repath
         if (otherAgent != null)
         {
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 dirToOther = otherAgent.position - transform.position;
 
             if (dirToOther.magnitude >= 2f)
             {
-                //Re-enable the stationary agent
+                //Re-enable the stationary agent - Prevents agent not being placed on navmesh error
                 if (isStationary)
                 {
                     stationaryTimer += Time.deltaTime;
@@ -260,17 +247,24 @@ public class CivillianController : MonoBehaviour
                     otherAgent = null;
                     navAgent.enabled = true;
                     navAgent.ResetPath(); //Clear any paths somehow created during the time navagent was turned off
+                    navAgent.isStopped = false;
 
                     //Calculate a new path to the same destination from when the agent was stopped
-                    NavMeshPath path = new NavMeshPath();
-                    navAgent.CalculatePath(currentDest, path);
-                    navAgent.SetPath(path);
+                    navAgent.SetDestination(currentDest);
 
-                    navAgent.isStopped = false;
+                    //Destroy(gameObject);
+
+                    //NavMeshPath path = new NavMeshPath();
+                    //navAgent.CalculatePath(currentDest, path);
+                    //navAgent.SetPath(path);
+
+
                     m_Animator.SetBool("idle", false);
                 }
             }
         }
+
+        //Debug.Log(Vector3.Distance(navAgent.transform.position, currentDest));
 
         //Update the animator
         //if (navAgent.enabled)
@@ -281,7 +275,7 @@ public class CivillianController : MonoBehaviour
         //        Move(Vector3.zero, false, false);
         //}
 
-
+        //State changing to Retreat because we have spotted an item and is spooked
         if (sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false)
         {
             if (isInLineOfSight() == true)
@@ -295,15 +289,13 @@ public class CivillianController : MonoBehaviour
                 m_stateMachine.ChangeState(this, new CIV_Retreat());
             }
         }
-        //Debug.Log("Possessed: " + sid.GetComponent<playerPossession>().IsPossessed());
-        //Debug.Log("Triggered Float: " + TRIGGERED_floating);
-        //Debug.Log("Hidden: " + sid.GetComponent<playerPossession>().IsHidden());
 
         //State changing to INTRIGUED if an itemPosition has been set, that means the ai has been in range of a recent lure mechanic used by the player
         if (alertedByItem && currentScareValue != scareThreshHoldMax)
         {
-            m_stateMachine.ChangeState(this, new CIV_Alert());
             alertedByItem = false;
+            m_stateMachine.ChangeState(this, new CIV_Alert());
+            
             //civIconStateScript.myState = script_civilianIconState.gameState.alerted;
         }
 
@@ -357,13 +349,13 @@ public class CivillianController : MonoBehaviour
         UpdateAnimator();
     }
 
+    //Update animator params
     void UpdateAnimator()
     {
         // update the animator parameters
         m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
         m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
     }
-
 
     //public void OnAnimatorMove()
     //{
@@ -450,8 +442,24 @@ public class CivillianController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(new Vector3(0, transform.position.y + 1.0f, 0 + (lineOfSight / 2)), new Vector3(1, 2, lineOfSight));        
+        if (drawLineOfSight)
+        {
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.color = Color.yellow;
+
+            //Length for line of sight
+            Gizmos.DrawWireCube(new Vector3(0, transform.position.y + 1.0f, 0 + (lineOfSight / 2)), new Vector3(1, 2, lineOfSight));
+        }
+        //Ray detecting other agents
+        Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward * (GetComponent<NavMeshAgent>().radius + .5f), Color.magenta);
+
+        //Show path without going into the Navigation window        
+        if(navAgent.hasPath)
+        {
+            for (int i = 0; i < navAgent.path.corners.Length - 1; i++)
+            {
+                Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
+            }
+        }
     }
 }

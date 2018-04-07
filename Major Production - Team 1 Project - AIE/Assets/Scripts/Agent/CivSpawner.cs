@@ -10,7 +10,7 @@ using System.Collections;
 public class CivSpawner : MonoBehaviour
 {
     public float spawnRadius = 10;
-    [Range(10, 50)]public int numberOfAgents = 40;
+    [Range(1, 50)]public int numberOfAgents = 40;
     public static int currentSpawned = 0;
     public GameObject civPrefab;
     public Vector3 spherePos;

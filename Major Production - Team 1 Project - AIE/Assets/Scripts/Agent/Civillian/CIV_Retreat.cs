@@ -32,6 +32,9 @@ public class CIV_Retreat : State_CIV
         if(agent.navAgent.hasPath)
             agent.navAgent.ResetPath();
 
+        //Update the priority so we push through other agents when blocked
+        agent.navAgent.avoidancePriority = 30;
+
         currentAgent = agent; //Storing reference
         currentAgent.currentState = State.State_Retreat; //Setting currentState - kinda temporary i hope
 
@@ -66,12 +69,13 @@ public class CIV_Retreat : State_CIV
         }
         else if (agent.TRIGGERED_repel) //Was lured to an item and spooked - multiply by x5??
         {
+            Debug.Log("TriggeredRepel");
             CheckScaryRating();
             ectoplasm.GetComponent<ectoplasmController>().modifier = Camera.main.GetComponent<valueController>().EctoRepelledScareValue;
             currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().itemThrown.GetComponent<ItemController>().baseScariness);
         }
 
-        
+        currentAgent.testParticle = ectoplasm;
 
     }
 
@@ -84,7 +88,10 @@ public class CIV_Retreat : State_CIV
         agent.hasDroppedEcto = false;
         currentAgent.navAgent.speed = 1.5f;
         currentAgent.m_Animator.SetBool("Scared", false);
-        
+
+        //Reset back to old priority
+        currentAgent.navAgent.avoidancePriority = 50;
+
         //Reset target item that hit us
         //agent.target = null; //Trying to prevent multiple hits from the same object, but seems to be working ok so far
     }
@@ -129,10 +136,13 @@ public class CIV_Retreat : State_CIV
             {
                 currentAgent.navAgent.velocity = Vector3.zero; //Stop the agent from moving
 
+                currentAgent.m_Animator.SetBool("idle", true);
+
                 //Debug.Log(timer);            
                 timer -= Time.deltaTime; //minus the time
                 if (timer <= 0f)
-                {           
+                {
+                    currentAgent.m_Animator.SetBool("idle", false);
                     stateMachine.ChangeState(agent, new CIV_Wander()); //Change back to wander
                     timer = 3.0f; //Reset timer
                 }
@@ -140,20 +150,9 @@ public class CIV_Retreat : State_CIV
             else //The player has moved close to the agent so move the agent
             {
                 timer = 3.0f; //Reset the timer
+                currentAgent.m_Animator.SetBool("idle", false);
 
-                //if (agent.navAgent.hasPath == false)
-                //{
-                //    Vector3 randDirection = Random.insideUnitSphere * currentAgent.wanderRadius;
-
-                //    //randDirection = randDirection += dirAwayFromObject; //Update direction based on Agent's current position
-
-                //    NavMeshHit navHit; //Stores the result of a NavMesh query
-                //    NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, -1);
-
-                //    agent.navAgent.SetDestination(navHit.position);
-                //}
-
-                if(agent.navAgent.hasPath == false)
+                if (agent.navAgent.hasPath == false)
                 {
                     agent.navAgent.SetDestination(RandomNavSphere(currentAgent.transform.position, 10, -1));
                 }

@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 4434642054978988}
   - component: {fileID: 95919619465918366}
   - component: {fileID: 136059112613975644}
-  - component: {fileID: 136586212405530436}
   - component: {fileID: 114991876231263102}
   - component: {fileID: 114319273047871860}
   - component: {fileID: 195366744027588062}
@@ -1909,6 +1908,7 @@ MonoBehaviour:
   initialSpawn: 0
   currentState: 2
   target: {fileID: 0}
+  stuckTimer: 0
   civIconStateScript: {fileID: 0}
   civilianPantsColour: {r: 0.025146209, g: 0.015138407, b: 0.14705884, a: 1}
   civilianTop1Colour: {r: 0, g: 0.5629819, b: 0.89705884, a: 1}
@@ -2023,19 +2023,6 @@ CapsuleCollider:
   m_Height: 2.37
   m_Direction: 1
   m_Center: {x: 0, y: 1.19, z: 0}
---- !u!136 &136586212405530436
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1182107029286222}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0.3}
 --- !u!137 &137468008215039138
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2155,7 +2142,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
