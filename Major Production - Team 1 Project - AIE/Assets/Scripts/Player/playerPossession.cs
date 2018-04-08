@@ -253,6 +253,7 @@ public class playerPossession : MonoBehaviour
                             {
                                 sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector                                                                      
                                 this.GetComponent<ItemController>().SetAnimScare(false);//Stop the scare animation incase it is still playing when we eject
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/Sid_Drop", transform.position);
                                 UnpossessItem();
                                 break;
                             }
@@ -801,6 +802,7 @@ public class playerPossession : MonoBehaviour
             gameObject.GetComponent<playerController>().enabled = false;
             //gameObject.GetComponent<playerPossession>().enabled = false;
             //gameObject.GetComponent<CharacterController>().enabled = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Sid_Possession", transform.position);
 
             Camera.main.gameObject.GetComponent<CamLock>().enabled = false;
 

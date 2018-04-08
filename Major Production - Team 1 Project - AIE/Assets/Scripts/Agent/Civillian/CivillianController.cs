@@ -378,7 +378,9 @@ public class CivillianController : MonoBehaviour
             //m_Animator.SetBool("hit", true);
             //Set values for the item controller
             //currentScareValue += (collision.gameObject.GetComponent<ItemController>().baseScariness * 2);
-           
+
+            GameObject smoke = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().smokeEffect, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
+            Destroy(smoke, 2.0f);
             //Set the target to run away from to be the item that hit us
             target = collision.gameObject;
 

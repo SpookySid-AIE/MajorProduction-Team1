@@ -22,15 +22,20 @@ public class playerController : MonoBehaviour
     private Text txt_ectoplasm;
     private Vector3 moveDirection = Vector3.zero;
     private Rigidbody m_Rigid;
-    private Animator m_Anim;
+    [HideInInspector]public Animator m_Anim;
+    private float damagedTimer;
 
     public float velocity;
+
+    FMOD.Studio.EventInstance damageSound;
 
     void Start()
     {
         m_Rigid = GetComponent<Rigidbody>();
         m_Anim = GetComponent<Animator>();
         txt_ectoplasm = GameObject.Find("Ectoplasm").GetComponent<Text>();
+
+        damageSound = FMODUnity.RuntimeManager.CreateInstance("event:/Sid_Damaged");
     }
 
     void Update()
@@ -76,6 +81,15 @@ public class playerController : MonoBehaviour
         float m_vel = m_Rigid.velocity.magnitude;
         velocity = m_vel;
         m_Anim.SetFloat("Velocity", m_vel, 0.1f, Time.deltaTime);
+
+        if (m_Anim.GetBool("Damaged") == true)
+            damagedTimer += Time.deltaTime;
+
+        if (damagedTimer >= 1.0f) //Backup timer turning off animation incase trigger exit didnt catch it
+        {
+            damagedTimer = 0;
+            m_Anim.SetBool("Damaged", false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,8 +108,27 @@ public class playerController : MonoBehaviour
 
                 if (m_Anim.GetBool("Damaged") == false)
                     m_Anim.SetBool("Damaged", true);
+
+                //Sound Effect ----------------------------------
+                FMOD.Studio.PLAYBACK_STATE stateDamaged;
+                damageSound.getPlaybackState(out stateDamaged); //Poll the audio events to see if playback is happening
+
+                //Check if any audio is still playing and stop it to prevent overlap - Then play the required clip
+                if (stateDamaged == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    damageSound.start(); // Starts the event
+                    FMODUnity.RuntimeManager.AttachInstanceToGameObject(damageSound, GetComponent<Transform>(), GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+                }
+                //End Sound Effect ----------------------------
             }
         }
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Bullet")
+            if (m_Anim.GetBool("Damaged") == true)
+                m_Anim.SetBool("Damaged", false);
     }
 }

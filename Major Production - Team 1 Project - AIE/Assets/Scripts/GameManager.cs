@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour {
     [FMODUnity.EventRef] public string audioScare;
     [FMODUnity.EventRef] public string audioCivSpotted;
     [FMODUnity.EventRef] public string audioCivScared;
+    [FMODUnity.EventRef] public string audioItemImpact;
 
 
     // public Canvas canvasPause;

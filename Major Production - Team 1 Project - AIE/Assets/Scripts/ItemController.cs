@@ -119,6 +119,9 @@ public class ItemController : MonoBehaviour
                 timesThrown = 0; //Resets the times thrown value.
             }
         }
+
+        //Play sound clip
+        FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioItemImpact, transform.position);
     }
 
     void Update()

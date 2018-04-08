@@ -1303,24 +1303,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1606824287989016
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4014888553187070}
-  - component: {fileID: 135162003123279754}
-  - component: {fileID: 114280131735820250}
-  - component: {fileID: 114795514861580690}
-  m_Layer: 0
-  m_Name: audio_Spotted_Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1632819925261392
 GameObject:
   m_ObjectHideFlags: 1
@@ -2094,20 +2076,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4014888553187070
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606824287989016}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.994, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 15}
-  m_Children: []
-  m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4017596769818262
 Transform:
@@ -2637,7 +2606,7 @@ Transform:
   m_LocalScale: {x: 4.2970896, y: 3.0418625, z: 4.2970877}
   m_Children: []
   m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4275203157920718
 Transform:
@@ -2763,7 +2732,7 @@ Transform:
   - {fileID: 4093929995613726}
   - {fileID: 4257659708112520}
   m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4326275692976908
 Transform:
@@ -3759,13 +3728,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450087094757792}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -221.01, y: 0, z: 35.74}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.23, y: 0, z: -8.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4014888553187070}
-  - {fileID: 4339655854196142}
   - {fileID: 224772743682053364}
+  - {fileID: 4339655854196142}
   - {fileID: 4006961236220614}
   - {fileID: 4274521821712886}
   - {fileID: 4318019224498702}
@@ -3980,7 +3948,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: bd11b6f96656d4b4cb354494acd0cded, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4169,28 +4137,6 @@ MonoBehaviour:
   ShowRadius: 0
   ShowState: 1
   enableWander: 1
---- !u!114 &114280131735820250
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606824287989016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Emitters:
-  - Target: {fileID: 0}
-    Params: []
-  - Target: {fileID: 0}
-    Params: []
-  - Target: {fileID: 0}
-    Params:
-    - Name: Sid_Spotted
-      Value: 1
-  TriggerEvent: 3
-  CollisionTag: Player
 --- !u!114 &114559768634516062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4258,28 +4204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5a2ca5f0c484d4a95485b36948751b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114795514861580690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606824287989016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744a208c85da6d04c861d81b992e4ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Emitters:
-  - Target: {fileID: 0}
-    Params: []
-  - Target: {fileID: 0}
-    Params: []
-  - Target: {fileID: 0}
-    Params:
-    - Name: Sid_Spotted
-      Value: 0
-  TriggerEvent: 4
-  CollisionTag: Player
 --- !u!114 &114802939067555734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4430,18 +4354,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!135 &135162003123279754
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606824287989016}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135550279156975396
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -4647,7 +4559,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0.05
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -8047,7 +7959,7 @@ RectTransform:
   m_Children:
   - {fileID: 224244018463950014}
   m_Father: {fileID: 4915228613401914}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

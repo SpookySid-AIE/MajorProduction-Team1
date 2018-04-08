@@ -242,9 +242,6 @@ public class AgentController : MonoBehaviour
                             return true;
                         }
                     }
-  
-                    //Debug.DrawRay(adjustedPosition, direction, Color.red);
-                    //Debug.Log(hit.transform.name);
 
                     return false;
                 } 
