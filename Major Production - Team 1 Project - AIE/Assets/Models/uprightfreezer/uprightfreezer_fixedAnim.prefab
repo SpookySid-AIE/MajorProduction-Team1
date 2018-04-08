@@ -292,9 +292,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4766101703196306}
   - component: {fileID: 95705946692403584}
+  - component: {fileID: 114014509119431516}
+  - component: {fileID: 65212470022668458}
+  - component: {fileID: 54229325669014156}
   m_Layer: 0
   m_Name: uprightfreezer_fixedAnim
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -692,8 +695,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476491858771104}
-  m_LocalRotation: {x: -0, y: 0.69006693, z: -0, w: 0.72374564}
-  m_LocalPosition: {x: -189.1, y: 0.00000047683716, z: 25.332632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -182.65, y: 0.00000047683716, z: 10.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4134420363793344}
@@ -723,7 +726,7 @@ Transform:
   - {fileID: 4313506804781302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 87.271, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4789417416971284
 Transform:
   m_ObjectHideFlags: 1
@@ -1848,6 +1851,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618128032970754}
   m_Mesh: {fileID: 4300040, guid: 5d0ce8cb9c2cf794ba5d8565e02c8a8e, type: 3}
+--- !u!54 &54229325669014156
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476491858771104}
+  serializedVersion: 2
+  m_Mass: 200
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &65212470022668458
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476491858771104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.8533936, y: 3.5675497, z: 1.3880558}
+  m_Center: {x: -2.3932648, y: 1.7738538, z: 0.6600857}
 --- !u!95 &95705946692403584
 Animator:
   serializedVersion: 3
@@ -1865,3 +1895,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114014509119431516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476491858771104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timesThrownBeforeDestroyed: 10
+  ItemScaryRating: 2
+  itemSize: 4
+  hasBeenThrown: 0
+  timer: 0
+  baseScariness: 0
+  ectoCost: 0
+  scaryObject: 1
