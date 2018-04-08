@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1277147385201928
 GameObject:
   m_ObjectHideFlags: 1
@@ -577,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1565645790235130
 GameObject:
   m_ObjectHideFlags: 1
@@ -1264,7 +1264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -201.77, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224991304644415114}
@@ -1903,8 +1903,10 @@ MonoBehaviour:
   firstSpawnDest: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   rendererGeo: {fileID: 1585393533884122}
-  t: {fileID: 0}
-  enableWander: 0
+  testTarget: {fileID: 0}
+  testParticle: {fileID: 0}
+  enableWander: 1
+  drawLineOfSight: 0
   initialSpawn: 0
   currentState: 2
   target: {fileID: 0}
@@ -1953,7 +1955,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 310d64dd6adcfae42b91956777186dd2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5a0d6ba51ee77845b07e1156e90309a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2006,9 +2008,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1270578890849640}
-  alerted: {fileID: 21300000, guid: 310d64dd6adcfae42b91956777186dd2, type: 3}
-  retreat: {fileID: 21300000, guid: 87cb97579242e254f990767d24cdd452, type: 3}
-  scared: {fileID: 21300000, guid: 12f324aa42dd24b488ccb7d9914a703a, type: 3}
+  alerted: {fileID: 21300000, guid: c5a0d6ba51ee77845b07e1156e90309a, type: 3}
+  retreat: {fileID: 21300000, guid: a7c268eb971902a46bc4df9d4cd65bad, type: 3}
+  scared: {fileID: 21300000, guid: f7e2f38cc764d614aa5aac17cbf1c7d6, type: 3}
   myState: 0
 --- !u!136 &136059112613975644
 CapsuleCollider:
@@ -2135,7 +2137,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 1.5
