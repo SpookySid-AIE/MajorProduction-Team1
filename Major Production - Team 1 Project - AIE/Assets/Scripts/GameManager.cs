@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
 
     //Gameplay UI
     // private Text txt_timerText;
+    private int fontSize;
+    private bool menuSkipBool = false;
     private Text txt_npcCount;
     private Text txt_playerHealth;
     private Vector3 screenDimension;
@@ -34,9 +36,12 @@ public class GameManager : MonoBehaviour {
     private GameObject pauseDirection;
     public GameObject sidReticle;
     public GameObject ui;
+    public GameObject br;
+    public Material sidSkin;
 
     public GameObject StoryboardIntro;
     public GameObject StoryboardOutro;
+    public GameObject[] uiShrinkElements;
 
 
     //Win/Lose Canvas
@@ -128,9 +133,9 @@ public class GameManager : MonoBehaviour {
         screenDimension = new Vector3(Screen.width, Screen.height);
         cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x / 2, screenDimension.y / 2, cursor.GetComponent<RectTransform>().position.z);
         if (screenDimension.x > 1000)
-            cursor.GetComponent<Text>().fontSize = 25;
+            fontSize = 25;
 
-        else cursor.GetComponent<Text>().fontSize = 50;
+        else fontSize = 50;
 
         //txt_timerText = GameObject.Find("Timer").GetComponent<Text>();
         txt_npcCount = GameObject.Find("NPC's Left").GetComponent<Text>();
@@ -164,15 +169,17 @@ public class GameManager : MonoBehaviour {
                 menuSkip();
             }
         }
-
-        if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
+        if (menuSkipBool)
         {
-            screenDimension = new Vector3(Screen.width / 2, Screen.height / 2);
-            cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x, screenDimension.y, cursor.GetComponent<RectTransform>().position.z);
-            if (screenDimension.x > 900)
-                cursor.GetComponent<Text>().fontSize = 25;
+            if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
+            {
+                screenDimension = new Vector3(Screen.width / 2, Screen.height / 2);
+                cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x, screenDimension.y, cursor.GetComponent<RectTransform>().position.z);
+                if (screenDimension.x > 900)
+                    cursor.GetComponent<Text>().fontSize = 25;
 
-            else cursor.GetComponent<Text>().fontSize = 50;
+                else cursor.GetComponent<Text>().fontSize = 50;
+            }
         }
 
         //timeLeft = timer;
@@ -279,8 +286,11 @@ public class GameManager : MonoBehaviour {
     {
         if (isPaused == true)
         {
-            sidReticle.SetActive(true);
-            ui.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            sidReticle.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            foreach (GameObject g in uiShrinkElements)
+            {
+                g.GetComponent<Text>().fontSize = 50;
+            }
 
             Time.timeScale = 1;
             Cursor.visible = false;
@@ -294,8 +304,11 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            sidReticle.SetActive(false);
-            ui.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            sidReticle.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            foreach (GameObject g in uiShrinkElements)
+            {
+                g.GetComponent<Text>().fontSize = 5000;
+            }
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -374,12 +387,17 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        sidReticle.SetActive(true);
-        ui.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        br.GetComponent<Text>().fontSize = fontSize;
+        sidReticle.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        foreach (GameObject g in uiShrinkElements)
+        {
+            g.GetComponent<Text>().fontSize = 50;
+        }
         isPaused = false;
         isStoryboardActive = false;
 
         GameObject.Find("UI Canvas").GetComponent<Canvas>().enabled = true;
+        menuSkipBool = true;
     }
 
     public void Quit()

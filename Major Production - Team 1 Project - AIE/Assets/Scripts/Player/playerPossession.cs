@@ -10,7 +10,6 @@ public class playerPossession : MonoBehaviour
 {    
     private GameObject player; //could be the real player or a possessed item
     private GameObject sneakTest; //Store old player here while possessing
-
     private float timer;
     private static bool resettingSidInvis;
 
@@ -732,6 +731,7 @@ public class playerPossession : MonoBehaviour
         foreach (SkinnedMeshRenderer smr in meshRenderer)
         {
             smr.enabled = true;
+            smr.material = Camera.main.GetComponent<GameManager>().sidSkin;
         }
 
         //sneakTest.transform.position = player.transform.position;
