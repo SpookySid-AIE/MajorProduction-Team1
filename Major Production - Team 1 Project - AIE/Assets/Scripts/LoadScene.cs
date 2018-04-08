@@ -8,8 +8,19 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+
+    public GameObject Sid;
+    public GameObject respawnPosition;
+
     public void Load(int sceneIndex) //Added by Jak //Loads scene by index, index of scenes is set via BuildSettings
     {
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void respawn()
+    {
+        Sid.GetComponent<playerController>().Ectoplasm = 100;
+        Sid.transform.position = respawnPosition.transform.position;
+        
     }
 }
