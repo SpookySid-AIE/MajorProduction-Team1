@@ -226,7 +226,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCcount: 0
-  Storyboard: {fileID: 0}
+  sidReticle: {fileID: 0}
+  ui: {fileID: 0}
+  br: {fileID: 0}
+  sidSkin: {fileID: 2100000, guid: 215977489d11178d11005b9844295342, type: 2}
+  StoryboardIntro: {fileID: 0}
+  StoryboardOutro: {fileID: 0}
+  uiShrinkElements:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   canvasWinOrLose: {fileID: 0}
   itemSelect: {fileID: 0}
   hideNonScary: {fileID: 0}
@@ -236,11 +246,13 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   controlsMenu: {fileID: 0}
   creditsMenu: {fileID: 0}
-  allStoryboard: []
+  allStoryboardIntro: []
+  allStoryboardOutro: []
   audioLure: event:/Sid_Lure_Whistle
   audioScare: event:/Sid_Scare_Laugh
   audioCivSpotted: event:/NPC_Startled_M
   audioCivScared: event:/NPC_Scared_M
+  audioItemImpact: event:/Impact_Thud
   isPaused: 1
   player: {fileID: 0}
 --- !u!114 &114451969983063204

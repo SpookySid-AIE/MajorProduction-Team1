@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 114488629452960790}
   - component: {fileID: 114947718831378804}
   m_Layer: 1
-  m_Name: Sid
+  m_Name: OLD Sid OLD
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1689,6 +1689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossessedItem: {fileID: 0}
   hasItemBeenThrown: 0
+  itemThrown: {fileID: 0}
   pivot: {fileID: 0}
   possessionColour: {r: 0, g: 1, b: 1, a: 1}
   HeightAdjustment: 0.4
@@ -1712,6 +1713,8 @@ MonoBehaviour:
   speed: 5
   floatSpeed: 3
   sinkspeed: 2.75
+  m_Anim: {fileID: 0}
+  velocity: 0
 --- !u!114 &114294829516336740
 MonoBehaviour:
   m_ObjectHideFlags: 1
