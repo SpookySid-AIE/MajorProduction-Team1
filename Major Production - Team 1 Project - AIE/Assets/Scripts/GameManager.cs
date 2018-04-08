@@ -354,12 +354,7 @@ public class GameManager : MonoBehaviour {
 
     public void nextPanelOutro()
     {
-        //int a = 0;
-        //foreach (Transform t in allStoryboard)
-        //{
-        //    a++;
-        //}
-        //Debug.Log(a);
+
 
         if (allStoryboardOutro[currentStoryboardOutro].tag != "StoryboardEnd")
         {
@@ -377,7 +372,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            menuSkip();
+            Camera.main.GetComponent<LoadScene>().Load(0);
         }
     }
 
