@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////
-// Author: <Jak Revai + Ben Thompson>                                     
+// Author: <Jak Revai>                                     
 // Date Created: <29/07/17>                               
 // Brief: <Handles the main game loop + Timer>  
 ////////////////////////////////////////////////////////////
@@ -27,15 +27,23 @@ public class GameManager : MonoBehaviour {
 
     //Gameplay UI
     // private Text txt_timerText;
+    private int fontSize;
+    private bool menuSkipBool = false;
     private Text txt_npcCount;
     private Text txt_playerHealth;
     private Vector3 screenDimension;
     private GameObject cursor;
     private GameObject pauseDirection;
+    public GameObject sidReticle;
+    public GameObject ui;
+    public GameObject br;
+    public Material sidSkin;
 
-    public GameObject Storyboard;
-    
-        
+    public GameObject StoryboardIntro;
+    public GameObject StoryboardOutro;
+    public GameObject[] uiShrinkElements;
+
+
     //Win/Lose Canvas
     public Canvas canvasWinOrLose;
 
@@ -49,7 +57,8 @@ public class GameManager : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject controlsMenu;
     public GameObject creditsMenu;
-    public Image[] allStoryboard;
+    public Image[] allStoryboardIntro;
+    public Image[] allStoryboardOutro;
 
     //Public accessor methods to set the UI gameobjects/on/off
     public void EnableItemSelect(bool value) { itemSelect.SetActive(value); }
@@ -77,7 +86,8 @@ public class GameManager : MonoBehaviour {
     private bool paused;
     private bool win;
 
-    private int currentStoryboard = 1;
+    private int currentStoryboardIntro = 1;
+    private int currentStoryboardOutro = 3;
 
     [HideInInspector]public playerPossession player; //Reference will be updated once in playerPossess
 
@@ -114,7 +124,8 @@ public class GameManager : MonoBehaviour {
 
         // Comments are cool.
         isStoryboardActive = true;
-        allStoryboard = Storyboard.GetComponentsInChildren<Image>();
+        allStoryboardIntro = StoryboardIntro.GetComponentsInChildren<Image>();
+        allStoryboardOutro = StoryboardOutro.GetComponentsInChildren<Image>();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -123,9 +134,9 @@ public class GameManager : MonoBehaviour {
         screenDimension = new Vector3(Screen.width, Screen.height);
         cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x / 2, screenDimension.y / 2, cursor.GetComponent<RectTransform>().position.z);
         if (screenDimension.x > 1000)
-            cursor.GetComponent<Text>().fontSize = 25;
+            fontSize = 25;
 
-        else cursor.GetComponent<Text>().fontSize = 50;
+        else fontSize = 50;
 
         //txt_timerText = GameObject.Find("Timer").GetComponent<Text>();
         txt_npcCount = GameObject.Find("NPC's Left").GetComponent<Text>();
@@ -159,31 +170,56 @@ public class GameManager : MonoBehaviour {
                 menuSkip();
             }
         }
-
-        if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
+        if (menuSkipBool)
         {
-            screenDimension = new Vector3(Screen.width / 2, Screen.height / 2);
-            cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x, screenDimension.y, cursor.GetComponent<RectTransform>().position.z);
-            if (screenDimension.x > 900)
-                cursor.GetComponent<Text>().fontSize = 25;
+            if (screenDimension != new Vector3(Screen.width / 2, Screen.height / 2))
+            {
+                screenDimension = new Vector3(Screen.width / 2, Screen.height / 2);
+                cursor.GetComponent<RectTransform>().position = new Vector3(screenDimension.x, screenDimension.y, cursor.GetComponent<RectTransform>().position.z);
+                if (screenDimension.x > 900)
+                    cursor.GetComponent<Text>().fontSize = 25;
 
-            else cursor.GetComponent<Text>().fontSize = 50;
+                else cursor.GetComponent<Text>().fontSize = 50;
+            }
         }
 
+        //timeLeft = timer;
         txt_npcCount.text = NPCcount.ToString();
+        //txt_playerHealth.text = player.health.ToString() + "%";
+
+        //Pause the game - kinda
+        //if (Input.GetKey(KeyCode.Escape) && !win)
+        //{
+        //    Time.timeScale = 0; //slow the game to a hault
+        //    canvasPause.gameObject.SetActive(true);
+        //    Camera.main.GetComponent<CamLock>().enabled = false;
+        //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
+        //    player.gameObject.GetComponent<playerPossession>().enabled = false;
+        //    player.gameObject.GetComponent<AudioSource>().enabled = false;
+        //    player.gameObject.GetComponent<PlayerController>().enabled = false;
+
+        //    AgentController[] agents = GameObject.FindObjectsOfType<AgentController>();
+
+        //    foreach (AgentController agent in agents)
+        //        agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = false;
+
+
+        //    paused = true;
+        //}
 
         //Winscreen
         if (NPCcount <= 0)
         {
             NPCcount = 0;
-
+        //    win = true;
            canvasWinOrLose.gameObject.SetActive(true);
            winText.gameObject.SetActive(true);
 
             Camera.main.GetComponent<CamLock>().enabled = false;
-
             Cursor.lockState = CursorLockMode.None;
-
+        //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
+        //    player.gameObject.GetComponent<playerPossession>().enabled = false;
+        //    player.gameObject.GetComponent<AudioSource>().enabled = false;
             gameObject.GetComponentInParent<CharacterController>().enabled = false;
             gameObject.GetComponentInParent<playerController>().enabled = false;
 
@@ -192,6 +228,10 @@ public class GameManager : MonoBehaviour {
             //    foreach (AgentController agent in agents)
             //        agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = false;
         }
+        //else
+        //{
+        //    timeLeft = timer - Time.time; //Countdown the timer
+        //}
 
         //Gameover State
         if (!player.IsHidden()) //Might cause core loop issues unsure yet, need this to prevent unreferenced error because i move the camera
@@ -208,10 +248,50 @@ public class GameManager : MonoBehaviour {
         }
     } //End update
 
+
+    //void Gameover()
+    //{
+    //    timeLeft = 0;
+    //    player.health = 0;
+    //    txt_timerText.text = "0:00";
+    //    txt_playerHealth.text = player.health.ToString() + "%";
+    //    //Disable Scripts here
+    //    canvasWinOrLose.gameObject.SetActive(true);
+    //    loseText.gameObject.SetActive(true);
+    //    Time.timeScale = 0;
+    //    player.GetComponent<PlayerController>().enabled = false;        
+    //}
+
+    //public void ResumeGameplay()
+    //{
+    //    if (paused == true)
+    //    {
+    //        canvasPause.gameObject.SetActive(false);
+    //        Camera.main.GetComponent<CamLock>().enabled = true;
+    //        player.gameObject.GetComponent<playerCannonBall>().enabled = true;
+    //        player.gameObject.GetComponent<playerPossession>().enabled = true;
+    //        player.gameObject.GetComponent<AudioSource>().enabled = true;
+    //        player.gameObject.GetComponent<PlayerController>().enabled = true;
+
+    //        AgentController[] agents = GameObject.FindObjectsOfType<AgentController>();
+
+    //        foreach (AgentController agent in agents)
+    //            agent.gameObject.GetComponent<script_ProtonBeam_v5>().enabled = true;
+
+    //        Time.timeScale = 1;
+    //        paused = true;
+    //    }
+    //}
+
     public void Pause()
     {
         if (isPaused == true)
         {
+            sidReticle.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            foreach (GameObject g in uiShrinkElements)
+            {
+                g.GetComponent<Text>().fontSize = 50;
+            }
 
             Time.timeScale = 1;
             Cursor.visible = false;
@@ -225,6 +305,11 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            sidReticle.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            foreach (GameObject g in uiShrinkElements)
+            {
+                g.GetComponent<Text>().fontSize = 5000;
+            }
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -238,7 +323,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void nextPanel()
+    public void nextPanelIntro()
     {
         //int a = 0;
         //foreach (Transform t in allStoryboard)
@@ -247,19 +332,48 @@ public class GameManager : MonoBehaviour {
         //}
         //Debug.Log(a);
 
-        if (allStoryboard[currentStoryboard].tag != "StoryboardEnd")
+        if (allStoryboardIntro[currentStoryboardIntro].tag != "StoryboardEnd")
         {
-            allStoryboard[currentStoryboard].enabled = false;
+            allStoryboardIntro[currentStoryboardIntro].enabled = false;
 
-            if(allStoryboard[currentStoryboard].GetComponentInChildren<Text>() != null)
-                allStoryboard[currentStoryboard].GetComponentInChildren<Text>().enabled = false;
+            if (allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>() != null)
+                allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>().enabled = false;
 
-            currentStoryboard++;
+            currentStoryboardIntro++;
 
-            allStoryboard[currentStoryboard].enabled = true;
+            allStoryboardIntro[currentStoryboardIntro].enabled = true;
 
-            if (allStoryboard[currentStoryboard].GetComponentInChildren<Text>() != null)
-                allStoryboard[currentStoryboard].GetComponentInChildren<Text>().enabled = true;
+            if (allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>() != null)
+                allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>().enabled = true;
+        }
+        else
+        {
+            menuSkip();
+        }
+    }
+
+    public void nextPanelOutro()
+    {
+        //int a = 0;
+        //foreach (Transform t in allStoryboard)
+        //{
+        //    a++;
+        //}
+        //Debug.Log(a);
+
+        if (allStoryboardOutro[currentStoryboardOutro].tag != "StoryboardEnd")
+        {
+            allStoryboardOutro[currentStoryboardOutro].enabled = false;
+
+            if (allStoryboardOutro[currentStoryboardOutro].GetComponentInChildren<Text>() != null)
+                allStoryboardOutro[currentStoryboardOutro].GetComponentInChildren<Text>().enabled = false;
+
+            currentStoryboardOutro--;
+
+            allStoryboardOutro[currentStoryboardOutro].enabled = true;
+
+            if (allStoryboardOutro[currentStoryboardOutro].GetComponentInChildren<Text>() != null)
+                allStoryboardOutro[currentStoryboardOutro].GetComponentInChildren<Text>().enabled = true;
         }
         else
         {
@@ -274,11 +388,17 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+        br.GetComponent<Text>().fontSize = fontSize;
+        sidReticle.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        foreach (GameObject g in uiShrinkElements)
+        {
+            g.GetComponent<Text>().fontSize = 50;
+        }
         isPaused = false;
         isStoryboardActive = false;
 
         GameObject.Find("UI Canvas").GetComponent<Canvas>().enabled = true;
+        menuSkipBool = true;
     }
 
     public void Quit()
