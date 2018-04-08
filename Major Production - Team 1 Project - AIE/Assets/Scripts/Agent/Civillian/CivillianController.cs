@@ -456,11 +456,14 @@ public class CivillianController : MonoBehaviour
         Debug.DrawRay(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward * (GetComponent<NavMeshAgent>().radius + .5f), Color.magenta);
 
         //Show path without going into the Navigation window        
-        if(navAgent.hasPath)
+        if (Application.isPlaying)
         {
-            for (int i = 0; i < navAgent.path.corners.Length - 1; i++)
+            if (navAgent.hasPath)
             {
-                Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
+                for (int i = 0; i < navAgent.path.corners.Length - 1; i++)
+                {
+                    Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
+                }
             }
         }
     }

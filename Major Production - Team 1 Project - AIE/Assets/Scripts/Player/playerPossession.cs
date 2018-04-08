@@ -232,7 +232,8 @@ public class playerPossession : MonoBehaviour
                 RaycastHit hit;
                 float length = 3;
                 Collider col = GetComponent<Collider>();
-                Vector3 colSize = transform.up * sneakTest.GetComponent<CapsuleCollider>().height / 2;
+                Vector3 colSizeUp = transform.up * sneakTest.GetComponent<CapsuleCollider>().height / 2;
+                Vector3 colSizeSide = transform.right * sneakTest.GetComponent<CapsuleCollider>().radius / 2;
 
                 for (int i = 0; i < (int)RayDirection.COUNT; i++)
                 {
@@ -242,20 +243,28 @@ public class playerPossession : MonoBehaviour
                     Vector3 newPos = sneakTest.transform.position;
                     newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
 
+                    //Check so we dont fall in the ground on eject
+                    if (newPos.y <= 1)
+                        newPos = new Vector3(newPos.x, 1, newPos.z);
+
                     Debug.DrawRay(transform.position, dir, Color.blue, 10f);
-                    Debug.DrawRay(newPos, colSize, Color.green, 10f);
-                    Debug.DrawRay(newPos, -colSize, Color.green, 10f);
+                    Debug.DrawRay(newPos, colSizeUp, Color.green, 10f);
+                    Debug.DrawRay(newPos, -colSizeUp, Color.green, 10f);
+                    Debug.DrawRay(newPos, colSizeSide, Color.red, 10f);
+                    Debug.DrawRay(newPos, -colSizeSide, Color.red, 10f);
 
                     if (!Physics.Raycast(transform.position, dir, out hit, length)) //Original Direction
-                        if (!Physics.Raycast(newPos, colSize, out hit, sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Up
-                            if (!Physics.Raycast(newPos, -colSize, out hit, -sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Down
-                            {
-                                sneakTest.transform.position = newPos; //Atm just forcing eject onto the end point, maybe use Random.RAnge and try and find a random point along that length vector                                                                      
-                                this.GetComponent<ItemController>().SetAnimScare(false);//Stop the scare animation incase it is still playing when we eject
-                                FMODUnity.RuntimeManager.PlayOneShot("event:/Sid_Drop", transform.position);
-                                UnpossessItem();
-                                break;
-                            }
+                        if (!Physics.Raycast(newPos, colSizeUp, out hit, sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Up
+                            if (!Physics.Raycast(newPos, -colSizeUp, out hit, -sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Down
+                                if (!Physics.Raycast(newPos, colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2))
+                                    if (!Physics.Raycast(newPos, -colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2))
+                                    {
+                                        sneakTest.transform.position = newPos;
+                                        this.GetComponent<ItemController>().SetAnimScare(false);//Stop the scare animation incase it is still playing when we eject
+                                        FMODUnity.RuntimeManager.PlayOneShot("event:/Sid_Drop", transform.position);
+                                        UnpossessItem();
+                                        break;
+                                    }
                 } //End loop
             } //End If
         }//End Quick-Drop
@@ -705,15 +714,19 @@ public class playerPossession : MonoBehaviour
             {
                 //I change the target gameobject in the civillians, so we can easily access the ItemScaryRating
                 //The target is also used in CIV_Retreat to know which item to run away from
-                civ.GetComponent<CivillianController>().target = gameObject;
-                civ.GetComponent<CivillianController>().TRIGGERED_repel = true;
+                CivillianController civillian = civ.GetComponent<CivillianController>();
+                if (civillian.currentState != State.State_Retreat) //Only LURE the CIVS if they arent already in a retreat state / Prevents spam
+                {
+                    civillian.target = gameObject;
+                    civillian.TRIGGERED_repel = true;
 
-                if (civ.GetComponent<NavMeshObstacle>() == null)
-                    continue;
-                else
-                    civ.GetComponent<NavMeshObstacle>().enabled = false;
+                    if (civillian.GetComponent<NavMeshObstacle>() == null)
+                        continue;
+                    else
+                        civillian.GetComponent<NavMeshObstacle>().enabled = false;
 
-                civ.GetComponent<NavMeshAgent>().enabled = true;
+                    civillian.GetComponent<NavMeshAgent>().enabled = true;
+                }
             }
         }
 

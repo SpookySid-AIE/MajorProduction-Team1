@@ -69,7 +69,6 @@ public class CIV_Retreat : State_CIV
         }
         else if (agent.TRIGGERED_repel) //Was lured to an item and spooked - multiply by x5??
         {
-            Debug.Log("TriggeredRepel");
             CheckScaryRating();
             ectoplasm.GetComponent<ectoplasmController>().modifier = Camera.main.GetComponent<valueController>().EctoRepelledScareValue;
             currentAgent.currentScareValue += (currentAgent.sid.GetComponent<playerPossession>().itemThrown.GetComponent<ItemController>().baseScariness);
