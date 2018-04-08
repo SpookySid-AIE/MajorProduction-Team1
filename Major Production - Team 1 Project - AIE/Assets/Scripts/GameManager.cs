@@ -238,6 +238,9 @@ public class GameManager : MonoBehaviour {
         {
             if (player.GetComponent<playerController>().Ectoplasm <= 0)
             {
+                Cursor.visible = true;
+                
+
                 player.GetComponent<playerController>().Ectoplasm = 0;
                 canvasWinOrLose.gameObject.SetActive(true);
                 loseText.gameObject.SetActive(true);
@@ -372,7 +375,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            Camera.main.GetComponent<LoadScene>().Load(0);
+            GameObject.Find("MenuCanvas (2)").GetComponent<LoadScene>().Load(0);
         }
     }
 

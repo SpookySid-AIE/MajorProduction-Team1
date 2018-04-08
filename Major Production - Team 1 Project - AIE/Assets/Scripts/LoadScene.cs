@@ -19,8 +19,19 @@ public class LoadScene : MonoBehaviour
 
     public void respawn()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Camera.main.GetComponent<CamLock>().enabled = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>().enabled = true;
+
+        Time.timeScale = 1;
         Sid.GetComponent<playerController>().Ectoplasm = 100;
         Sid.transform.position = respawnPosition.transform.position;
-        
+
+        GameObject WinLose = GameObject.Find("Win_LoseCanvas");
+
+        WinLose.SetActive(false);
+
     }
 }
