@@ -23,11 +23,13 @@ public class CIV_Alert : State_CIV
         agent.civIconStateScript.myState = script_civilianIconState.gameState.alerted;
         currentAgent.txtState.text = "ALERT";
         itemPos = currentAgent.itemPosition;
+        currentAgent.m_Animator.SetBool("lured", true);
     }
 
     public void OnExit(CivillianController agent)
     {
         stopped = false;
+        currentAgent.m_Animator.SetBool("lured", false);
         currentAgent.m_Animator.SetBool("idle", false);
     }
 
@@ -59,10 +61,6 @@ public class CIV_Alert : State_CIV
             }
 
             currentAgent.navAgent.enabled = false;
-
-            //Play thinking? animation here
-
-            currentAgent.GetComponent<Animator>().enabled = false;
         }
     }
 }

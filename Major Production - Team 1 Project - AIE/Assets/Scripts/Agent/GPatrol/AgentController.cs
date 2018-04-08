@@ -27,7 +27,9 @@ public class AgentController : MonoBehaviour
     [HideInInspector]public Light torch;
     [Header("How often does the gun damage the player. Percent Based.")][Range(0, 100)]public float gunAccuracy;
     [Header("How long to shoot for")]public float bulletShootTime;
-    [Header("How long to wait before shooting again")]public float bulletRecharge;    
+    [Header("How long to wait before shooting again")]public float bulletRecharge;
+    [FMODUnity.EventRef] public string shootSoundRef;
+    [HideInInspector]public FMOD.Studio.EventInstance shootSound;
 
     //Used in AlertedState
     private SphereCollider colliderSphere; //Used to determine where an "Audio" point of interest has appeared
@@ -72,6 +74,9 @@ public class AgentController : MonoBehaviour
 
         //If the text canvas is not in this position - will throw an error
         txtState = transform.GetChild(0).GetChild(0).GetComponent<Text>(); //Accesses the txtState Text object in the heirachy attached to this Agent
+
+        //Setup shoot sound
+        shootSound = FMODUnity.RuntimeManager.CreateInstance(shootSoundRef);
 
         //StateMachine creation - Setting Default State - Will inherit this from inspector
         m_stateMachine = new StateMachine_GPATROL();

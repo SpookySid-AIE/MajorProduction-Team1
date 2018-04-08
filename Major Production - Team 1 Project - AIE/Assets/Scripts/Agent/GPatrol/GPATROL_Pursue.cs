@@ -33,14 +33,13 @@ public class GPATROL_Pursue : State_GPATROL
 
     public void OnExit(AgentController agent)
     {
-        agent.anim.SetBool("stream", false);
-
         //Force stop shooting if early exit occurs
         timer = 0;
         internalTimer = 0;
         protonBeam.fire = false;
         pBeam.SetActive(false);
         agent.anim.SetBool("stream", false); //Stop stream animation
+        PlayShootSound(false);
     }
 
     public void STATE_Update(AgentController agent, StateMachine_GPATROL stateMachine, float deltaTime)
@@ -82,6 +81,7 @@ public class GPATROL_Pursue : State_GPATROL
                 protonBeam.fire = true;
                 pBeam.SetActive(true);
                 agent.anim.SetBool("stream", true); //Play stream animation
+                PlayShootSound(true);
 
                 internalTimer += Time.deltaTime;
                 CheckTorch();
@@ -93,6 +93,7 @@ public class GPATROL_Pursue : State_GPATROL
                 protonBeam.fire = false;
                 pBeam.SetActive(false);
                 agent.anim.SetBool("stream", false); //Stop stream animation
+                PlayShootSound(false);
                 initialEnter = false;
             }
         }
@@ -111,6 +112,7 @@ public class GPATROL_Pursue : State_GPATROL
                     protonBeam.fire = true;
                     pBeam.SetActive(true);
                     agent.anim.SetBool("stream", true); //Play stream animation
+                    PlayShootSound(true);
 
                     internalTimer += Time.deltaTime;
                     CheckTorch();
@@ -156,5 +158,29 @@ public class GPATROL_Pursue : State_GPATROL
 
             //More state changing to come
         }
+    }
+
+    void PlayShootSound(bool play)
+    {
+        //Sound Effect ----------------------------------
+        //FMOD.Studio.PLAYBACK_STATE stateShoot;
+        //currentAgent.shootSound.getPlaybackState(out stateShoot); //Poll the audio events to see if playback is happening
+
+        if (play == true)
+        {
+            //lureSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //scareSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+            FMODUnity.RuntimeManager.PlayOneShot(currentAgent.shootSoundRef);
+
+          //  currentAgent.shootSound.start(); // Starts the event
+            //FMODUnity.RuntimeManager.AttachInstanceToGameObject(currentAgent.shootSound, currentAgent.GetComponent<Transform>(), currentAgent.GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+        }
+        else if (play == false)
+        {
+            //currentAgent.shootSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        //End Sound Effect ----------------------------
     }
 }

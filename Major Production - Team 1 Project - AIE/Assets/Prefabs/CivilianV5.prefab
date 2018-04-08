@@ -1264,7 +1264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -201.77, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224991304644415114}
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   rendererGeo: {fileID: 1585393533884122}
   testTarget: {fileID: 0}
   testParticle: {fileID: 0}
-  enableWander: 1
+  enableWander: 0
   drawLineOfSight: 0
   initialSpawn: 0
   currentState: 2
@@ -2137,7 +2137,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 1.5
