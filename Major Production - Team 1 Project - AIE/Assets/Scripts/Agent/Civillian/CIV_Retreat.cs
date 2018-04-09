@@ -20,12 +20,6 @@ public class CIV_Retreat : State_CIV
 
     [HideInInspector]public static Vector3 dirAwayFromObject; //Set in OnCollisionEnter
 
-#if UNITY_EDITOR
-
-    
-
-#endif
-
     public void OnEnter(CivillianController agent)
     {        
         //Reset path to prevent errors when switching
@@ -46,7 +40,7 @@ public class CIV_Retreat : State_CIV
             currentAgent.m_Animator.enabled = true;
 
         //Play scared sound clip
-        FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioCivScared, currentAgent.transform.position);
+        agent.PlayScaredSound();
 
         currentAgent.navAgent.speed = 5.0f; //Add some additional speed to make them feel really spooked
         currentAgent.m_Animator.SetBool("Scared", true);

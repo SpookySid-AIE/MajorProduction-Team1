@@ -17,7 +17,7 @@ public class CivillianController : MonoBehaviour
 {
     [Header("New Location Search Radius.")] public float wanderRadius; //Radius used to pick a new location within
     [Header("Audio Search Radius")] public float audioSearch; //The range at which the AGENT can hear the sound    
-    [HideInInspector] public GameObject sid; //Permanent reference to the player object "sid"
+     public GameObject sid; //Permanent reference to the player object "sid"
     //Exit point that they will travel to and despawn
     [Header("Where the Civs run to despawn.")] public Transform endPoint;
     [Header("Max Scare Threshold")]public int scareThreshHoldMax;
@@ -75,6 +75,9 @@ public class CivillianController : MonoBehaviour
     //Store unique Agent ID for the TriggerHighlight.cs
     private int id;
     public int GetID() { return id; }
+
+    //FMOD
+    public FMOD.Studio.EventInstance FMOD_ScaredInstance;
 
     //DEBUGGING
     [Header("----[DEBUGGING]----")]
@@ -141,6 +144,9 @@ public class CivillianController : MonoBehaviour
 
         civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
         civIconStateScript.myState = script_civilianIconState.gameState.normal;// 19-12-2017 Added by Mark 
+
+        //Fmod instance creation
+        FMOD_ScaredInstance = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioCivScared);
 
         //StateMachine creation - Setting Default State - Will inherit this from inspector
         m_stateMachine = new StateMachine_CIV();
@@ -276,7 +282,7 @@ public class CivillianController : MonoBehaviour
         //}
 
         //State changing to Retreat because we have spotted an item and is spooked
-        if (sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false)
+        if (sid.GetComponent<playerPossession>().IsPossessed() == true && TRIGGERED_floating == false && sid.GetComponent<playerPossession>().IsHidden() == false && currentState != State.State_Retreat)
         {
             if (isInLineOfSight() == true)
             {
@@ -302,6 +308,7 @@ public class CivillianController : MonoBehaviour
         //State changing to Retreat, because the repel mechanic was used in playerPosession
         if (TRIGGERED_repel && currentScareValue != scareThreshHoldMax)
         {
+            TRIGGERED_repel = false;
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
             //civIconStateScript.myState = script_civilianIconState.gameState.retreat;
@@ -381,6 +388,7 @@ public class CivillianController : MonoBehaviour
 
             GameObject smoke = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().smokeEffect, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
             Destroy(smoke, 2.0f);
+
             //Set the target to run away from to be the item that hit us
             target = collision.gameObject;
 
@@ -440,6 +448,20 @@ public class CivillianController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void PlayScaredSound()
+    {
+        //Sound Effect ----------------------------------
+        FMOD.Studio.PLAYBACK_STATE stateScared;
+        FMOD_ScaredInstance.getPlaybackState(out stateScared); //Poll the audio events to see if playback is happening
+
+        if (stateScared == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+        {
+            FMOD_ScaredInstance.start(); // Starts the event
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(FMOD_ScaredInstance, GetComponent<Transform>(), GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+        }
+        //End Sound Effect ----------------------------
     }
 
     private void OnDrawGizmosSelected()

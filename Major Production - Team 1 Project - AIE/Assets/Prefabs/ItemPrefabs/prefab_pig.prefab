@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23878711142676476}
   - component: {fileID: 95681998948951938}
   - component: {fileID: 114088557431970210}
-  - component: {fileID: 64729446359222048}
   - component: {fileID: 54089787468241876}
+  - component: {fileID: 65323661706958064}
   m_Layer: 0
   m_Name: prefab_pig
   m_TagString: Item
@@ -38,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960861022346684}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.96520996, y: -17.646164, z: 9.885883}
+  m_LocalRotation: {x: 0.0064401585, y: -0.000009385854, z: -0.0014573633, w: 0.99997824}
+  m_LocalPosition: {x: 7.511058, y: -1.2898417, z: 8.670271}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,8 +101,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64729446359222048
-MeshCollider:
+--- !u!65 &65323661706958064
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -111,10 +111,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: d80d52562a6e5f343b95d1ef42cf5d8d, type: 3}
+  m_Size: {x: 2.6804984, y: 3.0771484, z: 3.2766728}
+  m_Center: {x: 0.018454432, y: -0.02187252, z: 0.2046906}
 --- !u!95 &95681998948951938
 Animator:
   serializedVersion: 3
@@ -145,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 10
   ItemScaryRating: 2
-  itemSize: 4
+  itemSize: 3
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
