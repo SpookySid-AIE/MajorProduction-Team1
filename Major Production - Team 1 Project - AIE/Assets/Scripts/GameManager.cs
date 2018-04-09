@@ -238,15 +238,9 @@ public class GameManager : MonoBehaviour {
         {
             if (player.GetComponent<playerController>().Ectoplasm <= 0)
             {
-                Cursor.visible = true;
-                
-
-                player.GetComponent<playerController>().Ectoplasm = 0;
-                canvasWinOrLose.gameObject.SetActive(true);
-                loseText.gameObject.SetActive(true);
-                Camera.main.GetComponent<CamLock>().enabled = false;
-                Cursor.lockState = CursorLockMode.None;
-                player.GetComponent<playerController>().enabled = false;
+                Time.timeScale = 1;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<playerController>().Ectoplasm = 100;
+                GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.Find("respawnPosition").transform.position;
             }            
         }
     } //End update
