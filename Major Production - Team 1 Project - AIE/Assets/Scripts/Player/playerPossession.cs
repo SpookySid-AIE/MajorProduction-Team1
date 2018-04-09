@@ -782,8 +782,8 @@ public class playerPossession : MonoBehaviour
 
         if (Physics.Raycast(secondTest, out hit, allowablePosessionRange))
         {
-            if(hit.transform.tag == "Item")
-            {
+            if(hit.transform.tag == "Item" && hit.transform.GetComponent<ItemController>().timesThrown <= hit.transform.GetComponent<ItemController>().timesThrownBeforeDestroyed)
+            {                
                 target = hit.collider.gameObject;
                 //Debug.DrawLine(Camera.main.transform.position, hit.point, Color.green, 100f);
                 targetSet = true;

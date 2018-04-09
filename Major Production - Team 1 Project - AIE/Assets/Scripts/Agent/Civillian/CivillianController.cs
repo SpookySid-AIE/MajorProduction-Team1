@@ -50,6 +50,10 @@ public class CivillianController : MonoBehaviour
     [HideInInspector] public Vector3 itemPosition;
     [HideInInspector] public bool alertedByItem;
 
+    //Item Position for Retreat when items collide state - WORLD POS NO NAV SAMPLING DONE HER compared to "itemPosition" above
+    //Hackish fix for the nullreference that occurs
+    public Vector3 collidedItemPos;
+
     [HideInInspector] public Vector3 firstSpawnDest; //Position to travel to on spawn
     public Vector3 currentDest; //I store a reference to the endPathDestination here, so the Civs can resume the same destination when waiting to move
 
@@ -140,7 +144,7 @@ public class CivillianController : MonoBehaviour
 
         //Set target to run away from
         target = GameManager.Instance.player.gameObject;
-        sid = target;
+        sid = target.gameObject;
 
         civIconStateScript = GetComponent<script_civilianIconState>();// 19-12-2017 Added by Mark 
         civIconStateScript.myState = script_civilianIconState.gameState.normal;// 19-12-2017 Added by Mark 
@@ -385,12 +389,14 @@ public class CivillianController : MonoBehaviour
             //m_Animator.SetBool("hit", true);
             //Set values for the item controller
             //currentScareValue += (collision.gameObject.GetComponent<ItemController>().baseScariness * 2);
+            
+            //Used in Retreat state when we are hit by an item, runs away from this world pos - item is deleted next frame
+            collidedItemPos = collision.transform.position;
 
             GameObject smoke = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().smokeEffect, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
             Destroy(smoke, 2.0f);
 
-            //Set the target to run away from to be the item that hit us
-            target = collision.gameObject;
+
 
             if (TRIGGERED_hit == false)
             {

@@ -55,7 +55,7 @@ public class CIV_Wander : State_CIV
 
             if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
             {
-                //Debug.Log("Reset Called");
+                Debug.Log(agent.name + " Reset Called");
                 agent.navAgent.ResetPath();
             }
 
@@ -80,8 +80,22 @@ public class CIV_Wander : State_CIV
         randDirection += currentAgent.transform.position; //Update direction based on Agent's current position
 
         NavMeshHit navHit; //Stores the result of a NavMesh query
-        NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, -1); //Returns the closest point where randDirection is situated on the NavMesh
+        Vector3 result;
 
-        return navHit.position; //Move towards the location
+        //Looping through the sample a few times, dont really have a fail-safe yet for this
+        for (int i = 0; i < 10; i++)
+        {
+            //Sample position and move the found position a little bit away from the edge taking into account the navMeshAgents radius hopefully fixing them being stuck on certain corners
+            if (NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, NavMesh.AllAreas))
+            {
+                result = navHit.position;
+                Vector3 pathDir = randDirection - result;
+                result += pathDir.normalized * (currentAgent.navAgent.radius / 2);
+                return result;
+            }
+        }
+
+        Debug.LogError(currentAgent.name + " failed to pick a wander point.");
+        return Vector3.zero;
     }
 }

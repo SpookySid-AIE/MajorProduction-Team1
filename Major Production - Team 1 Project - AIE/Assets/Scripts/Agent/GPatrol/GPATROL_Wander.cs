@@ -52,6 +52,11 @@ public class GPATROL_Wander : State_GPATROL
             if (agent.navAgent.hasPath == false)
                 PickNewWanderPoint();
 
+            if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
+            {
+                agent.navAgent.ResetPath();
+            }
+
             //Check if Will is in torchlight
             if (agent.isWillInTorchLight() == true)
             {

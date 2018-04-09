@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour
     public enum Orientation { Least_Scary, Medium_Scary, Most_Scary } //A created variable used to determine the scariness of an item and therefore, values received for scaring with it.
     public enum Size { Miniature, Small, Medium, Large, Massive } //A created variable used to determine the size of an object, and therefore the camera distance.
     public int timesThrownBeforeDestroyed = 1; //The number of times an item can be thrown before it's destroyed. Default is once, can be edited without repercussion.
-    private int timesThrown = 0; //A counter that tracks the number of times and item has been thrown. 
+    [HideInInspector]public int timesThrown = 0; //A counter that tracks the number of times and item has been thrown. 
     public Orientation ItemScaryRating; // Creating a variable for scary ratings, using the first line of code above this.
     public Size itemSize; //Same as "ItemScaryRating" except for item size.
     public bool hasBeenThrown; //A boolean to check whether an item has been thrown or not.
@@ -114,7 +114,7 @@ public class ItemController : MonoBehaviour
                 gameObject.GetComponentInChildren<Renderer>().enabled = false; //Derenders the thrown item.
                 if (gameObject.GetComponentInChildren<SkinnedMeshRenderer>())
                 gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-                gameObject.tag = "Untagged"; //Removes the items tag.
+                //gameObject.tag = "Untagged"; //Removes the items tag.
                 DestroyObject(gameObject, 2.0f); //Destroys the item after two seconds, to prevent it disappearing before sid is reactivated.
                 timesThrown = 0; //Resets the times thrown value.
             }

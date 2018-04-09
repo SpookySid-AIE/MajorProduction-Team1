@@ -105,7 +105,7 @@ public class CIV_Retreat : State_CIV
         if (scared == false)
         {
             //Get the direction away from the target object that they are trying to flee from
-            dirAwayFromObject = currentAgent.transform.position - currentAgent.target.transform.position;
+            dirAwayFromObject = currentAgent.transform.position - currentAgent.collidedItemPos;
 
             //Just minus a default value for now from the scared score
             //Overtime minus 1 from the scared value - possibly change in the future
