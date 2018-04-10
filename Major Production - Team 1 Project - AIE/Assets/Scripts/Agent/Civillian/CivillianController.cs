@@ -71,7 +71,7 @@ public class CivillianController : MonoBehaviour
     public GameObject rendererGeo; // 31/01/2018 Added by Mark - For custom colours
 
     //Repathing variables when stuck
-    private Transform otherAgent;
+    public Transform otherAgent;
     private float stationaryTimer; //Timer to re-enable NavAgent
     private bool isStationary = false;
     private RaycastHit hit;    
@@ -93,8 +93,12 @@ public class CivillianController : MonoBehaviour
     public State currentState;
     [Header("Dont Set. Showing target to follow")] public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
     public float stuckTimer; //Timer to count how long we are stuck on another agent for and when to turn into a obstacle
-    public float dist;
     public bool isOnNavMesh;
+
+    //Timing estimation for resetting path
+    public float estimationTime;
+    public float currTimeOnPath;
+    private bool estimTimeSet = false;
 
     //Testing - Mark
     public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
@@ -162,6 +166,10 @@ public class CivillianController : MonoBehaviour
         rend.material.SetColor("_PantsColour", civilianPantsColour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top1Colour", civilianTop1Colour);// 31/01/2018 Added by Mark - For custom colours
         rend.material.SetColor("_Top2Colour", civilianTop2Colour);// 31/01/2018 Added by Mark - For custom colours
+
+
+        //DEBUGGING
+        name = "Civ " + id;
     }
 
     private void Update()
@@ -171,40 +179,43 @@ public class CivillianController : MonoBehaviour
         if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, navAgent.radius + .5f)
             && navAgent.isOnNavMesh && !initialSpawn)
         {
-            if (hit.transform.tag == "Civillian" && hit.transform != this.transform)
+            if (hit.transform.tag == "Civillian" || hit.transform.tag == "GPatrol")                
             {
+                if(hit.transform != this.transform)
+                { 
                 stuckTimer += Time.deltaTime;
 
-                if (hit.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
-                {
-                    //Stop this agent and wait until the other one repaths around you
-                    stuckTimer = 0;
-                    m_Animator.SetBool("idle", true);
-                    navAgent.isStopped = true;
-
-                    currentDest = navAgent.destination;
-
-                    navAgent.ResetPath();
-                    navAgent.enabled = false;
-                    isStationary = true;
-
-
-                    //Create nav obstacle
-                    if (gameObject.GetComponent<NavMeshObstacle>() == null)
+                    if (hit.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
                     {
-                        NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
-                        obstacle.shape = NavMeshObstacleShape.Capsule;
-                        obstacle.radius = 0.3f;
-                        obstacle.center = new Vector3(0, 1, 0);
-                        obstacle.carving = true;
-                    }
-                    else //Obstacle has already been added first time around so enable from here on out
-                    {
-                        gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                    }
+                        //Stop this agent and wait until the other one repaths around you
+                        stuckTimer = 0;
+                        m_Animator.SetBool("idle", true);
+                        navAgent.isStopped = true;
 
-                    //Storing the hit agent
-                    otherAgent = hit.transform;
+                        currentDest = navAgent.destination;
+
+                        navAgent.ResetPath();
+                        navAgent.enabled = false;
+                        isStationary = true;
+
+
+                        //Create nav obstacle
+                        if (gameObject.GetComponent<NavMeshObstacle>() == null)
+                        {
+                            NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
+                            obstacle.shape = NavMeshObstacleShape.Capsule;
+                            obstacle.radius = 0.3f;
+                            obstacle.center = new Vector3(0, 1, 0);
+                            obstacle.carving = true;
+                        }
+                        else //Obstacle has already been added first time around so enable from here on out
+                        {
+                            gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+                        }
+
+                        //Storing the hit agent
+                        otherAgent = hit.transform;
+                    }
                 }
             }
         }
@@ -229,6 +240,7 @@ public class CivillianController : MonoBehaviour
             }
             else //Check incase one of the items update the navmesh and breaks the current agents pathing
             {
+                //Debug.Log("Else called initialSpawn");
                 NavMeshHit navHit;
                 NavMesh.SamplePosition(firstSpawnDest, out navHit, wanderRadius, -1);
                 navAgent.SetDestination(navHit.position); //No error checking so possible error if SamplePosition fails
@@ -284,12 +296,38 @@ public class CivillianController : MonoBehaviour
             navAgent.ResetPath();
         }
 
+        //Timing estimation, Reset path if the time it took to reach path end point is greater than the estimated time give or take 4 seconds for avoidance?
+        //Distance / Speed = Time
+        if(currentState == State.State_Wander)
+        {
+            if (navAgent.hasPath)
+            {
+                if (!estimTimeSet)
+                {
+                    estimationTime = Vector3.Distance(transform.position, navAgent.pathEndPosition) / navAgent.speed;
+                    estimationTime = estimationTime + 2.0f; //Adding a little leway
+                    estimTimeSet = true;
+                }
+
+                currTimeOnPath += Time.deltaTime;                
+
+                if (currTimeOnPath >= estimationTime)
+                    navAgent.ResetPath();
+            }
+            else
+            {
+                currTimeOnPath = 0;
+                estimationTime = 0;
+                estimTimeSet = false;
+            }
+        }
+
         isOnNavMesh = navAgent.isOnNavMesh;
 
-        if(navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
-        {
-            Debug.Log(name + " invalid path.");
-        }
+        //if(navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        //{
+        //    Debug.Log(name + " invalid path.");
+        //}
 
         //Debug.Log(Vector3.Distance(navAgent.transform.position, currentDest));
 
@@ -321,9 +359,7 @@ public class CivillianController : MonoBehaviour
         if (alertedByItem && currentScareValue != scareThreshHoldMax)
         {
             alertedByItem = false;
-            m_stateMachine.ChangeState(this, new CIV_Alert());
-            
-            //civIconStateScript.myState = script_civilianIconState.gameState.alerted;
+            m_stateMachine.ChangeState(this, new CIV_Alert());       
         }
 
         //State changing to Retreat, because the repel mechanic was used in playerPosession
@@ -332,7 +368,6 @@ public class CivillianController : MonoBehaviour
             TRIGGERED_repel = false;
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
-            //civIconStateScript.myState = script_civilianIconState.gameState.retreat;
         }
 
         //Call update from this agents FSM
@@ -340,6 +375,8 @@ public class CivillianController : MonoBehaviour
         {
             m_stateMachine.Update(this, Time.deltaTime);
         }
+
+
         //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(new Vector3(this.velocity_.x, 0.0f, this.velocity_.y), Vector3.up), Time.deltaTime * 10f);
         //Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green);
 
@@ -412,8 +449,6 @@ public class CivillianController : MonoBehaviour
 
             GameObject smoke = Instantiate(GameObject.Find("PrefabController").GetComponent<PrefabController>().smokeEffect, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
             Destroy(smoke, 2.0f);
-
-
 
             if (TRIGGERED_hit == false)
             {
@@ -511,7 +546,7 @@ public class CivillianController : MonoBehaviour
                 }
 
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawSphere(navAgent.pathEndPosition, 0.2f);
+                Gizmos.DrawSphere(navAgent.pathEndPosition, .5f);
             }
         }
     }

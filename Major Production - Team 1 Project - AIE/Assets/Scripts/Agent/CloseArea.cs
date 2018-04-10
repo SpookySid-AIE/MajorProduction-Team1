@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class CloseArea : MonoBehaviour
 {
     //Variables
-    int currentInside;
+    public int currentInside;
     bool runUpdate = false;
 	
 	//Components

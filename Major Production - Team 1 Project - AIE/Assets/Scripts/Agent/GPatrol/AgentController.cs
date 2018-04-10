@@ -47,6 +47,11 @@ public class AgentController : MonoBehaviour
     [Header("Display State")] public bool ShowState;
     [Header("Enable Wander")]public bool enableWander;
 
+    //Timing estimation for resetting path
+    public float estimationTime;
+    public float currTimeOnPath;
+    private bool estimTimeSet = false;
+
     //Possibly use this later for now unused
     //Agent_Blackboard blackboard = Agent_Blackboard.Instance;
 
@@ -117,6 +122,28 @@ public class AgentController : MonoBehaviour
             anim.SetFloat("speed", navAgent.speed); //Set the speed in the animation controller, only hooked speed up for now
         else //Agent stopped movement so stop animation   
             anim.SetFloat("speed", 0);
+
+        //Timing estimation to reset path if stuck
+        if (navAgent.hasPath)
+        {
+            if (!estimTimeSet)
+            {
+                estimationTime = Vector3.Distance(transform.position, navAgent.pathEndPosition) / navAgent.speed;
+                estimationTime = estimationTime + 2.0f; //Adding a little leway
+                estimTimeSet = true;
+            }
+
+            currTimeOnPath += Time.deltaTime;
+
+            if (currTimeOnPath >= estimationTime)
+                navAgent.ResetPath();
+        }
+        else
+        {
+            currTimeOnPath = 0;
+            estimationTime = 0;
+            estimTimeSet = false;
+        }
 
         //Update to the new possessed item
         //if (target)

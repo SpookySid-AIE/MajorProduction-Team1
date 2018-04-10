@@ -48,7 +48,12 @@ public class CIV_Wander : State_CIV
             //Just set a random destination
             if (agent.navAgent.hasPath == false && agent.navAgent.enabled == true)
             {
-                agent.navAgent.SetDestination(PickNewWanderPoint());
+                //Debug.Log("PickNewWander() called from " + agent.name);
+                if(!agent.navAgent.SetDestination(PickNewWanderPoint()))
+                {
+                    Debug.Log("SetDest failed: " + agent.name);
+                }
+                    
                 //agent.currentDest = agent.navAgent.destination;
             }
 
