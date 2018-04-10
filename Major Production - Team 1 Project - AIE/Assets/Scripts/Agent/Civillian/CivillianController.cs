@@ -93,7 +93,9 @@ public class CivillianController : MonoBehaviour
     public State currentState;
     [Header("Dont Set. Showing target to follow")] public GameObject target; //used to SEEK or PURSUE a target, this will change now when hit by an item
     public float stuckTimer; //Timer to count how long we are stuck on another agent for and when to turn into a obstacle
-    
+    public float dist;
+    public bool isOnNavMesh;
+
     //Testing - Mark
     public script_civilianIconState civIconStateScript; // 19-12-2017 Added by Mark 
     public Color civilianPantsColour = Color.black; // 31/01/2018 Added by Mark - For custom colours
@@ -272,6 +274,21 @@ public class CivillianController : MonoBehaviour
                     m_Animator.SetBool("idle", false);
                 }
             }
+        }
+
+        //Reset the path if we have arrived
+        //Maybe check the distance between current corner we are on and last corner in the path to check if we have arrived?
+        if (navAgent.hasPath && navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {            
+            Debug.Log(name + " Reset Called");
+            navAgent.ResetPath();
+        }
+
+        isOnNavMesh = navAgent.isOnNavMesh;
+
+        if(navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
+            Debug.Log(name + " invalid path.");
         }
 
         //Debug.Log(Vector3.Distance(navAgent.transform.position, currentDest));
@@ -492,6 +509,9 @@ public class CivillianController : MonoBehaviour
                 {
                     Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
                 }
+
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawSphere(navAgent.pathEndPosition, 0.2f);
             }
         }
     }

@@ -51,13 +51,6 @@ public class CIV_Wander : State_CIV
                 agent.navAgent.SetDestination(PickNewWanderPoint());
                 //agent.currentDest = agent.navAgent.destination;
             }
-            //Debug.Log(agent.navAgent.isPathStale);
-
-            if (agent.navAgent.hasPath && Vector3.Distance(agent.transform.position, agent.navAgent.destination) <= 0.5)
-            {
-                Debug.Log(agent.name + " Reset Called");
-                agent.navAgent.ResetPath();
-            }
 
             //if (agent.navAgent.isPathStale == true)
             //    Debug.Log(agent.name + " is stale");

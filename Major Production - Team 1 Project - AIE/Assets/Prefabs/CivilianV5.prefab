@@ -1900,6 +1900,7 @@ MonoBehaviour:
   hasDroppedEcto: 0
   itemPosition: {x: 0, y: 0, z: 0}
   alertedByItem: 0
+  collidedItemPos: {x: 0, y: 0, z: 0}
   firstSpawnDest: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   rendererGeo: {fileID: 1585393533884122}
@@ -1911,6 +1912,7 @@ MonoBehaviour:
   currentState: 2
   target: {fileID: 0}
   stuckTimer: 0
+  dist: 0
   civIconStateScript: {fileID: 0}
   civilianPantsColour: {r: 0.025146209, g: 0.015138407, b: 0.14705884, a: 1}
   civilianTop1Colour: {r: 0, g: 0.5629819, b: 0.89705884, a: 1}
@@ -2147,7 +2149,7 @@ NavMeshAgent:
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295

@@ -105,7 +105,10 @@ public class CIV_Retreat : State_CIV
         if (scared == false)
         {
             //Get the direction away from the target object that they are trying to flee from
-            dirAwayFromObject = currentAgent.transform.position - currentAgent.collidedItemPos;
+            if(currentAgent.TRIGGERED_hit)
+                dirAwayFromObject = currentAgent.transform.position - currentAgent.collidedItemPos;
+            else
+                dirAwayFromObject = currentAgent.transform.position - currentAgent.target.transform.position;
 
             //Just minus a default value for now from the scared score
             //Overtime minus 1 from the scared value - possibly change in the future
@@ -156,6 +159,7 @@ public class CIV_Retreat : State_CIV
     } //End update
 
     //Calculate a random point to run to - may need a different solution if they keep running towards the "scary" item
+    //StackOverFlow solution
     public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
     {
         Vector3 randDirection = Random.onUnitSphere * distance;
