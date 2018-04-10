@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23668494952740514}
   - component: {fileID: 95438944056166164}
   - component: {fileID: 65953803823974938}
-  - component: {fileID: 65350813873734208}
   m_Layer: 0
   m_Name: prefab_deliDoor
   m_TagString: Untagged
@@ -86,18 +85,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853984912283052}
   m_Mesh: {fileID: 4300000, guid: 2e05251024e0a974e82d570a7c4f0676, type: 3}
---- !u!65 &65350813873734208
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853984912283052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.8780844, y: 3.6261444, z: 2.2377496}
-  m_Center: {x: 1.3290561, y: 1.7422668, z: 1.0495566}
 --- !u!65 &65953803823974938
 BoxCollider:
   m_ObjectHideFlags: 1
