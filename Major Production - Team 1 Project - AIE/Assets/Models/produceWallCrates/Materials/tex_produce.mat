@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: tex_produce
-  m_Shader: {fileID: 4800000, guid: a75e61e64cea3b64ebbb7da199e90aac, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1632b54afb3c36a478597149f7e4c270, type: 3}
   m_ShaderKeywords: _INVERTAURA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,6 +54,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: fa4f3e5dbb578cb4b90d4721023d975c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ObjectTexture:
         m_Texture: {fileID: 2800000, guid: 758c96fc4121510408b3e629e153da87, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,6 +79,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
     - _ASEOutlineWidth: 0.01
     - _AuraBrightness: 4
     - _AuraFalloff1: 1.87
@@ -85,10 +90,12 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Edges: 0.1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _InvertAura: 1
+    - _Level: 0.1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -106,6 +113,8 @@ Material:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _AuraColour: {r: 0, g: 0.8758621, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColour1: {r: 1, g: 1, b: 1, a: 1}
+    - _EdgeColour2: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

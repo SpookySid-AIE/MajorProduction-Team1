@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54696879571655298}
   - component: {fileID: 65050459682649958}
   - component: {fileID: 114310397389007120}
+  - component: {fileID: 95566992578097426}
   m_Layer: 0
   m_Name: prefab_carrotCrate
   m_TagString: Item
@@ -37,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1784795335779172}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -140.82143, y: 0.825, z: 72.422}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.27999878, y: -18.366539, z: 51.37899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,6 +114,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6611293, y: 0.43559512, z: 0.83456707}
   m_Center: {x: 0.000000029802322, y: -0.01385662, z: -0.000000044703484}
+--- !u!95 &95566992578097426
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784795335779172}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f3e0ff45bb6f924a9ac0074ec10ecca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114310397389007120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,10 +143,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
+  timesThrown: 0
   ItemScaryRating: 0
   itemSize: 1
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scaryObject: 0
+  scaryObject: 1
