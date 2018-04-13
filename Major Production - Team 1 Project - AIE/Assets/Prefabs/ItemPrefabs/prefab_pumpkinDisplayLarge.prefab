@@ -297,8 +297,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509642296104946}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -158.21, y: 0.13, z: 69.68}
+  m_LocalRotation: {x: 0.0014573633, y: 0.99997824, z: 0.0064401585, w: 0.000009385854}
+  m_LocalPosition: {x: -4.3402967, y: -3.1837544, z: 47.449368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4187992022596230}
@@ -375,8 +375,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.683899, y: 5.35677, z: 2.8598557}
-  m_Center: {x: 0.06858826, y: 2.5998003, z: 0.045261383}
+  m_Size: {x: 2.683899, y: 4.772343, z: 2.8598557}
+  m_Center: {x: 0.06858827, y: 2.307587, z: 0.045261394}
 --- !u!95 &95050683256305230
 Animator:
   serializedVersion: 3
@@ -386,7 +386,7 @@ Animator:
   m_GameObject: {fileID: 1509642296104946}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 42574a7f4542470439c5064eda985c3f, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 83817e2754c2ca84bb7e2b74e3c3285b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
+  timesThrown: 0
   ItemScaryRating: 2
   itemSize: 3
   hasBeenThrown: 0
