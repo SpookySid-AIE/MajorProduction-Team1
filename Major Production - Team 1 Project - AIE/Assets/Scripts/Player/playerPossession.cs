@@ -229,6 +229,7 @@ public class playerPossession : MonoBehaviour
             if (IsHidden() || IsPossessed())
             {
                 Vector3 dir = Vector3.zero;
+                Vector3 startPos = transform.position;
                 RaycastHit hit;
                 float length = 3;
                 Collider col = GetComponent<Collider>();
@@ -238,26 +239,28 @@ public class playerPossession : MonoBehaviour
                 for (int i = 0; i < (int)RayDirection.COUNT; i++)
                 {
                     //Pass in dir variable and assign correct direction vector based on direction passed in
-                    AssignRayDirection((RayDirection)i, ref dir);
+                    AssignRayDirection((RayDirection)i, ref dir, ref startPos);
 
-                    Vector3 newPos = sneakTest.transform.position;
+                    Vector3 newPos = startPos;
                     newPos = new Vector3(newPos.x + dir.x, newPos.y + dir.y, newPos.z + dir.z);
 
                     //Check so we dont fall in the ground on eject
                     if (newPos.y <= 1)
                         newPos = new Vector3(newPos.x, 1, newPos.z);
 
-                    Debug.DrawRay(transform.position, dir, Color.blue, 10f);
-                    Debug.DrawRay(newPos, colSizeUp, Color.green, 10f);
-                    Debug.DrawRay(newPos, -colSizeUp, Color.green, 10f);
-                    Debug.DrawRay(newPos, colSizeSide, Color.red, 10f);
-                    Debug.DrawRay(newPos, -colSizeSide, Color.red, 10f);
+                    //Note test every direction extent
+                    //startPos.z = startPos.z + GetComponent<Collider>().bounds.extents.z;
+                    Debug.DrawRay(startPos, dir, Color.blue, 100f);
+                    //Debug.DrawRay(newPos, colSizeUp, Color.green, 100f);
+                    //Debug.DrawRay(newPos, -colSizeUp, Color.green, 100f);
+                    //Debug.DrawRay(newPos, colSizeSide, Color.red, 100f);
+                    //Debug.DrawRay(newPos, -colSizeSide, Color.red, 100f);
 
-                    if (!Physics.Raycast(transform.position, dir, out hit, length)) //Original Direction
+                    if (!Physics.Raycast(startPos, dir, out hit, length)) //Original Direction
                         if (!Physics.Raycast(newPos, colSizeUp, out hit, sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Up
                             if (!Physics.Raycast(newPos, -colSizeUp, out hit, -sneakTest.GetComponent<CapsuleCollider>().height / 2)) //Down
-                                if (!Physics.Raycast(newPos, colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2))
-                                    if (!Physics.Raycast(newPos, -colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2))
+                                if (!Physics.Raycast(newPos, colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2)) //Left to capsule sise
+                                    if (!Physics.Raycast(newPos, -colSizeSide, out hit, sneakTest.GetComponent<CapsuleCollider>().radius / 2)) //Right to capsule size
                                     {
                                         sneakTest.transform.position = newPos;
                                         this.GetComponent<ItemController>().SetAnimScare(false);//Stop the scare animation incase it is still playing when we eject
@@ -273,7 +276,7 @@ public class playerPossession : MonoBehaviour
     }//End update
 
     //Sets dir based on given rayDirection - Jak
-    void AssignRayDirection(RayDirection rayDirection, ref Vector3 dir)
+    void AssignRayDirection(RayDirection rayDirection, ref Vector3 dir, ref Vector3 startpos)
     {
         float length = 3;
 
@@ -281,21 +284,27 @@ public class playerPossession : MonoBehaviour
         {
             case RayDirection.FORWARD:
                 dir = transform.forward * length;
+                //startpos.z = startpos.z + GetComponent<Collider>().bounds.extents.z;
                 break;
             case RayDirection.BACK:
                 dir = -transform.forward * length;
+                //startpos.z = startpos.z - GetComponent<Collider>().bounds.extents.z * 2;
                 break;
             case RayDirection.LEFT:
                 dir = -transform.right * length;
+                //startpos.x = startpos.x -GetComponent<Collider>().bounds.extents.x * 2;
                 break;
             case RayDirection.RIGHT:
                 dir = transform.right * length;
+                //startpos.x = startpos.x + GetComponent<Collider>().bounds.extents.x * 2;
                 break;
             case RayDirection.UP:
                 dir = transform.up * length;
+                //startpos.y = startpos.y + GetComponent<Collider>().bounds.extents.y * 2;
                 break;
             case RayDirection.DOWN:
                 dir = -transform.up * length;
+                //startpos.y = startpos.y - GetComponent<Collider>().bounds.extents.y * 2;
                 break;
             default:
                 break;

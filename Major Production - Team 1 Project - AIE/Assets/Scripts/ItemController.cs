@@ -116,6 +116,7 @@ public class ItemController : MonoBehaviour
                 gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 //gameObject.tag = "Untagged"; //Removes the items tag.
                 DestroyObject(gameObject, 2.0f); //Destroys the item after two seconds, to prevent it disappearing before sid is reactivated.
+                Destroy(crashClone, 2.0f);
                 timesThrown = 0; //Resets the times thrown value.
             }
         }

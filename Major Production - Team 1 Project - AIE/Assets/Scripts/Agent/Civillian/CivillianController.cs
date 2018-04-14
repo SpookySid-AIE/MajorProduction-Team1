@@ -179,43 +179,75 @@ public class CivillianController : MonoBehaviour
         if (Physics.Raycast(new Vector3(transform.position.x, 1f, transform.position.z), transform.forward, out hit, navAgent.radius + .5f)
             && navAgent.isOnNavMesh && !initialSpawn)
         {
-            if (hit.transform.tag == "Civillian" || hit.transform.tag == "GPatrol")                
+            if (hit.transform.tag == "Civillian" && hit.transform != this.transform)                
             {
-                if(hit.transform != this.transform)
-                { 
                 stuckTimer += Time.deltaTime;
 
-                    if (hit.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
+                if (hit.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
+                {
+                    //Stop this agent and wait until the other one repaths around you
+                    stuckTimer = 0;
+                    m_Animator.SetBool("idle", true);
+                    navAgent.isStopped = true;
+
+                    currentDest = navAgent.destination;
+
+                    navAgent.ResetPath();
+                    navAgent.enabled = false;
+                    isStationary = true;
+
+                    //Create nav obstacle
+                    if (gameObject.GetComponent<NavMeshObstacle>() == null)
                     {
-                        //Stop this agent and wait until the other one repaths around you
-                        stuckTimer = 0;
-                        m_Animator.SetBool("idle", true);
-                        navAgent.isStopped = true;
-
-                        currentDest = navAgent.destination;
-
-                        navAgent.ResetPath();
-                        navAgent.enabled = false;
-                        isStationary = true;
-
-
-                        //Create nav obstacle
-                        if (gameObject.GetComponent<NavMeshObstacle>() == null)
-                        {
-                            NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
-                            obstacle.shape = NavMeshObstacleShape.Capsule;
-                            obstacle.radius = 0.3f;
-                            obstacle.center = new Vector3(0, 1, 0);
-                            obstacle.carving = true;
-                        }
-                        else //Obstacle has already been added first time around so enable from here on out
-                        {
-                            gameObject.GetComponent<NavMeshObstacle>().enabled = true;
-                        }
-
-                        //Storing the hit agent
-                        otherAgent = hit.transform;
+                        NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
+                        obstacle.shape = NavMeshObstacleShape.Capsule;
+                        obstacle.radius = 0.3f;
+                        obstacle.center = new Vector3(0, 1, 0);
+                        obstacle.carving = true;
                     }
+                    else //Obstacle has already been added first time around so enable from here on out
+                    {
+                        gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+                    }
+
+                    //Storing the hit agent
+                    otherAgent = hit.transform;
+                }                
+            }
+
+            if (hit.transform.tag == "GPatrol" && hit.transform != this.transform)
+            {
+                stuckTimer += Time.deltaTime;
+
+                if (this.transform.GetComponent<CivillianController>().isStationary == false && stuckTimer >= 2f)
+                {
+                    //Stop this agent and wait until the other one repaths around you
+                    stuckTimer = 0;
+                    m_Animator.SetBool("idle", true);
+                    navAgent.isStopped = true;
+
+                    currentDest = navAgent.destination;
+
+                    navAgent.ResetPath();
+                    navAgent.enabled = false;
+                    isStationary = true;
+
+                    //Create nav obstacle
+                    if (gameObject.GetComponent<NavMeshObstacle>() == null)
+                    {
+                        NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
+                        obstacle.shape = NavMeshObstacleShape.Capsule;
+                        obstacle.radius = 0.3f;
+                        obstacle.center = new Vector3(0, 1, 0);
+                        obstacle.carving = true;
+                    }
+                    else //Obstacle has already been added first time around so enable from here on out
+                    {
+                        gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+                    }
+
+                    //Storing the hit agent
+                    otherAgent = hit.transform;
                 }
             }
         }
@@ -298,8 +330,8 @@ public class CivillianController : MonoBehaviour
 
         //Timing estimation, Reset path if the time it took to reach path end point is greater than the estimated time give or take 4 seconds for avoidance?
         //Distance / Speed = Time
-        if(currentState == State.State_Wander)
-        {
+        //if(currentState == State.State_Wander)
+        //{
             if (navAgent.hasPath)
             {
                 if (!estimTimeSet)
@@ -320,7 +352,7 @@ public class CivillianController : MonoBehaviour
                 estimationTime = 0;
                 estimTimeSet = false;
             }
-        }
+        //}
 
         isOnNavMesh = navAgent.isOnNavMesh;
 
