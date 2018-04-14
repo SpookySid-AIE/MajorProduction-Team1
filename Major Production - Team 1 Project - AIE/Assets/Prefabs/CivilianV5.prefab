@@ -577,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1565645790235130
 GameObject:
   m_ObjectHideFlags: 1
@@ -1264,7 +1264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -201.77, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224991304644415114}
@@ -1880,7 +1880,7 @@ MonoBehaviour:
   audioSearch: 15
   sid: {fileID: 0}
   endPoint: {fileID: 0}
-  scareThreshHoldMax: 10
+  scareThreshHoldMax: 1
   lineOfSight: 15
   ParticleGreen: {fileID: 1476844225496228, guid: d6ff438e2ab55114587b409ce9fc0248,
     type: 2}
@@ -1904,15 +1904,18 @@ MonoBehaviour:
   firstSpawnDest: {x: 0, y: 0, z: 0}
   currentDest: {x: 0, y: 0, z: 0}
   rendererGeo: {fileID: 1585393533884122}
+  otherAgent: {fileID: 0}
   testTarget: {fileID: 0}
   testParticle: {fileID: 0}
-  enableWander: 0
+  enableWander: 1
   drawLineOfSight: 0
   initialSpawn: 0
   currentState: 2
   target: {fileID: 0}
   stuckTimer: 0
-  dist: 0
+  isOnNavMesh: 0
+  estimationTime: 0
+  currTimeOnPath: 0
   civIconStateScript: {fileID: 0}
   civilianPantsColour: {r: 0.025146209, g: 0.015138407, b: 0.14705884, a: 1}
   civilianTop1Colour: {r: 0, g: 0.5629819, b: 0.89705884, a: 1}
@@ -2139,7 +2142,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 1.5
