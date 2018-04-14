@@ -30,7 +30,7 @@ GameObject:
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1561327628303284
 GameObject:
@@ -66,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561327628303284}
-  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 8.964783, y: -18.440609, z: 42.905884}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.8164929, y: 0.7593918, z: 4.42697}
   m_LocalScale: {x: 19.042572, y: 19.042582, z: 19.042583}
   m_Children:
   - {fileID: 4729153492369028}
@@ -171,8 +171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesThrownBeforeDestroyed: 1
+  timesThrown: 0
   ItemScaryRating: 1
-  itemSize: 2
+  itemSize: 1
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
