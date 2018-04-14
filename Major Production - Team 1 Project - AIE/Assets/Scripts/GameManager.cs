@@ -333,15 +333,15 @@ public class GameManager : MonoBehaviour {
         {
             allStoryboardIntro[currentStoryboardIntro].enabled = false;
 
-            if (allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>() != null)
-                allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>().enabled = false;
-
             currentStoryboardIntro++;
 
             allStoryboardIntro[currentStoryboardIntro].enabled = true;
 
             if (allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>() != null)
-                allStoryboardIntro[currentStoryboardIntro].GetComponentInChildren<Text>().enabled = true;
+            {
+                foreach(Text t in allStoryboardIntro[currentStoryboardIntro].GetComponentsInChildren<Text>())
+                t.enabled = true;
+            }
         }
         else
         {
