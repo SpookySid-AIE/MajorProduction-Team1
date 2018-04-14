@@ -9,11 +9,11 @@ public class RotateCanvas : MonoBehaviour {
 
     private void Start()
     {
-        #if !UNITY_EDITOR
-        {
-            this.enabled = false;
-        }
-        #endif
+        //#if !UNITY_EDITOR
+        //{
+        //    this.enabled = false;
+        //}
+        //#endif
     }
     // Update is called once per frame
     void Update()

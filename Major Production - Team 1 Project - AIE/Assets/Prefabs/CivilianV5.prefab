@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 222617177014718236}
   - component: {fileID: 114437458414367404}
   - component: {fileID: 95006349917540472}
+  - component: {fileID: 114300618052909078}
   m_Layer: 0
   m_Name: Civ_StateIcon
   m_TagString: Untagged
@@ -1264,7 +1265,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -201.77, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224991304644415114}
@@ -1865,6 +1866,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114300618052909078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270578890849640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5a2ca5f0c484d4a95485b36948751b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114319273047871860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1907,7 +1919,7 @@ MonoBehaviour:
   otherAgent: {fileID: 0}
   testTarget: {fileID: 0}
   testParticle: {fileID: 0}
-  enableWander: 1
+  enableWander: 0
   drawLineOfSight: 0
   initialSpawn: 0
   currentState: 2
@@ -2142,14 +2154,14 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182107029286222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 0
