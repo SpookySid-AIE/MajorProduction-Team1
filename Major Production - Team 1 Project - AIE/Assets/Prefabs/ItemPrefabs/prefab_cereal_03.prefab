@@ -52,14 +52,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1297181838341062}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.435, y: 0.27212137, z: 24.671654}
+  m_LocalRotation: {x: 0.006487575, y: 0.39871907, z: 0.0012315691, w: 0.91704935}
+  m_LocalPosition: {x: 26.454, y: -0.375, z: 2.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4702387258091280}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!4 &4702387258091280
 Transform:
   m_ObjectHideFlags: 1
@@ -152,11 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8049c52bb03733a48bd98d69e834b242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemScaryRating: 0
-  itemSize: 0
+  timesThrownBeforeDestroyed: 1
+  timesThrown: 0
+  ItemScaryRating: 1
+  itemSize: 1
   hasBeenThrown: 0
   timer: 0
   baseScariness: 0
   ectoCost: 0
-  scare: 0
   scaryObject: 0
