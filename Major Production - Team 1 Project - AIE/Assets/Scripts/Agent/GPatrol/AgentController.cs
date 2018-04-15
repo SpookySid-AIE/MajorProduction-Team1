@@ -172,7 +172,7 @@ public class AgentController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            m_stateMachine.ChangeState(this, new GPATROL_Retreat());
+            //m_stateMachine.ChangeState(this, new GPATROL_Retreat());
         }
 
         if(collision.gameObject.tag == "Item")
@@ -181,7 +181,7 @@ public class AgentController : MonoBehaviour
             {
                 anim.SetBool("hit", true);
                 GetComponent<script_ProtonBeam_v5>().fire = false; //Stop shooting, noticed a bug that the beam would continue to fire when running away, hopefully this fixes it
-                m_stateMachine.ChangeState(this, new GPATROL_Retreat());
+                //m_stateMachine.ChangeState(this, new GPATROL_Retreat());
             }
         }
     }

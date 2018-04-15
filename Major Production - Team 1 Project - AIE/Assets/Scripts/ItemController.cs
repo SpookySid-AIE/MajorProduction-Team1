@@ -119,10 +119,7 @@ public class ItemController : MonoBehaviour
                 Destroy(crashClone, 2.0f);
                 timesThrown = 0; //Resets the times thrown value.
             }
-        }
-
-        //Play sound clip
-        FMODUnity.RuntimeManager.PlayOneShot(GameManager.Instance.audioItemImpact, transform.position);
+        }        
     }
 
     void Update()

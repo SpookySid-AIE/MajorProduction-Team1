@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // Author: <Jak Revai>                                     
 // Date Created: <15/05/17>                               
 // Brief: <Handles Scene Transition>  
@@ -20,7 +20,7 @@ public class LoadScene : MonoBehaviour
     public void respawn()
     {     
         Time.timeScale = 1;
-        Sid.GetComponent<playerController>().Ectoplasm = 100;
+        Sid.GetComponent<playerController>().GetEctoplasm = 100;
         Sid.transform.position = respawnPosition.transform.position;
     }
 }

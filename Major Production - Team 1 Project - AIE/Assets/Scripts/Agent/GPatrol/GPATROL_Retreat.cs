@@ -15,6 +15,7 @@ public class GPATROL_Retreat : State_GPATROL
     bool scared;
     float scaredRadius = 15.0f; ///If the player enteres this radius then run away
     float timer = 3.0f; //Wait 3 seconds before switching states otherwise you are still scared if the player comes to you
+    Vector3 dirAwayFromWill;
 
     public void OnEnter(AgentController agent)
     {
@@ -25,6 +26,10 @@ public class GPATROL_Retreat : State_GPATROL
         currentAgent = agent;
         //Debug.Log(currentAgent.gameObject.name + " State: RETREAT");
         agent.txtState.text = "RETREAT";
+
+        //Reset path to prevent errors when switching
+        if (agent.navAgent.hasPath)
+            agent.navAgent.ResetPath();
     }
 
     public void OnExit(AgentController agent)
@@ -37,7 +42,7 @@ public class GPATROL_Retreat : State_GPATROL
         agent.anim.SetBool("scared", scared); //Set the animation controller
 
         //Get the direction
-        Vector3 dirAwayFromWill = currentAgent.transform.position - agent.target.transform.position;
+        dirAwayFromWill = currentAgent.transform.position - currentAgent.target.transform.position;
 
         //If will is not close to the agent then don't flee
         if (dirAwayFromWill.magnitude > scaredRadius)
@@ -67,9 +72,9 @@ public class GPATROL_Retreat : State_GPATROL
 
             if (agent.navAgent.hasPath == false)
             {
-                Vector3 randDirection = UnityEngine.Random.insideUnitSphere * currentAgent.wanderRadius;
+                Vector3 randDirection = UnityEngine.Random.onUnitSphere * currentAgent.wanderRadius;
 
-                randDirection += dirAwayFromWill; //Update direction based on Agent's current position
+                randDirection += currentAgent.transform.position; //Update direction based on Agent's current position
 
                 NavMeshHit navHit; //Stores the result of a NavMesh query
                 NavMesh.SamplePosition(randDirection, out navHit, currentAgent.wanderRadius, -1);

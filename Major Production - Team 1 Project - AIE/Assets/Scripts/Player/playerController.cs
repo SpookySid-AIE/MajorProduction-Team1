@@ -13,7 +13,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))] //Added by Jak 6.04.18
 public class playerController : MonoBehaviour
 {
-    [HideInInspector]public float Ectoplasm = 100.0f;
+    private static float Ectoplasm = 100.0f;
+    [HideInInspector] public float GetEctoplasm { get{ return Ectoplasm;} set{ Ectoplasm = value;} }
     [Range(1, 20)]public float speed = 5.0f;
     
     [Header("Rigidbody drag should be same as this value.")][Range(1, 5)]public float floatSpeed = 3; //Speed of how fasty you float upwards when holding space.
@@ -41,7 +42,7 @@ public class playerController : MonoBehaviour
     void Update()
     {
         //Update health on UI
-        txt_ectoplasm.text = Ectoplasm.ToString() + "%";
+        txt_ectoplasm.text = GetEctoplasm.ToString() + "%";
         
         // Use input "W" and "S" for direction, multiplied by speed
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -104,7 +105,7 @@ public class playerController : MonoBehaviour
             //If the range is LESS than the acc then shoot - so if the Accuracy is 5 percent(0.05), that means Random.Range has to return 0.05 or less for it to shoot
             if (Random.Range(0.0f, 1.0f) < acc) //Process if hit or not
             {
-                Ectoplasm--;
+                GetEctoplasm--;
 
                 if (m_Anim.GetBool("Damaged") == false)
                     m_Anim.SetBool("Damaged", true);

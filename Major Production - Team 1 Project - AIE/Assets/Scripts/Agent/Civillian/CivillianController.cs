@@ -73,7 +73,7 @@ public class CivillianController : MonoBehaviour
     //Repathing variables when stuck
     public Transform otherAgent;
     private float stationaryTimer; //Timer to re-enable NavAgent
-    private bool isStationary = false;
+    [HideInInspector]public bool isStationary = false;
     private RaycastHit hit;    
 
     //Store unique Agent ID for the TriggerHighlight.cs
@@ -319,7 +319,11 @@ public class CivillianController : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            if (isStationary)
+                Debug.Log("stationaryNull");
+        }
         //Reset the path if we have arrived
         //Maybe check the distance between current corner we are on and last corner in the path to check if we have arrived?
         if (navAgent.hasPath && navAgent.remainingDistance <= navAgent.stoppingDistance)
@@ -395,9 +399,8 @@ public class CivillianController : MonoBehaviour
         }
 
         //State changing to Retreat, because the repel mechanic was used in playerPosession
-        if (TRIGGERED_repel && currentScareValue != scareThreshHoldMax)
-        {
-            TRIGGERED_repel = false;
+        if (TRIGGERED_repel && currentScareValue != scareThreshHoldMax && currentState != State.State_Retreat)
+        {            
             ItemScaryRating = target.GetComponent<ItemController>().ItemScaryRating; //Target at this point is the object we are HIDING in - Set in playerPossesion
             m_stateMachine.ChangeState(this, new CIV_Retreat());
         }

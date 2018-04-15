@@ -51,7 +51,7 @@ public class CivSpawner : MonoBehaviour
             }
 
 
-            Debug.DrawLine(adjustedSpawnPos, new Vector3(adjustedSpawnPos.x, 20f, adjustedSpawnPos.z), Color.green, 99f);
+            //Debug.DrawLine(adjustedSpawnPos, new Vector3(adjustedSpawnPos.x, 20f, adjustedSpawnPos.z), Color.green, 99f);
 
             currentSpawned++;
             

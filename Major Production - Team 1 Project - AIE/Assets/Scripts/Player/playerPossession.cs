@@ -94,6 +94,7 @@ public class playerPossession : MonoBehaviour
     //Fmod audio instances - these are set in Lure/Repel - Jak
     FMOD.Studio.EventInstance lureSound;
     FMOD.Studio.EventInstance scareSound;
+    FMOD.Studio.EventInstance impactSound;
 
     // Use this for initialization - note that the player could be real or could be an item
     void Start()
@@ -125,6 +126,7 @@ public class playerPossession : MonoBehaviour
         //Setup the references
         lureSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioLure);
         scareSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioScare);
+        impactSound = FMODUnity.RuntimeManager.CreateInstance(GameManager.Instance.audioItemImpact);
 
         sneakTest = GameObject.FindGameObjectWithTag("Sneak");
     }
@@ -249,6 +251,11 @@ public class playerPossession : MonoBehaviour
                         newPos = new Vector3(newPos.x, 1, newPos.z);
 
                     //Note test every direction extent
+					
+					//Maybe change the overall length of the raycast
+					//Move raycast start pos over by half of the size of the collider?
+					//Then raycast total length acoording to max size of the collider?
+					
                     //startPos.z = startPos.z + GetComponent<Collider>().bounds.extents.z;
                     Debug.DrawRay(startPos, dir, Color.blue, 100f);
                     //Debug.DrawRay(newPos, colSizeUp, Color.green, 100f);
@@ -274,6 +281,30 @@ public class playerPossession : MonoBehaviour
 
 
     }//End update
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (IsPossessed())
+        {
+            //Sound Effect ----------------------------------
+            FMOD.Studio.PLAYBACK_STATE stateImpact;
+            
+            impactSound.getPlaybackState(out stateImpact); //Poll the audio events to see if playback is happening
+
+            //Check if any audio is still playing and stop it to prevent overlap - Then play the required clip
+            if (stateImpact != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                impactSound.start(); // Starts the event
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(impactSound, GetComponent<Transform>(), GetComponent<Rigidbody>()); //Setup the 3D audio attributes
+            }
+            else //If none is playing start immediatly
+            {
+                impactSound.start(); // Starts the event
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(impactSound, GetComponent<Transform>(), GetComponent<Rigidbody>());
+            }
+            //End Sound Effect ----------------------------
+        }
+    }
 
     //Sets dir based on given rayDirection - Jak
     void AssignRayDirection(RayDirection rayDirection, ref Vector3 dir, ref Vector3 startpos)
@@ -378,12 +409,12 @@ public class playerPossession : MonoBehaviour
     //Mainly written by Ben - Jak tweaked here and there when restructuring player controls
     void PossessItem() 
     {
-        if (player.GetComponent<playerController>().Ectoplasm > 0.0f)
+        if (player.GetComponent<playerController>().GetEctoplasm > 0.0f)
         {
             Camera.main.GetComponent<CamLock>().floatSpeedOfSid = player.GetComponent<playerController>().floatSpeed;
 
             //At this point playerPossesion 'should' be attached to the player so minus the ecto cost
-            this.GetComponent<playerController>().Ectoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
+            this.GetComponent<playerController>().GetEctoplasm -= target.GetComponent<ItemController>().ectoCost; //Deducts the amount of ectoplasm based on item thrown - Ben
 
             //rename the player tag so they dont participate in any collisions
             player.tag = "Sneak";
@@ -417,7 +448,7 @@ public class playerPossession : MonoBehaviour
             playerController playerController = target.GetComponent<playerController>();
 
             //Carry over all sid values to the item
-            playerController.Ectoplasm = player.GetComponent<playerController>().Ectoplasm;
+            playerController.GetEctoplasm = player.GetComponent<playerController>().GetEctoplasm;
             playerController.speed = OldSidValues.speed;
             playerController.floatSpeed = OldSidValues.floatspeed;
             playerController.sinkspeed = OldSidValues.sinkspeed;

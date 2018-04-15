@@ -32,6 +32,9 @@ public class CIV_Retreat : State_CIV
         currentAgent = agent; //Storing reference
         currentAgent.currentState = State.State_Retreat; //Setting currentState - kinda temporary i hope
 
+        if (agent.initialSpawn)
+            agent.initialSpawn = false;
+
         //Update icon
         agent.civIconStateScript.myState = script_civilianIconState.gameState.retreat;
 
@@ -155,7 +158,6 @@ public class CIV_Retreat : State_CIV
 
             } //End else
         }//End Scared if
-
     } //End update
 
     //Calculate a random point to run to - may need a different solution if they keep running towards the "scary" item
@@ -190,12 +192,21 @@ public class CIV_Retreat : State_CIV
             //Update Icon
             currentAgent.civIconStateScript.myState = script_civilianIconState.gameState.scared;
 
+            //Hack to turn back on the agent because we lost the reference of the otherAgent because they left the scene
+            if(currentAgent.isStationary)
+            {
+                currentAgent.GetComponent<NavMeshObstacle>().enabled = true;
+                currentAgent.navAgent.enabled = true;
+                currentAgent.isStationary = false;
+            }
+
             //Update animator
             currentAgent.navAgent.speed = 5f; //Add some additional speed to make them feel really spooked
             currentAgent.m_Animator.SetBool("Scared", true);
 
             //Run to exit point
-            currentAgent.navAgent.SetDestination(currentAgent.endPoint.position);
+            if (currentAgent.navAgent.SetDestination(currentAgent.endPoint.position) == false)
+                //Debug.LogError(currentAgent.name + " failed to set exitpoint.");
 
             //Despawn
             if (Vector3.Distance(currentAgent.endPoint.transform.position, currentAgent.transform.position) < 2)

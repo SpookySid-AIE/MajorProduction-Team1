@@ -25,9 +25,9 @@ public class ectoplasmController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") //If item that's collided with is tagged as, "Player"
         {
-            if ((other.gameObject.GetComponent<playerController>().Ectoplasm += (currentEctoplasmValue * modifier)) > 100.0f) 
-                other.gameObject.GetComponent<playerController>().Ectoplasm = 100.0f; //If the number of ectoplasm being added exceeds 100, then just set it to 100.
-            else other.gameObject.GetComponent<playerController>().Ectoplasm += (currentEctoplasmValue * modifier); //Otherwise, add the full amount.
+            if ((other.gameObject.GetComponent<playerController>().GetEctoplasm += (currentEctoplasmValue * modifier)) > 100.0f) 
+                other.gameObject.GetComponent<playerController>().GetEctoplasm = 100.0f; //If the number of ectoplasm being added exceeds 100, then just set it to 100.
+            else other.gameObject.GetComponent<playerController>().GetEctoplasm += (currentEctoplasmValue * modifier); //Otherwise, add the full amount.
 
             //Play sound clip
             FMODUnity.RuntimeManager.PlayOneShot(ectoPickup, transform.position);
