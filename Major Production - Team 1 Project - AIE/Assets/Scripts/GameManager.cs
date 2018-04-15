@@ -216,8 +216,7 @@ public class GameManager : MonoBehaviour {
             NPCcount = 0;
         //    win = true;
            StoryboardOutro.gameObject.SetActive(true);
-
-            Pause();
+            Time.timeScale = 0;
             isPaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
