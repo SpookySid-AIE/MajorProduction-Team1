@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33942366212029962}
   - component: {fileID: 23844573265812748}
   - component: {fileID: 95141399534069628}
-  - component: {fileID: 65816880303004736}
   - component: {fileID: 54980591429371186}
   - component: {fileID: 114942026843885608}
+  - component: {fileID: 65188617699302196}
   m_Layer: 0
   m_Name: banana_crate
   m_TagString: Item
@@ -67,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561327628303284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8164929, y: 0.7593918, z: 4.42697}
-  m_LocalScale: {x: 19.042572, y: 19.042582, z: 19.042583}
+  m_LocalPosition: {x: 1.59, y: 0.7593918, z: 4.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4729153492369028}
   m_Father: {fileID: 0}
@@ -130,7 +130,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65816880303004736
+--- !u!65 &65188617699302196
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -140,8 +140,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12496843, y: 0.07677953, z: 0.119046286}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6245896, y: 0.99813384, z: 1.5476017}
+  m_Center: {x: 0, y: 0, z: 0.0000038146973}
 --- !u!95 &95141399534069628
 Animator:
   serializedVersion: 3
