@@ -205,7 +205,7 @@ public class CIV_Retreat : State_CIV
             currentAgent.m_Animator.SetBool("Scared", true);
 
             //Run to exit point
-            if (currentAgent.navAgent.SetDestination(currentAgent.endPoint.position) == false)
+            currentAgent.navAgent.SetDestination(currentAgent.endPoint.position);
                 //Debug.LogError(currentAgent.name + " failed to set exitpoint.");
 
             //Despawn
