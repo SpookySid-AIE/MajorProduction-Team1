@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4379297895521266}
   - component: {fileID: 65993511731263410}
   - component: {fileID: 65459919428144960}
+  - component: {fileID: 65792422040696942}
   m_Layer: 0
   m_Name: prefab_ButcherDisplay
   m_TagString: Untagged
@@ -111,8 +112,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473649688404804}
-  m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 6.9220057, y: -8.533325, z: -10.942001}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.9999945, y: -8.533325, z: -12.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4166490859721540}
@@ -120,7 +121,7 @@ Transform:
   - {fileID: 4957528598649830}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4957528598649830
 Transform:
   m_ObjectHideFlags: 1
@@ -272,6 +273,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.657887, y: 1.1559, z: 1.327549}
   m_Center: {x: 0.1734129, y: 0.5984998, z: 0.017938616}
+--- !u!65 &65792422040696942
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473649688404804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6734772, y: 1.9244604, z: 0.09632492}
+  m_Center: {x: 0.16002655, y: 1.0377531, z: 0.712183}
 --- !u!65 &65993511731263410
 BoxCollider:
   m_ObjectHideFlags: 1
