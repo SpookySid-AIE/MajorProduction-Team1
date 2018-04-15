@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
     private GameObject cursor;
     private GameObject pauseDirection;
     public GameObject sidReticle;
+    public playerPossession pPossession;
     public GameObject ui;
     public GameObject br;
     public Material sidSkin;
@@ -160,6 +161,11 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isPaused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -288,6 +294,7 @@ public class GameManager : MonoBehaviour {
 
     public void Pause()
     {
+        pPossession = GameObject.FindGameObjectWithTag("Player").GetComponent<playerPossession>();
         if (isPaused == true)
         {
             sidReticle.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
@@ -299,6 +306,7 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            pPossession.enabled = true;
 
             pauseMenu.SetActive(false);
             controlsMenu.SetActive(false);
@@ -316,6 +324,7 @@ public class GameManager : MonoBehaviour {
 
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            pPossession.enabled = false;
 
             pauseMenu.SetActive(true);
 

@@ -41,7 +41,7 @@ public class script_ProtonBeam_v5 : MonoBehaviour {
     void Update()
     {
         
-        if (fire)
+        if (fire && !Camera.main.GetComponent<GameManager>().isPaused)
         {
             //Disabled raycasting and trying an accuracy system to minus the health - Jak
             //RaycastHit hit;            
