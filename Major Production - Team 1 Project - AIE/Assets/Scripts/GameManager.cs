@@ -160,6 +160,11 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isPaused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
