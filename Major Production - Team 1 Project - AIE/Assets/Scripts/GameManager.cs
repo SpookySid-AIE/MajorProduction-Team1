@@ -115,9 +115,6 @@ public class GameManager : MonoBehaviour {
         if (audioScare == null)
             Debug.LogError("audioScare has not been set on GameManager.cs. Please set the audio file in inspector.");
 
-        canvasWinOrLose.gameObject.SetActive(false);
-        //canvasPause.gameObject.SetActive(false);
-
     }
 
     // Use this for initialization
@@ -218,14 +215,15 @@ public class GameManager : MonoBehaviour {
         {
             NPCcount = 0;
         //    win = true;
-           canvasWinOrLose.gameObject.SetActive(true);
-           winText.gameObject.SetActive(true);
+           StoryboardOutro.gameObject.SetActive(true);
 
-            Camera.main.GetComponent<CamLock>().enabled = false;
+            Pause();
+            isPaused = true;
             Cursor.lockState = CursorLockMode.None;
-        //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
-        //    player.gameObject.GetComponent<playerPossession>().enabled = false;
-        //    player.gameObject.GetComponent<AudioSource>().enabled = false;
+            Cursor.visible = true;
+            //    player.gameObject.GetComponent<playerCannonBall>().enabled = false;
+            //    player.gameObject.GetComponent<playerPossession>().enabled = false;
+            //    player.gameObject.GetComponent<AudioSource>().enabled = false;
             gameObject.GetComponentInParent<CharacterController>().enabled = false;
             gameObject.GetComponentInParent<playerController>().enabled = false;
 

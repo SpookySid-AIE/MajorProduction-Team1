@@ -20,9 +20,6 @@ public class changeMenu : MonoBehaviour
         pause.SetActive(false);
 
         controls.SetActive(true);
-
-        if (sid)
-            sid.SetActive(false);
     }
 
     public void mainSwap()
@@ -33,9 +30,6 @@ public class changeMenu : MonoBehaviour
 
         if (mainMenu)
             mainMenu.SetActive(true);
-
-        if (sid)
-            sid.SetActive(true);
     }
 
     public void creditSwap()
@@ -46,9 +40,6 @@ public class changeMenu : MonoBehaviour
         pause.SetActive(false);
 
         credits.SetActive(true);
-
-        if (sid)
-            sid.SetActive(false);
     }
 
     public void pauseSwap()
@@ -59,9 +50,7 @@ public class changeMenu : MonoBehaviour
         credits.SetActive(false);
 
         pause.SetActive(true);
-        if (sid)
-            sid.SetActive(false);
-    }
+    } 
 
     public void Quit()
     {
@@ -73,5 +62,8 @@ public class changeMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
+        
+        SceneManager.LoadScene(0);
+        
     }
 }
