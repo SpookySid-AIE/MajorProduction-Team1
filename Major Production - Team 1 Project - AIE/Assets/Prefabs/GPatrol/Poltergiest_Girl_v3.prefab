@@ -3728,8 +3728,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450087094757792}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23, y: 0, z: -8.82}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -221.01, y: 0, z: 35.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224772743682053364}
@@ -4122,7 +4122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wanderRadius: 10
-  movementSpeed: 2
+  movementSpeed: 4
   audioSearch: 40
   target: {fileID: 0}
   anim: {fileID: 95835547430445098}
@@ -4132,12 +4132,14 @@ MonoBehaviour:
   txtState: {fileID: 114559768634516062}
   torch: {fileID: 108878975309583884}
   gunAccuracy: 100
-  bulletShootTime: 3
+  bulletShootTime: 1
   bulletRecharge: 5
   shootSoundRef: event:/G-Patrol_Fire
   ShowRadius: 0
   ShowState: 1
   enableWander: 1
+  estimationTime: 0
+  currTimeOnPath: 0
 --- !u!114 &114559768634516062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4363,7 +4365,7 @@ SphereCollider:
   m_GameObject: {fileID: 1450087094757792}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 40
   m_Center: {x: 0, y: 0.84, z: 0}
