@@ -223,14 +223,20 @@ public class CIV_Retreat : State_CIV
 
 #if UNITY_EDITOR
         if (currentAgent.ItemScaryRating == ItemController.Orientation.Least_Scary)
+        {
             ectoplasm = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/particleEctoplasmGreen.prefab", typeof(GameObject)) as GameObject;
-
+            ectoplasm.GetComponent<ectoplasmController>().currentEctoplasmValue = Camera.main.GetComponent<valueController>().leastScaryEctoDropValue;
+        }
         else if (currentAgent.ItemScaryRating == ItemController.Orientation.Medium_Scary)
+        {
             ectoplasm = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/particleEctoplasmPink.prefab", typeof(GameObject)) as GameObject;
-
+            ectoplasm.GetComponent<ectoplasmController>().currentEctoplasmValue = Camera.main.GetComponent<valueController>().mediumScaryEctoDropValue;
+        }
         else if (currentAgent.ItemScaryRating == ItemController.Orientation.Most_Scary)
+        {
             ectoplasm = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/particleEctoplasmRed.prefab", typeof(GameObject)) as GameObject;
-
+            ectoplasm.GetComponent<ectoplasmController>().currentEctoplasmValue = Camera.main.GetComponent<valueController>().mostScaryEctoDropValue;
+        }
         else Debug.LogError("CIV_Retreat isn't receiving the values from ItemController.Dropdown successfully.");
 #elif UNITY_STANDALONE
         if (currentAgent.ItemScaryRating == ItemController.Orientation.Least_Scary)
