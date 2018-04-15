@@ -95,7 +95,7 @@ public class playerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Minus health if hit by a bullet and calculate accuracy from the agent - Jak
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet" && Camera.main.GetComponent<GameManager>().isPaused == false)
         {
             //Get the gun accuracy from the bullet - I store the gameobject that spawns the bullet in AgentReference - which is attached to the instantiated bullet
             float acc = other.gameObject.GetComponent<AgentReference>().spawner.GetComponent<AgentController>().gunAccuracy;
