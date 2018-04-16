@@ -28,18 +28,14 @@ public class AgentController : MonoBehaviour
     [Header("How often does the gun damage the player. Percent Based.")][Range(0, 100)]public float gunAccuracy;
     [Header("How long to shoot for")]public float bulletShootTime;
     [Header("How long to wait before shooting again")]public float bulletRecharge;
+
     [FMODUnity.EventRef] public string shootSoundRef;
     [HideInInspector]public FMOD.Studio.EventInstance shootSound;
 
     //Used in AlertedState
     private SphereCollider colliderSphere; //Used to determine where an "Audio" point of interest has appeared
-    private List<Vector3> pointsOfInterest;
+    public List<Vector3> pointsOfInterest;
     private StateMachine_GPATROL m_stateMachine;
-
-    //Debugging the Points of Interests
-    private GameObject temp;
-    private GameObject POIPrefab;
-    private List<GameObject> tempPOIList;
 
     //Debugging
     [Header("----[DEBUGGING]----")]
@@ -54,9 +50,6 @@ public class AgentController : MonoBehaviour
 
     //Possibly use this later for now unused
     //Agent_Blackboard blackboard = Agent_Blackboard.Instance;
-
-    //For when we BUILD the exe, dont spawn objects, causing issues currently
-    bool showPOI;
 
     // Use this for initialization
     void Start()
@@ -91,26 +84,17 @@ public class AgentController : MonoBehaviour
         {
             ShowState = true;
         }
+#else
+        {
+            ShowState = false;
+        }
 #endif
         if (ShowState == true)
             txtState.enabled = true;
         else
             txtState.enabled = false;
 
-        //Visual Debugging for the points of interest
         pointsOfInterest = new List<Vector3>();
-        tempPOIList = new List<GameObject>();
-
-#if UNITY_EDITOR
-        {
-            //Load the POI prefab to instantiate later
-            POIPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Resources/Prefabs/POI.prefab", typeof(GameObject)) as GameObject;
-            showPOI = true;
-        }
-#else
-        showPOI = false;
-#endif
-
     }
 
     // Update is called once per frame
@@ -315,18 +299,6 @@ public class AgentController : MonoBehaviour
         if (NavMesh.SamplePosition(poi, out myNavHit, torch.range, -1))
         {
             pointsOfInterest.Add(myNavHit.position);
-
-            //DEBUGGING for visualising the Points of interest   
-            if (showPOI)
-            {
-                temp = Instantiate(POIPrefab);
-                temp.transform.position = myNavHit.position; //Set its position 
-                tempPOIList.Add(temp);
-            }
-        }
-        else
-        {
-            Debug.Log("Invalid POI at: " + poi);
         }
     }
 
@@ -336,16 +308,9 @@ public class AgentController : MonoBehaviour
         return pointsOfInterest.Count;
     }
 
-    //Remove the debug objects and the position from the list
+    //Remove the position from the list
     public void RemovePOI(int i)
     {
-        //Agent has visited this POI      
-        if (ShowState)
-        {
-            Destroy(tempPOIList[i]); //Destroy the debug object
-            tempPOIList.RemoveAt(i); //Remove the object from the list
-        }
-
         pointsOfInterest.RemoveAt(i); //Remove from the points of interest list
         navAgent.ResetPath(); //make sure we clear the path.
     }

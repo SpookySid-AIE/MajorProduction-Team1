@@ -107,6 +107,7 @@ public class CIV_Retreat : State_CIV
         //This is the code that makes the agent run away from whatever target has been set
         if (scared == false)
         {
+            Debug.Log("Scared");
             //Get the direction away from the target object that they are trying to flee from
             if(currentAgent.TRIGGERED_hit)
                 dirAwayFromObject = currentAgent.transform.position - currentAgent.collidedItemPos;
@@ -158,6 +159,16 @@ public class CIV_Retreat : State_CIV
 
             } //End else
         }//End Scared if
+
+        //Hack to turn back on the agent because we lost the reference of the otherAgent because they left the scene
+        if (currentAgent.isStationary)
+        {
+            Debug.Log("stationay");
+            currentAgent.GetComponent<NavMeshObstacle>().enabled = true;
+            currentAgent.m_Animator.SetBool("idle", false);
+            currentAgent.navAgent.enabled = true;
+            currentAgent.isStationary = false;
+        }
     } //End update
 
     //Calculate a random point to run to - may need a different solution if they keep running towards the "scary" item
@@ -184,7 +195,10 @@ public class CIV_Retreat : State_CIV
     {
         if (currentAgent.currentScareValue >= currentAgent.scareThreshHoldMax)
         {
-            currentAgent.txtScaredValue.text = currentAgent.scareThreshHoldMax.ToString();
+            Debug.Log("ScaredExit");
+            //currentAgent.navAgent.ResetPath();
+
+            //currentAgent.txtScaredValue.text = currentAgent.scareThreshHoldMax.ToString();
             currentAgent.currentScareValue = currentAgent.scareThreshHoldMax;
 
             scared = true;
@@ -192,21 +206,29 @@ public class CIV_Retreat : State_CIV
             //Update Icon
             currentAgent.civIconStateScript.myState = script_civilianIconState.gameState.scared;
 
-            //Hack to turn back on the agent because we lost the reference of the otherAgent because they left the scene
-            if(currentAgent.isStationary)
-            {
-                currentAgent.GetComponent<NavMeshObstacle>().enabled = true;
-                currentAgent.navAgent.enabled = true;
-                currentAgent.isStationary = false;
-            }
-
             //Update animator
             currentAgent.navAgent.speed = 5f; //Add some additional speed to make them feel really spooked
             currentAgent.m_Animator.SetBool("Scared", true);
 
-            //Run to exit point
-            currentAgent.navAgent.SetDestination(currentAgent.endPoint.position);
-                //Debug.LogError(currentAgent.name + " failed to set exitpoint.");
+            
+
+            NavMeshHit navHit; //Stores the result of a NavMesh query
+            Vector3 result;
+
+            if (!currentAgent.navAgent.hasPath)
+            {
+                //if (NavMesh.SamplePosition(currentAgent.endPoint.position, out navHit, 2, NavMesh.AllAreas))
+                //{
+                //    result = navHit.position;
+                //    Vector3 pathDir = currentAgent.transform.position - result;
+                //    result += pathDir.normalized * (currentAgent.navAgent.radius / 2);
+
+                    //Run to exit point
+                    if (!currentAgent.navAgent.SetDestination(currentAgent.endPoint.position))
+                        Debug.Log("failed runexit setdest");
+                //}
+            }
+            //Debug.LogError(currentAgent.name + " failed to set exitpoint.");
 
             //Despawn
             if (Vector3.Distance(currentAgent.endPoint.transform.position, currentAgent.transform.position) < 2)

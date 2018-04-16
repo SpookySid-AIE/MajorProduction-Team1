@@ -328,7 +328,7 @@ public class CivillianController : MonoBehaviour
         //Maybe check the distance between current corner we are on and last corner in the path to check if we have arrived?
         if (navAgent.hasPath && navAgent.remainingDistance <= navAgent.stoppingDistance)
         {            
-            Debug.Log(name + " Reset Called");
+            //Debug.Log(name + " Reset Called");
             navAgent.ResetPath();
         }
 
@@ -336,7 +336,7 @@ public class CivillianController : MonoBehaviour
         //Distance / Speed = Time
         //if(currentState == State.State_Wander)
         //{
-            if (navAgent.hasPath)
+            if (navAgent.hasPath) //Added retreat state check to turn off repathing causing issues atm
             {
                 if (!estimTimeSet)
                 {

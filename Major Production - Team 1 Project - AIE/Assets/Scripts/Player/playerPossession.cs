@@ -275,6 +275,7 @@ public class playerPossession : MonoBehaviour
                                         UnpossessItem();
                                         break;
                                     }
+                    
                 } //End loop
             } //End If
         }//End Quick-Drop
